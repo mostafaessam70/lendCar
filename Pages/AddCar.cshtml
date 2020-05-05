@@ -1,0 +1,80 @@
+<section style="background-image: url(https://bit.ly/2Sxz2lq); background-size:cover">
+    <div class="form-horizontal">
+        <div class="container-fluid ">
+            <div class="row col-md-5 add-car center-block" >
+                <div>
+                    <h2>Add Your Car</h2>
+                </div>
+                <hr />
+                <form>
+                    <div class="form-group col-md-10">
+                        <label for="VIN">VIN : </label>
+                        <input type="text" class="form-control" id="VIN" placeholder="VIN ">
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label for="NameOfBrand">Name Of Brand : </label>
+                        <input type="text" class="form-control" id="NameOfBrand" placeholder="NameOfBrand ">
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label for="vehicleLicensePlateNumber">License Plate Number</label>
+                        <input type="number" class="form-control" id="vehicleLicensePlateNumber" placeholder="License Plate Number">
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label for="Year">Year : </label>
+                        <input type="number" min="1900" max="2020" step="1" class="form-control" id="Year" placeholder="Year">
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label for="Model">Model : </label>
+                        <input type="number" min="1900" max="2020" step="1" class="form-control" id="Model" placeholder="Model">
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label for="OdoMeter">OdoMeter : </label>
+                        <input type="number" class="form-control" id="OdoMeter" placeholder="OdoMeter">
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label for="VehicleType">Vehicle Type : </label>
+                        <select id="VehicleType">
+                            <option value="volvo">4 By 4</option>
+                            <option value="saab">Vin</option>
+                            <option value="opel">Convertibles</option>
+                            <option value="audi">Pickup Trucks</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label for="Country">Country : </label>
+                        <select id="Country">
+                            <option value="volvo">Egypt</option>
+                            <option value="saab">Saab</option>
+                            <option value="opel">Opel</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label for="City">City : </label>
+                        <select id="City">
+                            <option value="volvo">Minia</option>
+                            <option value="saab">Saab</option>
+                            <option value="opel">Opel</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label for="Region">Region : </label>
+                        <select id="Region">
+                            <option value="volvo">Damaress</option>
+                            <option value="saab">Saab</option>
+                            <option value="opel">Opel</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label for="ImageCar">Image Car: </label>
+                        <input type="file" id="ImageCar">
+                        <p class="help-block">Select more than image...</p>
+                    </div>
+                    <button type="submit" class="btn btn-primary col-md-8">Add My Car</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
