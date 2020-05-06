@@ -126,7 +126,7 @@ body {
 
 .preload {
     position: fixed;
-    background: #fff url(../images/preload.gif) center center no-repeat;
+    background: #fff url('../loader6.gif') center center no-repeat;
     left: 0px;
     top: 0px;
     width: 100%;
@@ -2681,18 +2681,17 @@ img.testimonial-thumb {
     padding: 0;
 }
 
-#back-to-top .btn.btn-primary:hover {
-    color: #fff;
+    #back-to-top .btn.btn-primary:hover {
+        color: #fff;
+        
+    }
+.back-to-top:hover {
+    background: url(http://themes.potenzaglobalsolutions.com/html/cardealer/assets/images/car-focus.png) no-repeat 0 0;
 }
-
-
-/* Sub Pages
+    /* Sub Pages
 ================================================== */
-
-
-/*-- Title border --*/
-
-.main-container .border-left {
+    /*-- Title border --*/
+    .main-container .border-left {
     margin-bottom: 30px;
 }
 
