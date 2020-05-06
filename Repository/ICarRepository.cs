@@ -10,7 +10,10 @@ namespace LendCar.Repository
     interface ICarRepository
     {
         LendCarDBContext Context { get; }
-        Vehicle Find(string id);
+        Vehicle GetVehicle(int id);
+        List<Vehicle> GetAllVehicles();
+        void Add(Vehicle vehicle);
+        void Delete(int id);
         void Save();
     }
 }
