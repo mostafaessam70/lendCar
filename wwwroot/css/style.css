@@ -2701,7 +2701,7 @@ img.testimonial-thumb {
 
 .banner-area {
     position: relative;
-    min-height: 300px;
+    min-height: 500px;
     color: #fff;
     background-position: 50% 50%;
     -webkit-background-size: cover;
@@ -2718,15 +2718,15 @@ img.testimonial-thumb {
 
 .banner-text {
     position: absolute;
-    top: 50%;
+    /*top: 50%;*/
     left: 0;
     right: 0;
-    max-width: 1170px;
+    /*max-width: 1170px;*/
     margin: 0 auto;
     width: 100%;
     z-index: 1;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+    /*-webkit-transform: translateY(-50%);
+    transform: translateY(-50%);*/
 }
 
 .banner-heading{
@@ -3562,3 +3562,19 @@ label {
 .header-two .logo{
     padding: 28px 0;
 }
+/*form add car*/
+.add-car {
+    background-color: white;
+    border-radius: 20px 20px;
+    padding: 50px;
+    margin-left: 350px;
+    opacity: .9;
+}
+
+    .add-car h2 {
+        text-align: center
+    }
+
+    .add-car button {
+        margin-left: 80px
+    }
