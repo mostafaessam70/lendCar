@@ -23,15 +23,15 @@ namespace LendCar.Models
         public string Brand { get; set; }
         public int NumberOfSeats { get; set; }
         public int NumberOfDoors { get; set; }
-        public double milesPerGallon { get; set; }
+        public double MilesPerGallon { get; set; }
         public string EnergyMakeCarMove { get; set; }
-        public List<Img> Photos { get; set; }
+        public ICollection<Img> Photos { get; set; }
         public int TripsNumber { get; set; }
         public double PricePerDay { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
         [Range(1, 5)]
-        public double rate { get; set; }
+        public double Rate { get; set; }
 
 
         public string OwnerId { get; set; }
@@ -42,12 +42,13 @@ namespace LendCar.Models
         [ForeignKey("RenterId")]
         public ApplicationUser Renter { get; set; }
 
-        public string VehicleTypeId { get; set; }
+        public int VehicleTypeId { get; set; }
         [ForeignKey("VehicleTypeId")]
         public VehicleType VehicleType { get; set; }
 
+        public int OdoMeterId { get; set; }
+        [ForeignKey("OdoMeterId")]
         public OdoMeter OdoMeter { get; set; }
-        public ICollection<Img> Images { get; set; }
 
     }
 }

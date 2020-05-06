@@ -9,5 +9,6 @@ namespace LendCar.Models
     {
         public int Id { get; set; }
         public string Value { get; set; }
+        public ICollection<Vehicle> Vehicles { get; set; }
     }
 }
