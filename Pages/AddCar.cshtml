@@ -14,24 +14,25 @@
                         <form>
                             <div class="form-group col-md-10">
                                 <label for="VIN">VIN : </label>
-                                <input type="text" class="form-control" id="VIN" placeholder="VIN ">
+                                <input type="text" class="form-control" name="VIN" id="VIN" placeholder="VIN ">
                             </div>
                             <div class="form-group col-md-10">
-                                <label for="NameOfBrand">Name Of Brand : </label>
-                                <input type="text" class="form-control" id="NameOfBrand" placeholder="NameOfBrand ">
+                                <label for="Brand">Brand :</label>
+                                <input type="text" class="form-control" name="Brand" id="Brand" placeholder="Brand">
                             </div>
                             <div class="form-group col-md-10">
-                                <label for="vehicleLicensePlateNumber">License Plate Number</label>
-                                <input type="number" class="form-control" id="vehicleLicensePlateNumber" placeholder="License Plate Number">
-                            </div>
-                            <div class="form-group col-md-10">
-                                <label for="Year">Year : </label>
-                                <input type="number" min="1900" max="2020" step="1" class="form-control" id="Year" placeholder="Year">
+                                <label for="PlateNumber">Plate Number</label>
+                                <input type="text" class="form-control" name="PlateNumber" id="PlateNumber" placeholder="Plate Number">
                             </div>
                             <div class="form-group col-md-10">
                                 <label for="Model">Model : </label>
-                                <input type="number" min="1900" max="2020" step="1" class="form-control" id="Model" placeholder="Model">
+                                <input type="text" class="form-control" name="Model" id="Model" placeholder="Model">
                             </div>
+                            <div class="form-group col-md-10">
+                                <label for="Year">Year : </label>
+                                <input type="number" min="1800" max="@DateTime.Now.Year" name="Year" step="1" class="form-control" id="Year" placeholder="Year">
+                            </div>
+
                             <div class="form-group col-md-10">
                                 <label for="OdoMeter">OdoMeter : </label>
                                 <input type="number" class="form-control" id="OdoMeter" placeholder="OdoMeter">
