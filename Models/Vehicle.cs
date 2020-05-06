@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LendCar.Models
 {
-    public class Vehicle 
+    public class Vehicle
     {
         //vehicleIdentificationNumber 
         [Key]
@@ -16,18 +16,22 @@ namespace LendCar.Models
         public string VIN { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
-        public string Region { get; set; }           
+        public string Region { get; set; }
         public string PlateNumber { get; set; }
         public string Year { get; set; }
         public string Model { get; set; }
         //NameOfBrand
         public string Brand { get; set; }
-        public List<string> Photos { get; set; }
+        public int NumberOfSeats { get; set; }
+        public int NumberOfDoors { get; set; }
+        public double milesPerGallon { get; set; }
+        public string EnergyMakeCarMove { get; set; }
+        public List<Img> Photos { get; set; }
         public int TripsNumber { get; set; }
         public double PricePerDay { get; set; }
-	public string StartDate {get; set;}
-	public string EndDate {get; set;}        
-        [Range(1,5)]
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        [Range(1, 5)]
         public double rate { get; set; }
         public ApplicationUser Owner { get; set; }
         public ApplicationUser Renter { get; set; }
