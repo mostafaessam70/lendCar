@@ -11,7 +11,9 @@ namespace LendCar.Models
     public class Vehicle
     {
         //vehicleIdentificationNumber 
-        [Key,Required,MaxLength(17)]
+        
+        public int Id { get; set; }
+        [Required,MaxLength(17)]
         public string VIN { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
@@ -25,14 +27,15 @@ namespace LendCar.Models
         public int NumberOfDoors { get; set; }
         public double MilesPerGallon { get; set; }
         public string EnergyMakeCarMove { get; set; }
-        public ICollection<Img> Photos { get; set; }
         public int TripsNumber { get; set; }
         public double PricePerDay { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
         [Range(1, 5)]
         public double Rate { get; set; }
+        public string ImageUrl { get; set; }
 
+        public ICollection<Img> Photos { get; set; }
 
         public string OwnerId { get; set; }
         [ForeignKey("OwnerId")]
