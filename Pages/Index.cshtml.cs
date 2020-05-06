@@ -19,6 +19,7 @@ namespace LendCar.Pages
      
 
         private readonly ILogger<IndexModel> _logger;
+         
 
         public IndexModel(ILogger<IndexModel> logger)
         {
