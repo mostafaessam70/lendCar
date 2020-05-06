@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,9 +11,7 @@ namespace LendCar.Models
     public class Vehicle
     {
         //vehicleIdentificationNumber 
-        [Key]
-        [Required]
-        [MaxLength(17)]
+        [Key,Required,MaxLength(17)]
         public string VIN { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
@@ -33,10 +32,22 @@ namespace LendCar.Models
         public string EndDate { get; set; }
         [Range(1, 5)]
         public double rate { get; set; }
+
+
+        public string OwnerId { get; set; }
+        [ForeignKey("OwnerId")]
         public ApplicationUser Owner { get; set; }
+
+        public string RenterId { get; set; }
+        [ForeignKey("RenterId")]
         public ApplicationUser Renter { get; set; }
+
+        public string VehicleTypeId { get; set; }
+        [ForeignKey("VehicleTypeId")]
         public VehicleType VehicleType { get; set; }
+
         public OdoMeter OdoMeter { get; set; }
+        public ICollection<Img> Images { get; set; }
 
     }
 }

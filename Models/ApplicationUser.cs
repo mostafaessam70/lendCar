@@ -10,7 +10,6 @@ namespace LendCar.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [Key]
         [Required]
         public string NationalId { get; set; }
         public string FirstName { get; set; }
@@ -20,20 +19,22 @@ namespace LendCar.Models
         public string City { get; set; }
         public string Region { get; set; }
         [DataType(DataType.ImageUrl)]
-        public string Image { get; set; }
-
+        public string ImageUrl { get; set; }
         public string DriverLicenseNumber { get; set; }
-
         [DataType(DataType.MultilineText)]
         public string BriefAboutMe { get; set; }
+
+
+
+        public int GenderId { get; set; }
+        [ForeignKey("GenderId")]
         public Gender Gender { get; set; }
+
         [InverseProperty("Owner")]
         public virtual ICollection<Vehicle> VehiclesOwnedByHim { get; set; }
 
         [InverseProperty("Renter")]
         public virtual ICollection<Vehicle> VehiclesRentalByHim { get; set; }
-
-        // public ICollection<Vehicle> Vehicles { get; set; }
 
     }
 
