@@ -18,7 +18,6 @@ namespace LendCar.Repository
         public List<Vehicle> GetAllVehicles() => Context.Vehicles.ToList();
         public void Add(Vehicle vehicle) => Context.Vehicles.Add(vehicle);
         public void Delete(int id) => Context.Vehicles.Remove(GetVehicle(id));
-
         public void Save() => Context.SaveChanges();
     }
 }

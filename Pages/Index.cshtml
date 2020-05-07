@@ -201,64 +201,44 @@
 
 
 
+@for (int i = 0; i < Model.Vehicles.Count; i++)
+{
+    <section id="ts-team" class="ts-team">
+        <div class="container">
 
-<section id="ts-team" class="ts-team">
-    <div class="container">
-        <div class="text-center titl-list">
-            <h1>Inventory</h1>
+            @if (i == 0)
+            {
+                <div class="text-center titl-list">
+                    <h1>Inventory</h1>
+                </div>
+            }
+            <div class="row list-cars">
+                @for (int j = 0; j < 3 && Model.Vehicles.Count > i; j++, i++)
+                {
+                    <div class="item col-lg-4">
+                        <div class="ts-team-wrapper">
+                            <div class="team-img-wrapper">
+                                <img alt="" src="@Url.Content(Model.Vehicles[i].ImageUrl)" class="img-responsive">
+                            </div>
+                            <div class="ts-team-content">
+                                <h2 class="ts-name">@Model.Vehicles[i].Brand</h2>
+                                <p class="ts-designation">@Model.Vehicles[i].Brand</p>
+                                <p class="ts-description">@Model.Vehicles[i].VIN</p>
+                                <p>color: Red</p>
+                                <strong>@Model.Vehicles[i].PricePerDay $ Daily</strong><br><br>
+                                <a class="btn btn-warning" asp-page="/carDetails" asp-route-Id="@Model.Vehicles[i].Id">GO Detils</a>
+                            </div>
+                        </div><!--/ Team wrapper end -->
+                    </div>
+                }
+
+            </div>
+
         </div>
-        <div class="row list-cars">
-            <div class="item col-lg-4">
-                <div class="ts-team-wrapper">
-                    <div class="team-img-wrapper">
-                        <img alt="" src="images/200117085056-tesla-cars-file.jpg" class="img-responsive">
-                    </div>
-                    <div class="ts-team-content">
-                        <h2 class="ts-name">Nissan</h2>
-                        <p class="ts-designation">New Model</p>
-                        <p class="ts-description">2017 Ford Explorer Limited</p>
-                        <p>color: RED</p>
-                        <strong>$26,490</strong><br><br>
-                        <button class="btn btn-warning">GO Detils</button>
-                    </div>
-                </div><!--/ Team wrapper end -->
-            </div><!-- Team 1 end -->
+    </section>
+}
 
-            <div class="item col-lg-4">
-                <div class="ts-team-wrapper">
-                    <div class="team-img-wrapper">
-                        <img alt="" src="images/2021-ford-mustang-mach-e-front-16-9.webp" class="img-responsive">
-                    </div>
-                    <div class="ts-team-content">
-                        <h2 class="ts-name">Nissan</h2>
-                        <p class="ts-designation">New Model</p>
-                        <p class="ts-description">2017 Ford Explorer Limited</p>
-                        <p>color: RED</p>
-                        <strong>$26,490</strong><br><br>
-                        <button class="btn btn-warning">GO Detils</button>
-                    </div>
-                </div><!--/ Team wrapper end -->
-            </div><!-- Team 2 end -->
 
-            <di,v class="item col-lg-4">
-                <div class="ts-team-wrapper">
-                    <div class="team-img-wrapper">
-                        <img alt="" src="images/3qqv6mpm6i12we1r13lqjlaw6.jpg" class="img-responsive">
-                    </div>
-                    <div class="ts-team-content">
-                        <h2 class="ts-name">Nissan</h2>
-                        <p class="ts-designation">New Model</p>
-                        <p class="ts-description">2017 Ford Explorer Limited</p>
-                        <p>color: RED</p>
-                        <strong>$26,490</strong><br><br>
-                        <button class="btn btn-warning">GO Detils</button>
-                    </div>
-                </div><!--/ Team wrapper end -->
-        </div><!-- Team 3 end -->
-    </div>
-</section>
-
- 
 
 
 

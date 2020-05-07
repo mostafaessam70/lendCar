@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LendCar.Repository
 {
-    interface ICarRepository
+   public interface ICarRepository
     {
         LendCarDBContext Context { get; }
         Vehicle GetVehicle(int id);
