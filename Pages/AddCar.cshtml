@@ -18,18 +18,24 @@
                                 <label for="VIN">VIN : </label>
                                 <input type="text" class="form-control" name="VIN" id="VIN" placeholder="VIN ">
                             </div>
-                            <div class="form-group col-md-10">
-                                <label for="Brand">Brand :</label>
-                                <input type="text" class="form-control" name="Brand" id="Brand" placeholder="Brand">
-                            </div>
+
                             <div class="form-group col-md-10">
                                 <label for="PlateNumber">Plate Number</label>
                                 <input type="text" class="form-control" name="PlateNumber" id="PlateNumber" placeholder="Plate Number">
                             </div>
+                            
+                            <div class="form-group col-md-10">
+                                <label for="BrandId">Brand :</label>
+                                <select asp-for="BrandId" asp-items="@Model.Brands" class="form-control">
+                                </select>
+                            </div>
+
                             <div class="form-group col-md-10">
                                 <label for="Model">Model : </label>
-                                <input type="text" class="form-control" name="Model" id="Model" placeholder="Model">
+                                <select asp-for="BrandModelId" asp-items="@Model.BrandModels" class="form-control">
+                                </select>
                             </div>
+
                             <div class="form-group col-md-10">
                                 <label for="Year">Year : </label>
                                 <input type="number" min="1800" max="@DateTime.Now.Year" name="Year" step="1" class="form-control" id="Year" placeholder="Year">
@@ -39,12 +45,12 @@
                                 <label for="OdoMeter">OdoMeter : </label>
                                 <input type="number" class="form-control" id="OdoMeter" placeholder="OdoMeter">
                             </div>
+                            
                             <div class="form-group col-md-10">
-                                <label for="VehicleType">Vehicle Type : </label>
-                                <select id="VehicleType" class="form-control">
-                                    
-                                </select>
+                                <label for="VehicleTypeId">Vehicle Type : </label>
+                                <select asp-for="VehicleTypeId" asp-items="@Model.VehicleTypes" class="form-control"></select>
                             </div>
+                            
                             <div class="form-group col-md-10">
                                 <label for="Country">Country : </label>
                                 <select id="Country" class="form-control">
@@ -54,6 +60,7 @@
                                     <option value="audi">Audi</option>
                                 </select>
                             </div>
+                            
                             <div class="form-group col-md-10">
                                 <label for="City">City : </label>
                                 <select id="City" class="form-control">
@@ -63,6 +70,7 @@
                                     <option value="audi">Audi</option>
                                 </select>
                             </div>
+                            
                             <div class="form-group col-md-10">
                                 <label for="Region">Region : </label>
                                 <select id="Region" class="form-control">
@@ -72,12 +80,15 @@
                                     <option value="audi">Audi</option>
                                 </select>
                             </div>
+                            
                             <div class="form-group col-md-10">
                                 <label for="ImageCar">Image Car: </label>
                                 <input type="file" id="ImageCar">
                                 <p class="help-block">Select more than image...</p>
                             </div>
+                            
                             <button type="submit" class="btn btn-primary col-md-8">Add My Car</button>
+                        
                         </form>
                     </div>
                 </div>

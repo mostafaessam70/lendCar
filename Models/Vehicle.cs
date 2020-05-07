@@ -21,8 +21,6 @@ namespace LendCar.Models
         public string PlateNumber { get; set; }
         public string Year { get; set; }
         public string Model { get; set; }
-        //NameOfBrand
-        public string Brand { get; set; }
         public int NumberOfSeats { get; set; }
         public int NumberOfDoors { get; set; }
         public double MilesPerGallon { get; set; }
@@ -31,6 +29,7 @@ namespace LendCar.Models
         public double PricePerDay { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+        public string Color { get; set; }
         [Range(1, 5)]
         public double Rate { get; set; }
         public string ImageUrl { get; set; }
@@ -52,6 +51,9 @@ namespace LendCar.Models
         public int OdoMeterId { get; set; }
         [ForeignKey("OdoMeterId")]
         public OdoMeter OdoMeter { get; set; }
-
+ 
+        public int BrandId { get; set; }
+        [ForeignKey("BrandId")]
+        public Brand Brand { get; set; }
     }
 }

@@ -36,6 +36,9 @@ namespace LendCar
           
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICarRepository, CarRepository>();
+            services.AddTransient<IVehicleTypeRepository, VehicleTypeRepository>();
+            services.AddTransient<IBrandRepository, BrandRepository>();
+            services.AddTransient<IBrandModelRepository, BrandModelRepository>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<LendCarDBContext>();
 
