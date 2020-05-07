@@ -3316,11 +3316,10 @@ label {
     text-transform: uppercase;
     border-left: 3px solid #ffb600;
 }
-
-
-
+.sidebar a{
+    cursor:pointer;
+}
 /* Widget common */
-
 .sidebar .widget {
     margin-bottom: 40px;
 }
@@ -3437,9 +3436,9 @@ label {
 }
 
 .widget.recent-posts ul li {
-    border-bottom: 1px solid #dadada;
+    /*border-bottom: 1px solid #dadada;*/
     padding-bottom: 15px;
-    margin-bottom: 17px;
+    margin-bottom: 180px;
 }
 
 .widget.recent-posts ul li:last-child {
@@ -3450,8 +3449,13 @@ label {
 
 .widget.recent-posts .posts-thumb img {
     margin-right: 15px;
-    width: 90px;
-    height: 70px;
+    width: 260px;
+    height: 154px;
+    border-radius: 10px;
+    display: block;
+}
+.posts-thumb:hover {
+    transition: opacity linear 100ms;
 }
 
 .widget.recent-posts .post-info .entry-title {
