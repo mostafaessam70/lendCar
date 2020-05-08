@@ -68,7 +68,9 @@ namespace LendCar
             app.UseRouting();
 
             app.UseAuthorization();
-            
+          
+            app.UseMvcWithDefaultRoute();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
