@@ -11,7 +11,7 @@ namespace LendCar.Repository
     {
         LendCarDBContext Context { get; }
         Vehicle GetVehicle(int id);
-        List<Vehicle> GetAllVehicles();
+        IQueryable<Vehicle> GetAllVehicles();
         void Add(Vehicle vehicle);
         void Delete(int id);
         void Save();

@@ -13,18 +13,20 @@ using System.Threading;
 using System.Web;
 using LendCar.Models;
 using LendCar.Repository;
+using X.PagedList;
 
 namespace LendCar.Pages
 {
+    //[BindProperties(SupportsGet = true)]
     public class IndexModel : PageModel
     {
-     
+
 
         private readonly ILogger<IndexModel> _logger;
-        public List<Vehicle> Vehicles { get; set; }
         public ICarRepository ICarRepository { get; }
+        public IPagedList<Vehicle> Vehicles { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger,ICarRepository ICarRepository)
+        public IndexModel(ILogger<IndexModel> logger, ICarRepository ICarRepository)
         {
             _logger = logger;
             this.ICarRepository = ICarRepository;
@@ -32,8 +34,23 @@ namespace LendCar.Pages
 
         public void OnGet()
         {
-            Vehicles = ICarRepository.GetAllVehicles();
+            Request.Query.TryGetValue("Page", out var page);
+            int pageNumber;
+            if (page.Count > 0)
+            {
+                if (int.TryParse(page[0], out var pageNum))
+                {
+                    pageNumber = pageNum;
+                }
+                else
+                    pageNumber = 1;
+            }
+            else
+                pageNumber = 1;
+
+            Vehicles = ICarRepository.GetAllVehicles().ToList().ToPagedList(pageNumber, 9);
+
         }
-     
+
     }
 }
