@@ -43,7 +43,8 @@ namespace LendCar
             services.AddTransient<IBrandModelRepository, BrandModelRepository>();
             
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<LendCarDBContext>();
-            services.AddMvc(options=>options.EnableEndpointRouting = false);
+            
+            services.AddControllers();
             services.AddRazorPages();
         }
 
@@ -67,10 +68,12 @@ namespace LendCar
             app.UseRouting();
 
             app.UseAuthorization();
+          
             app.UseMvcWithDefaultRoute();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
             });
         }

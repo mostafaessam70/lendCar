@@ -13,14 +13,13 @@ namespace LendCar.Models
         //vehicleIdentificationNumber 
         
         public int Id { get; set; }
-        [Required,MaxLength(17)]
+        [Required,RegularExpression("[A-Z|0-9]{17}")]
         public string VIN { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
         public string Region { get; set; }
         public string PlateNumber { get; set; }
         public string Year { get; set; }
-        public string Model { get; set; }
         public int NumberOfSeats { get; set; }
         public int NumberOfDoors { get; set; }
         public double MilesPerGallon { get; set; }
@@ -51,9 +50,9 @@ namespace LendCar.Models
         public int OdoMeterId { get; set; }
         [ForeignKey("OdoMeterId")]
         public OdoMeter OdoMeter { get; set; }
- 
-        public int BrandId { get; set; }
-        [ForeignKey("BrandId")]
-        public Brand Brand { get; set; }
+
+        public int ModelId { get; set; }
+        [ForeignKey("ModelId")]
+        public BrandModel Model { get; set; }
     }
 }
