@@ -1,10 +1,12 @@
 ﻿@page
 @using LendCar.Pages
-@model AddCarModel
+@model LendCar.Pages.AddCarModel
 @{
     ViewData["Title"] = "AddCar";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+    <script> var root = '@Url.Content("~")'; </script>
+
         <section style="background-image: url(https://bit.ly/2Sxz2lq); background-size:cover">
             <div class="form-horizontal">
                 <div class="container-fluid ">
@@ -15,83 +17,128 @@
                         <hr />
                         <form>
                             <div class="form-group col-md-10">
-                                <label for="VIN">VIN : </label>
-                                <input type="text" class="form-control" name="VIN" id="VIN" placeholder="VIN ">
+                                <label asp-for="@Model.Vehicle.VIN">VIN : </label>
+                                <input asp-for="@Model.Vehicle.VIN" class="form-control">
                             </div>
 
                             <div class="form-group col-md-10">
-                                <label for="PlateNumber">Plate Number</label>
-                                <input type="text" class="form-control" name="PlateNumber" id="PlateNumber" placeholder="Plate Number">
+                                <label asp-for="@Model.Vehicle.PlateNumber">Plate Number</label>
+                                <input asp-for="@Model.Vehicle.PlateNumber" class="form-control">
                             </div>
-                            
+
                             <div class="form-group col-md-10">
                                 <label for="BrandId">Brand :</label>
-                                <select asp-for="BrandId" asp-items="@Model.Brands" class="form-control">
+                                <select id="ddlBrands" asp-for="@Model.Vehicle.Model.BrandId" asp-items="@Model.Brands" class="form-control">
                                 </select>
                             </div>
 
                             <div class="form-group col-md-10">
                                 <label for="Model">Model : </label>
-                                <select asp-for="BrandModelId" asp-items="@Model.BrandModels" class="form-control">
+                                <select id="ddlModels" asp-for="@Model.Vehicle.ModelId" asp-items='@Model.BrandModels' class="form-control">
                                 </select>
                             </div>
 
                             <div class="form-group col-md-10">
-                                <label for="Year">Year : </label>
-                                <input type="number" min="1800" max="@DateTime.Now.Year" name="Year" step="1" class="form-control" id="Year" placeholder="Year">
+                                <label asp-for="@Model.Vehicle.Year">Year : </label>
+                                <input asp-for="@Model.Vehicle.Year" class="form-control">
                             </div>
 
                             <div class="form-group col-md-10">
-                                <label for="OdoMeter">OdoMeter : </label>
-                                <input type="number" class="form-control" id="OdoMeter" placeholder="OdoMeter">
+                                <label asp-for="@Model.Vehicle.OdoMeterId">OdoMeter : </label>
+                                <input asp-for="@Model.Vehicle.OdoMeterId" class="form-control">
                             </div>
-                            
+
                             <div class="form-group col-md-10">
-                                <label for="VehicleTypeId">Vehicle Type : </label>
-                                <select asp-for="VehicleTypeId" asp-items="@Model.VehicleTypes" class="form-control"></select>
+                                <label asp-for="@Model.Vehicle.VehicleTypeId">Vehicle Type : </label>
+                                <select asp-for="@Model.Vehicle.VehicleTypeId" asp-items="@Model.VehicleTypes" class="form-control"></select>
                             </div>
-                            
+
                             <div class="form-group col-md-10">
-                                <label for="Country">Country : </label>
+                                <label asp-for="@Model.Vehicle.PricePerDay">Price per day : </label>
+                                <input asp-for="@Model.Vehicle.PricePerDay" class="form-control" />
+                                
+                            </div>
+
+
+                            <div class="form-group col-md-10">
+                                <label asp-for="@Model.Vehicle.Country">Country : </label>
                                 <select id="Country" class="form-control">
-                                    <option value="volvo">Egypt</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="opel">Opel</option>
-                                    <option value="audi">Audi</option>
+                                    <option value="1">Egypt</option>
+                                    <option value="2">USA</option>
+                                    <option value="3">KSA</option>
+
                                 </select>
                             </div>
-                            
+
                             <div class="form-group col-md-10">
-                                <label for="City">City : </label>
+                                <label asp-for="@Model.Vehicle.City">City : </label>
                                 <select id="City" class="form-control">
-                                    <option value="volvo">Minia</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="opel">Opel</option>
-                                    <option value="audi">Audi</option>
+                                    <option value="1">City 1</option>
+                                    <option value="2">City 2</option>
+                                    <option value="3">City 3</option>
+
                                 </select>
                             </div>
-                            
+
                             <div class="form-group col-md-10">
-                                <label for="Region">Region : </label>
-                                <select id="Region" class="form-control">
+                                <label asp-for="@Model.Vehicle.Region">Region : </label>
+                                <select asp-for="@Model.Vehicle.Region" class="form-control">
                                     <option value="volvo">Damaress</option>
                                     <option value="saab">Saab</option>
                                     <option value="opel">Opel</option>
                                     <option value="audi">Audi</option>
                                 </select>
                             </div>
-                            
+
                             <div class="form-group col-md-10">
-                                <label for="ImageCar">Image Car: </label>
-                                <input type="file" id="ImageCar">
-                                <p class="help-block">Select more than image...</p>
+                                <label asp-for="@Model.VehiclePhotos">Car Images: </label>
+                                <input asp-for="@Model.VehiclePhotos"  id="VehiclePhotos" accept="image/*" multiple>
+                                <p class="help-block">@*Select more than image...*@</p>
                             </div>
-                            
-                            <button type="submit" class="btn btn-primary col-md-8">Add My Car</button>
-                        
+                            <div asp-validation-summary="All"></div>
+                            <button asp-action="POST" type="submit" class="btn btn-primary col-md-8">Add My Car</button>
+
                         </form>
                     </div>
                 </div>
             </div>
         </section>
- 
+ @section Scripts{
+<script>
+    $(document).ready(
+        $("#ddlBrands").change(
+            function getbrandmodels() {
+                var loadmessage = "<option value='0'> please wait...</option>";
+                $("#ddlmodels").html(loadmessage).show();
+                var id = $("#ddlBrands").val();
+                var url = root + '/api/BrandModels/byBrand/' + id;
+              
+                $.ajax({
+                    url: url,
+                    data: id,
+                    cache: false,
+                    type: "GET",
+                    success: function (data) {
+                        if (data.length == 0) {
+                            var markup = "<option value='0'> No models available for this brand </option>";
+                        }
+                        else
+                        {
+                            var markup = "<option value=" + data[0].id + ">" + data[0].name + "</option>";
+                            for (var i = 1; i < data.length; i++) {
+                                markup += "<option value=" + data[i].id + ">" + data[i].name + "</option>";
+                            }
+                        }
+                        $("#ddlModels").html(markup).show();
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+            }
+        )
+        
+    );
+    
+</script>
+}

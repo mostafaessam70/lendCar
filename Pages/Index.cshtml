@@ -221,8 +221,8 @@
                                 <img alt="" src="@Url.Content(Model.Vehicles[i].ImageUrl)" class="img-responsive">
                             </div>
                             <div class="ts-team-content">
-                                <h2 class="ts-name">@Model.Vehicles[i].Brand</h2>
-                                <p class="ts-designation">@Model.Vehicles[i].Brand</p>
+                                <h2 class="ts-name">@Model.Vehicles[i].Model.Brand.Name</h2>
+                                <p class="ts-designation">@Model.Vehicles[i].Model.Name</p>
                                 <p class="ts-description">@Model.Vehicles[i].VIN</p>
                                 <p>color: Red</p>
                                 <strong>@Model.Vehicles[i].PricePerDay $ Daily</strong><br><br>
