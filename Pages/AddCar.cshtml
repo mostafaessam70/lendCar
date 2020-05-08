@@ -15,7 +15,7 @@
                             <h2>Add Your Car</h2>
                         </div>
                         <hr />
-                        <form>
+                        <form method="post" enctype="multipart/form-data">
                             <div class="form-group col-md-10">
                                 <label asp-for="@Model.Vehicle.VIN">VIN : </label>
                                 <input asp-for="@Model.Vehicle.VIN" class="form-control">
@@ -95,8 +95,10 @@
                                 <input asp-for="@Model.VehiclePhotos"  id="VehiclePhotos" accept="image/*" multiple>
                                 <p class="help-block">@*Select more than image...*@</p>
                             </div>
-                            <div asp-validation-summary="All"></div>
-                            <button asp-action="POST" type="submit" class="btn btn-primary col-md-8">Add My Car</button>
+                            <div class="form-group col-md-12">
+                                <div  asp-validation-summary="All"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary col-md-8">Add My Car</button>
 
                         </form>
                     </div>

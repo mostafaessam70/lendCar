@@ -61,10 +61,15 @@ namespace LendCar.Pages
                 foreach (var photo in VehiclePhotos)
                 {
                     string folder = Path.Combine(hostEnvironment.WebRootPath, "CarPhotosUploaded");
-                    newImgName = $"{photo.FileName}_{DateTime.Now}";
+                    newImgName = $"{DateTime.Now.ToString("MM_dd_yyyy_HH_mm_ss")}_{photo.FileName}";
                     string file = Path.Combine(folder,newImgName);
-                    photo.CopyTo(new FileStream(file,FileMode.Create));
+                    FileStream fs = new FileStream(file, FileMode.Create);
+                    photo.CopyTo(fs);
+                    fs.Close();
+                   
                 }
+                carRepo.Add(Vehicle);
+                carRepo.Save();
             }
         }
 
