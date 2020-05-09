@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace LendCar.Repository
 {
-    public interface ICarRepository
+    public interface IBrandRepository
     {
         LendCarDBContext Context { get; }
-        Vehicle GetVehicle(int id);
-        IQueryable<Vehicle> GetAllVehicles();
-        void Add(Vehicle vehicle);
+        Brand GetBrand(int id);
+        List<Brand> GetAllBrands();
+        void Add(Brand brand);
         void Delete(int id);
         void Save();
     }

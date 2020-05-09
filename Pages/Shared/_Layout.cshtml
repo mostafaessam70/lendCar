@@ -4,6 +4,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>@ViewData["Title"] - test1</title>
+    <!-- Javascript Files
+    ================================================== -->
+    <!-- initialize jQuery Library -->
+    <script src="~/js/jquery.js"></script>
+    <!-- Bootstrap jQuery -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- Owl Carousel -->
+    <script src="~/js/owl.carousel.min.js"></script>
+    <!-- Color box -->
+    <script src="~/js/jquery.colorbox.js"></script>
+    <!-- Isotope -->
+    <script src="~/js/isotope.js"></script>
+    <script src="~/js/ini.isotope.js"></script>
+    <!-- Template custom -->
+    <script src="~/js/custom.js"></script>
+    <script src="~/js/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+
+
     <!-- Bootstrap -->
     <link rel="stylesheet" href="~/css/bootstrap.min.css">
     <!-- Template styles-->
@@ -227,10 +245,10 @@
         </header>
         <!--/ Header end -->
 
-        <div class="container-fluid  no-padding" >
+        <div class="container-fluid  no-padding">
             @*<main role="main" class="pb-3">*@
-                @RenderBody()
-            
+            @RenderBody()
+
         </div>
 
 
@@ -308,8 +326,8 @@
 
                     <div id="back-to-top" data-spy="affix" data-offset-top="10" class="back-to-top affix">
                         @*<button class="btn btn-primary" title="Back to Top">
-                            <i class="fa fa-angle-double-up"></i>
-                        </button>*@
+                                <i class="fa fa-angle-double-up"></i>
+                            </button>*@
                         <span>
                             <img src="http://themes.potenzaglobalsolutions.com/html/cardealer/assets/images/car.png" alt="">
                         </span>
@@ -320,10 +338,14 @@
 
         </footer><!-- Footer end -->
     </div>
+
     <!-- Javascript Files
     ================================================== -->
     <!-- initialize jQuery Library -->
     <script src="~/js/jquery.js"></script>
+    <!-- jQuery Validation Libraries -->
+    <script src="~/js/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/js/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <!-- Bootstrap jQuery -->
     <script src="~/js/bootstrap.min.js"></script>
     <!-- Owl Carousel -->
@@ -335,6 +357,6 @@
     <script src="~/js/ini.isotope.js"></script>
     <!-- Template custom -->
     <script src="~/js/custom.js"></script>
-
+    @RenderSection("Scripts", false);
 </body>
 </html>
