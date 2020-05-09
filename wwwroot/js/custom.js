@@ -367,3 +367,4 @@ jQuery(function ($) {
 	$('#back-to-top').tooltip('hide');
 
 });
+
