@@ -13,6 +13,5 @@ namespace LendCar.Models
         [Required,StringLength(50),DisplayName("Brand name")]
         public string Name { get; set; }
         public ICollection<BrandModel> BrandModels { get; set; }
-        public ICollection<Vehicle> Vehicles { get; set; }
     }
 }

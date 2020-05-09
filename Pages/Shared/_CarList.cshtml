@@ -17,19 +17,19 @@
                 <div class="item col-lg-4 ">
                     <div class="ts-team-wrapper">
                         <div class="team-img-wrapper">
-                            <img alt="" src="@Url.Content(Model[i].ImageUrl)" class="img-responsive">
+                            <img alt="" src="@Url.Content("~/CarPhotosUploaded/"+Model[i].ImageUrl)" class="img-responsive">
                         </div>
                         <div class="ts-team-content">
-<<<<<<< HEAD
-                            <h2 class="ts-name">@Model[i].Model.Brand</h2>
-                            <p class="ts-designation">@Model[i].Model.Brand</p>
-=======
+
+                            <h2 class="ts-name">@Model[i].Model.Brand.Name </h2>
+                            <p class="ts-designation">@Model[i].Model.Name </p> @*null*@
+
                             <h2 class="ts-name">@Model[i].Color</h2>
                             <p class="ts-designation">@Model[i].EndDate</p>
->>>>>>> 8281c1cecea5c216983f8d86de2236e7cf85f818
+
                             <p class="ts-description">@Model[i].VIN</p>
-                            <p>color: Red</p>
-                            <strong>@Model[i].PricePerDay $ Daily</strong><br><br>
+                            <p>color: Car Color</p>
+                            <strong>@Model[i].PricePerDay EGP Daily</strong><br><br>
                             <a class="btn btn-warning" asp-page="/carDetails" asp-route-Id="@Model[i].Id">GO Detils</a>
                         </div>
                     </div><!--/ Team wrapper end -->

@@ -10,6 +10,10 @@ namespace LendCar.DBContext
 {
     public class LendCarDBContext : IdentityDbContext<ApplicationUser>
     {
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+            
+        //}
         public LendCarDBContext(DbContextOptions<LendCarDBContext> options) : base(options)  { }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }

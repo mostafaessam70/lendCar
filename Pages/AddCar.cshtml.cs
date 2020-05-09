@@ -53,9 +53,9 @@ namespace LendCar.Pages
         }
         public void OnPost(Vehicle Vehicle,IEnumerable<IFormFile> VehiclePhotos) 
         {
+            
             if (!ModelState.IsValid)
             {
-                ViewData["Error"] = ModelState.Values;
                 RedirectToPage();
             }
             else
@@ -63,7 +63,7 @@ namespace LendCar.Pages
                 string newImgName = null;
                 if (VehiclePhotos != null && VehiclePhotos.Count() > 0)
                 {
-                    
+                    List<Img> photos = new List<Img>();
                     foreach (var photo in VehiclePhotos)
                     {
                         string folder = Path.Combine(hostEnvironment.WebRootPath, "CarPhotosUploaded");
@@ -72,12 +72,14 @@ namespace LendCar.Pages
                         FileStream fs = new FileStream(file, FileMode.Create);
                         photo.CopyTo(fs);
                         fs.Close();
-                        Vehicle.Photos.Add(new Img() {Image = newImgName });
+                        photos.Add(new Img { Image = newImgName});
                         if (VehiclePhotos.ElementAt(0) == photo)
                         {
                             Vehicle.ImageUrl = newImgName;
                         }
                     }
+                    Vehicle.Photos = photos;
+
                     carRepo.Add(Vehicle);
                     carRepo.Save();
                 }
