@@ -1,37 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-using System.Globalization;
-using System.IO;
-using System.Threading;
-using System.Web;
 using LendCar.Models;
 using LendCar.Repository;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using X.PagedList;
 
 namespace LendCar.Pages
 {
-    //[BindProperties(SupportsGet = true)]
-    public class IndexModel : PageModel
+    public class AdminModel : PageModel
     {
-
-
-        private readonly ILogger<IndexModel> _logger;
         public ICarRepository ICarRepository { get; }
         public IPagedList<Vehicle> Vehicles { get; set; }
-
-        public IndexModel(ILogger<IndexModel> logger, ICarRepository ICarRepository)
+        public int CurrentPage { get; set; }
+        public AdminModel(ICarRepository ICarRepository)
         {
-            _logger = logger;
             this.ICarRepository = ICarRepository;
         }
-
         public void OnGet()
         {
             Request.Query.TryGetValue("Page", out var page);
@@ -48,9 +35,9 @@ namespace LendCar.Pages
             else
                 pageNumber = 1;
 
-            Vehicles = ICarRepository.GetAllVehicles().ToList().ToPagedList(pageNumber, 9);
+            CurrentPage = pageNumber;
 
+            Vehicles = ICarRepository.GetAllVehicles().ToList().ToPagedList(pageNumber, 10);
         }
-
     }
 }

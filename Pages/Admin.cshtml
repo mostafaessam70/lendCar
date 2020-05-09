@@ -1,0 +1,68 @@
+﻿@page
+@model AdminModel
+@{
+    ViewData["Title"] = "Admin";
+}
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="sidebar sidebar-right">
+                    <div class="widget recent-posts">
+                        <h3 class="widget-title">Admin Dashboard</h3>
+                        <ul class="unstyled clearfix">
+                            <li>
+                                <img src="~/loader6.gif" style="display:none"  id="loader"/>
+                                <div id="vechileList">
+                                    <partial name="_AdminCarList" model="@Model.Vehicles" />
+                                </div>
+
+                            </li><!-- 1st post end-->
+                        </ul>
+                        <div class="text-center">
+
+                            @Html.PagedListPager((IPagedList)Model.Vehicles, page => "/Admin?Page=" + page,
+                                new X.PagedList.Mvc.Common.PagedListRenderOptions
+                                {
+                                    DisplayItemSliceAndTotal = true,
+                                    ContainerDivClasses = new[] { "navigation" },
+                                    LiElementClasses = new[] { "page-item" },
+                                    PageClasses = new[] { "page-link" },
+                                })
+                        </div>
+                    </div><!-- Recent post end -->
+                </div><!-- Sidebar end -->
+            </div><!-- Col end -->
+        </div><!-- Content row end -->
+    </div><!-- Container end -->
+</section>
+
+
+
+@section Scripts{
+    <script>
+
+          $(document).on('click','.carList',function () {
+
+                let vechicleId = $(this).attr('data-id');
+                if (vechicleId != undefined) {
+                    $.ajax({
+                        method: 'Post',
+                        data: { Page:@Model.CurrentPage, Id: vechicleId },
+                        url: '/Vehicles/Delete',
+                        beforeSend: function () {
+                            $('#loader').show();
+                        },
+                        success(data) {
+                            $('#vechileList').html(data);
+                            $('#loader').hide();
+                        }
+                    })
+                }
+
+            })
+        $(document).ready(function () {
+            $('/*ul*/.pagination > li.disabled > a').addClass('page-link');
+        });
+    </script>
+}

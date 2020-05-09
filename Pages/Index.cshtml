@@ -1,10 +1,10 @@
 ﻿@page
 @model LendCar.Pages.IndexModel
+
 @{
     ViewData["Title"] = "Home page";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-
 <section class="header">
     <div class="container-fluid">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -200,47 +200,24 @@
 </section><!-- Feature are end -->
 
 
+<partial name="_CarList" model="(IPagedList)Model.Vehicles" />
 
-@for (int i = 0; i < Model.Vehicles.Count; i++)
-{
-    <section id="ts-team" class="ts-team">
-        <div class="container">
+<div class="text-center">
 
-            @if (i == 0)
-            {
-                <div class="text-center titl-list">
-                    <h1>Inventory</h1>
-                </div>
-            }
-            <div class="row list-cars">
-                @for (int j = 0; j < 3 && Model.Vehicles.Count > i; j++, i++)
-                {
-                    <div class="item col-lg-4">
-                        <div class="ts-team-wrapper">
-                            <div class="team-img-wrapper">
-                                <img alt="" src="@Url.Content(Model.Vehicles[i].ImageUrl)" class="img-responsive">
-                            </div>
-                            <div class="ts-team-content">
-                                <h2 class="ts-name">@Model.Vehicles[i].Brand</h2>
-                                <p class="ts-designation">@Model.Vehicles[i].Brand</p>
-                                <p class="ts-description">@Model.Vehicles[i].VIN</p>
-                                <p>color: Red</p>
-                                <strong>@Model.Vehicles[i].PricePerDay $ Daily</strong><br><br>
-                                <a class="btn btn-warning" asp-page="/carDetails" asp-route-Id="@Model.Vehicles[i].Id">GO Detils</a>
-                            </div>
-                        </div><!--/ Team wrapper end -->
-                    </div>
-                }
+    @Html.PagedListPager((IPagedList)Model.Vehicles, page =>"/Index?Page="+page,
+        new X.PagedList.Mvc.Common.PagedListRenderOptions
+        {
+            DisplayItemSliceAndTotal = true,
+            ContainerDivClasses = new[] { "navigation" },
+            LiElementClasses = new[] { "page-item" },
+            PageClasses = new[] { "page-link" },
+        })
+</div>
 
-            </div>
-
-        </div>
-    </section>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('/*ul*/.pagination > li.disabled > a').addClass('page-link');
+        });
+    </script>
 }
-
-
-
-
-
-
-

@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Configuration;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LendCar
 {
@@ -33,12 +34,17 @@ namespace LendCar
         {
             services.AddDbContext<LendCarDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("LendCarCString")));
-          
+            
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICarRepository, CarRepository>();
 
+            services.AddTransient<IVehicleTypeRepository, VehicleTypeRepository>();
+            services.AddTransient<IBrandRepository, BrandRepository>();
+            services.AddTransient<IBrandModelRepository, BrandModelRepository>();
+            
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<LendCarDBContext>();
-
+            
+            services.AddControllers();
             services.AddRazorPages();
         }
 
@@ -62,9 +68,10 @@ namespace LendCar
             app.UseRouting();
 
             app.UseAuthorization();
-
+          
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
             });
         }
