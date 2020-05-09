@@ -3582,7 +3582,6 @@ label {
         margin-left: 80px
     }
 
-
 /*Login Page*/
 .LoginPage {
     background: url(https://bit.ly/35R2p7S) no-repeat center;
@@ -3902,6 +3901,9 @@ label:hover:before {
     100% {
         left: 500px;
     }
+
+}*/
+
 }
 
     /*style of error 404 page */
