@@ -15,9 +15,18 @@ namespace LendCar.Controllers
 
         public VehiclesController(ICarRepository _CarRepository)=>
             CarRepository = _CarRepository;
+
         [Route("VehiclesList")]
         public PartialViewResult VehiclesList(int page =1)=>
              PartialView("_CarList",CarRepository.GetAllVehicles().ToList().ToPagedList(page, 9));
+
+        [Route("Delete")]
+        public PartialViewResult Delete(int id , int page=1)
+        {
+            CarRepository.Delete(id);
+            CarRepository.Save();
+            return PartialView("_AdminCarList", CarRepository.GetAllVehicles().ToList().ToPagedList(page, 10));
+        }
 
     }
 }
