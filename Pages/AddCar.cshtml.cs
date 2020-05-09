@@ -35,43 +35,54 @@ namespace LendCar.Pages
             this.hostEnvironment = hostEnvironment;
         }
 
+        [BindProperty]
         public Vehicle Vehicle { get; set; }
         [BindProperty]
         public IEnumerable<IFormFile> VehiclePhotos { get; set; }
         public SelectList Brands { get; set; }
         public SelectList BrandModels { get; set; }
         public SelectList VehicleTypes { get; set; }
+        public SelectList OdoMeters { get; set; }
 
         public void OnGet() 
         {
             this.VehicleTypes = new SelectList(vehicleTypeRepo.GetAllVehicleTypes().OrderBy(vt=>vt.Type), "Id", "Type");
             this.Brands = new SelectList(brandRepo.GetAllBrands().OrderBy(b=>b.Name), "Id", "Name");
             this.BrandModels = new SelectList(brandModelRepo.GetAllBrandModels().Where(bm=>bm.BrandId== brandRepo.GetAllBrands().OrderBy(b => b.Name).FirstOrDefault().Id).OrderBy(b=>b.Name), "Id", "Name");
+            this.OdoMeters = new SelectList(carRepo.Context.OdoMeters.ToList(),"Id","Value");
         }
-        public void OnPost([Bind("VIN","PricePerDay","VehicleTypeId","ModelId")] Vehicle Vehicle,IEnumerable<IFormFile> VehiclePhotos) 
+        public void OnPost(Vehicle Vehicle,IEnumerable<IFormFile> VehiclePhotos) 
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    RedirectToPage();
-            //}
-            
-            string newImgName = null;
-            if (VehiclePhotos != null && VehiclePhotos.Count() > 0)
+            if (!ModelState.IsValid)
             {
-                foreach (var photo in VehiclePhotos)
+                ViewData["Error"] = ModelState.Values;
+                RedirectToPage();
+            }
+            else
+            {
+                string newImgName = null;
+                if (VehiclePhotos != null && VehiclePhotos.Count() > 0)
                 {
-                    string folder = Path.Combine(hostEnvironment.WebRootPath, "CarPhotosUploaded");
-                    newImgName = $"{DateTime.Now.ToString("MM_dd_yyyy_HH_mm_ss")}_{photo.FileName}";
-                    string file = Path.Combine(folder,newImgName);
-                    FileStream fs = new FileStream(file, FileMode.Create);
-                    photo.CopyTo(fs);
-                    fs.Close();
-                   
+                    
+                    foreach (var photo in VehiclePhotos)
+                    {
+                        string folder = Path.Combine(hostEnvironment.WebRootPath, "CarPhotosUploaded");
+                        newImgName = $"{DateTime.Now.ToString("MM_dd_yyyy_HH_mm_ss")}_{photo.FileName}";
+                        string file = Path.Combine(folder, newImgName);
+                        FileStream fs = new FileStream(file, FileMode.Create);
+                        photo.CopyTo(fs);
+                        fs.Close();
+                        Vehicle.Photos.Add(new Img() {Image = newImgName });
+                        if (VehiclePhotos.ElementAt(0) == photo)
+                        {
+                            Vehicle.ImageUrl = newImgName;
+                        }
+                    }
+                    carRepo.Add(Vehicle);
+                    carRepo.Save();
                 }
-                carRepo.Add(Vehicle);
-                carRepo.Save();
+                RedirectToPage("/index");
             }
         }
-
     }
 }

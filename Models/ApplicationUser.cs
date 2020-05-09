@@ -29,14 +29,7 @@ namespace LendCar.Models
         public int GenderId { get; set; }
         [ForeignKey("GenderId")]
         public Gender Gender { get; set; }
-
-        [InverseProperty("Owner")]
+        
         public virtual ICollection<Vehicle> VehiclesOwnedByHim { get; set; }
-
-        [InverseProperty("Renter")]
-        public virtual ICollection<Vehicle> VehiclesRentalByHim { get; set; }
-
     }
-
-
 }
