@@ -41,7 +41,6 @@ namespace LendCar
             services.AddTransient<IVehicleTypeRepository, VehicleTypeRepository>();
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<IBrandModelRepository, BrandModelRepository>();
-            
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<LendCarDBContext>();
             
             services.AddControllers();
@@ -57,8 +56,7 @@ namespace LendCar
             }
             else
             {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
                 app.UseHsts();
             }
 
@@ -67,8 +65,7 @@ namespace LendCar
 
             app.UseRouting();
 
-            app.UseAuthorization();
-            
+            app.UseAuthorization();            
           
             app.UseEndpoints(endpoints =>
             {

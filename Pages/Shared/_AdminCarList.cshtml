@@ -1,22 +1,59 @@
 ﻿@model IPagedList<LendCar.Models.Vehicle>
-
+@*@for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="col-md-10">
+            <div class="posts-thumb pull-left">
+                <a href="#"><img alt="img" src="@Url.Content(Model[i].ImageUrl)"></a>
+            </div>
+            <div class="post-info">
+                <h4 class="entry-title">
+                    <a href="#">@Model[i].Id</a>
+                </h4>
+                <p>4.2 <i class="fas fa-star"></i></p>
+                <span>(116 Trip)</span>
+                <p><i class="fa fa-car"></i> Gas</p>
+                <p><i class="fa fa-group "></i> 5 seats</p>
+            </div>
+        </div>
+        <div class=" col-md-2">
+            <a class="fas fa-trash-alt carList" data-id="@Model[i].Id"> Delete</a>
+        </div>
+    }*@
+<table class="table  table-responsive table-bordered text-center ">
+    <thead class="text-center">
+        <tr>
+            <td scope="col">#</td>
+            <td scope="col">Vehicles Name</td>
+            <td scope="col">Color</td>
+            <td scope="col">Platform</td>
+            <td scope="col">Start Date</td>
+            <td scope="col">End Date</td>
+            <td scope="col">Details</td>
+            <td scope="col">Delete</td>
+        </tr>
+    </thead>
+    <tbody>
         @for (int i = 0; i < Model.Count; i++)
         {
-            <div class="col-md-10">
-                <div class="posts-thumb pull-left">
-                    <a href="#"><img alt="img" src="@Url.Content(Model[i].ImageUrl)"></a>
-                </div>
-                <div class="post-info">
-                    <h4 class="entry-title">
-                        <a href="#">@Model[i].Id</a>
-                    </h4>
-                    <p>4.2 <i class="fas fa-star"></i></p>
-                    <span>(116 Trip)</span>
-                    <p><i class="fa fa-car"></i> Gas</p>
-                    <p><i class="fa fa-group "></i> 5 seats</p>
-                </div>
-            </div>
-            <div class=" col-md-2">
-                <a class="fas fa-trash-alt carList" data-id="@Model[i].Id"> Delete</a>
-            </div>
+            <tr>
+                <td scope="row">@i</td>
+                <td>@Model[i].Country</td>
+                @* <td> <p style="min-width:100%;min-height:100%; background-color:#@Url.Content(Model[i].Color.HexValue);"><p></td>*@
+                <td><i style="border-radius:50%; width:50%;height:50%; background-color:#@Url.Content(Model[i].Color.HexValue);">    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </i></td>
+
+                <td>@Model[i].PlateNumber</td>
+                <td>@Model[i].StartDate</td>
+                <td>@Model[i].EndDate</td>
+
+                <td>
+                    <a asp-page="/carDetails">Details</a>
+                    <a href="/carDetails" >Details</a>
+                </td>
+                <td>
+                    <a class="fas fa-trash-alt carList" data-id="@Model[i].Id"></a>
+                </td>
+
+            </tr>
         }
+    </tbody>
+</table>
