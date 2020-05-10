@@ -1,8 +1,8 @@
 ﻿@page
 @model LendCar.Pages.testModel
 @{
-    ViewData["Title"] = "test";
-    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Page Not Found";
+    Layout =null;
 }
 
 <section class="main-container">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="help-text">
                     <p>Try using the button below to go to main page of the site</p> <br>
-                    <a href="#"><i class="fas fa-angle-double-left"></i> Back to Home Page</a>
+                    <a  asp-page="Index"><i class="fas fa-angle-double-left"></i> Back to Home Page</a>
                 </div>
             </div>
         </div>
