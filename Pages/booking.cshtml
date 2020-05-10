@@ -1,0 +1,172 @@
+﻿@page
+@model LendCar.Pages.bookingModel
+@{
+    ViewData["Title"] = "booking";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<section class="booking">
+    <div class="container">
+        <div class="row left-side">
+            <div class="col-md-7 col-xs-12">
+                <div class="title">
+                    <h1>Your Info</h1>
+                </div>
+                <div class="box-info">
+                    <span class="icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </span>
+                    <div class="info">
+                        <p>Since this is your first trip, you’ll need to provide your photo, driver’s license, and contact info to set up your account.</p>
+                    </div>
+                </div>
+                <hr>
+                <h3>Driver's license</h3>
+                <p>Enter your info exactly as it appears on your license so Turo can verify your eligibility to drive.</p>
+                <!-- form -->
+
+                <form>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Fist Name</label>
+                                <input class="form-control" type="text" name="firtName">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Middle Name</label>
+                                <input class="form-control" type="text" name="middleName">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input class="form-control" type="text" name="lastName">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Country</label>
+                                <select class="form-control">
+                                    <option>Minia</option>
+                                    <option>Giza</option>
+                                    <option>Giza</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>City</label>
+                                <select class="form-control">
+                                    <option>Minia</option>
+                                    <option>Giza</option>
+                                    <option>Giza</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>License number</label>
+                            <input class="form-control" type="text" name="licenseNumber">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Phone number</label>
+                            <input class="form-control" type="text" name="phoneNumber">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Date Of Birth</h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <select class="form-control">
+                                <option>Month</option>
+                                <option>jinuary</option>
+                                <option>fibrary</option>
+                                <option>march</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control">
+                                <option>Day</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control">
+                                <option>Year</option>
+                                <option>1990</option>
+                                <option>1991</option>
+                                <option>1992</option>
+                                <option>1993</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 confirm">
+                            <button class="btn btn-primary btn-block">Continue <i class="fas fa-share-square"></i></button>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+            </div>
+
+            <!-- right-side -->
+            <div class="col-md-4 col-box">
+                <div class="car-info">
+                    <img src="https://bit.ly/3bhdjVv" class=" car-img">
+                    <img src="https://bit.ly/2SP7AQ9" class=" person-img">
+                </div><br>
+                <div class="car-details">
+                    <p class="car-owner">dewei’s</p>
+                    <h3>Toyota Corolla 2008</h3>
+                    <div class="rate">
+                        <span class="rate-number">4.88</span>
+                        <i class="fas fa-star"></i>
+                        <span>(100 trips)</span>
+                    </div>
+
+                    <div class="from-to-booking">
+                        <div class="from-booking">
+                            <div class="schedule-date">Mon, May 11</div>
+                            <div class="schedule-time">10:00 AM</div>
+                        </div>
+                        <div class="to-booking">
+                            <div class="schedule-date">Thu, May 14</div>
+                            <div class="schedule-time">10:00 AM</div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="meeting-location">
+                    <h5>MEETING LOCATION</h5>
+                    <div class="meeting-location-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="location">
+                        <p>Rosemead, CA 91770</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      </div>
+    
+</section>
+
+
