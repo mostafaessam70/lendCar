@@ -48,12 +48,7 @@ namespace LendCar.Pages
             else
                 pageNumber = 1;
 
-            Vehicles = ICarRepository.GetAllVehicles()
-                                     .Include(v=>v.Color)
-                                     .Include(v=>v.Model)
-                                     .ThenInclude(v=>v.Brand)
-                                     .ToList()
-                                     .ToPagedList(pageNumber, 9);
+            Vehicles = ICarRepository.GetAllVehicles().ToList().ToPagedList(pageNumber, 9);
         }
 
     }

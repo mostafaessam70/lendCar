@@ -15,6 +15,7 @@ namespace LendCar.Repository
         }
         public LendCarDBContext Context { get; }
         public ApplicationUser FindByNatId(string id) => Context.Users.SingleOrDefault(p => p.NationalId == id);
+        public ApplicationUser FindById(string id) => Context.Users.SingleOrDefault(p => p.Id == id);
         public void Save() => Context.SaveChanges();
 
     }

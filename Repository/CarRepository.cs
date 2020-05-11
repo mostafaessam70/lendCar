@@ -15,8 +15,16 @@ namespace LendCar.Repository
             this.Context = Context;
         }
         public LendCarDBContext Context { get; }
-        public Vehicle GetVehicle(int id) => Context.Vehicles.SingleOrDefault(c => c.Id == id);
-        public IQueryable<Vehicle> GetAllVehicles() => Context.Vehicles.Include("Color");
+        public Vehicle GetVehicle(int id) => Context.Vehicles.Include(v => v.Color)
+                                     .Include(v=>v.Photos)
+                                     .Include(v => v.Model)
+                                     .ThenInclude(v => v.Brand)
+                                     .SingleOrDefault(c => c.Id == id);
+        public IQueryable<Vehicle> GetAllVehicles() => Context.Vehicles
+                                     .Include(v=>v.Photos)
+                                     .Include(v => v.Color)
+                                     .Include(v => v.Model)
+                                     .ThenInclude(v => v.Brand);
         public void Add(Vehicle vehicle) => Context.Vehicles.Add(vehicle);
         public void Delete(int id) => Context.Vehicles.Remove(GetVehicle(id));
         public void Save() => Context.SaveChanges();

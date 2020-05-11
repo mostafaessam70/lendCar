@@ -14,7 +14,7 @@ namespace LendCar.Pages
         public Vehicle CurrentCar { get; set; }
         public ApplicationUser Owner { get; set; }
 
-        public List<Img> CurrentCarImges;
+        public List<CarImage> CurrentCarImges { get; set; }
         public ICarRepository CarRepository { get; }
         public IUserRepository UserRepository { get; }
 
@@ -23,11 +23,11 @@ namespace LendCar.Pages
             CarRepository = _CarRepository;
             UserRepository = _UserRepository;
         }
-        public void OnGet(string id)
+        public void OnGet(int id)
         {
-            CurrentCar = CarRepository.Find("1FTRW14W84KC76110");
-            CurrentCarImges = CarRepository.GetImgForCurrntCar("1FTRW14W84KC76110");
-            Owner =UserRepository.Find(CurrentCar.OwnerId);
+            CurrentCar = CarRepository.GetVehicle(id);
+            CurrentCarImges = CurrentCar.Photos.ToList();
+            Owner = UserRepository.FindById(CurrentCar.OwnerId);
         }
     }
 }
