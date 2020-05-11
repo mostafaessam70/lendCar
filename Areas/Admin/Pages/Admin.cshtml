@@ -6,35 +6,23 @@
 <section id="main-container" class="main-container">
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
-                <div class="sidebar sidebar-right">
-                    <div class="widget recent-posts">
-                        <h3 class="widget-title">Admin Dashboard</h3>
-                        <ul class="unstyled clearfix">
-                            <li>
-                                <img src="~/loader6.gif" style="display:none"  id="loader" class="preload"/>
-                                <div id="vechileList">
-                                    <partial name="_AdminCarList" model="@Model.Vehicles" />
-                                </div>
+            <img src="~/loader6.gif" style="display:none" id="loader" class="preload" />
+            <div id="vechileList">
+                <partial name="_AdminCarList" model="@Model.Vehicles" />
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
 
-                            </li><!-- 1st post end-->
-                        </ul>
-                        <div class="text-center">
-
-                            @Html.PagedListPager((IPagedList)Model.Vehicles, page => "/Admin?Page=" + page,
-                                new X.PagedList.Mvc.Common.PagedListRenderOptions
-                                {
-                                    DisplayItemSliceAndTotal = true,
-                                    ContainerDivClasses = new[] { "navigation" },
-                                    LiElementClasses = new[] { "page-item" },
-                                    PageClasses = new[] { "page-link" },
-                                })
-                        </div>
-                    </div><!-- Recent post end -->
-                </div><!-- Sidebar end -->
-            </div><!-- Col end -->
-        </div><!-- Content row end -->
-    </div><!-- Container end -->
+        @Html.PagedListPager((IPagedList)Model.Vehicles, page => "/Admin?Page=" + page,
+            new X.PagedList.Mvc.Common.PagedListRenderOptions
+            {
+                DisplayItemSliceAndTotal = true,
+                ContainerDivClasses = new[] { "navigation" },
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new[] { "page-link" },
+            })
+    </div>
 </section>
 
 
