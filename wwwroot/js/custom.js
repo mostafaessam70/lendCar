@@ -368,3 +368,8 @@ jQuery(function ($) {
 
 });
 
+//adminDashboard
+$(function () {
+	$('a[title]').tooltip();
+});
+
