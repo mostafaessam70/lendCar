@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using System.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace LendCar
 {
@@ -34,16 +35,32 @@ namespace LendCar
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<LendCarDBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("LendCarCString")));
-            
+             options.UseSqlServer(Configuration.GetConnectionString("LendCarCString")));
+
+
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICarRepository, CarRepository>();
-
             services.AddTransient<IVehicleTypeRepository, VehicleTypeRepository>();
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<IBrandModelRepository, BrandModelRepository>();
+
+
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddSingleton<IEmailSender, EmailSender>();
+
+
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<LendCarDBContext>().AddDefaultTokenProviders(); ;
+            services.ConfigureApplicationCookie(option =>
+            {
+
+                option.LoginPath = "/Login";
+            }
+            );
+
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<LendCarDBContext>();
-            
+
             services.AddControllers();
             services.AddRazorPages();
         }
@@ -64,10 +81,16 @@ namespace LendCar
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseCookiePolicy();
+
             app.UseRouting();
 
-            app.UseAuthorization();            
-          
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+
+
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
