@@ -34,40 +34,37 @@ namespace LendCar.Pages
             this.brandRepo = _brandRepo;
             this.brandModelRepo = _brandModelRepo;
             this.hostEnvironment = _hostEnvironment;
+
             this.VehicleTypes = new SelectList(vehicleTypeRepo.GetAllVehicleTypes().OrderBy(vt => vt.Type), "Id", "Type");
             this.Brands = new SelectList(brandRepo.GetAllBrands().OrderBy(b => b.Name), "Id", "Name");
             this.BrandModels = new SelectList(brandModelRepo.GetAllBrandModels().Where(bm => bm.BrandId == brandRepo.GetAllBrands().OrderBy(b => b.Name).FirstOrDefault().Id).OrderBy(b => b.Name), "Id", "Name");
             this.OdoMeters = new SelectList(carRepo.Context.OdoMeters.ToList(), "Id", "Value");
-            this.Colors = carRepo.Context.Colors.OrderBy(c => c.Name).ToList();
+            this.Colors = new SelectList(carRepo.Context.Colors.OrderBy(c => c.Name).ToList(),"Id","Name");
+            this.Vehicle = new Vehicle();
+
         }
 
         [BindProperty]
         public Vehicle Vehicle { get; set; }
-        [BindProperty,Required(ErrorMessage ="Car photos must be included")]
+        [BindProperty/*,Required(ErrorMessage ="Car photos must be included")*/]
         public IEnumerable<IFormFile> VehiclePhotos { get; set; }
         public SelectList Brands { get; set; }
         public SelectList BrandModels { get; set; }
         public SelectList VehicleTypes { get; set; }
         public SelectList OdoMeters { get; set; }
-        public List<Color> Colors { get; set; }
+        public SelectList Colors { get; set; }
 
-        public void OnGet() 
+        public void OnGet()
         {
-            
         }
         public IActionResult OnPost(Vehicle Vehicle,IEnumerable<IFormFile> VehiclePhotos) 
         {
-
             if (!ModelState.IsValid)
             {
-                return RedirectToPage();
+                return RedirectToPage("/cars/addcar",new { Vehicle = Vehicle, VehiclePhotos = VehiclePhotos});
+                //return Page();
             }
-            //else if () 
-            //{
-
-            //    return RedirectToPage();
-
-            //}
+            
             else
             {
                 if (VehiclePhotos != null && VehiclePhotos.Count() > 0)
@@ -85,7 +82,7 @@ namespace LendCar.Pages
                         photos.Add(new CarImage { Image = newImgName });
                         if (VehiclePhotos.ElementAt(0) == photo)
                         {
-                            Vehicle.ImageUrl = file;
+                            Vehicle.ImageUrl = $"~/CarPhotosUploaded/{photo.FileName}";
                         }
                     }
                     Vehicle.Photos = photos;
@@ -96,7 +93,7 @@ namespace LendCar.Pages
 
                 }
                 else
-                    return RedirectToPage();
+                    return RedirectToPage("/Cars/AddCar",new { Vehicle = Vehicle, VehiclePhotos = VehiclePhotos});
             }
         }
     }
