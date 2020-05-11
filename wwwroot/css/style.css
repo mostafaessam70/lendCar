@@ -1000,7 +1000,7 @@ ul.navbar-nav>li>a i {
     position: absolute;
     cursor: pointer;
     top: 22px;
-    right: 10px;
+    right: -20px;
     color: #999;
 }
 
@@ -1030,8 +1030,8 @@ ul.navbar-nav>li>a i {
 .search-block .search-close {
     color: #999;
     position: absolute;
-    top: -53px;
-    right: -10px;
+    top: -10px;
+    right: -25px;
     font-size: 32px;
     cursor: pointer;
     background: #23282d;
