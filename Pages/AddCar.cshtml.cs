@@ -85,7 +85,7 @@ namespace LendCar.Pages
                         photos.Add(new CarImage { Image = newImgName });
                         if (VehiclePhotos.ElementAt(0) == photo)
                         {
-                            Vehicle.ImageUrl = newImgName;
+                            Vehicle.ImageUrl = file;
                         }
                     }
                     Vehicle.Photos = photos;
