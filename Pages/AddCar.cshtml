@@ -202,7 +202,6 @@
                     var startVal = new Date($("#StartDate").val());
                     startVal.setDate(startVal.getDate() + 1);
                     var stringDate = startVal.toISOString().substring(0, 10);
-                    alert(stringDate);
                     $("#EndDate").attr("min", stringDate);
                 }
             );

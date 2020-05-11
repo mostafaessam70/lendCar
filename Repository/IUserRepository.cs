@@ -9,7 +9,7 @@ namespace LendCar.Repository
     interface IUserRepository
     {
         LendCarDBContext Context { get; }
-        ApplicationUser Find(string id);
+        ApplicationUser FindByNatId(string id);
         void Save();
     }
 }

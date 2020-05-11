@@ -1,33 +1,38 @@
 ﻿@page
+@model LendCar.Pages.carDetailsModel
 @{
-    ViewData["Title"] = "carDetalis";
+    ViewData["Title"] = "carDetails";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+
 <div id="banner-area" class="banner-area" style="background-image:url(images/banner/banner2.jpg)">
     <div class="banner-text">
-            <div class="row">
-                <div class="col-xs-12">
-                            <div id="page-slider" class="owl-carousel owl-theme page-slider page-slider-small">
-                                <div class="item">
-                                    <img src="https://bit.ly/3c7TmBz" alt="" />
-                                </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="page-slider" class="owl-carousel owl-theme page-slider page-slider-small">
 
-                                <div class="item">
-                                    <img src="https://bit.ly/3foiQN4" alt="" />
-                                </div>
+                    @foreach (var item in Model.CurrentCarImges)
+                    {
+                        <div class="item">
+                            <img src="@item.Image" alt="" />
+                        </div>
+                    }
 
-                                <div class="item">
-                                    <img src="https://bit.ly/35CjFh6" alt="" />
-                                </div>
 
-                                <div class="item">
-                                    <img src="https://bit.ly/3dosX2W" alt="" />
-                                </div>
+                    @*<div class="item">
+            <img src="https://bit.ly/3foiQN4" alt="" />
+        </div>
+        <div class="item">
+            <img src="https://bit.ly/35CjFh6" alt="" />
+        </div>
+        <div class="item">
+            <img src="https://bit.ly/3dosX2W" alt="" />
+        </div>*@
 
-                            </div><!-- Page slider end -->
-                        </div><!-- Slider col end -->
-            </div><!-- Row end -->
+                </div><!-- Page slider end -->
+            </div><!-- Slider col end -->
+        </div><!-- Row end -->
     </div><!-- Banner text end -->
 </div><!-- Banner area end -->
 
@@ -41,20 +46,20 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <p >THE CAR</p>
+                        <p>THE CAR</p>
                     </div>
                     <div class="col-md-8">
-                        <h1>Toyota Yaris 2013</h1>
-                        <h2>4.2 <i class="fas fa-star-half-o "></i></h2>
-                        <span>(116 Trip)</span>
+                        <h3> @Model.CurrentCar.Brand @Model.CurrentCar.Model  @Model.CurrentCar.Year</h3>
+                        <h2>4.2 <i class="fa fa-star-half-o "></i></h2>
+                        <span>(@Model.CurrentCar.TripsNumber Trip)</span>
                         <div class="row">
                             <div class="col-md-6">
-                                <h3><i class="fas fa-tachometer"></i> 34 MPG</h3>
-                                <h3><i class="fas fa-clone "></i> 2 doors</h3>
+                                <h3><i class="fa fa-tachometer"></i>  @Model.CurrentCar.milesPerGallon MPG</h3>
+                                <h3><i class="fa fa-clone "></i>  @Model.CurrentCar.NumberOfDoors doors</h3>
                             </div>
                             <div class="col-md-6">
-                                <h3><i class="fas fa-car"></i> Gas</h3>
-                                <h3><i class="fas fa-group "></i> 5 seats</h3>
+                                <h3><i class="fa fa-car"></i>  @Model.CurrentCar.EnergyMakeCarMove </h3>
+                                <h3><i class="fa fa-group "></i>   @Model.CurrentCar.NumberOfSeats seats</h3>
                             </div>
                         </div>
                     </div>
@@ -65,24 +70,24 @@
                         <p>HOSTED BY</p>
                     </div>
                     <div class="col-md-8">
-                        <div class="col-md-4 center-block">
-                            <img src="https://bit.ly/2WAy4Ga" alt="..." class="img-circle">
-                            <h3 ><span>5.0<i class="fa fa-star "></i></span></h3>
+                        <div class="col-md-4 center-block" >
+                            <img src="@Model.Owner.Image" alt="..." class="img-circle">
+                            <h3><span>5.0<i class="fa fa-star "></i></span></h3>
                         </div>
                         <div class="col-md-8">
-                            <h3>Chris</h3>
-                            <p>899 trips  <i class="fa fa-dot-circle-o"></i> Joined May 2015</p>
+                            <h4>@Model.Owner.UserName</h4>
+                            <p>@Model.Owner.TripsNumber trips  <i class="fa fa-dot-circle-o"></i> Joined May 2015</p>
                             <p>All-Star Hosts like Chris are the top-rated, most experienced hosts on LendCar.</p>
                         </div>
                     </div>
                 </div>
 
 
-            </div>   
+            </div>
 
             <div class="col-md-6">
                 <div class="row">
-                    <h1 class="col-md-1">$32</h1><i class="col-md-11">per day</i>
+                    <h1 class="col-md-1">$@Model.CurrentCar.PricePerDay</h1><i class="col-md-11">per day</i>
                 </div>
                 <div class="row">
                     <form>
@@ -132,7 +137,7 @@
                                 <option value="audi">Pickup Trucks</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary col-md-6">Go To Checkout</button>
+                        <button type="submit" class="btn btn-primary col-md-9" style="width:70%;margin-left:17px">Go To Checkout</button>
                     </form>
 
                 </div>
