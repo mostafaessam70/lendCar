@@ -1,10 +1,7 @@
 ﻿@page
-@using System.Reflection
-@using System.Drawing
 @model LendCar.Pages.AddCarModel
 @{
     ViewData["Title"] = "AddCar";
-    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
     <script>
         var root = '@Url.Content("~")'; 
@@ -110,17 +107,8 @@
                             </div>
 
                             <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.City.Name">Country : </label>
-                                <select id="Country" class="form-control">
-                                    <option value="1">Egypt</option>
-                                    <option value="2">USA</option>
-                                    <option value="3">KSA</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.City">City : </label>
-                                <input id="City" asp-for="@Model.Vehicle.City" class="form-control">
+                                <label asp-for="@Model.Vehicle.CityId">City : </label>
+                                <select asp-for="@Model.Vehicle.CityId" asp-items="@Model.Cities" class="form-control"></select>
                             </div>
 
                             <div class="form-group col-md-10">
@@ -130,13 +118,13 @@
 
                             <div class="form-group col-md-10">
                                 <label asp-for="@Model.Vehicle.StartDate">Available from : </label>
-                                <input id="StartDate" type="date" value="@DateTime.Now.Date.AddDays(1).ToString("yyyy-MM-dd")" min='@DateTime.Now.Date.AddDays(1).ToString("yyyy-MM-dd")' asp-for="@Model.Vehicle.StartDate" class="form-control">
+                                <input id="StartDate" type="date" value='@Model.Today.AddDays(1).ToString("yyyy-MM-dd")' min='@Model.Today.AddDays(1).ToString("yyyy-MM-dd")' asp-for="@Model.Vehicle.StartDate" class="form-control">
                                 <span asp-validation-for="@Model.Vehicle.StartDate"></span>
                             </div>
 
                             <div class="form-group col-md-10">
                                 <label asp-for="@Model.Vehicle.EndDate">Available to : </label>
-                                <input id="EndDate" type="date" asp-for="@Model.Vehicle.EndDate" class="form-control">
+                                <input id="EndDate" type="date" value='@Model.Today.AddDays(2).ToString("yyyy-MM-dd")' min="@Model.Today.AddDays(2).ToString("yyyy-MM-dd")" asp-for="@Model.Vehicle.EndDate" class="form-control">
                                 <span asp-validation-for="@Model.Vehicle.EndDate"></span>
 
                             </div>
@@ -149,7 +137,7 @@
 
                             @*should be changed after User feature is added*@
                             <div class="form-group col-md-10">
-                                <input hidden asp-for="@Model.Vehicle.OwnerId" value="1">
+                                <input hidden asp-for="@Model.Vehicle.OwnerId" value="@Model.userManager.GetUserId(User)">
                             </div>
 
                             <div class="form-group col-md-10">
@@ -184,6 +172,7 @@
                                      var markup = "<option value='0'> No models available for this brand </option>";
                                  }
                                  else {
+                                     console.log(data);
                                      var markup = "<option value=" + data[0].id + ">" + data[0].name + "</option>";
                                      for (var i = 1; i < data.length; i++) {
                                          markup += "<option value=" + data[i].id + ">" + data[i].name + "</option>";

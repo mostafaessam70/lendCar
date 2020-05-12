@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LendCar.DBContext;
 using LendCar.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LendCar.Repository
 {
@@ -14,8 +15,15 @@ namespace LendCar.Repository
             this.Context = Context;
         }
         public LendCarDBContext Context { get; }
-        public ApplicationUser FindByNatId(string id) => Context.Users.SingleOrDefault(p => p.NationalId == id);
-        public ApplicationUser FindById(string id) => Context.Users.SingleOrDefault(p => p.Id == id);
+        public List<ApplicationUser> GetAllUsers() => Context.Users.Include(u => u.City)
+                                                                    .Include(u => u.Gender)
+                                                                    .ToList();
+        public ApplicationUser FindByNatId(string id) => Context.Users.Include(u => u.City)
+                                                                       .Include(u => u.Gender)
+                                                                       .SingleOrDefault(p => p.NationalId == id);
+        public ApplicationUser FindById(string id) => Context.Users.Include(u=>u.City)
+                                                                   .Include(u=>u.Gender)
+                                                                   .SingleOrDefault(p => p.Id == id);
         public void Save() => Context.SaveChanges();
 
     }

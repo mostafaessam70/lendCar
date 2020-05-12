@@ -23,6 +23,7 @@ namespace LendCar.Models
         [DataType(DataType.MultilineText)]
         public string BriefAboutMe { get; set; }
 
+        public string JoinedAt { get; set; }
 
         public int CityId { get; set; }
         [ForeignKey("CityId")]
