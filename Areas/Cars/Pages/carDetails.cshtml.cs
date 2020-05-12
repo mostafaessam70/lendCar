@@ -25,7 +25,7 @@ namespace LendCar.Pages
         }
         public void OnGet(int id)
         {
-            CurrentCar = CarRepository.GetVehicle(id);
+            CurrentCar = CarRepository.GetVehicle(1);
             CurrentCarImges = CurrentCar.Photos.ToList();
             Owner = UserRepository.FindById(CurrentCar.OwnerId);
         }

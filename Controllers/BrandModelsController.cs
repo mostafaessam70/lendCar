@@ -26,7 +26,7 @@ namespace LendCar.Controllers
         [HttpGet]
         public IActionResult GetBrandModels()
         {
-            return Ok(bmRepo.GetAllBrandModels());
+            return Ok(bmRepo.GetAllBrandModels().OrderBy(bm=>bm.Name));
         }
 
         // GET: api/BrandModels/5
@@ -47,7 +47,7 @@ namespace LendCar.Controllers
         [HttpGet("byBrand/{id}")]
         public IActionResult GetModelByBrandId(int id)
         {
-            var brandModel = bmRepo.GetAllBrandModels().Where(bm => bm.BrandId == id);
+            var brandModel = bmRepo.GetAllBrandModels().Where(bm => bm.BrandId == id).OrderBy(bm => bm.Name);
 
             if (brandModel == null)
             {

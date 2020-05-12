@@ -11,7 +11,7 @@ using X.PagedList;
 
 namespace LendCar.Pages
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdminModel : PageModel
     {
         public ICarRepository ICarRepository { get; }
@@ -39,7 +39,7 @@ namespace LendCar.Pages
 
             CurrentPage = pageNumber;
 
-            Vehicles = ICarRepository.GetAllVehicles().ToList().ToPagedList(pageNumber, 10);
+            Vehicles = ICarRepository.GetAllVehiclesRequests().ToList().ToPagedList(pageNumber, 10);
         }
     }
 }
