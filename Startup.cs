@@ -43,12 +43,17 @@ namespace LendCar
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<IBrandModelRepository, BrandModelRepository>();
             services.AddTransient<IContactRepository,ContactRepository>();
-            //services.AddSingleton<IEmail, Email>();
+            services.AddTransient<ICityRepostiory, CityRepostiory>();
+            services.AddTransient<IUserRepository, UserRepository>();
+          
+            services.AddSingleton<IEmail, Email>();
+          
             //services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             //services.AddSingleton<IEmailSender, EmailSender>();
             
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<LendCarDBContext>().AddDefaultTokenProviders();
+
 
             services.ConfigureApplicationCookie(option =>
             {

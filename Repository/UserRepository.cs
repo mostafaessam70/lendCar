@@ -15,6 +15,17 @@ namespace LendCar.Repository
             this.Context = Context;
         }
         public LendCarDBContext Context { get; }
+        public void EditBookingInfo(ApplicationUser user)
+        {
+            var appUser = FindById(user.Id);
+            appUser.FirstName = user.FirstName;
+            appUser.LastName = user.LastName;
+            appUser.PhoneNumber = user.PhoneNumber;
+            appUser.DriverLicenseNumber = user.DriverLicenseNumber;
+            appUser.CityId = user.CityId;
+            appUser.BirthDate = user.BirthDate;
+        }
+
         public List<ApplicationUser> GetAllUsers() => Context.Users.Include(u => u.City)
                                                                     .Include(u => u.Gender)
                                                                     .ToList();
