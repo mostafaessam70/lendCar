@@ -12,17 +12,23 @@ namespace LendCar.Models
     {
         [Required]
         public string NationalId { get; set; }
+        [Required,Display(Name ="First Name")]
         public string FirstName { get; set; }
+        [Required, Display(Name = "Last Name")]
         public string LastName { get; set; }
         public string Address { get; set; }
         public int TripsNumber { get; set; }
+        
         public string Region { get; set; }
         [DataType(DataType.ImageUrl)]
         public string ImageUrl { get; set; }
+        [Required, Display(Name = "Driver License Number")]
         public string DriverLicenseNumber { get; set; }
         [DataType(DataType.MultilineText)]
         public string BriefAboutMe { get; set; }
-
+        public string BirthDate { get; set; }
+        [Required,Display(Name ="Phone Number")]
+        public new  string PhoneNumber { get; set; }
         public string JoinedAt { get; set; }
 
         public int CityId { get; set; }
