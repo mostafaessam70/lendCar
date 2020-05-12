@@ -11,6 +11,7 @@ namespace LendCar.Repository
         LendCarDBContext Context { get; }
         ApplicationUser FindByNatId(string id);
         ApplicationUser FindById(string id);
+        void EditBookingInfo(ApplicationUser user);
         void Save();
     }
 }
