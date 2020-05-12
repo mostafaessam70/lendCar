@@ -12,7 +12,7 @@ namespace LendCar.Pages
     public class bookingModel : PageModel
     {
         [BindProperty]
-        public ApplicationUser User { get; set; }
+        public ApplicationUser CurrentUser { get; set; }
         public void OnGet()
         {
 

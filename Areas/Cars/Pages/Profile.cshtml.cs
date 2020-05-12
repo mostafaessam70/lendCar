@@ -34,7 +34,7 @@ namespace LendCar.Pages
             }
             _uid = _userManager.GetUserId(User);
             CurrentUser = _userRepo.FindById(_uid);
-            UserVehicles = _carRepo.GetAllVehicles().Where(v => v.OwnerId == _uid).ToList();
+            UserVehicles = _carRepo.GetAllVehiclesAccepted().Where(v => v.OwnerId == _uid).ToList();
             return Page();
         }
     }

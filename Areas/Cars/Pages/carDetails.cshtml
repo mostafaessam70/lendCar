@@ -105,7 +105,7 @@
                             <label for="Tripend">Trip end : </label>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="date" class="form-control" id="Tripend" value="@Model.CurrentCar.EndDate" max="@Model.CurrentCar.EndDate">
+                                    <input type="date" class="form-control" id="Tripend" value="@Model.CurrentCar.EndDate" min="@Model.CurrentCar.StartDate" max="@Model.CurrentCar.EndDate">
                                 </div>
                                 <div class="col-md-6">
                                     
