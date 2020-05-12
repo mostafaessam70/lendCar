@@ -19,7 +19,7 @@ namespace LendCar.Controllers
 
         [Route("VehiclesList")]
         public PartialViewResult VehiclesList(int page =1)=>
-             PartialView("_CarList",CarRepository.GetAllVehiclesRequests().ToList().ToPagedList(page, 9));
+             PartialView("_CarList",CarRepository.GetAllVehiclesAccepted().ToList().ToPagedList(page, 9));
 
         [Route("Accept")]
         public PartialViewResult Accept(int id , int page=1)
