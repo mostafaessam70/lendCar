@@ -15,9 +15,7 @@ namespace LendCar.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
-        public string Country { get; set; }
         public int TripsNumber { get; set; }
-        public string City { get; set; }
         public string Region { get; set; }
         [DataType(DataType.ImageUrl)]
         public string ImageUrl { get; set; }
@@ -26,6 +24,9 @@ namespace LendCar.Models
         public string BriefAboutMe { get; set; }
 
 
+        public int CityId { get; set; }
+        [ForeignKey("CityId")]
+        public City City { get; set; }
 
         public int GenderId { get; set; }
         [ForeignKey("GenderId")]
