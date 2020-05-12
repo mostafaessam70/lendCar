@@ -23,8 +23,9 @@ namespace LendCar.Repository
         public IQueryable<Vehicle> GetAllVehicles() => Context.Vehicles
                                      .Include(v=>v.Photos)
                                      .Include(v => v.Color)
-                                     .Include(v => v.Model)
-                                     .ThenInclude(v => v.Brand);
+                                     .Include(c => c.City)
+                                     .Include(v => v.Model)                              
+                                    .ThenInclude(v => v.Brand);
         public void Add(Vehicle vehicle) => Context.Vehicles.Add(vehicle);
         public void Delete(int id) => Context.Vehicles.Remove(GetVehicle(id));
         public void Save() => Context.SaveChanges();
