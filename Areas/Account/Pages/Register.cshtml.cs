@@ -76,7 +76,7 @@ namespace LendCar.Pages
             if (ModelState.IsValid)
             {
 
-                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email };
+                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email ,JoinedAt = DateTime.Now.ToString("MMMM yyyy") };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

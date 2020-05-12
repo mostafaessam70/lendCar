@@ -11,10 +11,11 @@ namespace LendCar.Controllers
         [Route("Error/{statusCode}")]
         public IActionResult ErrorHandler(int statusCode)
         {
+            string areaName = "Errors"; 
             switch (statusCode)
             {
-                case 404:return RedirectToPage("/NotFound");
-                default:return RedirectToPage("/Error");
+                case 404:return RedirectToPage("NotFound", new { area = areaName });
+                default:return RedirectToPage("Error", new { area = areaName });
             }
         }
     }

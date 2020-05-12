@@ -10,10 +10,18 @@ namespace LendCar.DBContext
 {
     public class LendCarDBContext : IdentityDbContext<ApplicationUser>
     {
-        //protected override void OnModelCreating(ModelBuilder builder)
-        //{
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Vehicle>()
+                   .HasIndex(v => v.VIN)
+                   .IsUnique();
             
-        //}
+            builder.Entity<ApplicationUser>()
+                   .HasIndex(u => u.NationalId)
+                   .IsUnique();
+        }
         public LendCarDBContext(DbContextOptions<LendCarDBContext> options) : base(options)  { }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
@@ -25,6 +33,7 @@ namespace LendCar.DBContext
         public DbSet<CarImage> CarImages { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<Contact> Contact { get; set; }
+        public DbSet<City> Cities { get; set; }
 
     }
 }

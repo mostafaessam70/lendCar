@@ -45,12 +45,11 @@ namespace LendCar
             services.AddTransient<IBrandModelRepository, BrandModelRepository>();
             services.AddTransient<IContactRepository,ContactRepository>();
             services.AddSingleton<IEmail, Email>();
- 
-
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddSingleton<IEmailSender, EmailSender>();
 
             services.ConfigureApplicationCookie(option =>
             {
-
                 option.LoginPath = "/Login";
             }
             );
