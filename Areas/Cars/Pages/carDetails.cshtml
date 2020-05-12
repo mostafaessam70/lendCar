@@ -15,7 +15,7 @@
                     @foreach (var item in Model.CurrentCarImges)
                     {
                         <div class="item">
-                            <img src="@item.Image" alt="" />
+                            <img src="@Url.Content(item.Image)" alt="" />
                         </div>
                     }
 
@@ -46,15 +46,15 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <p>THE CAR</p>
+                        <p>Vehicle</p>
                     </div>
                     <div class="col-md-8">
                         <h3> @Model.CurrentCar.Model.Brand.Name @Model.CurrentCar.Model.Name  @Model.CurrentCar.Year</h3>
-                        <h2>4.2 <i class="fa fa-star-half-o "></i></h2>
-                        <span>(@Model.CurrentCar.TripsNumber Trip)</span>
+                        <h2><span>@Model.CurrentCar.Rate<i class="fa fa-star "></i></span></h2>
+                        <span>(@Model.CurrentCar.TripsNumber Trips)</span>
                         <div class="row">
                             <div class="col-md-6">
-                                <h3><i class="fa fa-tachometer"></i>  @Model.CurrentCar.GasMileage MPG</h3>
+                                <h3><i class="fa fa-tachometer"></i>  @Model.CurrentCar.GasMileage KMPL</h3>
                                 <h3><i class="fa fa-clone "></i>  @Model.CurrentCar.NumberOfDoors doors</h3>
                             </div>
                             <div class="col-md-6">
@@ -67,17 +67,16 @@
                 <hr />
                 <div class="row">
                     <div class="col-md-3">
-                        <p>HOSTED BY</p>
+                        <p>Vehicle owner</p>
                     </div>
                     <div class="col-md-8">
                         <div class="col-md-4 center-block" >
-                            <img src="@Model.Owner.ImageUrl" alt="..." class="img-circle">
-                            <h3><span>5.0<i class="fa fa-star "></i></span></h3>
+                            <img src="@Model.Owner.ImageUrl" alt="@Model.Owner.FirstName" class="img-circle">
                         </div>
                         <div class="col-md-8">
-                            <h4>@Model.Owner.UserName</h4>
-                            <p>@Model.Owner.TripsNumber trips  <i class="fa fa-dot-circle-o"></i> Joined May 2015</p>
-                            <p>All-Star Hosts like Chris are the top-rated, most experienced hosts on LendCar.</p>
+                            <h4>@Model.Owner.FirstName @Model.Owner.LastName</h4>
+                            <p>@Model.Owner.TripsNumber trips  <i class="fa fa-dot-circle-o"></i> Joined @Model.Owner.JoinedAt</p>
+                            <p>@Model.Owner.BriefAboutMe</p>
                         </div>
                     </div>
                 </div>
@@ -87,7 +86,7 @@
 
             <div class="col-md-6">
                 <div class="row">
-                    <h1 class="col-md-1">$@Model.CurrentCar.PricePerDay</h1><i class="col-md-11">per day</i>
+                    <h2 class="col-md-6">@Model.CurrentCar.PricePerDay EGP / day</h2>
                 </div>
                 <div class="row">
                     <form>
@@ -95,17 +94,10 @@
                             <label for="TripStart">Trip start : </label>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="date" class="form-control" id="TripStart" placeholder="VIN ">
+                                    <input type="date" class="form-control" id="TripStart" value="@Model.CurrentCar.StartDate" min="@Model.CurrentCar.StartDate">
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group col-md-10">
-                                        <select id="VehicleType" class="form-control">
-                                            <option value="volvo">10:00 AM</option>
-                                            <option value="saab">11:00 AM</option>
-                                            <option value="opel">12:00 AM</option>
-                                            <option value="audi"> 1:00 AM</option>
-                                        </select>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -113,30 +105,14 @@
                             <label for="Tripend">Trip end : </label>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="date" class="form-control" id="Tripend" placeholder="Tripend ">
+                                    <input type="date" class="form-control" id="Tripend" value="@Model.CurrentCar.EndDate" max="@Model.CurrentCar.EndDate">
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group col-md-10">
-                                        <select id="Timeend" class="form-control">
-                                            <option value="volvo">10:00 AM</option>
-                                            <option value="saab">11:00 AM</option>
-                                            <option value="opel">12:00 AM</option>
-                                            <option value="audi"> 1:00 AM</option>
-                                        </select>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group col-md-9">
-                            <label for="VehicleType">Pickup & return location : </label>
-                            <select id="VehicleType" class="form-control ">
-                                <option value="volvo">Convertibles</option>
-                                <option value="saab">Vin</option>
-                                <option value="opel">Convertibles</option>
-                                <option value="audi">Pickup Trucks</option>
-                            </select>
-                        </div>
                         <button type="submit" class="btn btn-primary col-md-9" style="width:70%;margin-left:17px">Go To Checkout</button>
                     </form>
 
