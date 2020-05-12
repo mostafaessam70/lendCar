@@ -14,8 +14,6 @@ namespace LendCar.Models
         public int Id { get; set; }
         [Required, RegularExpression("[A-Z|0-9]{17}", ErrorMessage = "VIN is invalid")]
         public string VIN { get; set; }
-        public string Country { get; set; }
-        public string City { get; set; }
         public string Region { get; set; }
         [Required, DisplayName("Plate number")]
         public string PlateNumber { get; set; }
@@ -64,5 +62,9 @@ namespace LendCar.Models
         public int ColorId { get; set; }
         [ForeignKey("ColorId")]
         public Color Color { get; set; }
+
+        public int CityId { get; set; }
+        [ForeignKey("CityId")]
+        public City City { get; set; }
     }
 }
