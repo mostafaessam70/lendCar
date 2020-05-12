@@ -5,10 +5,12 @@
     ViewData["Title"] = "Home page";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-<section class="header">
+
+
+@*<section class="header">
     <div class="container-fluid">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
+            
             <ol class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -52,17 +54,17 @@
             <div class="col-lg-12">
                 <h1><i class="fas fa-car"></i> LendCars</h1>
                 <div class="map">
-                    <p class="fas fa-map-marker fa-1x"> <a href="#"> 310 NE 39th Ave Gainesville, FL 32609</a></p>
-                    <p><span class="fas fa-clock fa-1x"> <strong> Avalable</strong> 9:00 AM - 11:00 PM</span></p>
-                    <p><span class="fas fa-phone-square "> <strong> Used </strong> (352) 275-5590</span></p>
+                    <p><span class="fas fa-map-marker fa-1x"></span> <a href="#"> 310 NE 39th Ave Gainesville, FL 32609</a></p>
+                    <p><span class="fas fa-clock fa-1x"></span> <strong> Avalable</strong> 9:00 AM - 11:00 PM</p>
+                    <p><span class="fas fa-phone-square "></span> <strong> Used </strong> (352) 275-5590</p>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</section>*@
 
 
-<section id="lend-features" class="lend-features">
+@*<section id="lend-features" class="lend-features">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-xs-12">
@@ -74,7 +76,7 @@
                         she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village
                         and the subline of her own road, the Line Lane.
                     </p>
-                </div><!-- Intro box end -->
+                </div>
 
                 <div class="gap-20"></div>
 
@@ -87,8 +89,8 @@
                             <div class="ts-service-box-content">
                                 <h3 class="service-box-title">We've Repution for Excellence</h3>
                             </div>
-                        </div><!-- Service 1 end -->
-                    </div><!-- col end -->
+                        </div>
+                    </div>
 
                     <div class="col-md-6">
                         <div class="ts-service-box">
@@ -98,9 +100,9 @@
                             <div class="ts-service-box-content">
                                 <h3 class="service-box-title">We Buy Cars</h3>
                             </div>
-                        </div><!-- Service 2 end -->
-                    </div><!-- col end -->
-                </div><!-- Content row 1 end -->
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-md-6">
@@ -111,8 +113,8 @@
                             <div class="ts-service-box-content">
                                 <h3 class="service-box-title">Guided by Commitment</h3>
                             </div>
-                        </div><!-- Service 1 end -->
-                    </div><!-- col end -->
+                        </div>
+                    </div>
 
                     <div class="col-md-6">
                         <div class="ts-service-box">
@@ -122,10 +124,10 @@
                             <div class="ts-service-box-content">
                                 <h3 class="service-box-title">A Team of Professionals</h3>
                             </div>
-                        </div><!-- Service 2 end -->
-                    </div><!-- col end -->
-                </div><!-- Content row 1 end -->
-            </div><!-- Col end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="col-md-6 col-xs-12 home-panel">
                 <h3 class="into-sub-title">Our Values</h3>
@@ -149,8 +151,7 @@
                             </div>
                         </div>
                     </div>
-                    <!--/ Panel 1 end-->
-
+                  
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
@@ -169,8 +170,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--/ Panel 2 end-->
-
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -189,15 +188,11 @@
                             </div>
                         </div>
                     </div>
-                    <!--/ Panel 3 end-->
-
                 </div>
-                <!--/ Accordion end -->
-
-            </div><!-- Col end -->
-        </div><!-- Row end -->
-    </div><!-- Container end -->
-</section><!-- Feature are end -->
+            </div>
+        </div>
+    </div>
+</section>*@
 
 
 <partial name="_CarList" model="(IPagedList)Model.Vehicles" />
@@ -209,7 +204,7 @@
         {
             DisplayItemSliceAndTotal = true,
             ContainerDivClasses = new[] { "navigation" },
-            LiElementClasses = new[] { "page-item" },
+            LiElementClasses = new[] { "page-item","car-list" },
             PageClasses = new[] { "page-link" },
         })
 </div>

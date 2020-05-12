@@ -11,7 +11,7 @@ using X.PagedList;
 
 namespace LendCar.Pages
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdminModel : PageModel
     {
         public ICarRepository ICarRepository { get; }
