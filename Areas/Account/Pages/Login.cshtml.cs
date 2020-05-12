@@ -37,7 +37,7 @@ namespace LendCar.Pages
         public async Task<IActionResult> OnPostAsync()
         {
             #region AddUserAndRolesAndAssign
-            // ApplicationUser user1= new ApplicationUser()
+            //ApplicationUser user1 = new ApplicationUser()
             //{
             //    Email = "mohamedesam9397@gmail.com",
             //    UserName = "MohamedEsam",
@@ -52,7 +52,7 @@ namespace LendCar.Pages
             //}
             // await Usermanger.CreateAsync(user1, "Sara@ask123.com");
 
-            //ApplicationUser user2= new ApplicationUser()
+            //ApplicationUser user2 = new ApplicationUser()
             //{
             //    Email = "akg9397@gmail.com",
             //    UserName = "akg",
@@ -74,7 +74,7 @@ namespace LendCar.Pages
             //await _roleManager.CreateAsync(SecondRole);
 
             //await Usermanger.AddToRoleAsync(user1, "Admin");
-            //await Usermanger.AddToRoleAsync(user2, "user" );
+            //await Usermanger.AddToRoleAsync(user2, "user");
             #endregion
 
             Email = "MohamedEsam";

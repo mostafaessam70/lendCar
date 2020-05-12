@@ -50,8 +50,8 @@ namespace LendCar
 
 
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<LendCarDBContext>().AddDefaultTokenProviders(); ;
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<LendCarDBContext>().AddDefaultTokenProviders(); ;
             services.ConfigureApplicationCookie(option =>
             {
 
