@@ -87,7 +87,7 @@
                                     </div>
                                     <div class="text-center">
 
-                                        @Html.PagedListPager((IPagedList)Model.Vehicles, page => "/Admin?Page=" + page,
+                                        @Html.PagedListPager((IPagedList)Model.Vehicles, page => "Admin/Admin?Page=" + page,
                                             new X.PagedList.Mvc.Common.PagedListRenderOptions
                                             {
                                                 DisplayItemSliceAndTotal = true,
