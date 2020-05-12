@@ -41,6 +41,8 @@ namespace LendCar.Models
         public double? Rate { get; set; }
         public string ImageUrl { get; set; }
 
+        [DefaultValue("false")]
+        public bool AcceptedAdmin { get; set; }
         public ICollection<CarImage> Photos { get; set; }
 
         public string OwnerId { get; set; }

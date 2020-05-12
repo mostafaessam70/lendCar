@@ -39,7 +39,7 @@ namespace LendCar.Pages
 
             CurrentPage = pageNumber;
 
-            Vehicles = ICarRepository.GetAllVehicles().ToList().ToPagedList(pageNumber, 10);
+            Vehicles = ICarRepository.GetAllVehiclesRequests().ToList().ToPagedList(pageNumber, 10);
         }
     }
 }

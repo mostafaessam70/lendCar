@@ -9,8 +9,10 @@ namespace LendCar.Repository
     public interface IUserRepository
     {
         LendCarDBContext Context { get; }
+        List<ApplicationUser> GetAllUsers();
         ApplicationUser FindByNatId(string id);
         ApplicationUser FindById(string id);
+        void EditBookingInfo(ApplicationUser user);
         void Save();
     }
 }

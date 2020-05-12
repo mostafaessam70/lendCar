@@ -45,7 +45,7 @@
                 </div>
                 <h3>VISIT OUR OFFICE</h3>
                 <div class="office-addres">
-                    <p>9051 Constra Incorporate, USA</p>
+                    <p>@Model.Contact.Location</p>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
                 </div>
                 <h3>MAIL US</h3>
                 <div class="office-addres">
-                    <p>lendCar@mail.com</p>
+                    <p>@Model.Contact.Email</p>
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@
                 </div>
                 <h3>CALL US</h3>
                 <div class="office-addres">
-                    <p>+1546646464646</p>
+                    <p>@Model.Contact.Phone</p>
                 </div>
             </div>
         </div>
@@ -87,45 +87,44 @@
     </div>
 </section>
 
+<form method="post">
+    <section class="contact">
+        <div class="container">
+            <form id="contact-form" action="" method="post" role="form">
+                <div class="error-container"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>WE LOVE TO HEAR YOU</h3>
+                    </div>
 
-<section class="contact">
-    <div class="container">
-        <form id="contact-form" action="" method="post" role="form">
-            <div class="error-container"></div>
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>WE LOVE TO HEAR YOU</h3>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input class="form-control form-control-name" name="name" id="name" placeholder="Enter Your Name" type="text" required="">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="ContactViewModel.UserEmail">Email</label>
+                            <input asp-for="ContactViewModel.UserEmail" class="form-control form-control-email" id="email" placeholder="Enter Your Mail">
+                            <span asp-validation-for="ContactViewModel.UserEmail" class="red"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="ContactViewModel.MailSubjct">Subject</label>
+                            <input asp-for="ContactViewModel.MailSubjct" class="form-control form-control-subject" id="subject" placeholder="Eneter Subject OF Your Message">
+                            <span asp-validation-for="ContactViewModel.MailSubjct" style="color:red"></span>
+
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input class="form-control form-control-email" name="email" id="email" placeholder="Enter Your Mail" type="email" required="">
-                    </div>
+                <div class="form-group">
+                    <label asp-for="ContactViewModel.Message">Message</label>
+                    <textarea asp-for="ContactViewModel.Message" class="form-control form-control-message" id="message" placeholder="Write Your Message" rows="10"></textarea>
+                    <span asp-validation-for="ContactViewModel.Message" class="red"></span>
+
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Subject</label>
-                        <input class="form-control form-control-subject" name="subject" id="subject" placeholder="Eneter Subject OF Your Message" required="">
-                    </div>
+                <div class="text-right">
+                    <br>
+                    <button class="btn btn-primary " type="submit">Send Message  <i class="fas fa-paper-plane"></i></button>
                 </div>
-            </div>
-            <div class="form-group">
-                <label>Message</label>
-                <textarea class="form-control form-control-message" name="message" id="message" placeholder="Write Your Message" rows="10" required=""></textarea>
-            </div>
-            <div class="text-right">
-                <br>
-                <button class="btn btn-primary " type="submit">Send Message  <i class="fas fa-paper-plane"></i></button>
-            </div>
-        </form>
+            </form>
 
-    </div>
-</section>
-
-
+        </div>
+    </section>
+</form>

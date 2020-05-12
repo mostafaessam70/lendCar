@@ -1,10 +1,9 @@
 ﻿@page
-@model LendCar.Pages.bookingModel
+@model bookingModel
 @{
     ViewData["Title"] = "booking";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-
 
 <section class="booking">
     <div class="container">
@@ -26,46 +25,30 @@
                 <p>Enter your info exactly as it appears on your license so Turo can verify your eligibility to drive.</p>
                 <!-- form -->
 
-                <form>
+                <form method="post">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label>Fist Name</label>
-                                <input class="form-control" type="text" name="firtName">
+                                <label asp-for="ModelUser.FirstName">Fist Name</label>
+                                <input asp-for="ModelUser.FirstName" class="form-control" type="text">
+                               <span asp-validation-for="ModelUser.FirstName"></span>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label>Middle Name</label>
-                                <input class="form-control" type="text" name="middleName">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Last Name</label>
-                                <input class="form-control" type="text" name="lastName">
+                                <label asp-for="ModelUser.LastName">Last Name</label>
+                                <input asp-for="ModelUser.LastName" class="form-control" type="text">
+                                <span asp-validation-for="ModelUser.LastName"></span>
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Country</label>
-                                <select class="form-control">
-                                    <option>Minia</option>
-                                    <option>Giza</option>
-                                    <option>Giza</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label>City</label>
-                                <select class="form-control">
-                                    <option>Minia</option>
-                                    <option>Giza</option>
-                                    <option>Giza</option>
+                                <select asp-items="Model.Cites" class="form-control">
+                                    
                                 </select>
                             </div>
                         </div>
@@ -73,12 +56,14 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <label>License number</label>
-                            <input class="form-control" type="text" name="licenseNumber">
+                            <label asp-for="ModelUser.DriverLicenseNumber">License number</label>
+                            <input asp-for="ModelUser.DriverLicenseNumber" class="form-control" type="text">
+                            <span  asp-validation-for="ModelUser.DriverLicenseNumber"></span>
                         </div>
                         <div class="col-md-6">
-                            <label>Phone number</label>
-                            <input class="form-control" type="text" name="phoneNumber">
+                            <label asp-for="ModelUser.PhoneNumber">Phone number</label>
+                            <input asp-for="ModelUser.PhoneNumber" class="form-control" type="text" name="phoneNumber">
+                            <span asp-validation-for="ModelUser.PhoneNumber"></span>
                         </div>
                     </div>
 
@@ -87,39 +72,24 @@
                             <h3>Date Of Birth</h3>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-4">
-                            <select class="form-control">
-                                <option>Month</option>
-                                <option>jinuary</option>
-                                <option>fibrary</option>
-                                <option>march</option>
+                            <select name="Day" class="form-control" asp-items="bookingModel.Days">
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="form-control">
-                                <option>Day</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                            <select name="Month" class="form-control" asp-items="bookingModel.Months">
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="form-control">
-                                <option>Year</option>
-                                <option>1990</option>
-                                <option>1991</option>
-                                <option>1992</option>
-                                <option>1993</option>
+                            <select name="Year"  class="form-control" asp-items="@bookingModel.Years">
                             </select>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4 confirm">
-                            <button class="btn btn-primary btn-block">Continue <i class="fas fa-share-square"></i></button>
+                            <button type="submit" class="btn btn-primary btn-block">Continue <i class="fas fa-share-square"></i></button>
                         </div>
                     </div>
                 </form>
@@ -129,29 +99,27 @@
             <!-- right-side -->
             <div class="col-md-4 col-box">
                 <div class="car-info">
-                    <img src="https://bit.ly/3bhdjVv" class=" car-img">
-                    <img src="https://bit.ly/2SP7AQ9" class=" person-img">
+                    <img src="@Url.Content(Model.Vehicle.ImageUrl)" class="img-responsive car-img">
+                    <img src="@Url.Content(Model.Vehicle.Owner.ImageUrl)" class="img-responsive  person-img">
                 </div><br>
-                <div class="car-details">
-                    <p class="car-owner">dewei’s</p>
-                    <h3>Toyota Corolla 2008</h3>
-                    <div class="rate">
-                        <span class="rate-number">4.88</span>
-                        <i class="fas fa-star"></i>
-                        <span>(100 trips)</span>
-                    </div>
-
-                    <div class="from-to-booking">
-                        <div class="from-booking">
-                            <div class="schedule-date">Mon, May 11</div>
-                            <div class="schedule-time">10:00 AM</div>
-                        </div>
-                        <div class="to-booking">
-                            <div class="schedule-date">Thu, May 14</div>
-                            <div class="schedule-time">10:00 AM</div>
-                        </div>
-                    </div>
-                </div>
+                      <div class="car-details">
+                          <p class="car-owner">dewei’s</p>
+                          <h3>@Model.Vehicle.Model.Brand.Name</h3>
+                          <div class="rate">
+                              <span class="rate-number">4.88</span>
+                              <i class="fas fa-star"></i>
+                              <span>(@Model.Vehicle.TripsNumber trips)</span>
+                          </div>
+                     
+                          <div class="from-to-booking">
+                              <div class="from-booking">
+                                  <div class="schedule-date">@Model.StartBookingDate</div>
+                              </div>
+                              <div class="to-booking">
+                                  <div class="schedule-date">@Model.EndBookingDate</div>
+                              </div>
+                          </div>
+                      </div>
                 <hr>
                 <div class="meeting-location">
                     <h5>MEETING LOCATION</h5>
@@ -159,14 +127,12 @@
                         <i class="fas fa-car"></i>
                     </div>
                     <div class="location">
-                        <p>Rosemead, CA 91770</p>
+                        <p>@Model.Contact.Location</p>
                     </div>
                 </div>
             </div>
         </div>
 
-      </div>
-    
+    </div>
+
 </section>
-
-
