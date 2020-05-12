@@ -56,6 +56,7 @@ namespace LendCar
             }
             );
 
+
             services.AddControllers();
             services.AddRazorPages();
         }

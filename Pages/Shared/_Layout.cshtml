@@ -150,16 +150,7 @@
                                         <li><a href="/contact">Contact</a></li>
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
-                                        @if (!User.Identity.IsAuthenticated)
-                                        {
-                                            <li><a asp-area="Account" asp-page="Login">Login</a></li>
-
-                                        }
-                                        else
-                                        {
-                                            <li><a href="#">Logout</a></li>
-
-                                        }
+                                        <partial name="_LoginPartial" />
 
                                         <li class="dropdown">
                                             <a class="dropdown-toggle" data-toggle="dropdown">
