@@ -32,6 +32,7 @@ namespace LendCar.DBContext
         public DbSet<VehicleBooking> VehicleBookings { get; set; }
         public DbSet<CarImage> CarImages { get; set; }
         public DbSet<Color> Colors { get; set; }
+        public DbSet<Contact> Contact { get; set; }
         public DbSet<City> Cities { get; set; }
 
     }
