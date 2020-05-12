@@ -54,7 +54,6 @@ namespace LendCar
             }
             );
 
-            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<LendCarDBContext>();
 
             services.AddControllers();
             services.AddRazorPages();

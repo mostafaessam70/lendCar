@@ -65,7 +65,7 @@ namespace LendCar.Pages
             //    Gender = new Gender() { Type = "Male" },
             //    TripsNumber = 2334,
             //    City = new City { Name = "Minya" },
-            //    LastName = "Korany",
+            //    LastName = "Korany"
             //};
             //await Usermanger.CreateAsync(user2, "Sara@ask123.com");
 
@@ -76,6 +76,7 @@ namespace LendCar.Pages
             //await _roleManager.CreateAsync(SecondRole);
 
             //await Usermanger.AddToRoleAsync(user1, "Admin");
+
             //await Usermanger.AddToRoleAsync(user2, "Member");
             #endregion
 
