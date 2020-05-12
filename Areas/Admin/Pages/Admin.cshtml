@@ -311,14 +311,34 @@
 @section Scripts{
     <script>
 
-          $(document).on('click','.carList',function () {
+        $(document).on('click','.accept',function () {
 
                 let vechicleId = $(this).attr('data-id');
                 if (vechicleId != undefined) {
                     $.ajax({
                         method: 'Post',
                         data: { Page:@Model.CurrentPage, Id: vechicleId },
-                        url: '/Vehicles/Delete',
+                        url: '/Vehicles/Accept',
+                        beforeSend: function () {
+                            $('#loader').show();
+                        },
+                        success(data) {
+                            $('#vechileList').html(data);
+                            $('#loader').hide();
+                        }
+                    })
+                }
+
+        })
+
+        $(document).on('click','.refuse',function () {
+
+                let vechicleId = $(this).attr('data-id');
+                if (vechicleId != undefined) {
+                    $.ajax({
+                        method: 'Post',
+                        data: { Page:@Model.CurrentPage, Id: vechicleId },
+                        url: '/Vehicles/Refuse',
                         beforeSend: function () {
                             $('#loader').show();
                         },
@@ -330,6 +350,7 @@
                 }
 
             })
+
         $(document).ready(function () {
             $('/*ul*/.pagination > li.disabled > a').addClass('page-link');
         });

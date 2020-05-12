@@ -37,34 +37,28 @@ namespace LendCar.Pages
         public async Task<IActionResult> OnPostAsync()
         {
             #region AddUserAndRolesAndAssign
-            // ApplicationUser user1= new ApplicationUser()
+            //ApplicationUser user1 = new ApplicationUser()
             //{
             //    Email = "mohamedesam9397@gmail.com",
             //    UserName = "MohamedEsam",
-            //    Image = "https://lh3.googleusercontent.com/-xkin9yi5v5E/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnOElStaOw_H_2SsTTYEoZyntSIyQ/photo.jpg?sz=46",
             //    NationalId = "12345678998752",
             //    FirstName = "Mohamed",
             //    Gender = new Gender() { Type = "Male" },
-            //    Country = "Egypt",
             //    TripsNumber = 2334,
-            //    City = "Minya",
             //    LastName = "Esam",
-            //}
+            //};
             // await Usermanger.CreateAsync(user1, "Sara@ask123.com");
 
-            //ApplicationUser user2= new ApplicationUser()
+            //ApplicationUser user2 = new ApplicationUser()
             //{
             //    Email = "akg9397@gmail.com",
             //    UserName = "akg",
-            //    Image = "https://lh3.googleusercontent.com/-xkin9yi5v5E/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnOElStaOw_H_2SsTTYEoZyntSIyQ/photo.jpg?sz=46",
             //    NationalId = "12345678998752",
             //    FirstName = "Mohamed",
             //    Gender = new Gender() { Type = "Male" },
-            //    Country = "Egypt",
             //    TripsNumber = 2334,
-            //    City = "Minya",
             //    LastName = "Esam",
-            //}
+            //};
             //await Usermanger.CreateAsync(user2, "Sara@ask123.com");
 
             //var role = new IdentityRole("Admin");
@@ -74,7 +68,7 @@ namespace LendCar.Pages
             //await _roleManager.CreateAsync(SecondRole);
 
             //await Usermanger.AddToRoleAsync(user1, "Admin");
-            //await Usermanger.AddToRoleAsync(user2, "user" );
+            //await Usermanger.AddToRoleAsync(user2, "user");
             #endregion
 
             Email = "MohamedEsam";
