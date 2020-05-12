@@ -46,7 +46,7 @@ namespace LendCar.Pages
 
         [BindProperty]
         public Vehicle Vehicle { get; set; }
-        [BindProperty/*,Required(ErrorMessage ="Car photos must be included")*/]
+        [BindProperty, Required(ErrorMessage = "Car photos must be included")]
         public IEnumerable<IFormFile> VehiclePhotos { get; set; }
         public SelectList Brands { get; set; }
         public SelectList BrandModels { get; set; }
@@ -79,10 +79,10 @@ namespace LendCar.Pages
                         FileStream fs = new FileStream(file, FileMode.Create);
                         photo.CopyTo(fs);
                         fs.Close();
-                        photos.Add(new CarImage { Image = newImgName });
+                        photos.Add(new CarImage { Image = $"~/CarPhotosUploaded/{newImgName}" });
                         if (VehiclePhotos.ElementAt(0) == photo)
                         {
-                            Vehicle.ImageUrl = $"~/CarPhotosUploaded/{photo.FileName}";
+                            Vehicle.ImageUrl = $"~/CarPhotosUploaded/{newImgName}";
                         }
                     }
                     Vehicle.Photos = photos;

@@ -130,7 +130,7 @@
 
                             <div class="form-group col-md-10">
                                 <label asp-for="@Model.Vehicle.StartDate">Available from : </label>
-                                <input id="StartDate" type="date" min='@DateTime.Now.Date.ToString("yyyy-MM-dd")' asp-for="@Model.Vehicle.StartDate" class="form-control">
+                                <input id="StartDate" type="date" value="@DateTime.Now.Date.AddDays(1).ToString("yyyy-MM-dd")" min='@DateTime.Now.Date.AddDays(1).ToString("yyyy-MM-dd")' asp-for="@Model.Vehicle.StartDate" class="form-control">
                                 <span asp-validation-for="@Model.Vehicle.StartDate"></span>
                             </div>
 
@@ -164,63 +164,63 @@
             </div>
         </section>
  @section Scripts{
-<script>
-    $(document).ready(
-        () => {
-            $("#ddlBrands").change(
-                function () {
-                    var loadmessage = "<option value='0'> please wait...</option>";
-                    $("#ddlmodels").html(loadmessage).show();
-                    var id = $("#ddlBrands").val();
-                    var url = root + '/api/BrandModels/byBrand/' + id;
+     <script>
+         $(document).ready(
+             () => {
+                 $("#ddlBrands").change(
+                     function () {
+                         var loadmessage = "<option value='0'> please wait...</option>";
+                         $("#ddlmodels").html(loadmessage).show();
+                         var id = $("#ddlBrands").val();
+                         var url = root + '/api/BrandModels/byBrand/' + id;
 
-                    $.ajax({
-                        url: url,
-                        data: id,
-                        cache: false,
-                        type: "GET",
-                        success: function (data) {
-                            if (data.length == 0) {
-                                var markup = "<option value='0'> No models available for this brand </option>";
-                            }
-                            else {
-                                var markup = "<option value=" + data[0].id + ">" + data[0].name + "</option>";
-                                for (var i = 1; i < data.length; i++) {
-                                    markup += "<option value=" + data[i].id + ">" + data[i].name + "</option>";
-                                }
-                            }
-                            $("#ddlModels").html(markup).show();
-                        },
-                        error: function (reponse) {
-                            alert("error : " + reponse);
-                        }
-                    });
-                }
-            );
+                         $.ajax({
+                             url: url,
+                             data: id,
+                             cache: false,
+                             type: "GET",
+                             success: function (data) {
+                                 if (data.length == 0) {
+                                     var markup = "<option value='0'> No models available for this brand </option>";
+                                 }
+                                 else {
+                                     var markup = "<option value=" + data[0].id + ">" + data[0].name + "</option>";
+                                     for (var i = 1; i < data.length; i++) {
+                                         markup += "<option value=" + data[i].id + ">" + data[i].name + "</option>";
+                                     }
+                                 }
+                                 $("#ddlModels").html(markup).show();
+                             },
+                             error: function (reponse) {
+                                 alert("error : " + reponse);
+                             }
+                         });
+                     }
+                 );
 
-            $("#StartDate").change(
-                () => {
-                    var startVal = new Date($("#StartDate").val());
-                    startVal.setDate(startVal.getDate() + 1);
-                    var stringDate = startVal.toISOString().substring(0, 10);
-                    $("#EndDate").attr("min", stringDate);
-                }
-            );
-        }
-    );
+                 $("#StartDate").change(
+                     () => {
+                         var startVal = new Date($("#StartDate").val());
+                         startVal.setDate(startVal.getDate() + 1);
+                         var stringDate = startVal.toISOString().substring(0, 10);
+                         $("#EndDate").attr("min", stringDate);
+                         $("#EndDate").val(stringDate);
+                     }
+                 );
+             }
+         );
 
-    var $form = $("#AddCarForm");
-    var $submitbutton = $("#AddcarSubmitBtn");
+         var $form = $("#AddCarForm");
+         var $submitbutton = $("#AddcarSubmitBtn");
 
-    $form.on("blur", "input", () => {
-        if ($form.valid()) {
-            $submitbutton.removeAttr("disabled");
-        } else {
-            $submitbutton.attr("disabled", "disabled");
-        }
-        $(".field-validation-error").addClass("text-danger");
-    });
+         $form.on("blur", "input", () => {
+             if ($form.valid()) {
+                 $submitbutton.removeAttr("disabled");
+             } else {
+                 $submitbutton.attr("disabled", "disabled");
+             }
+             $(".field-validation-error").addClass("text-danger");
+         });
 
-
-</script>
+     </script>
 }
