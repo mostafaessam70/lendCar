@@ -29,6 +29,7 @@ namespace LendCar.Models
         public string BirthDate { get; set; }
         [Required,Display(Name ="Phone Number")]
         public new  string PhoneNumber { get; set; }
+        public string JoinedAt { get; set; }
 
         public int CityId { get; set; }
         [ForeignKey("CityId")]

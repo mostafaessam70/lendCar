@@ -2657,17 +2657,21 @@ img.testimonial-thumb {
 .footer-menu ul li a:hover {
     color: #fff;
 }
+.back-to-top:hover {
+    background: url(http://themes.potenzaglobalsolutions.com/html/cardealer/assets/images/car-focus.png) no-repeat 0 0;
+}
 
 #back-to-top {
-    right: 40px;
+    right: 0px;
     top: auto;
     z-index: 10;
     -webkit-backface-visibility: hidden;
+    opacity: .7;
 }
 
-#back-to-top.affix {
-    bottom: 20px;
-}
+    #back-to-top.affix {
+        bottom: 20px;
+    }
 
 #back-to-top .btn.btn-primary {
     width: 36px;
@@ -2683,11 +2687,8 @@ img.testimonial-thumb {
 
     #back-to-top .btn.btn-primary:hover {
         color: #fff;
-        
+       
     }
-.back-to-top:hover {
-    background: url(http://themes.potenzaglobalsolutions.com/html/cardealer/assets/images/car-focus.png) no-repeat 0 0;
-}
     /* Sub Pages
 ================================================== */
     /*-- Title border --*/
@@ -4628,7 +4629,7 @@ label:hover:before {
 .board {
     /*width: 75%;*/
     /*margin: 60px auto;*/
-    height: 500px;
+    /*height: 500px;*/
     background: #fff;
     /*box-shadow: 10px 10px #ccc,-10px 20px #ddd;*/
 }
@@ -4872,4 +4873,59 @@ li.active:after {
         box-shadow: 3px 3px 0px transparent;
         transition: 0.5s;
     }
+/*admin page*/
+.edit-admin {
+    margin-top: 10%;
+}
 
+    .edit-admin .edit-border {
+        border: 1px solid silver;
+        border-radius: 5px;
+        padding: 25px;
+    }
+
+    .edit-admin .edit-title h1 {
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    .edit-admin .edit-title hr {
+        height: 1.5px;
+        background-color: #ffb600;
+    }
+
+    .edit-admin .form-group label {
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    .edit-admin input {
+        height: 45px;
+        border-radius: 0;
+        border-color: #ffb600;
+    }
+
+        .edit-admin input:focus {
+            border: 2px solid #ffb600;
+            -webkit-box-shadow: 1px 1px 6px 0px rgba(255,182,0,1);
+            -moz-box-shadow: 1px 1px 6px 0px rgba(255,182,0,1);
+            box-shadow: 1px 1px 6px 0px rgba(255,182,0,1);
+        }
+
+    .edit-admin .save {
+        font-size: 16px;
+        border-radius: 0px;
+        width: 110px;
+    }
+
+    .edit-admin .back {
+        background-color: #ffb600;
+        font-size: 16px;
+        border-radius: 0px;
+        border: 0;
+        height: 40px;
+    }
+
+        .edit-admin .back:hover {
+            background-color: black;
+        }

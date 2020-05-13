@@ -8,8 +8,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="board">
-                     @*<h2>Welcome to IGHALO!<sup>™</sup></h2>*@
+                    @*<h2>Welcome to IGHALO!<sup>™</sup></h2>*@
                     <div class="board-inner">
+
+                        @*list of tabs*@
                         <ul class="nav nav-tabs" id="myTab">
                             <div class="liner"></div>
                             <li class="active">
@@ -54,10 +56,10 @@
                         </ul>
                     </div>
 
+                    @*Tab 1*@
                     <div class="container">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="home">
-
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label for="showEntries">Show Entries : </label>
@@ -92,12 +94,14 @@
                                             {
                                                 DisplayItemSliceAndTotal = true,
                                                 ContainerDivClasses = new[] { "navigation" },
-                                                LiElementClasses = new[] { "page-item" },
+                                                LiElementClasses = new[] { "page-item","admin-list" },
                                                 PageClasses = new[] { "page-link" },
                                             })
                                     </div>
                                 </section>
                             </div>
+
+                            @*Tap 2*@
                             <div class="tab-pane fade" id="profile">
                                 <div class="row">
                                     <div class="form-group col-md-2">
@@ -121,7 +125,7 @@
                                     <div class="row col-md-8 col-md-offset-2 custyle">
                                         <table class="table table-striped custab">
                                             <thead>
-                                                <a href="#" class="btn btn-primary btn-xs pull-left"><b>+</b> Add new Brand</a>
+                                                <a href="#" class="btn btn-primary btn-xs pull-left"data-toggle="modal" data-target="#product_Create"><b>+</b> Add new Brand</a>
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Title</th>
@@ -131,23 +135,87 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>News</td>
-                                                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+                                                <td class="text-center">
+                                                    <a class='btn btn-info btn-xs' data-toggle="modal" data-target="#product_view" href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                                                    <a href="#" class="btn btn-danger btn-xs" ><span class="glyphicon glyphicon-remove"></span> Del</a>
+                                                </td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Products</td>
-                                                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Blogs</td>
-                                                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                                            </tr>
+
                                         </table>
+
+
+                                        <!--model of edit-->
+                                        <div class="modal fade product_view" id="product_view">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove" style="color:red"></span></a>
+                                                        <h3 class="modal-title">Edit</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <section class="edit-admin">
+                                                            <div class="container">
+                                                                <form action="">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4  col-md-offset-1 edit-color">
+                                                                            <div class="form-group">
+                                                                                <label>Brand</label>
+                                                                                <input class="form-control" type="text" name="Brand" id="Brand" placeholder="Enter Car Brand" required>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 text-center">
+                                                                                    <button class="btn btn-primary save">Save <i class="far fa-save"></i></button><br><br>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--model of Create-->
+                                        <div class="modal fade product_view" id="product_Create">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                                        <h3 class="modal-title">Create</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <section class="create-admin">
+                                                            <div class="container">
+                                                                <form action="">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4  col-md-offset-1 create-border">
+                                                                            <div class="form-group">
+                                                                                <label>Brand</label>
+                                                                                <input class="form-control" type="text" name="Brand" id="Brand" placeholder="Enter Car Brand" required>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 text-center">
+                                                                                    <button class="btn btn-primary save">Save <i class="far fa-save"></i></button><br><br>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </section>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
-
                             </div>
+
+                            @*Tab 3*@
                             <div class="tab-pane fade" id="messages">
                                 <div class="row">
                                     <div class="form-group col-md-2">
@@ -197,6 +265,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            @*Tab 4*@
                             <div class="tab-pane fade" id="settings">
                                 <div class="row">
                                     <div class="form-group col-md-2">
@@ -246,6 +316,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            @*Tab 5*@
                             <div class="tab-pane fade" id="doner">
                                 <div class="text-center">
                                     <div class="row">
@@ -296,7 +368,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            <div class="clearfix"></div>
+                                <div class="clearfix"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -311,14 +384,34 @@
 @section Scripts{
     <script>
 
-          $(document).on('click','.carList',function () {
+        $(document).on('click','.accept',function () {
 
                 let vechicleId = $(this).attr('data-id');
                 if (vechicleId != undefined) {
                     $.ajax({
                         method: 'Post',
                         data: { Page:@Model.CurrentPage, Id: vechicleId },
-                        url: '/Vehicles/Delete',
+                        url: '/Vehicles/Accept',
+                        beforeSend: function () {
+                            $('#loader').show();
+                        },
+                        success(data) {
+                            $('#vechileList').html(data);
+                            $('#loader').hide();
+                        }
+                    })
+                }
+
+        })
+
+        $(document).on('click','.refuse',function () {
+
+                let vechicleId = $(this).attr('data-id');
+                if (vechicleId != undefined) {
+                    $.ajax({
+                        method: 'Post',
+                        data: { Page:@Model.CurrentPage, Id: vechicleId },
+                        url: '/Vehicles/Refuse',
                         beforeSend: function () {
                             $('#loader').show();
                         },
@@ -330,6 +423,7 @@
                 }
 
             })
+
         $(document).ready(function () {
             $('/*ul*/.pagination > li.disabled > a').addClass('page-link');
         });

@@ -15,6 +15,7 @@ using LendCar.Models;
 using LendCar.Repository;
 using X.PagedList;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace LendCar.Pages
 {
@@ -25,11 +26,15 @@ namespace LendCar.Pages
 
         private readonly ILogger<IndexModel> _logger;
         public ICarRepository ICarRepository { get; }
+
+        private SignInManager<ApplicationUser> _signInManager;
+
         public IPagedList<Vehicle> Vehicles { get; set; }
-        public IndexModel(ILogger<IndexModel> logger, ICarRepository ICarRepository)
+        public IndexModel(ILogger<IndexModel> logger, ICarRepository ICarRepository,SignInManager<ApplicationUser> signInManager)
         {
             _logger = logger;
             this.ICarRepository = ICarRepository;
+            this._signInManager = signInManager;
         }
 
         public void OnGet()
@@ -48,7 +53,13 @@ namespace LendCar.Pages
             else
                 pageNumber = 1;
 
-            Vehicles = ICarRepository.GetAllVehicles().ToList().ToPagedList(pageNumber, 9);
+            Vehicles = ICarRepository.GetAllVehiclesAccepted().ToList().ToPagedList(pageNumber, 9);
+        }
+
+        public IActionResult OnGetLogout() 
+        {
+            this._signInManager.SignOutAsync();
+            return RedirectToPage("Index");
         }
 
     }

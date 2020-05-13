@@ -150,9 +150,10 @@
                                         <li><a href="/contact">Contact</a></li>
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li><a asp-area="Account" asp-page="Login">Login</a></li>
+                                        <partial name="_LoginPartial" />
+
                                         <li class="dropdown">
-                                            <a  class="dropdown-toggle" data-toggle="dropdown">
+                                            <a class="dropdown-toggle" data-toggle="dropdown">
                                                 Setting <i class="fa fa-angle-down"></i>
                                             </a>
                                             <ul class="dropdown-menu" role="menu">
