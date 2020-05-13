@@ -14,7 +14,7 @@ namespace LendCar.Repository
         {
             Context = context;
         }
-        public List<City> GetAllCites() => Context.City.ToList();
+        public List<City> GetAllCites() => Context.Cities.ToList();
 
     }
 }
