@@ -28,6 +28,7 @@
                 <form method="post">
                     <div class="row">
                         <div class="col-md-6">
+                            <input name="carId" value="@Model.CarId" hidden /> 
                             <div class="form-group">
                                 <label asp-for="ModelUser.FirstName">Fist Name</label>
                                 <input asp-for="ModelUser.FirstName" class="form-control" type="text">
@@ -47,7 +48,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>City</label>
-                                <select asp-items="Model.Cites" class="form-control">
+                                <select  asp-for="ModelUser.CityId" asp-items="Model.Cites" class="form-control">
                                     
                                 </select>
                             </div>
@@ -62,7 +63,7 @@
                         </div>
                         <div class="col-md-6">
                             <label asp-for="ModelUser.PhoneNumber">Phone number</label>
-                            <input asp-for="ModelUser.PhoneNumber" class="form-control" type="text" name="phoneNumber">
+                            <input asp-for="ModelUser.PhoneNumber" class="form-control" type="text">
                             <span asp-validation-for="ModelUser.PhoneNumber"></span>
                         </div>
                     </div>
@@ -74,15 +75,15 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <select name="Day" class="form-control" asp-items="bookingModel.Days">
+                            <select asp-for="Day" class="form-control" asp-items="bookingModel.Days">
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select name="Month" class="form-control" asp-items="bookingModel.Months">
+                            <select  asp-for="Month" class="form-control" asp-items="bookingModel.Months">
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select name="Year"  class="form-control" asp-items="@bookingModel.Years">
+                            <select  asp-for="Year"  class="form-control" asp-items="@bookingModel.Years">
                             </select>
                         </div>
                     </div>
