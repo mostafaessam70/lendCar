@@ -21,6 +21,26 @@ namespace LendCar.DBContext
             builder.Entity<ApplicationUser>()
                    .HasIndex(u => u.NationalId)
                    .IsUnique();
+
+            builder.Entity<Brand>()
+                   .HasIndex(b => b.Name)
+                   .IsUnique();
+
+            builder.Entity<BrandModel>()
+                   .HasIndex(bm => new { bm.Name, bm.BrandId})
+                   .IsUnique();
+
+            builder.Entity<City>()
+                   .HasIndex(c => c.Name)
+                   .IsUnique();
+
+            builder.Entity<Color>()
+                   .HasIndex(c => c.Name)
+                   .IsUnique();
+
+            builder.Entity<VehicleType>()
+                   .HasIndex(vt => vt.Type)
+                   .IsUnique();
         }
         public LendCarDBContext(DbContextOptions<LendCarDBContext> options) : base(options)  { }
         public DbSet<Gender> Genders { get; set; }

@@ -51,9 +51,12 @@ namespace LendCar.Pages
             //    Gender = new Gender() { Type = "Male" },
             //    TripsNumber = 2334,
             //    City = new City { Name = "Minya" },
-            //    LastName = "Esam"
+            //    LastName = "Esam",
+            //    DriverLicenseNumber = "828282828",
+            //    PhoneNumber = "0124869196"
+
             //};
-            // await Usermanger.CreateAsync(user1, "Sara@ask123.com");
+            //await Usermanger.CreateAsync(user1, "Sara@ask123.com");
 
             //ApplicationUser user2 = new ApplicationUser()
             //{
@@ -65,7 +68,9 @@ namespace LendCar.Pages
             //    Gender = new Gender() { Type = "Male" },
             //    TripsNumber = 2334,
             //    City = new City { Name = "Minya" },
-            //    LastName = "Korany"
+            //    LastName = "Korany",
+            //    DriverLicenseNumber = "828282828",
+            //    PhoneNumber = "0124869196"
             //};
             //await Usermanger.CreateAsync(user2, "Sara@ask123.com");
 

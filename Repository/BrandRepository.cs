@@ -19,5 +19,6 @@ namespace LendCar.Repository
         public List<Brand> GetAllBrands() => Context.Brands.ToList();
         public Brand GetBrand(int id) => Context.Brands.Find(id);
         public void Save() => Context.SaveChanges();
+        public bool Exists(int id) => Context.Brands.Any(b => b.Id == id);
     }
 }

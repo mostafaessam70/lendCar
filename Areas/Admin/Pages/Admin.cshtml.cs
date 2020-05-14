@@ -14,20 +14,26 @@ namespace LendCar.Pages
     //[Authorize(Roles = "Admin")]
     public class AdminModel : PageModel
     {
-        public ICarRepository ICarRepository { get; }
+        private ICarRepository _carRepository;
+        private IBrandRepository _brandRepo;
         public IPagedList<Vehicle> Vehicles { get; set; }
-        public int CurrentPage { get; set; }
-        public AdminModel(ICarRepository ICarRepository)
+        public IPagedList<Brand> Brands { get; set; }
+        public int CurrentVehiclesPage { get; set; }
+        public int CurrentBrandsPage { get; set; }
+        public AdminModel(ICarRepository carRepository,
+                          IBrandRepository brandRepository) 
         {
-            this.ICarRepository = ICarRepository;
+            this._carRepository = carRepository;
+            this._brandRepo = brandRepository;
         }
         public void OnGet()
         {
-            Request.Query.TryGetValue("Page", out var page);
+            Request.Query.TryGetValue("vehiclePage", out var vehiclePage);
+            Request.Query.TryGetValue("brandPage", out var brandPage);
             int pageNumber;
-            if (page.Count > 0)
+            if (vehiclePage.Count > 0)
             {
-                if (int.TryParse(page[0], out var pageNum))
+                if (int.TryParse(vehiclePage[0], out var pageNum))
                 {
                     pageNumber = pageNum;
                 }
@@ -37,9 +43,24 @@ namespace LendCar.Pages
             else
                 pageNumber = 1;
 
-            CurrentPage = pageNumber;
+            if (brandPage.Count > 0)
+            {
+                if (int.TryParse(brandPage[0], out var pageNum))
+                {
+                    pageNumber = pageNum;
+                }
+                else
+                    pageNumber = 1;
+            }
+            else
+                pageNumber = 1;
 
-            Vehicles = ICarRepository.GetAllVehiclesRequests().ToList().ToPagedList(pageNumber, 10);
+            CurrentVehiclesPage = pageNumber;
+            CurrentBrandsPage = pageNumber;
+
+            Vehicles = _carRepository.GetAllVehiclesRequests().ToList().ToPagedList(pageNumber, 10);
+            Brands = _brandRepo.GetAllBrands().ToList().ToPagedList(pageNumber, 10);
+
         }
     }
 }
