@@ -7,5 +7,18 @@
 }
 else
 {
+
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+            Setting <i class="fa fa-angle-down"></i>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+            <li><a asp-area="Cars" asp-page="/Profile">Profile</a></li>
+            <li><a asp-area="Account" asp-page="/changePassword">Change Passowrd</a></li>
+            <li><a asp-area="Cars" asp-page="/UserInfo">Edit Info</a></li>
+
+        </ul>
+    </li>
     <li><a asp-page="Index" asp-page-handler="Logout">Logout</a></li>
+
 }

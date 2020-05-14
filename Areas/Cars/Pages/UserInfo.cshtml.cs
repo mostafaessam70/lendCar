@@ -16,7 +16,7 @@ namespace LendCar.Pages
 {
 
 
-    public class bookingModel : PageModel
+    public class UserInfo : PageModel
     {
 
         public SignInManager<ApplicationUser> SignInManager { get; }
@@ -51,7 +51,7 @@ namespace LendCar.Pages
 
         public Vehicle Vehicle { get; set; }
         public int CarId { get; set; }
-        public bookingModel(SignInManager<ApplicationUser> signInManager,
+        public UserInfo(SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> usermanger, IUserRepository userRerpository,
             ICityRepostiory cityRepository, ICarRepository carRepsitory, IContactRepository IContactRepsotiory)
         {

@@ -13,6 +13,7 @@ namespace LendCar.Repository
         ApplicationUser FindByNatId(string id);
         ApplicationUser FindById(string id);
         void EditBookingInfo(ApplicationUser user);
+        void EditPhotoPath(string userId, string phtoPath);
         void Save();
     }
 }

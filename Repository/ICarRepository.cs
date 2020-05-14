@@ -16,5 +16,6 @@ namespace LendCar.Repository
         void Add(Vehicle vehicle);
         void Delete(int id);
         void Save();
+        bool IsCarAvailable(string startDate, string endDate, int carId);
     }
 }

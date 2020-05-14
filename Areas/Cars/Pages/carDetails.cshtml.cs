@@ -18,16 +18,43 @@ namespace LendCar.Pages
         public ICarRepository CarRepository { get; }
         public IUserRepository UserRepository { get; }
 
+        [BindProperty]
+        public string EndBookingDate { get; set; }
+        [BindProperty]
+        public string StartBookingDate { get; set; }
         public carDetailsModel(ICarRepository _CarRepository,IUserRepository _UserRepository)
         {   
             CarRepository = _CarRepository;
             UserRepository = _UserRepository;
         }
-        public void OnGet(int id)
+        public  IActionResult OnGet(int id)
         {
             CurrentCar = CarRepository.GetVehicle(id);
-            CurrentCarImges = CurrentCar.Photos.ToList();
-            Owner = UserRepository.FindById(CurrentCar.OwnerId);
+            StartBookingDate = Convert.ToDateTime(CurrentCar.StartDate).ToString("yyyy-MM-dd");
+            EndBookingDate = Convert.ToDateTime(CurrentCar.EndDate).ToString("yyyy-MM-dd");
+            CurrentCarImges = CurrentCar?.Photos.ToList();
+            Owner = UserRepository.FindById(CurrentCar?.OwnerId);
+            return  Page();
+        }
+        public IActionResult OnPost(string endBookingDate,string startBookingDate,int carId)
+        {
+            if (ModelState.IsValid)
+            {
+                //if (CarRepository.IsCarAvailable(startBookingDate, endBookingDate, carId))
+                {
+                    return RedirectToPage("booking",
+                        new
+                        {
+                            area = "Cars",
+                            EndBookingDate = endBookingDate,
+                            StartBookingDate = startBookingDate,
+                            CarId = carId
+                        });
+                }
+                //ViewData["errorMessage"] = "this Vehicle Avilabel only From {} to {}";
+            }
+
+           return OnGet(carId);
         }
     }
 }
