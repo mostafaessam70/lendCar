@@ -23,13 +23,12 @@ namespace LendCar.Pages
         [BindProperty]
         public string StartBookingDate { get; set; }
         public carDetailsModel(ICarRepository _CarRepository,IUserRepository _UserRepository)
-        {
+        {   
             CarRepository = _CarRepository;
             UserRepository = _UserRepository;
         }
         public  IActionResult OnGet(int id)
         {
-
             CurrentCar = CarRepository.GetVehicle(id);
             StartBookingDate = Convert.ToDateTime(CurrentCar.StartDate).ToString("yyyy-MM-dd");
             EndBookingDate = Convert.ToDateTime(CurrentCar.EndDate).ToString("yyyy-MM-dd");

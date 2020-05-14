@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace LendCar.Areas.Account.Pages
+namespace LendCar.Areas.Admin.Pages
 {
-    public class LogoutModel : PageModel
+    public class historyclientModel : PageModel
     {
         public void OnGet()
         {

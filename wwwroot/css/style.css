@@ -4690,8 +4690,8 @@ span.round-tabs {
 }
 
     span.round-tabs.one {
-        color: rgb(34, 194, 34);
-        border: 2px solid rgb(34, 194, 34);
+        color: #f1685e  /*rgb(34, 194, 34)*/;
+        border: 2px solid #f1685e  /*rgb(34, 194, 34)*/;
     }
 
 li.active span.round-tabs.one {
@@ -4723,14 +4723,14 @@ li.active span.round-tabs.three {
 }
 
 span.round-tabs.four {
-    color: #f1685e;
-    border: 2px solid #f1685e;
+    color: /*#f1685e*/ rgb(34, 194, 34);
+    border: 2px solid /*#f1685e*/ rgb(34, 194, 34);
 }
 
 li.active span.round-tabs.four {
     background: #fff !important;
     border: 2px solid #ddd;
-    color: #f1685e;
+    color: /*#f1685e*/ rgb(34, 194, 34);
 }
 
 span.round-tabs.five {
@@ -5005,3 +5005,110 @@ li.active:after {
 .submit-button {
     margin-top: 10px;
 }
+
+
+
+/* client history style*/
+
+#user-history .nav-container {
+    background: url(http://subtlepatterns.com/patterns/geometry2.png);
+}
+
+#user-history .nav-tabs li {
+    width: 50%;
+}
+
+
+
+#user-history li a {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    margin: 20px auto;  
+    border: 2px solid silver;
+    border-radius: 100%;
+    padding: 0px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+    #user-history li a:hover {
+        background-color: white;
+    }
+
+
+li.active:after {
+    content: " ";
+    position: absolute;
+    left: 48%;
+    opacity: 1;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 13px solid transparent;
+    border-bottom-color: silver;
+}
+
+
+
+#user-history .liner {
+    height: 2px;
+    background: #ddd;
+    position: absolute;
+    width: 43.5%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 50%;
+    z-index: 1;
+}
+
+
+
+#user-history .nav-tabs li .tab-one {
+    color: cornflowerblue;
+    border-color: cornflowerblue;
+}
+
+#user-history .nav-tabs li .tab-tow {
+    color: #ffb600;
+    border-color: #ffb600;
+}
+
+
+#user-history .active a {
+    color: black;
+    border-color: silver;
+    background-color: white;
+}
+
+#user-history .tab-content {
+   
+    margin-bottom: 2%;
+}
+
+
+    #user-history .tab-content .description h2 {
+        font-weight: 600;
+        font-size: 36px;
+    }
+
+    #user-history .tab-content .description p {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+
+    #user-history .tab-content table {
+        border: 1px solid #ccc;
+        padding: 5px;
+        margin: 5% 0;
+        box-shadow: 3px 3px 2px #ccc;
+        transition: 0.5s;
+        margin: auto;
+        max-width: 70%;
+    }
+
+        #user-history .tab-content table thead {
+            background-color: #0970a2;
+            color: white;
+            font-size: 20px;
+        }
