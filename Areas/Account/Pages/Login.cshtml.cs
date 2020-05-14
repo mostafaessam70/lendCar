@@ -53,11 +53,15 @@ namespace LendCar.Pages
             //    ImageUrl = "https://lh3.googleusercontent.com/-xkin9yi5v5E/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnOElStaOw_H_2SsTTYEoZyntSIyQ/photo.jpg?sz=46",
             //    NationalId = "12345678998752",
             //    FirstName = "Mohamed",
-            //    Gender = new Gender() { Type = "Male" },
+            //    GenderId =1,
             //    TripsNumber = 2334,
+
+            //    DriverLicenseNumber = "828282828",
+            //    PhoneNumber = "0124869196"
 
             //    LastName = "Esam",
             //    CityId = 1
+
 
             //};
             //await Usermanger.CreateAsync(user1, "Sara@ask123.com");
@@ -69,8 +73,11 @@ namespace LendCar.Pages
             //    ImageUrl = "https://lh3.googleusercontent.com/-xkin9yi5v5E/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnOElStaOw_H_2SsTTYEoZyntSIyQ/photo.jpg?sz=46",
             //    NationalId = "12345678998652",
             //    FirstName = "Ahmed",
-            //    Gender = new Gender() { Type = "Male" },
+            //    GenderId = 1,
             //    TripsNumber = 2334,
+
+            //    DriverLicenseNumber = "828282828",
+            //    PhoneNumber = "0124869196"
 
             //    LastName = "Korany",
             //    CityId=1

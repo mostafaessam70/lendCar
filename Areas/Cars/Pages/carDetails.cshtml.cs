@@ -19,13 +19,13 @@ namespace LendCar.Pages
         public IUserRepository UserRepository { get; }
 
         public carDetailsModel(ICarRepository _CarRepository,IUserRepository _UserRepository)
-        {
+        {   
             CarRepository = _CarRepository;
             UserRepository = _UserRepository;
         }
         public void OnGet(int id)
         {
-            CurrentCar = CarRepository.GetVehicle(1);
+            CurrentCar = CarRepository.GetVehicle(id);
             CurrentCarImges = CurrentCar.Photos.ToList();
             Owner = UserRepository.FindById(CurrentCar.OwnerId);
         }

@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Admin";
 }
-
     <section style="background:#efefe9;">
         <div class="container-fluid">
             <div class="row">
@@ -14,18 +13,18 @@
                         @*list of tabs*@
                         <ul class="nav nav-tabs" id="myTab">
                             <div class="liner"></div>
-                            <li class="active">
-                                <a href="#home" data-toggle="tab" title="welcome">
+                            <li >
+                                <a href="#home" data-toggle="tab" title="Pending Vehicles">
                                     <span class="round-tabs one">
-                                        <i class="glyphicon glyphicon-home"></i>
+                                        <i class="glyphicon glyphicon-exclamation-sign"></i>
                                     </span>
                                 </a>
                             </li>
 
-                            <li>
-                                <a href="#profile" data-toggle="tab" title="profile">
+                            <li class="active">
+                                <a href="#BrandsList" data-toggle="tab" title="Brands">
                                     <span class="round-tabs two">
-                                        <i class="glyphicon glyphicon-user"></i>
+                                        <i class="glyphicon glyphicon-copyright-mark"></i>
                                     </span>
                                 </a>
                             </li>
@@ -59,7 +58,7 @@
                     @*Tab 1*@
                     <div class="container">
                         <div class="tab-content">
-                            <div class="tab-pane fade in active" id="home">
+                            <div class="tab-pane fade " id="home">
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label for="showEntries">Show Entries : </label>
@@ -89,7 +88,7 @@
                                     </div>
                                     <div class="text-center">
 
-                                        @Html.PagedListPager((IPagedList)Model.Vehicles, page => "Admin/Admin?Page=" + page,
+                                        @Html.PagedListPager((IPagedList)Model.Vehicles, page => "Admin/Admin?vehiclePage=" + page,
                                             new X.PagedList.Mvc.Common.PagedListRenderOptions
                                             {
                                                 DisplayItemSliceAndTotal = true,
@@ -102,7 +101,7 @@
                             </div>
 
                             @*Tap 2*@
-                            <div class="tab-pane fade" id="profile">
+                            <div class="tab-pane fade in active"  id="BrandsList">
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label for="showEntries">Show Entries : </label>
@@ -123,27 +122,21 @@
 
                                 <div class="container">
                                     <div class="row col-md-8 col-md-offset-2 custyle">
-                                        <table class="table table-striped custab">
-                                            <thead>
-                                                <a href="#" class="btn btn-primary btn-xs pull-left"data-toggle="modal" data-target="#product_Create"><b>+</b> Add new Brand</a>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Title</th>
-                                                    <th class="text-center">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>News</td>
-                                                <td class="text-center">
-                                                    <a class='btn btn-info btn-xs' data-toggle="modal" data-target="#product_view" href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-                                                    <a href="#" class="btn btn-danger btn-xs" ><span class="glyphicon glyphicon-remove"></span> Del</a>
-                                                </td>
-                                            </tr>
+                                        <button id="ShowBrandModal" class="btn btn-primary btn-xs pull-left" ><b>+</b> Add new Brand</button>
+                                        <div id="BrandsSection">
+                                        <partial name="_BrandsList" model="Model.Brands" />
+                                        </div>
+                                        <div class="text-center">
 
-                                        </table>
-
-
+                                            @Html.PagedListPager((IPagedList)Model.Brands, brandPage => "/Admin/Admin?brandPage=" + brandPage,
+                                                new X.PagedList.Mvc.Common.PagedListRenderOptions
+                                                {
+                                                    DisplayItemSliceAndTotal = true,
+                                                    ContainerDivClasses = new[] { "navigation" },
+                                                    LiElementClasses = new[] { "page-item", "admin-list" },
+                                                    PageClasses = new[] { "page-link" },
+                                                })
+                                        </div>
                                         <!--model of edit-->
                                         <div class="modal fade product_view" id="product_view">
                                             <div class="modal-dialog">
@@ -160,7 +153,7 @@
                                                                         <div class="col-md-4  col-md-offset-1 edit-color">
                                                                             <div class="form-group">
                                                                                 <label>Brand</label>
-                                                                                <input class="form-control" type="text" name="Brand" id="Brand" placeholder="Enter Car Brand" required>
+                                                                                <input class="form-control" type="text" name="Brand" id="EditBrand" placeholder="Enter Car Brand" required>
                                                                             </div>
                                                                             <div class="row">
                                                                                 <div class="col-md-12 text-center">
@@ -178,26 +171,26 @@
                                         </div>
 
                                         <!--model of Create-->
-                                        <div class="modal fade product_view" id="product_Create">
+                                        <div class="modal fade product_view" id="Brand_Create">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                                        <button id="HideBrandModal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></button>
                                                         <h3 class="modal-title">Create</h3>
                                                     </div>
                                                     <div class="modal-body">
                                                         <section class="create-admin">
                                                             <div class="container">
-                                                                <form action="">
+                                                                <form id="AddBrandForm" >
                                                                     <div class="row">
                                                                         <div class="col-md-4  col-md-offset-1 create-border">
                                                                             <div class="form-group">
                                                                                 <label>Brand</label>
-                                                                                <input class="form-control" type="text" name="Brand" id="Brand" placeholder="Enter Car Brand" required>
+                                                                                <input class="form-control" id="BrandName" name="Name" placeholder="Enter Car Brand" required>
                                                                             </div>
                                                                             <div class="row">
                                                                                 <div class="col-md-12 text-center">
-                                                                                    <button class="btn btn-primary save">Save <i class="far fa-save"></i></button><br><br>
+                                                                                    <button id="AddBrandBtn" type="submit" class="btn btn-primary save" disabled>Save <i class="far fa-save"></i></button><br><br>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -386,19 +379,22 @@
 
         $(document).on('click','.accept',function () {
 
-                let vechicleId = $(this).attr('data-id');
+            let vechicleId = $(this).attr('data-id');
+
                 if (vechicleId != undefined) {
                     $.ajax({
                         method: 'Post',
-                        data: { Page:@Model.CurrentPage, Id: vechicleId },
+                        data: { Page:@Model.CurrentVehiclesPage, Id: vechicleId },
                         url: '/Vehicles/Accept',
                         beforeSend: function () {
                             $('#loader').show();
                         },
-                        success(data) {
+                        success: function (data) {
                             $('#vechileList').html(data);
                             $('#loader').hide();
-                        }
+                        },
+                        error: function (err) { console.log(err) }
+
                     })
                 }
 
@@ -406,26 +402,83 @@
 
         $(document).on('click','.refuse',function () {
 
-                let vechicleId = $(this).attr('data-id');
+            let vechicleId = $(this).attr('data-id');
+
                 if (vechicleId != undefined) {
                     $.ajax({
                         method: 'Post',
-                        data: { Page:@Model.CurrentPage, Id: vechicleId },
+                        data: { page:@Model.CurrentVehiclesPage, id: vechicleId },
                         url: '/Vehicles/Refuse',
                         beforeSend: function () {
                             $('#loader').show();
                         },
-                        success(data) {
+                        success: function (data) {
+                            console.log(data);
                             $('#vechileList').html(data);
                             $('#loader').hide();
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            console.log(xhr.status);
+                            console.log(thrownError);
                         }
+
                     })
                 }
 
             })
 
         $(document).ready(function () {
+
+            $("#ShowBrandModal").click(function () {
+                $("#Brand_Create").modal('show');
+                }
+            );
+
+            $("#HideBrandModal").click(function () { 
+                $("#Brand_Create").modal('hide');
+                }
+            );
+
+            $("#AddBrandForm").on("blur", "input", () => {
+                if ($("#AddBrandForm").valid()) {
+                    $("#AddBrandBtn").removeAttr("disabled");
+                } else {
+                    ("#AddBrandBtn").attr("disabled", "disabled");
+                }
+            });
+
             $('/*ul*/.pagination > li.disabled > a').addClass('page-link');
+
+            $("#AddBrandForm").submit(
+                function () {
+                    event.preventDefault();
+                    var url = '@Url.Content("~/api/Brands")';
+                    var data = { "Name": $("#BrandName").val() , "page":@Model.CurrentBrandsPage };
+                    debugger;
+
+                    $.ajax({
+                        url: url,
+                        data: JSON.stringify(data),
+                        cache: false,
+                        method: 'POST',
+                        beforeSend: function () {
+                            $("#Brand_Create").modal('hide');
+                            $('#loader').show();
+                        },
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Content-Length": data.length},
+                        success: function (data) {
+                            $("#loader").hide();
+                            $("#BrandsSection").html(data);
+                        },
+                        error: function (xhr, ajaxSettings, thrownError) {
+                            console.log(xhr.status);
+                            console.log(thrownError);
+                        }
+                    })
+                }
+            );
         });
     </script>
 }

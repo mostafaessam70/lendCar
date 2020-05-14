@@ -13,26 +13,26 @@
         </tr>
     </thead>
     <tbody>
-        @for (int i = 0; i < Model.Count; i++)
+        @for (int i = 1; i <= Model.Count; i++)
         {
         <tr>
             <td scope="row">@i</td>
-            <td>@Model[i].City.Name</td>
+            <td>@Model[i-1].City.Name</td>
             @* <td> <p style="min-width:100%;min-height:100%; background-color:#@Url.Content(Model[i].Color.HexValue);"><p></td>*@
-            <td><i style="border-radius:50%; width:50%;height:50%; background-color:#@Url.Content(Model[i].Color.HexValue);">    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </i></td>
+            <td><i style="border-radius:50%; width:50%;height:50%; background-color:@Model[i-1].Color.HexValue">    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </i></td>
 
-            <td>@Model[i].PlateNumber</td>
-            <td>@Model[i].StartDate</td>
-            <td>@Model[i].EndDate</td>
+            <td>@Model[i-1].PlateNumber</td>
+            <td>@Model[i-1].StartDate</td>
+            <td>@Model[i-1].EndDate</td>
 
             @*<td>
             <a asp-page="/Cars/carDetails" asp-route-id="@Model[i].Id">Details</a>
         </td>*@
             <td>
-                <a class="far fa-check-circle accept" data-id="@Model[i].Id"></a>
+                <a class="far fa-check-circle accept" data-id="@Model[i-1].Id"></a>
             </td>
             <td>
-                <a class="fas fa-times refuse" data-id="@Model[i].Id"></a>
+                <a class="fas fa-times refuse" data-id="@Model[i-1].Id"></a>
             </td>
         </tr>
         }

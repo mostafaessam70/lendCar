@@ -15,5 +15,6 @@ namespace LendCar.Repository
         void Add(Brand brand);
         void Delete(int id);
         void Save();
+        bool Exists(int id);
     }
 }
