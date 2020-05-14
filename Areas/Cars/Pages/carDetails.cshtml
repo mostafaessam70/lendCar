@@ -11,24 +11,15 @@
         <div class="row">
             <div class="col-xs-12">
                 <div id="page-slider" class="owl-carousel owl-theme page-slider page-slider-small">
-
-                    @foreach (var item in Model.CurrentCarImges)
+                    @if (Model.CurrentCarImges != null)
                     {
-                        <div class="item">
-                            <img src="@Url.Content(item.Image)" alt="" />
-                        </div>
+                        @foreach (var item in Model.CurrentCarImges)
+                        {
+                            <div class="item">
+                                <img src="@Url.Content(item.Image)" alt="" />
+                            </div>
+                        }
                     }
-
-
-                    @*<div class="item">
-            <img src="https://bit.ly/3foiQN4" alt="" />
-        </div>
-        <div class="item">
-            <img src="https://bit.ly/35CjFh6" alt="" />
-        </div>
-        <div class="item">
-            <img src="https://bit.ly/3dosX2W" alt="" />
-        </div>*@
 
                 </div><!-- Page slider end -->
             </div><!-- Slider col end -->
@@ -70,7 +61,7 @@
                         <p>Vehicle owner</p>
                     </div>
                     <div class="col-md-8">
-                        <div class="col-md-4 center-block" >
+                        <div class="col-md-4 center-block">
                             <img src="@Model.Owner.ImageUrl" alt="@Model.Owner.FirstName" class="img-circle">
                         </div>
                         <div class="col-md-8">
@@ -89,15 +80,20 @@
                     <h2 class="col-md-6">@Model.CurrentCar.PricePerDay EGP / day</h2>
                 </div>
                 <div class="row">
-                    <form>
+                    <form method="post">
+                        <input type="hidden" name="carId" value="@Model.CurrentCar.Id" />
                         <div class="form-group col-md-10">
                             <label for="TripStart">Trip start : </label>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="date" class="form-control" id="TripStart" value="@Model.CurrentCar.StartDate" min="@Model.CurrentCar.StartDate">
+                                    <input type="date" required
+                                           class="form-control" id="TripStart"
+                                           asp-for="EndBookingDate"
+                                           min="@Model.CurrentCar.StartDate"
+                                           max="@Model.CurrentCar.EndDate">
                                 </div>
                                 <div class="col-md-6">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -105,15 +101,20 @@
                             <label for="Tripend">Trip end : </label>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="date" class="form-control" id="Tripend" value="@Model.CurrentCar.EndDate" min="@Model.CurrentCar.StartDate" max="@Model.CurrentCar.EndDate">
+                                    <input type="date"
+                                           class="form-control" ,required
+                                           asp-for="StartBookingDate"
+                                           id="Tripend"
+                                           min="@Model.CurrentCar.StartDate"
+                                           max="@Model.CurrentCar.EndDate">
+                                    <span></span>
                                 </div>
                                 <div class="col-md-6">
-                                    
+
                                 </div>
                             </div>
                         </div>
-
-                        <button type="submit" class="btn btn-primary col-md-9" style="width:70%;margin-left:17px">Go To Checkout</button>
+                        <button type="submit" id="con" class="btn btn-primary col-md-9" style="width:70%;margin-left:17px">Go To Checkout</button>
                     </form>
 
                 </div>
@@ -123,3 +124,4 @@
 
     </div><!-- Conatiner end -->
 </section><!-- Main container end -->
+ 

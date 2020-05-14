@@ -35,7 +35,12 @@ namespace LendCar.Repository
         public ApplicationUser FindById(string id) => Context.Users.Include(u=>u.City)
                                                                    .Include(u=>u.Gender)
                                                                    .SingleOrDefault(p => p.Id == id);
+        public void EditPhotoPath(string userId, string phtoPath)
+        {
+            FindById(userId).ImageUrl = phtoPath;
+        }
         public void Save() => Context.SaveChanges();
+       
 
     }
 }

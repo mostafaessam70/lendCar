@@ -1,5 +1,5 @@
 ﻿@page
-@model bookingModel
+@model UserInfo
 @{
     ViewData["Title"] = "booking";
     Layout = "~/Pages/Shared/_Layout.cshtml";
@@ -16,9 +16,6 @@
                     <span class="icon">
                         <i class="fas fa-exclamation-circle"></i>
                     </span>
-                    <div class="info">
-                        <p>Since this is your first trip, you’ll need to provide your photo, driver’s license, and contact info to set up your account.</p>
-                    </div>
                 </div>
                 <hr>
                 <h3>Driver's license</h3>
@@ -115,45 +112,43 @@
 
             <!-- right-side -->
             <div class="col-md-4 col-box">
-                <div class="car-info">
-
-                    <img src="@Url.Content(Model.Vehicle.ImageUrl)"
-                         class="img-responsive car-img">
-
-                    <img src="@Url.Content(Model.Vehicle.Owner.ImageUrl)"
-                         class="img-responsive  person-img">
-                </div><br>
-                <div class="car-details">
-                    <p class="car-owner">dewei’s</p>
-                    <h3>@Model.Vehicle.Model.Brand.Name</h3>
-                    <div class="rate">
-                        <span class="rate-number">4.88</span>
-                        <i class="fas fa-star"></i>
-                        <span>(@Model.Vehicle.TripsNumber trips)</span>
-                    </div>
-
-                    <div class="from-to-booking">
-                        <div class="from-booking">
-                            <div class="schedule-date">@Model.StartBookingDate</div>
-                        </div>
-                        <div class="to-booking">
-                            <div class="schedule-date">@Model.EndBookingDate</div>
-                        </div>
+                <div class="row">
+                    <div class="col-lg-8 text-center col-offset-2">
+                        <img id="profileImage" src="@Url.Content(Model.LoggedUserInfo.ImageUrl)" class="img-circle img-responsive" />
+                        <input type="file" id="UploadUserPhoto" class="hidden" />
                     </div>
                 </div>
-                <hr>
-                <div class="meeting-location">
-                    <h5>MEETING LOCATION</h5>
-                    <div class="meeting-location-icon">
-                        <i class="fas fa-car"></i>
-                    </div>
-                    <div class="location">
-                        <p>@Model.Contact.Location</p>
-                    </div>
+                <div class="row text-center">
+                    <label for="UploadUserPhoto">Change Photo</label>
+                </div>
+                <div id="c">
+
                 </div>
             </div>
+
         </div>
-
     </div>
-
 </section>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#UploadUserPhoto").change(function () {
+
+                var formData = new FormData();
+                formData.append("photo", $("#UploadUserPhoto")[0].files[0]);
+                  formData.append("userId",'@Model.LoggedUserInfo.Id');
+                $.ajax({
+                    url: '/Photo/Upload',
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (photo) {
+                        window.location.reload();
+                    }
+                });
+
+            })
+        })
+    </script>
+}
