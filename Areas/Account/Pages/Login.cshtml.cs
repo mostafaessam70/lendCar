@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using LendCar.Models;
@@ -11,8 +12,12 @@ namespace LendCar.Pages
 {
     public class LoginModel : PageModel
     {
+        [Required]       
         [BindProperty]
-        public string Email { get; set; }
+        public string UserName { get; set; }
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
         [BindProperty]
         public string Password { get; set; }
 
@@ -50,10 +55,12 @@ namespace LendCar.Pages
             //    FirstName = "Mohamed",
             //    Gender = new Gender() { Type = "Male" },
             //    TripsNumber = 2334,
-            //    City = new City { Name = "Minya" },
-            //    LastName = "Esam"
+
+            //    LastName = "Esam",
+            //    CityId = 1
+
             //};
-            // await Usermanger.CreateAsync(user1, "Sara@ask123.com");
+            //await Usermanger.CreateAsync(user1, "Sara@ask123.com");
 
             //ApplicationUser user2 = new ApplicationUser()
             //{
@@ -64,8 +71,10 @@ namespace LendCar.Pages
             //    FirstName = "Ahmed",
             //    Gender = new Gender() { Type = "Male" },
             //    TripsNumber = 2334,
-            //    City = new City { Name = "Minya" },
-            //    LastName = "Korany"
+
+            //    LastName = "Korany",
+            //    CityId=1
+
             //};
             //await Usermanger.CreateAsync(user2, "Sara@ask123.com");
 
@@ -80,10 +89,8 @@ namespace LendCar.Pages
             //await Usermanger.AddToRoleAsync(user2, "Member");
             #endregion
 
-            Email = "MohamedEsam";
-            Password = "Sara@ask123.com";
 
-            var result = await SignInManager.PasswordSignInAsync(Email, Password, false, false);
+            var result = await SignInManager.PasswordSignInAsync(UserName, Password, false, false);
 
             if (result.Succeeded)
             {
