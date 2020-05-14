@@ -2541,7 +2541,7 @@ img.testimonial-thumb {
     font-size: 16px;
     font-weight: 700;
     position: relative;
-    margin: 0 0 30px;
+    margin: 0 0 15px;
     padding-left: 15px;
     text-transform: uppercase;
     color: #fff;
@@ -2562,7 +2562,10 @@ img.testimonial-thumb {
 
 .footer-social {
     margin-top: 15px;
+    
 }
+
+
 
     .footer-social .widget-title {
         font-size: 14px;
@@ -2582,17 +2585,18 @@ img.testimonial-thumb {
 
             .footer-social ul li a i {
                 display: block;
-                font-size: 18px;
+                font-size: 25px;
                 color: #999;
                 background: none;
-                -webkit-transition: 400ms;
-                -moz-transition: 400ms;
-                -o-transition: 400ms;
-                transition: 400ms;
+                -webkit-transition: 500ms;
+                -moz-transition: 500ms;
+                -o-transition: 500ms;
+                transition: 500ms;
             }
 
                 .footer-social ul li a i:hover {
-                    color: #fff;
+                    transform:rotate(360deg);
+                    color: #ffb600;
                 }
 
 
@@ -2637,7 +2641,7 @@ img.testimonial-thumb {
     position: relative;
     z-index: 1;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 .footer-menu {
