@@ -37,25 +37,27 @@ namespace LendCar
             services.AddDbContext<LendCarDBContext>(options =>
              options.UseSqlServer(Configuration.GetConnectionString("LendCarCString")));
 
-
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICarRepository, CarRepository>();
             services.AddTransient<IVehicleTypeRepository, VehicleTypeRepository>();
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<IBrandModelRepository, BrandModelRepository>();
-
-
-            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
-            services.AddSingleton<IEmailSender, EmailSender>();
-
-
-
+            services.AddTransient<IContactRepository,ContactRepository>();
+            services.AddTransient<ICityRepostiory, CityRepostiory>();
+            services.AddTransient<IUserRepository, UserRepository>();
+          
+            services.AddSingleton<IEmail, Email>();
+          
+            //services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            //services.AddSingleton<IEmailSender, EmailSender>();
+            
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<LendCarDBContext>().AddDefaultTokenProviders(); ;
+                .AddEntityFrameworkStores<LendCarDBContext>().AddDefaultTokenProviders();
+
+
             services.ConfigureApplicationCookie(option =>
             {
-
-                option.LoginPath = "/Login";
+                option.LoginPath = "/Account/Login";
             }
             );
 

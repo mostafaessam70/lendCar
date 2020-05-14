@@ -16,6 +16,7 @@ namespace LendCar.Repository
         }
         public LendCarDBContext Context { get; }
         public Vehicle GetVehicle(int id) => Context.Vehicles.Include(v => v.Color)
+                                     .Include(c=>c.Owner)
                                      .Include(v=>v.Photos)
                                      .Include(v => v.Model)
                                      .ThenInclude(v => v.Brand)

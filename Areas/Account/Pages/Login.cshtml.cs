@@ -27,17 +27,21 @@ namespace LendCar.Pages
         private readonly RoleManager<IdentityRole> _roleManager;
 
         public LoginModel(SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> usermanger, RoleManager<IdentityRole> roleManager
-)
+                          UserManager<ApplicationUser> usermanger,
+                          RoleManager<IdentityRole> roleManager
+                         )
         {
             SignInManager = signInManager;
             Usermanger = usermanger;
             _roleManager = roleManager;
 
         }
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            if (!User.Identity.IsAuthenticated)
+                return Page();
+            else
+                return RedirectToPage("Index");
         }
         public async Task<IActionResult> OnPostAsync()
         {
@@ -46,10 +50,12 @@ namespace LendCar.Pages
             //{
             //    Email = "mohamedesam9397@gmail.com",
             //    UserName = "MohamedEsam",
+            //    ImageUrl = "https://lh3.googleusercontent.com/-xkin9yi5v5E/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnOElStaOw_H_2SsTTYEoZyntSIyQ/photo.jpg?sz=46",
             //    NationalId = "12345678998752",
             //    FirstName = "Mohamed",
             //    Gender = new Gender() { Type = "Male" },
             //    TripsNumber = 2334,
+
             //    LastName = "Esam",
             //    CityId = 1
 
@@ -60,11 +66,13 @@ namespace LendCar.Pages
             //{
             //    Email = "akg9397@gmail.com",
             //    UserName = "akg",
-            //    NationalId = "12345678998752",
-            //    FirstName = "Mohamed",
+            //    ImageUrl = "https://lh3.googleusercontent.com/-xkin9yi5v5E/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnOElStaOw_H_2SsTTYEoZyntSIyQ/photo.jpg?sz=46",
+            //    NationalId = "12345678998652",
+            //    FirstName = "Ahmed",
             //    Gender = new Gender() { Type = "Male" },
             //    TripsNumber = 2334,
-            //    LastName = "Esam",
+
+            //    LastName = "Korany",
             //    CityId=1
 
             //};
@@ -73,22 +81,26 @@ namespace LendCar.Pages
             //var role = new IdentityRole("Admin");
             //await _roleManager.CreateAsync(role);
 
-            //var SecondRole = new IdentityRole("user");
+            //var SecondRole = new IdentityRole("Member");
             //await _roleManager.CreateAsync(SecondRole);
 
             //await Usermanger.AddToRoleAsync(user1, "Admin");
-            //await Usermanger.AddToRoleAsync(user2, "user");
+
+            //await Usermanger.AddToRoleAsync(user2, "Member");
             #endregion
 
-           
 
             var result = await SignInManager.PasswordSignInAsync(UserName, Password, false, false);
 
             if (result.Succeeded)
             {
-                return RedirectToPage("./index");
+                if (User.IsInRole("Admin"))
+                    return RedirectToPage("Admin", new { area = "Admin"});
+                else
+                    return RedirectToPage("Index");
             }
-            return RedirectToPage("account/Login");
+            else
+                return RedirectToPage("Login", new { area = "Account"});
         }
     }
 }

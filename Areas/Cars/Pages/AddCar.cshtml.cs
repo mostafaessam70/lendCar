@@ -2,6 +2,7 @@
 using LendCar.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,18 +23,21 @@ namespace LendCar.Pages
         private IBrandModelRepository brandModelRepo;
         private ICarRepository carRepo;
         private IWebHostEnvironment hostEnvironment;
-
+        
         public AddCarModel(IVehicleTypeRepository _vehicleTypeRepo,
                             ICarRepository _carRepo,
                             IBrandRepository _brandRepo,
                             IBrandModelRepository _brandModelRepo,
-                            IWebHostEnvironment _hostEnvironment)
+                            IWebHostEnvironment _hostEnvironment,
+                            UserManager<ApplicationUser> _userManager
+                            )
         {
             this.vehicleTypeRepo = _vehicleTypeRepo;
             this.carRepo = _carRepo;
             this.brandRepo = _brandRepo;
             this.brandModelRepo = _brandModelRepo;
             this.hostEnvironment = _hostEnvironment;
+            this.userManager = _userManager;
 
             this.VehicleTypes = new SelectList(vehicleTypeRepo.GetAllVehicleTypes().OrderBy(vt => vt.Type), "Id", "Type");
             this.Brands = new SelectList(brandRepo.GetAllBrands().OrderBy(b => b.Name), "Id", "Name");
@@ -41,19 +45,23 @@ namespace LendCar.Pages
             this.OdoMeters = new SelectList(carRepo.Context.OdoMeters.ToList(), "Id", "Value");
             this.Colors = new SelectList(carRepo.Context.Colors.OrderBy(c => c.Name).ToList(),"Id","Name");
             this.Vehicle = new Vehicle();
-
+            this.Cities = new SelectList(carRepo.Context.Cities.OrderBy(c=>c.Name).ToList(),"Id","Name");
+            this.Today = DateTime.Now.Date;
         }
 
         [BindProperty]
         public Vehicle Vehicle { get; set; }
-        [BindProperty/*,Required(ErrorMessage ="Car photos must be included")*/]
+        [BindProperty, Required(ErrorMessage = "Car photos must be included")]
         public IEnumerable<IFormFile> VehiclePhotos { get; set; }
         public SelectList Brands { get; set; }
         public SelectList BrandModels { get; set; }
         public SelectList VehicleTypes { get; set; }
         public SelectList OdoMeters { get; set; }
         public SelectList Colors { get; set; }
-
+        public SelectList Cities { get; set; }
+        public DateTime Today { get; set; }
+        public UserManager<ApplicationUser> userManager { get; set; }
+        
         public void OnGet()
         {
         }
@@ -79,10 +87,10 @@ namespace LendCar.Pages
                         FileStream fs = new FileStream(file, FileMode.Create);
                         photo.CopyTo(fs);
                         fs.Close();
-                        photos.Add(new CarImage { Image = newImgName });
+                        photos.Add(new CarImage { Image = $"~/CarPhotosUploaded/{newImgName}" });
                         if (VehiclePhotos.ElementAt(0) == photo)
                         {
-                            Vehicle.ImageUrl = $"~/CarPhotosUploaded/{photo.FileName}";
+                            Vehicle.ImageUrl = $"~/CarPhotosUploaded/{newImgName}";
                         }
                     }
                     Vehicle.Photos = photos;
