@@ -17,9 +17,17 @@
 */
 
 
-jQuery(function ($) {
-	"use strict";
 
+
+jQuery(function ($) {
+    "use strict";
+    /* preloader */
+    $('body').toggleClass('loaded');
+
+    setTimeout(function () {
+        $('body').addClass('loaded');
+       
+    }, 1500);
 	/* ----------------------------------------------------------- */
 	/*  Fixed header
 	/* ----------------------------------------------------------- */
