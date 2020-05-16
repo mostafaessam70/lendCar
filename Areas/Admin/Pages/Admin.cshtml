@@ -429,12 +429,37 @@
 
         $(document).ready(function () {
 
+            $(".delete-brand").click(
+                function () {
+                    var brandId = parseInt( $(this).attr('id'));
+                    var url = '@Url.Content($"~/api/Brands/Delete/")';
+                    debugger;
+                    $.ajax({
+                        url: url + brandId + "/@Model.CurrentBrandsPage",
+                        cache: false,
+                        method: 'Post',
+                        beforeSend: function () {
+                            $('#loader').show();
+                        },
+                        headers: {
+                            "Content-Type": "application/json"},
+                        success: function (data) {
+                            $("#BrandsSection").html(data);
+                        },
+                        error: function (xhr, ajaxSettings, thrownError) {
+                            console.log(xhr.status);
+                            console.log(thrownError);
+                        }
+                    })
+                }
+            );
+
             $("#ShowBrandModal").click(function () {
                 $("#Brand_Create").modal('show');
                 }
             );
 
-            $("#HideBrandModal").click(function () { 
+            $("#HideBrandModal").click(function () {
                 $("#Brand_Create").modal('hide');
                 }
             );
@@ -452,8 +477,8 @@
             $("#AddBrandForm").submit(
                 function () {
                     event.preventDefault();
-                    var url = '@Url.Content("~/api/Brands")';
-                    var data = { "Name": $("#BrandName").val() , "page":@Model.CurrentBrandsPage };
+                    var url = '@Url.Content("~/api/Brands/Add/")' + @Model.CurrentBrandsPage;
+                    var data = { "Name": $("#BrandName").val()};
                     debugger;
 
                     $.ajax({

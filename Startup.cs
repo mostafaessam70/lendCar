@@ -61,6 +61,10 @@ namespace LendCar
             }
             );
 
+            //services.AddCors(c =>
+            //{
+            //    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            //});
 
             services.AddControllers();
             services.AddRazorPages();
@@ -79,7 +83,13 @@ namespace LendCar
                 app.UseHsts();
             }
 
+            //app.UseCors(options => options.AllowAnyOrigin());
+
+            app.UseHttpMethodOverride();
+
             app.UseHttpsRedirection();
+
+            
             app.UseStaticFiles();
 
             app.UseCookiePolicy();
@@ -90,8 +100,6 @@ namespace LendCar
             app.UseAuthorization();
 
 
-
-            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
