@@ -67,7 +67,7 @@ namespace LendCar
             //});
 
             services.AddControllers();
-            services.AddRazorPages();
+            services.AddRazorPages(c=>c.Conventions.AddPageRoute("/Home",""));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
