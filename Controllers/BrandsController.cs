@@ -42,13 +42,15 @@ namespace LendCar.Controllers
         }
 
 
-        // PUT: api/Brands/5
-        [HttpPut("{id}")]
-        public IActionResult PutBrand(int id, Brand brand)
+        // PUT: api/Brands/edit/id/page
+        [ActionName("Edit")]
+        [HttpPost("{id}/{page}")]
+        public IActionResult Edit([FromRoute]int id,[FromBody] Brand brand,[FromRoute]int page = 1)
         {
+            IActionResult result;
             if (id != brand.Id)
             {
-                return BadRequest();
+                result = BadRequest();
             }
 
             _brandRepo.Context.Entry(brand).State = EntityState.Modified;
@@ -57,23 +59,24 @@ namespace LendCar.Controllers
             {
                 _brandRepo.Save();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException err)
             {
                 if (!BrandExists(id))
                 {
-                    return NotFound();
+                    result =  NotFound();
                 }
                 else
                 {
-                    throw;
+                    result = BadRequest(err.ToString());
                 }
             }
 
-            return NoContent();
+            result =  PartialView("_BrandsList", _brandRepo.GetAllBrands().ToList().ToPagedList(page, 10));
+            
+            return result;
         }
 
 
-        //[Route("{id}/{page}")]
         [ActionName("Delete")]
         [HttpPost("{id}/{page}")]
         public IActionResult Delete([FromRoute]int id,[FromRoute] int page = 1)

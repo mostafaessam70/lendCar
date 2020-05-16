@@ -13,8 +13,8 @@
                 <td>@i</td>
                 <td>@Model[i-1].Name</td>
                 <td class="text-center">
-                    <a class='btn btn-info btn-xs' data-toggle="modal" data-target="#product_view" href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-                    <a id="@Model[i-1].Id" class="btn btn-danger btn-xs delete-brand"><span class="glyphicon glyphicon-remove "></span> Del</a>
+                    <a data-edited-brand-id="@Model[i-1].Id" data-edited-brand-name="@Model[i-1].Name" class='btn btn-info btn-xs edit-brand-btn' onclick="ShowEditBrandModal(this)"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                    <a data-deleted-brand-id="@Model[i-1].Id" data-deleted-brand-name="@Model[i-1].Name" class="btn btn-danger btn-xs delete-brand" onclick="DeleteBrand(this)"><span class="glyphicon glyphicon-remove "></span> Del</a>
                 </td>
             </tr>
         }
