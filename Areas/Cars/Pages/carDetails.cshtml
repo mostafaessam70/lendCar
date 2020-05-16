@@ -86,21 +86,6 @@
                             <label for="TripStart">Trip start : </label>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="date" required
-                                           class="form-control" id="TripStart"
-                                           asp-for="EndBookingDate"
-                                           min="@Model.CurrentCar.StartDate"
-                                           max="@Model.CurrentCar.EndDate">
-                                </div>
-                                <div class="col-md-6">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-10">
-                            <label for="Tripend">Trip end : </label>
-                            <div class="row">
-                                <div class="col-md-6">
                                     <input type="date"
                                            class="form-control" ,required
                                            asp-for="StartBookingDate"
@@ -109,8 +94,39 @@
                                            max="@Model.CurrentCar.EndDate">
                                     <span></span>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-10">
+                            <label for="Tripend">Trip end : </label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="date" required
+                                           class="form-control" id="TripStart"
+                                           asp-for="EndBookingDate"
+                                           min="@Model.CurrentCar.StartDate"
+                                           max="@Model.CurrentCar.EndDate">
+                                </div>
+                                <span></span>
                                 <div class="col-md-6">
 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-10">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @if (Model.avilabeldays != null)
+                                    {
+                                        <span class="text-danger">This Vechicle not available in all Days You want </span>
+                                        <button type="button" class="btn btn-link text-danger" data-toggle="modal" data-target="#exampleModal">
+                                            Details
+                                        </button>
+                                    }
+                                    @if (Model.DateIsNotCorrect)
+                                    {
+                                        <span class="text-danger">Please open your eyes and look At your Choosen date ! </span>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -124,4 +140,38 @@
 
     </div><!-- Conatiner end -->
 </section><!-- Main container end -->
- 
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Avilabel Date</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @if (Model.avilabeldays != null)
+                {
+                    foreach (var item in Model.avilabeldays)
+                    {
+                        <div class="row">
+
+                            <div class="col-xs-offset-2 col-xs-5 text-info ">
+                                <p>@item.Key</p>
+                            </div>
+                            <div class="col-xs-3 text-danger">
+                                <p class='text @(item.Value=="Available"?"text-info":"text-danger")'>@item.Value</p>
+                            </div>
+
+                        </div>
+                    }
+                }
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
