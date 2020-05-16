@@ -13,7 +13,7 @@
                         @*list of tabs*@
                         <ul class="nav nav-tabs" id="myTab">
                             <div class="liner"></div>
-                            <li >
+                            <li id="vehiclesTabLi">
                                 <a href="#home" data-toggle="tab" title="Pending Vehicles">
                                     <span class="round-tabs one">
                                         <i class="glyphicon glyphicon-exclamation-sign"></i>
@@ -21,14 +21,14 @@
                                 </a>
                             </li>
 
-                            <li class="active">
+                            <li id="brandsTabLi">
                                 <a href="#BrandsList" data-toggle="tab" title="Brands">
                                     <span class="round-tabs two">
                                         <i class="glyphicon glyphicon-copyright-mark"></i>
                                     </span>
                                 </a>
                             </li>
-                            <li>
+                            <li id="modelsTabLi">
                                 <a href="#messages" data-toggle="tab" title="bootsnipp goodies">
                                     <span class="round-tabs three">
                                         <i class="glyphicon glyphicon-gift"></i>
@@ -36,7 +36,7 @@
                                 </a>
                             </li>
 
-                            <li>
+                            <li id="colorsTabLi">
                                 <a href="#settings" data-toggle="tab" title="blah blah">
                                     <span class="round-tabs four">
                                         <i class="glyphicon glyphicon-comment"></i>
@@ -44,7 +44,7 @@
                                 </a>
                             </li>
 
-                            <li>
+                            <li id="vehicleTypesTabLi">
                                 <a href="#doner" data-toggle="tab" title="completed">
                                     <span class="round-tabs five">
                                         <i class="glyphicon glyphicon-ok"></i>
@@ -58,7 +58,7 @@
                     @*Tab 1*@
                     <div class="container">
                         <div class="tab-content">
-                            <div class="tab-pane fade " id="home">
+                            <div class="tab-pane fade " id="vehiclesTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label for="showEntries">Show Entries : </label>
@@ -101,7 +101,7 @@
                             </div>
 
                             @*Tap 2*@
-                            <div class="tab-pane fade in active"  id="BrandsList">
+                            <div class="tab-pane fade"  id="brandsTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label for="showEntries">Show Entries : </label>
@@ -210,7 +210,7 @@
                             </div>
 
                             @*Tab 3*@
-                            <div class="tab-pane fade" id="messages">
+                            <div class="tab-pane fade" id="modelsTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label for="showEntries">Show Entries : </label>
@@ -261,7 +261,7 @@
                             </div>
 
                             @*Tab 4*@
-                            <div class="tab-pane fade" id="settings">
+                            <div class="tab-pane fade" id="colorsTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label for="showEntries">Show Entries : </label>
@@ -312,7 +312,7 @@
                             </div>
 
                             @*Tab 5*@
-                            <div class="tab-pane fade" id="doner">
+                            <div class="tab-pane fade" id="vehicleTypesTabDiv">
                                 <div class="text-center">
                                     <div class="row">
                                         <div class="form-group col-md-2">
@@ -377,9 +377,22 @@
 
 @section Scripts{
     <script>
+        var currentUrl = window.location.href;
+        if (currentUrl.includes("Page")) {
+            if (currentUrl.includes("vehiclePage")) {
+                $("#vehiclesTabLi").addClass(" active");
+                $("#vehiclesTabDiv").addClass(" in active");
+            } else if (currentUrl.includes("brandPage")) {
+                $("#brandsTabLi").addClass(" active");
+                $("#brandsTabDiv").addClass(" in active");
+            }
+        }
+        else {
+            $("#vehiclesTabLi").addClass(" active");
+            $("#vehiclesTabDiv").addClass(" in active");
+        }
 
-        
-        $(document).on('click','.accept',function () {
+        $(document).on('click', '.accept', function () {
 
             let vechicleId = $(this).attr('data-id');
 
@@ -478,10 +491,6 @@
         }
         
         $(document).ready(function () {
-
-            if (window.location.href) {
-
-            }
 
             $("#AddBrandForm").on("blur", "input", () => {
                 if ($("#AddBrandForm").valid()) {
