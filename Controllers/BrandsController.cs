@@ -26,7 +26,9 @@ namespace LendCar.Controllers
 
         [HttpGet]
         public IActionResult BrandsList(int page = 1) {
-            return PartialView("_BrandsList", _brandRepo.GetAllBrands().ToList().ToPagedList(page, 10)); }
+            return PartialView("_BrandsList", _brandRepo.GetAllBrands().ToList().ToPagedList(page, 10)); 
+        }
+        
         [ActionName("GetBrand")]
         [HttpGet("{id}")]
         public IActionResult GetBrand(int id)

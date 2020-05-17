@@ -5,35 +5,38 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using LendCar.DBContext;
 using LendCar.Models;
 using LendCar.Repository;
+using X.PagedList;
 
 namespace LendCar.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class BrandModelsController : ControllerBase
+    public class BrandModelsController : Controller
     {
-        private readonly IBrandModelRepository bmRepo;
+        private readonly IBrandModelRepository _bmRepo;
 
-        public BrandModelsController(IBrandModelRepository _bmRepo)
+        public BrandModelsController(IBrandModelRepository bmRepo)
         {
-            bmRepo = _bmRepo;
+            _bmRepo = bmRepo;
+        }
+        [ActionName("GetBrandModelsPartial")]
+        [HttpGet("{brandId}")]
+        public IActionResult BrandModelsList([FromRoute]int brandId = 0,int page = 1)
+        {
+            if(brandId != 0)
+                return PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().Where(bm=>bm.BrandId == brandId).GroupBy(bm=>bm.Brand.Name).ToPagedList(page, 10));
+            else
+                return PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().GroupBy(bm=>bm.Brand.Name).ToPagedList(page, 10));
+
         }
 
-        // GET: api/BrandModels
-        [HttpGet]
-        public IActionResult GetBrandModels()
-        {
-            return Ok(bmRepo.GetAllBrandModels().OrderBy(bm=>bm.Name));
-        }
-
-        // GET: api/BrandModels/5
+        [ActionName("GetBrandModel")]
         [HttpGet("{id}")]
         public IActionResult GetBrandModel(int id)
         {
-            var brandModel = bmRepo.GetBrandModel(id);
+            var brandModel = _bmRepo.GetBrandModel(id);
 
             if (brandModel == null)
             {
@@ -43,79 +46,84 @@ namespace LendCar.Controllers
             return Ok(brandModel);
         }
 
-        
-        [HttpGet("byBrand/{id}")]
-        public IActionResult GetModelByBrandId(int id)
+
+        // PUT: api/Brands/edit/id/page
+        [ActionName("Edit")]
+        [HttpPost("{id}/{page}")]
+        public IActionResult Edit([FromRoute]int id, [FromBody] BrandModel brandModel, [FromRoute]int page = 1)
         {
-            var brandModel = bmRepo.GetAllBrandModels().Where(bm => bm.BrandId == id).OrderBy(bm => bm.Name);
-
-            if (brandModel == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(brandModel);
-        }
-
-        // PUT: api/BrandModels/5
-        [HttpPut("{id}")]
-        public IActionResult PutBrandModel(int id, BrandModel brandModel)
-        {
+            IActionResult result;
             if (id != brandModel.Id)
             {
-                return BadRequest();
+                result = BadRequest();
             }
 
-            bmRepo.Context.Entry(brandModel).State = EntityState.Modified;
+            _bmRepo.Context.Entry(brandModel).State = EntityState.Modified;
 
             try
             {
-                bmRepo.Save();
+                _bmRepo.Save();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException err)
             {
-                if (!BrandModelExists(id))
+                if (!BrandExists(id))
                 {
-                    return NotFound();
+                    result = NotFound();
                 }
                 else
                 {
-                    throw;
+                    result = BadRequest(err.ToString());
                 }
             }
 
-            return NoContent();
+            result = PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().ToList().ToPagedList(page, 10));
+
+            return result;
         }
 
-        // POST: api/BrandModels
-        
-        [HttpPost]
-        public IActionResult PostBrandModel(BrandModel brandModel)
-        {
-            bmRepo.Add(brandModel);
-            bmRepo.Save();
 
-            return CreatedAtAction("GetBrandModel", new { id = brandModel.Id }, brandModel);
-        }
-
-        // DELETE: api/BrandModels/5
-        [HttpDelete("{id}")]
-        public IActionResult DeleteBrandModel(int id)
+        [ActionName("Delete")]
+        [HttpPost("{id}/{page}")]
+        public IActionResult Delete([FromRoute]int id, [FromRoute] int page = 1)
         {
-            var brandModel = bmRepo.GetBrandModel(id);
+            var brandModel = _bmRepo.GetBrandModel(id);
             if (brandModel == null)
             {
                 return NotFound();
             }
 
-            bmRepo.Delete(id);
-            bmRepo.Save();
+            _bmRepo.Delete(id);
+            _bmRepo.Save();
+            return PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().ToList().ToPagedList(page, 10));
+        }
+
+        [ActionName("Add")]
+        [HttpPost("{page}")]
+        public IActionResult Add([FromBody]BrandModel brandModel, [FromRoute] int page = 1)
+        {
+            _bmRepo.Add(brandModel);
+            _bmRepo.Save();
+            return PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().ToList().ToPagedList(page, 10));
+        }
+
+        private bool BrandExists(int id)
+        {
+            return _bmRepo.Exists(id);
+        }
+
+        [ActionName("byBrand")]
+        [HttpGet("{id}")]
+        public IActionResult GetModelByBrandId([FromRoute]int id)
+        {
+            var brandModel = _bmRepo.GetAllBrandModels().Where(bm => bm.BrandId == id).OrderBy(bm => bm.Name);
+
+            if (brandModel == null)
+            {
+                return NotFound();
+            }
+
             return Ok(brandModel);
         }
 
-        private bool BrandModelExists(int id)
-        {
-            return bmRepo.Exists(id);
-        }
     }
 }
