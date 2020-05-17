@@ -24,97 +24,16 @@
     <!-- index page of all car -->
     <link href="~/css/HomeStyle.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-
+    <!-- font -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lemon" />
     @RenderSection("Styles", false)
 </head>
 <body>
     <div class="body-inner">
-        <div id="top-bar" class="top-bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
-                        <ul class="top-info">
-                            <li>
-                                <i class="fa fa-map-marker">&nbsp;</i>
-                                <p class="info-text">9051 Damarees, Minia, Egypt</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--/ Top info end -->
-
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 top-social text-right">
-                        <ul class="unstyled">
-                            <li>
-                                <a title="Facebook" href="https://facebbok.com/themefisher.com">
-                                    <span class="social-icon"><i class="fab fa-facebook"></i></span>
-                                </a>
-                                <a title="Twitter" href="https://twitter.com/themefisher.com">
-                                    <span class="social-icon"><i class="fab fa-twitter"></i></span>
-                                </a>
-                                <a title="Instagram" href="https://instagram.com/themefisher.com">
-                                    <span class="social-icon"><i class="fab fa-instagram"></i></span>
-                                </a>
-                                <a title="Linkdin" href="https://github.com/themefisher.com">
-                                    <span class="social-icon"><i class="fab fa-linkedin"></i></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--/ Top social end -->
-                </div>
-                <!--/ Content row end -->
-            </div>
-            <!--/ Container end -->
-        </div>
+        
         <!--/ Topbar end -->
         <!-- Header start -->
         <header id="header" class="header-one">
-            <div class="container">
-                <div class="row">
-                    <div class="logo-area clearfix">
-                        <div class="logo col-xs-12 col-md-3">
-                            <a href="index.html">
-                                <img src="https://bit.ly/3dvHTfB" alt="">
-                            </a>
-                        </div><!-- logo end -->
-
-                        <div class="col-xs-12 col-md-9 header-right">
-                            <ul class="top-info-box">
-                                <li>
-                                    <div class="info-box">
-                                        <div class="info-box-content">
-                                            <p class="info-box-title">Call Us</p>
-                                            <p class="info-box-subtitle">(+2) 012-345-6789</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="info-box">
-                                        <div class="info-box-content">
-                                            <p class="info-box-title">Email Us</p>
-                                            <p class="info-box-subtitle">office@LendCar.com</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="last">
-                                    <div class="info-box last">
-                                        <div class="info-box-content">
-                                            <p class="info-box-title">Global Certificate</p>
-                                            <p class="info-box-subtitle">ISO 9001:2017</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="header-get-a-quote">
-                                    <a class="btn btn-primary" href="/contact">Get A Quote</a>
-                                </li>
-                            </ul><!-- Ul end -->
-                        </div><!-- header right end -->
-
-                    </div><!-- logo area end -->
-
-                </div><!-- Row end -->
-            </div><!-- Container end -->
-
             <nav class="site-navigation navigation navdown">
                 <div class="container">
                     <div class="row">
@@ -129,6 +48,12 @@
 
                                 <div class="collapse navbar-collapse navbar-responsive-collapse">
                                     <ul class="nav navbar-nav">
+                                        <li class="logo col-xs-12 col-md-4">
+                                            <a href="index.html">
+                                                <img src="https://bit.ly/3dvHTfB" style="height:56px"  alt="">
+                                            </a>
+                                        </li><!-- logo end -->
+
                                         <li class="dropdown active"><a href="#">Home</a></li>
                                         <li><a href="/allCar">All Cars</a></li>
                                         <li><a href="/contact">Contact</a></li>
@@ -176,53 +101,6 @@
 
 
         <footer id="footer" class="footer bg-overlay">
-            <div class="footer-main">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-12 footer-widget footer-about">
-                            <h3 class="widget-title">About Us</h3>
-                            <img class="footer-logo" src="images/footer-logo.png" alt="" />
-                            <p>
-                                LendCar is a car sharing marketplace where guests can book any car they want,
-                                wherever they want it, from a vibrant community of local hosts across the Governorates of Egypt.
-                            </p>
-                            <div class="footer-social">
-                                <ul>
-                                    <li><a href="https://facebook.com/themefisher"><i class="fab fa-facebook"></i></a></li>
-                                    <li><a href="https://twitter.com/themefisher"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="https://instagram.com/themefisher"><i class="fab fa-instagram"></i></a></li>
-                                    <li><a href="https://github.com/themefisher"><i class="fab fa-linkedin"></i></a></li>
-                                </ul>
-                            </div><!-- Footer social end -->
-                        </div><!-- Col end -->
-
-                        <div class="col-md-4 col-sm-12 footer-widget">
-                            <h3 class="widget-title">Working Hours</h3>
-                            <div class="working-hours">
-                                We work 7 days a week, every day excluding major holidays. Contact us if you have an emergency, with our
-                                Hotline and Contact form.
-                                <br><br> Monday - Friday: <span class="text-right">10:00 - 16:00 </span>
-                                <br> Saturday: <span class="text-right">12:00 - 15:00</span>
-                                <br> Sunday and holidays: <span class="text-right">09:00 - 12:00</span>
-                            </div>
-                        </div><!-- Col end -->
-
-                        <div class="col-md-4 col-sm-12 footer-widget">
-                            <h3 class="widget-title">LendCar</h3>
-                            <ul class="list-arrow">
-                                <li><a href="service-single.html">About</a></li>
-                                <li><a href="service-single.html">Team</a></li>
-                                <li><a href="service-single.html">Policies</a></li>
-                                <li><a href="service-single.html">Book a car</a></li>
-                                <li><a href="service-single.html">Contact</a></li>
-                            </ul>
-                        </div><!-- Col end -->
-
-
-                    </div><!-- Row end -->
-                </div><!-- Container end -->
-            </div><!-- Footer main end -->
-
             <div class="copyright">
                 <div class="container">
                     <div class="row">
@@ -233,15 +111,25 @@
                         </div>
 
                         <div class="col-xs-12 col-sm-6">
-                            <div class="footer-menu">
-                                <ul class="nav unstyled">
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="team.html">Our people</a></li>
-                                    <li><a href="faq.html">Faq</a></li>
-                                    <li><a href="news-left-sidebar.html">Blog</a></li>
-                                    <li><a href="pricing.html">Pricing</a></li>
+                            <div class="top-social text-right">
+                                <ul class="unstyled">
+                                    <li>
+                                        <a title="Facebook" href="https://facebbok.com/themefisher.com">
+                                            <span class="social-icon"><i class="fab fa-facebook"></i></span>
+                                        </a>
+                                        <a title="Twitter" href="https://twitter.com/themefisher.com">
+                                            <span class="social-icon"><i class="fab fa-twitter"></i></span>
+                                        </a>
+                                        <a title="Instagram" href="https://instagram.com/themefisher.com">
+                                            <span class="social-icon"><i class="fab fa-instagram"></i></span>
+                                        </a>
+                                        <a title="Linkdin" href="https://github.com/themefisher.com">
+                                            <span class="social-icon"><i class="fab fa-linkedin"></i></span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
+
                         </div>
                     </div><!-- Row end -->
 

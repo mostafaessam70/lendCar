@@ -62,6 +62,10 @@ namespace LendCar
             }
             );
 
+            //services.AddCors(c =>
+            //{
+            //    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            //});
 
             services.AddControllers();
             services.AddRazorPages(c=>c.Conventions.AddPageRoute("/Home",""));
@@ -80,8 +84,16 @@ namespace LendCar
                 app.UseStatusCodePagesWithReExecute("/Error/{0}");
                 app.UseHsts();
             }
+
             StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
+
+
+            app.UseHttpMethodOverride();
+
+
             app.UseHttpsRedirection();
+
+            
             app.UseStaticFiles();
 
             app.UseCookiePolicy();
@@ -92,8 +104,6 @@ namespace LendCar
             app.UseAuthorization();
 
 
-
-            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
