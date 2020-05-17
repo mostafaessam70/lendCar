@@ -21,5 +21,6 @@ namespace LendCar.Repository
         Dictionary<string, string> AvailableDays(string startDate, string endDate, int carId);
         List<VehicleBooking> GetAllBookingByUserID(string userId);
         List<Vehicle> GetAllUserCar(string userID);
+        void VehicleBook(VehicleBooking vehicleBooking);
     }
 }
