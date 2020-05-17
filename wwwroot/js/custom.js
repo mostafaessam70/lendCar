@@ -17,6 +17,7 @@
 */
 
 
+/*about raruoser */
 
 
 jQuery(function ($) {
@@ -27,7 +28,7 @@ jQuery(function ($) {
     setTimeout(function () {
         $('body').addClass('loaded');
        
-    }, 1500);
+    }, 2000);
 	/* ----------------------------------------------------------- */
 	/*  Fixed header
 	/* ----------------------------------------------------------- */
@@ -381,3 +382,32 @@ $(function () {
 	$('a[title]').tooltip();
 });
 
+//wow 
+new WOW().init();
+
+$("#our-team").owlCarousel({
+
+    loop: false,
+    animateOut: 'fadeOut',
+    nav: true,
+    navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+    margin: 20,
+    dots: false,
+    mouseDrag: true,
+    touchDrag: true,
+    slideSpeed: 1000,
+    items: 4,
+    responsive: {
+        0: {
+            items: 1
+        },
+        480: {
+            items: 2
+        },
+        1000: {
+            items: 4,
+            loop: false
+        }
+    }
+
+});
