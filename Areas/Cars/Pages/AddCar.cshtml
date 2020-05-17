@@ -180,8 +180,9 @@
                                  }
                                  $("#ddlModels").html(markup).show();
                              },
-                             error: function (reponse) {
-                                 alert("error : " + reponse);
+                             error: function (statusCode, ajaxOptions, thrownError) {
+                                 console.log(statusCode);
+                                 console.log(thrownError);
                              }
                          });
                      }

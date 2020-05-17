@@ -13,8 +13,8 @@
                         @*list of tabs*@
                         <ul class="nav nav-tabs" id="myTab">
                             <div class="liner"></div>
-                            <li id="vehiclesTabLi">
-                                <a href="#home" data-toggle="tab" title="Pending Vehicles">
+                            <li class="active" id="vehiclesTabLi">
+                                <a href="#vehiclesTabDiv" data-toggle="tab" title="Pending Vehicles">
                                     <span class="round-tabs one">
                                         <i class="glyphicon glyphicon-exclamation-sign"></i>
                                     </span>
@@ -22,14 +22,14 @@
                             </li>
 
                             <li id="brandsTabLi">
-                                <a href="#BrandsList" data-toggle="tab" title="Brands">
+                                <a href="#brandsTabDiv" data-toggle="tab" title="Brands">
                                     <span class="round-tabs two">
                                         <i class="glyphicon glyphicon-copyright-mark"></i>
                                     </span>
                                 </a>
                             </li>
-                            <li id="modelsTabLi">
-                                <a href="#messages" data-toggle="tab" title="bootsnipp goodies">
+                            <li id="brandModelsTabLi">
+                                <a href="#brandModelsTabDiv" data-toggle="tab" title="Models">
                                     <span class="round-tabs three">
                                         <i class="glyphicon glyphicon-gift"></i>
                                     </span>
@@ -37,7 +37,7 @@
                             </li>
 
                             <li id="colorsTabLi">
-                                <a href="#settings" data-toggle="tab" title="blah blah">
+                                <a href="#colorsTabDiv" data-toggle="tab" title="Colors">
                                     <span class="round-tabs four">
                                         <i class="glyphicon glyphicon-comment"></i>
                                     </span>
@@ -45,7 +45,7 @@
                             </li>
 
                             <li id="vehicleTypesTabLi">
-                                <a href="#doner" data-toggle="tab" title="completed">
+                                <a href="#vehicleTypesTabDiv" data-toggle="tab" title="Vehicle types">
                                     <span class="round-tabs five">
                                         <i class="glyphicon glyphicon-ok"></i>
                                     </span>
@@ -58,14 +58,15 @@
                     @*Tab 1*@
                     <div class="container">
                         <div class="tab-content">
-                            <div class="tab-pane fade " id="vehiclesTabDiv">
+                            <div class="tab-pane fade in active tabDiv" id="vehiclesTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
-                                        <label for="showEntries">Show Entries : </label>
-                                        <select id="showEntries" class="form-control">
-                                            <option value="1">10</option>
-                                            <option value="2">15</option>
-                                            <option value="3">20</option>
+                                        <label>Show Entries : </label>
+                                        <select class="form-control" onchange="changeEntries(this.value)">
+                                            <option value="0">select size..</option>
+                                            <option value="5">5</option>
+                                            <option value="15">15</option>
+                                            <option value="50">50</option>
                                         </select>
                                     </div>
                                     <div class="col-md-7">
@@ -80,7 +81,7 @@
                                 <section id="main-container" class="main-container">
                                     <div class="container">
                                         <div class="row">
-                                            <img src="~/loader6.gif" style="display:none" id="loader" class="preload" />
+                                            @*<img src="~/loader6.gif" style="display:none" id="loader" class="preload" />*@
                                             <div id="vechileList">
                                                 <partial name="_AdminCarList" model="@Model.Vehicles" />
                                             </div>
@@ -101,14 +102,15 @@
                             </div>
 
                             @*Tap 2*@
-                            <div class="tab-pane fade"  id="brandsTabDiv">
+                            <div class="tab-pane fade tabDiv"  id="brandsTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
-                                        <label for="showEntries">Show Entries : </label>
-                                        <select id="showEntries" class="form-control">
-                                            <option value="1">10</option>
-                                            <option value="2">15</option>
-                                            <option value="3">20</option>
+                                        <label>Show Entries : </label>
+                                        <select class="form-control" onchange="changeEntries(this.value)">
+                                            <option value="0">select size ..</option>
+                                            <option value="5">5</option>
+                                            <option value="15">15</option>
+                                            <option value="50">50</option>
                                         </select>
                                     </div>
                                     <div class="col-md-7">
@@ -210,65 +212,59 @@
                             </div>
 
                             @*Tab 3*@
-                            <div class="tab-pane fade" id="modelsTabDiv">
+                            <div class="tab-pane fade tabDiv" id="brandModelsTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
-                                        <label for="showEntries">Show Entries : </label>
-                                        <select id="showEntries" class="form-control">
-                                            <option value="1">10</option>
-                                            <option value="2">15</option>
-                                            <option value="3">20</option>
+                                        <label>Show Entries : </label>
+                                        <select class="form-control" onchange="changeEntries(this.value)">
+                                            <option value="0">select size ..</option>
+                                            <option value="5">5</option>
+                                            <option value="15">15</option>
+                                            <option value="50">50</option>
                                         </select>
                                     </div>
                                     <div class="col-md-7">
-                                        <h3 class="head text-center">Color</h3>
+                                        <h3 class="head text-center">Models</h3>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label for="">Search : </label>
-                                        <input type="text" class="form-control">
+                                        <label>Select brand to filter by : </label>
+                                        <select onchange="RenderBrandModels(this)" asp-items="@Model.BrandsSelectList">
+                                            <option value="0">All brands</option>
+                                        </select>
                                     </div>
                                 </div>
 
                                 <div class="container">
                                     <div class="row col-md-8 col-md-offset-2 custyle">
-                                        <table class="table table-striped custab">
-                                            <thead>
-                                                <a href="#" class="btn btn-primary btn-xs pull-left"><b>+</b> Add new Color</a>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Color</th>
-                                                    <th class="text-center">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>News</td>
-                                                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Products</td>
-                                                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Blogs</td>
-                                                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                                            </tr>
-                                        </table>
+                                        <button id="ShowBrandModelModal" class="btn btn-primary btn-xs pull-left" onclick="ShowCreateBrandModelModal()"><b>+</b> Add New Model</button>
+                                        <div id="BrandModelsSection">
+                                            <partial name="_BrandModelsList" model="Model.BrandModels" />
+                                        </div>
+                                        <div class="text-center">
+
+                                            @Html.PagedListPager((IPagedList)Model.BrandModels, brandModelPage => "/Admin/Admin?brandModelPage=" + brandModelPage,
+                                                new X.PagedList.Mvc.Common.PagedListRenderOptions
+                                                {
+                                                    DisplayItemSliceAndTotal = true,
+                                                    ContainerDivClasses = new[] { "navigation" },
+                                                    LiElementClasses = new[] { "page-item", "admin-list" },
+                                                    PageClasses = new[] { "page-link" },
+                                                })
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             @*Tab 4*@
-                            <div class="tab-pane fade" id="colorsTabDiv">
+                            <div class="tab-pane fade tabDiv" id="colorsTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
-                                        <label for="showEntries">Show Entries : </label>
-                                        <select id="showEntries" class="form-control">
-                                            <option value="1">10</option>
-                                            <option value="2">15</option>
-                                            <option value="3">20</option>
+                                        <label>Show Entries : </label>
+                                        <select class="form-control" onchange="changeEntries(this.value)">
+                                            <option value="0">select size ..</option>
+                                            <option value="5">5</option>
+                                            <option value="15">15</option>
+                                            <option value="50">50</option>
                                         </select>
                                     </div>
                                     <div class="col-md-7">
@@ -312,15 +308,15 @@
                             </div>
 
                             @*Tab 5*@
-                            <div class="tab-pane fade" id="vehicleTypesTabDiv">
+                            <div class="tab-pane fade tabDiv" id="vehicleTypesTabDiv">
                                 <div class="text-center">
                                     <div class="row">
                                         <div class="form-group col-md-2">
-                                            <label for="showEntries">Show Entries : </label>
-                                            <select id="showEntries" class="form-control">
-                                                <option value="1">10</option>
-                                                <option value="2">15</option>
-                                                <option value="3">20</option>
+                                            <label>Show Entries : </label>
+                                            <select class="form-control" onchange="changeEntries(this.value)">
+                                                <option value="5">5</option>
+                                                <option value="15">15</option>
+                                                <option value="50">50</option>
                                             </select>
                                         </div>
                                         <div class="col-md-7">
@@ -372,24 +368,37 @@
     </section>
 
 
-
-
-
 @section Scripts{
     <script>
+
         var currentUrl = window.location.href;
-        if (currentUrl.includes("Page")) {
-            if (currentUrl.includes("vehiclePage")) {
-                $("#vehiclesTabLi").addClass(" active");
-                $("#vehiclesTabDiv").addClass(" in active");
-            } else if (currentUrl.includes("brandPage")) {
-                $("#brandsTabLi").addClass(" active");
-                $("#brandsTabDiv").addClass(" in active");
-            }
-        }
-        else {
+        if (currentUrl.includes("vehiclePage")) {
+            resetTabs();
             $("#vehiclesTabLi").addClass(" active");
             $("#vehiclesTabDiv").addClass(" in active");
+        }
+        else if (currentUrl.includes("brandPage")) {
+            resetTabs();
+            $("#brandsTabLi").addClass(" active");
+            $("#brandsTabDiv").addClass(" in active");
+        }
+        else if (currentUrl.includes("brandModelPage")) {
+            resetTabs();
+            $("#brandModelsTabLi").addClass(" active");
+            $("#brandModelsTabDiv").addClass(" in active");
+        }
+
+        function resetTabs() {
+            $("#myTab>li.active").removeClass("active");
+            $(".tabDiv").removeClass("in active");
+        }
+
+        function changeEntries(entries) {
+            
+            if (parseInt(entries) > 0 && parseInt(entries) != @Model.PageSize) {
+                var url = '@Url.Content("~/admin/admin?entries=")' + entries;
+                window.location.href = url;
+            }
         }
 
         $(document).on('click', '.accept', function () {
@@ -469,7 +478,7 @@
                         })
                     }
                 }
-             
+
         function ShowEditBrandModal(element) {
             var editedBrandName = element.getAttribute("data-edited-brand-name");
             var editedBrandId = element.getAttribute("data-edited-brand-id");
@@ -477,19 +486,19 @@
             $("#EditedBrandName").val(editedBrandName);
             $("#EditedBrandId").val(editedBrandId);
         }
-       
+
         function HideEditBrandModal() {
             $("#EditBrandModal").modal('hide')
         }
-       
+
         function ShowCreateBrandModal() {
             $("#Brand_Create").modal('show');
         }
-        
+
         function HideCreateBrandModal() {
             $("#Brand_Create").modal('hide');
         }
-        
+
         $(document).ready(function () {
 
             $("#AddBrandForm").on("blur", "input", () => {
@@ -574,5 +583,28 @@
             $('/*ul*/.pagination > li.disabled > a').addClass('page-link');
 
         });
+
+        function RenderBrandModels(element)
+        {
+            var selectedBrandId = parseInt(element.value);
+            var url = '@Url.Content("~/api/BrandModels/GetBrandModelsPartial/")' + selectedBrandId;
+
+            $.ajax({
+                url: url,
+                method: 'Get',
+                cache: false,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                success: function (data) {
+                    $("#BrandModelsSection").html(data);
+                },
+                error: function (xhr, ajaxSettings, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                }
+            });
+        }
+
     </script>
 }
