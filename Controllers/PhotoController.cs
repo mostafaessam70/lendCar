@@ -24,7 +24,7 @@ namespace LendCar.Controllers
         [Route("Upload")]
         public IActionResult Upload(string userId, IFormFile photo)
         {
-            //if (HttpContext.Request.Headers["x-requested-with"] == "XMLHttpRequest")
+            if (HttpContext.Request.Headers["x-requested-with"] == "XMLHttpRequest")
             {
                 string photoName = Guid.NewGuid().ToString() + DateTime.Now.ToString("dd-MM-yyyy") + Path.GetExtension(photo.FileName);
                 string physicalPath = Path.Combine(HostEnvironment.WebRootPath, "CarPhotosUploaded", photoName);
@@ -36,7 +36,7 @@ namespace LendCar.Controllers
                 UserRepostiory.EditPhotoPath(userId,relativePath );
                 UserRepostiory.Save();
                 var image = System.IO.File.OpenRead(physicalPath);
-                return File(image, $"image/{Path.GetExtension(photoName)}");
+                return Json(true);
             }
             return NotFound();
         }

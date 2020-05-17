@@ -9,11 +9,12 @@ using LendCar.Models;
 using LendCar.Repository;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using X.PagedList;
+using Microsoft.AspNetCore.Cors;
 
 namespace LendCar.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    [Route("api/[controller]/[action]")]
+
     public class BrandsController : Controller
     {
         private readonly IBrandRepository _brandRepo;
@@ -23,13 +24,10 @@ namespace LendCar.Controllers
             _brandRepo = brandRepo;
         }
 
-        // GET: api/Brands
         [HttpGet]
-        public PartialViewResult VehiclesList(int page = 1) { 
-           return PartialView("_BrandsList", _brandRepo.GetAllBrands().ToList().ToPagedList(page, 10));}
-
-
-        // GET: api/Brands/5
+        public IActionResult BrandsList(int page = 1) {
+            return PartialView("_BrandsList", _brandRepo.GetAllBrands().ToList().ToPagedList(page, 10)); }
+        [ActionName("GetBrand")]
         [HttpGet("{id}")]
         public IActionResult GetBrand(int id)
         {
@@ -44,13 +42,15 @@ namespace LendCar.Controllers
         }
 
 
-        // PUT: api/Brands/5
-        [HttpPut("{id}")]
-        public IActionResult PutBrand(int id, Brand brand)
+        // PUT: api/Brands/edit/id/page
+        [ActionName("Edit")]
+        [HttpPost("{id}/{page}")]
+        public IActionResult Edit([FromRoute]int id,[FromBody] Brand brand,[FromRoute]int page = 1)
         {
+            IActionResult result;
             if (id != brand.Id)
             {
-                return BadRequest();
+                result = BadRequest();
             }
 
             _brandRepo.Context.Entry(brand).State = EntityState.Modified;
@@ -59,33 +59,27 @@ namespace LendCar.Controllers
             {
                 _brandRepo.Save();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException err)
             {
                 if (!BrandExists(id))
                 {
-                    return NotFound();
+                    result =  NotFound();
                 }
                 else
                 {
-                    throw;
+                    result = BadRequest(err.ToString());
                 }
             }
 
-            return NoContent();
+            result =  PartialView("_BrandsList", _brandRepo.GetAllBrands().ToList().ToPagedList(page, 10));
+            
+            return result;
         }
 
-        // POST: api/Brands
-        [HttpPost]
-        public IActionResult PostBrand(Brand brand,int page = 1)
-        {
-            _brandRepo.Add(brand);
-            _brandRepo.Save();
-            return PartialView("_BrandsList", _brandRepo.GetAllBrands().ToList().ToPagedList(page, 10));
-        }
 
-    // DELETE: api/Brands/5
-    [HttpPost]
-        public IActionResult DeleteBrand(int id)
+        [ActionName("Delete")]
+        [HttpPost("{id}/{page}")]
+        public IActionResult Delete([FromRoute]int id,[FromRoute] int page = 1)
         {
             var brand = _brandRepo.GetBrand(id);
             if (brand == null)
@@ -95,7 +89,16 @@ namespace LendCar.Controllers
 
             _brandRepo.Delete(id);
             _brandRepo.Save();
-            return Ok(brand);
+            return PartialView("_BrandsList", _brandRepo.GetAllBrands().ToList().ToPagedList(page, 10));
+        }
+
+        [ActionName("Add")]
+        [HttpPost("{page}")]
+        public IActionResult Add([FromBody]Brand brand,[FromRoute] int page = 1)
+        {
+            _brandRepo.Add(brand);
+            _brandRepo.Save();
+            return PartialView("_BrandsList", _brandRepo.GetAllBrands().ToList().ToPagedList(page, 10));
         }
 
         private bool BrandExists(int id)

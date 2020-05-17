@@ -33,7 +33,6 @@ namespace LendCar.Pages
             {
                  Email.SendEmail("ahmedmoneim094@gmail.com", 
                     ContactViewModel.MailSubjct, ContactViewModel.UserEmail+"\n\n"+ContactViewModel. Message);
-              
             }
         }
     }

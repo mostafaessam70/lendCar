@@ -16,6 +16,11 @@ namespace LendCar.Repository
         void Add(Vehicle vehicle);
         void Delete(int id);
         void Save();
-        bool IsCarAvailable(string startDate, string endDate, int carId);
+        string ChangeDateFormatToYearsMonthDays(string date);
+        string ChangeDateFormatToDaysMonthYears(string date);
+        Dictionary<string, string> AvailableDays(string startDate, string endDate, int carId);
+        List<VehicleBooking> GetAllBookingByUserID(string userId);
+        List<Vehicle> GetAllUserCar(string userID);
+        void VehicleBook(VehicleBooking vehicleBooking);
     }
 }

@@ -48,7 +48,7 @@ namespace LendCar.Pages
         public string EndBookingDate { get; set; }
         [BindProperty]
         public string StartBookingDate { get; set; }
-
+        public double totalPrice { get; private set; }
         public Vehicle Vehicle { get; set; }
         public int CarId { get; set; }
         public bookingModel(SignInManager<ApplicationUser> signInManager,
@@ -63,16 +63,31 @@ namespace LendCar.Pages
             Contact = IContactRepsotiory.GetCompanyContact();
 
         }
-        public async Task OnGetAsync(int carId, string EndBookingDate, string StartBookingDate)
+        public async Task OnGetAsync(int carId, string endBookingDate, string startBookingDate)
         {
 
             CarId = carId;
             await SignInManager.PasswordSignInAsync("Moneim2", "Sara@ask123.com", false, false);
 
-
             LoggedUserInfo = UserRerpository.FindById(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             this.Vehicle = CarRepsitory.GetVehicle(CarId);
+
+            string changeDateFormat(string date)
+            {
+                var dateArr = date.Split('-');
+                return $"{dateArr[2]}-{dateArr[1]}-{dateArr[0]}";
+            }
+
+            EndBookingDate = changeDateFormat(endBookingDate);
+            StartBookingDate = changeDateFormat(startBookingDate);
+
+
+            totalPrice = (((Convert.ToDateTime(EndBookingDate).Date -
+                Convert.ToDateTime(StartBookingDate).Date)
+                .TotalDays + 1) * Vehicle.PricePerDay);
+
+
 
             string[] dateTime = LoggedUserInfo?.BirthDate?.Split('/');
             if (dateTime?.Length == 3)

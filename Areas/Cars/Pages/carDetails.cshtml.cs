@@ -22,39 +22,67 @@ namespace LendCar.Pages
         public string EndBookingDate { get; set; }
         [BindProperty]
         public string StartBookingDate { get; set; }
-        public carDetailsModel(ICarRepository _CarRepository,IUserRepository _UserRepository)
-        {   
+        public bool DateIsNotCorrect { get; private set; }
+
+        public Dictionary<string, string> avilabeldays;
+        public carDetailsModel(ICarRepository _CarRepository, IUserRepository _UserRepository)
+        {
             CarRepository = _CarRepository;
             UserRepository = _UserRepository;
         }
-        public  IActionResult OnGet(int id)
+        public IActionResult OnGet(int id)
         {
             CurrentCar = CarRepository.GetVehicle(id);
-            StartBookingDate = Convert.ToDateTime(CurrentCar.StartDate).ToString("yyyy-MM-dd");
-            EndBookingDate = Convert.ToDateTime(CurrentCar.EndDate).ToString("yyyy-MM-dd");
+
+            StartBookingDate = CarRepository.ChangeDateFormatToYearsMonthDays(CurrentCar.StartDate);
+            EndBookingDate = CarRepository.ChangeDateFormatToYearsMonthDays(CurrentCar.EndDate);
+
             CurrentCarImges = CurrentCar?.Photos.ToList();
             Owner = UserRepository.FindById(CurrentCar?.OwnerId);
-            return  Page();
+
+            if (TempData["avilabeldays"] != null)
+            {
+                avilabeldays =(Dictionary<string,string>)TempData["avilabeldays"];
+            }
+            if (TempData["DateIsNotCorrect"] != null)
+            {
+                DateIsNotCorrect = true;
+            }
+            return Page();
         }
-        public IActionResult OnPost(string endBookingDate,string startBookingDate,int carId)
+        public IActionResult OnPost(string endBookingDate, string startBookingDate, int carId)
         {
             if (ModelState.IsValid)
             {
-                //if (CarRepository.IsCarAvailable(startBookingDate, endBookingDate, carId))
-                {
-                    return RedirectToPage("booking",
-                        new
-                        {
-                            area = "Cars",
-                            EndBookingDate = endBookingDate,
-                            StartBookingDate = startBookingDate,
-                            CarId = carId
-                        });
-                }
-                //ViewData["errorMessage"] = "this Vehicle Avilabel only From {} to {}";
-            }
+                var availableDays = CarRepository.AvailableDays(
+                    CarRepository.ChangeDateFormatToDaysMonthYears(startBookingDate),
+                    CarRepository.ChangeDateFormatToDaysMonthYears(endBookingDate), carId);
 
-           return OnGet(carId);
+                if (availableDays != null)
+                {
+                    if (!availableDays.Any(c => c.Value == "Not Available"))
+                    {
+                        return RedirectToPage("booking",
+                            new
+                            {
+                                area = "Cars",
+                                EndBookingDate = endBookingDate,
+                                StartBookingDate = startBookingDate,
+                                CarId = carId
+                            });
+                    }
+                    else
+                    {
+
+                        TempData["avilabeldays"] = availableDays;
+                        return OnGet(carId);
+                    }
+
+                }
+                TempData["DateIsNotCorrect"] = true;
+            }
+            TempData["DateIsNotCorrect"] = true;
+            return OnGet(carId);
         }
     }
 }

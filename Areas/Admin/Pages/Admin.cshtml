@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Admin";
 }
-    <section style="background:#efefe9;">
+    <section class="no-padding">
         <div class="container-fluid">
             <div class="row">
                 <div class="board">
@@ -13,7 +13,7 @@
                         @*list of tabs*@
                         <ul class="nav nav-tabs" id="myTab">
                             <div class="liner"></div>
-                            <li >
+                            <li id="vehiclesTabLi">
                                 <a href="#home" data-toggle="tab" title="Pending Vehicles">
                                     <span class="round-tabs one">
                                         <i class="glyphicon glyphicon-exclamation-sign"></i>
@@ -21,14 +21,14 @@
                                 </a>
                             </li>
 
-                            <li class="active">
+                            <li id="brandsTabLi">
                                 <a href="#BrandsList" data-toggle="tab" title="Brands">
                                     <span class="round-tabs two">
                                         <i class="glyphicon glyphicon-copyright-mark"></i>
                                     </span>
                                 </a>
                             </li>
-                            <li>
+                            <li id="modelsTabLi">
                                 <a href="#messages" data-toggle="tab" title="bootsnipp goodies">
                                     <span class="round-tabs three">
                                         <i class="glyphicon glyphicon-gift"></i>
@@ -36,7 +36,7 @@
                                 </a>
                             </li>
 
-                            <li>
+                            <li id="colorsTabLi">
                                 <a href="#settings" data-toggle="tab" title="blah blah">
                                     <span class="round-tabs four">
                                         <i class="glyphicon glyphicon-comment"></i>
@@ -44,7 +44,7 @@
                                 </a>
                             </li>
 
-                            <li>
+                            <li id="vehicleTypesTabLi">
                                 <a href="#doner" data-toggle="tab" title="completed">
                                     <span class="round-tabs five">
                                         <i class="glyphicon glyphicon-ok"></i>
@@ -58,7 +58,7 @@
                     @*Tab 1*@
                     <div class="container">
                         <div class="tab-content">
-                            <div class="tab-pane fade " id="home">
+                            <div class="tab-pane fade " id="vehiclesTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label for="showEntries">Show Entries : </label>
@@ -101,7 +101,7 @@
                             </div>
 
                             @*Tap 2*@
-                            <div class="tab-pane fade in active"  id="BrandsList">
+                            <div class="tab-pane fade"  id="brandsTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label for="showEntries">Show Entries : </label>
@@ -122,7 +122,7 @@
 
                                 <div class="container">
                                     <div class="row col-md-8 col-md-offset-2 custyle">
-                                        <button id="ShowBrandModal" class="btn btn-primary btn-xs pull-left" ><b>+</b> Add new Brand</button>
+                                        <button id="ShowBrandModal" class="btn btn-primary btn-xs pull-left" onclick="ShowCreateBrandModal()"><b>+</b> Add new Brand</button>
                                         <div id="BrandsSection">
                                         <partial name="_BrandsList" model="Model.Brands" />
                                         </div>
@@ -138,26 +138,27 @@
                                                 })
                                         </div>
                                         <!--model of edit-->
-                                        <div class="modal fade product_view" id="product_view">
+                                        <div class="modal fade product_view" id="EditBrandModal">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove" style="color:red"></span></a>
+                                                        <a class="class pull-right btn-xs" id="HideEditBrand" onclick="HideEditBrandModal()"><span class="glyphicon glyphicon-remove" style="color:red"></span></a>
                                                         <h3 class="modal-title">Edit</h3>
                                                     </div>
                                                     <div class="modal-body">
                                                         <section class="edit-admin">
                                                             <div class="container">
-                                                                <form action="">
+                                                                <form id="EditBrandForm">
+                                                                    <input id="EditedBrandId" name="Id" hidden />
                                                                     <div class="row">
                                                                         <div class="col-md-4  col-md-offset-1 edit-color">
                                                                             <div class="form-group">
                                                                                 <label>Brand</label>
-                                                                                <input class="form-control" type="text" name="Brand" id="EditBrand" placeholder="Enter Car Brand" required>
+                                                                                <input class="form-control" type="text" name="Name" id="EditedBrandName" placeholder="Enter Car Brand" required>
                                                                             </div>
                                                                             <div class="row">
                                                                                 <div class="col-md-12 text-center">
-                                                                                    <button class="btn btn-primary save">Save <i class="far fa-save"></i></button><br><br>
+                                                                                    <button id="EditBrandBtn" class="btn btn-primary save" disabled>Save <i class="far fa-save"></i></button><br><br>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -175,7 +176,7 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <button id="HideBrandModal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></button>
+                                                        <a id="HideBrandModal" class="class pull-right btn-xs" onclick="HideCreateBrandModal()"><span class="glyphicon glyphicon-remove" style="color:red"></span></a>
                                                         <h3 class="modal-title">Create</h3>
                                                     </div>
                                                     <div class="modal-body">
@@ -209,7 +210,7 @@
                             </div>
 
                             @*Tab 3*@
-                            <div class="tab-pane fade" id="messages">
+                            <div class="tab-pane fade" id="modelsTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label for="showEntries">Show Entries : </label>
@@ -260,7 +261,7 @@
                             </div>
 
                             @*Tab 4*@
-                            <div class="tab-pane fade" id="settings">
+                            <div class="tab-pane fade" id="colorsTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label for="showEntries">Show Entries : </label>
@@ -311,7 +312,7 @@
                             </div>
 
                             @*Tab 5*@
-                            <div class="tab-pane fade" id="doner">
+                            <div class="tab-pane fade" id="vehicleTypesTabDiv">
                                 <div class="text-center">
                                     <div class="row">
                                         <div class="form-group col-md-2">
@@ -376,8 +377,22 @@
 
 @section Scripts{
     <script>
+        var currentUrl = window.location.href;
+        if (currentUrl.includes("Page")) {
+            if (currentUrl.includes("vehiclePage")) {
+                $("#vehiclesTabLi").addClass(" active");
+                $("#vehiclesTabDiv").addClass(" in active");
+            } else if (currentUrl.includes("brandPage")) {
+                $("#brandsTabLi").addClass(" active");
+                $("#brandsTabDiv").addClass(" in active");
+            }
+        }
+        else {
+            $("#vehiclesTabLi").addClass(" active");
+            $("#vehiclesTabDiv").addClass(" in active");
+        }
 
-        $(document).on('click','.accept',function () {
+        $(document).on('click', '.accept', function () {
 
             let vechicleId = $(this).attr('data-id');
 
@@ -427,33 +442,77 @@
 
             })
 
+        function DeleteBrand(element) {
+            var deletedBrandName = element.getAttribute("data-deleted-brand-name");
+                    var choice = confirm('Are you sure you want to delete ' + deletedBrandName);
+                    if (choice) {
+                        var brandId = parseInt(element.getAttribute("data-deleted-brand-id"));
+                        var url = '@Url.Content($"~/api/Brands/Delete/")';
+                        debugger;
+                        $.ajax({
+                            url: url + brandId + "/@Model.CurrentBrandsPage",
+                            cache: false,
+                            method: 'Post',
+                            beforeSend: function () {
+                                $('#loader').show();
+                            },
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            success: function (data) {
+                                $("#BrandsSection").html(data);
+                            },
+                            error: function (xhr, ajaxSettings, thrownError) {
+                                console.log(xhr.status);
+                                console.log(thrownError);
+                            }
+                        })
+                    }
+                }
+             
+        function ShowEditBrandModal(element) {
+            var editedBrandName = element.getAttribute("data-edited-brand-name");
+            var editedBrandId = element.getAttribute("data-edited-brand-id");
+            $("#EditBrandModal").modal('show');
+            $("#EditedBrandName").val(editedBrandName);
+            $("#EditedBrandId").val(editedBrandId);
+        }
+       
+        function HideEditBrandModal() {
+            $("#EditBrandModal").modal('hide')
+        }
+       
+        function ShowCreateBrandModal() {
+            $("#Brand_Create").modal('show');
+        }
+        
+        function HideCreateBrandModal() {
+            $("#Brand_Create").modal('hide');
+        }
+        
         $(document).ready(function () {
-
-            $("#ShowBrandModal").click(function () {
-                $("#Brand_Create").modal('show');
-                }
-            );
-
-            $("#HideBrandModal").click(function () { 
-                $("#Brand_Create").modal('hide');
-                }
-            );
 
             $("#AddBrandForm").on("blur", "input", () => {
                 if ($("#AddBrandForm").valid()) {
                     $("#AddBrandBtn").removeAttr("disabled");
                 } else {
-                    ("#AddBrandBtn").attr("disabled", "disabled");
+                    $("#AddBrandBtn").attr("disabled", "disabled");
                 }
             });
 
-            $('/*ul*/.pagination > li.disabled > a').addClass('page-link');
+            $("#EditBrandForm").on("blur", "input", () => {
+                if ($("#EditBrandForm").valid()) {
+                    $("#EditBrandBtn").removeAttr("disabled");
+                } else {
+                    $("#EditBrandBtn").attr("disabled", "disabled");
+                }
+            });
 
             $("#AddBrandForm").submit(
                 function () {
                     event.preventDefault();
-                    var url = '@Url.Content("~/api/Brands")';
-                    var data = { "Name": $("#BrandName").val() , "page":@Model.CurrentBrandsPage };
+                    var url = '@Url.Content("~/api/Brands/Add/")' + @Model.CurrentBrandsPage;
+                    var data = { "Name": $("#BrandName").val()};
                     debugger;
 
                     $.ajax({
@@ -479,6 +538,41 @@
                     })
                 }
             );
+
+            $("#EditBrandForm").submit(
+                function () {
+                    event.preventDefault();
+                    var EditedBrandId = parseInt($("#EditedBrandId").val());
+                    var EditedBrandName = $("#EditedBrandName").val();
+                    var url = '@Url.Content("~/api/Brands/Edit/")' + EditedBrandId + "/" + @Model.CurrentBrandsPage;
+                    var data = { Id: EditedBrandId, Name: EditedBrandName }
+                    debugger;
+                    $.ajax({
+                        url: url,
+                        data: JSON.stringify(data),
+                        cache: false,
+                        method: 'POST',
+                        beforeSend: function () {
+                            $("#EditBrandModal").modal('hide');
+                            $('#loader').show();
+                        },
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Content-Length": data.length},
+                        success: function (data) {
+                            $("#loader").hide();
+                            $("#BrandsSection").html(data);
+                        },
+                        error: function (xhr, ajaxSettings, thrownError) {
+                            console.log(xhr.status);
+                            console.log(thrownError);
+                        }
+                    })
+                }
+            );
+
+            $('/*ul*/.pagination > li.disabled > a').addClass('page-link');
+
         });
     </script>
 }
