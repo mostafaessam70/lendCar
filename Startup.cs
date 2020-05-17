@@ -18,6 +18,7 @@ using System.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Stripe;
 
 namespace LendCar
 {
@@ -68,6 +69,7 @@ namespace LendCar
 
             services.AddControllers();
             services.AddRazorPages(c=>c.Conventions.AddPageRoute("/Home",""));
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,9 +85,11 @@ namespace LendCar
                 app.UseHsts();
             }
 
-            //app.UseCors(options => options.AllowAnyOrigin());
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
+
 
             app.UseHttpMethodOverride();
+
 
             app.UseHttpsRedirection();
 

@@ -73,7 +73,7 @@ namespace LendCar.Repository
                 var tripDays = GetDateBetweenTwoDates(startTrip, endTrip);
                 Dictionary<string, string> tableOfAllDays = new Dictionary<string, string>();
 
-                bool exists = false;
+                bool exists;
 
                 for (int i = 0; i < tripDays.Count; i++)
                 {
@@ -122,5 +122,9 @@ namespace LendCar.Repository
             Context.Vehicles.Where(c => c.OwnerId == ownerId)
             .Include(c=>c.Model).ThenInclude(c=>c.Brand).ToList();
 
+        public void VehicleBook(VehicleBooking vehicleBooking)
+        {
+            Context.VehicleBookings.Add(vehicleBooking);
+        }
     }
 }
