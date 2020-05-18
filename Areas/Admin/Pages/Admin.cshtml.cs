@@ -20,7 +20,7 @@ namespace LendCar.Pages
         private IBrandModelRepository _brandModelRepo;
         public IPagedList<Vehicle> Vehicles { get; set; }
         public IPagedList<Brand> Brands { get; set; }
-        public IPagedList<IGrouping<string,BrandModel>> BrandModels { get; set; }
+        public IPagedList<BrandModel> BrandModels { get; set; }
         public SelectList BrandsSelectList { get; set; }
         public int CurrentVehiclesPage { get; set; }
         public int CurrentBrandsPage { get; set; }
@@ -69,7 +69,7 @@ namespace LendCar.Pages
 
             Vehicles = _carRepository.GetAllVehiclesRequests().ToList().ToPagedList(vehiclesPageNumber, PageSize);
             Brands = _brandRepo.GetAllBrands().ToList().ToPagedList(brandsPageNumber, PageSize);
-            BrandModels = _brandModelRepo.GetAllBrandModels().GroupBy(bm=>bm.Brand.Name).ToPagedList(brandModelsPageNumber, PageSize);
+            BrandModels = _brandModelRepo.GetAllBrandModels().ToList().ToPagedList(brandModelsPageNumber, PageSize);
         }
     }
 }

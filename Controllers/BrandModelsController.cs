@@ -26,9 +26,9 @@ namespace LendCar.Controllers
         public IActionResult BrandModelsList([FromRoute]int brandId = 0,int page = 1,[FromRoute]int pagesize = 10)
         {
             if(brandId != 0)
-                return PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().Where(bm=>bm.BrandId == brandId).GroupBy(bm=>bm.Brand.Name).ToPagedList(page, pagesize));
+                return PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().Where(bm=>bm.BrandId == brandId).ToList().ToPagedList(page, pagesize));
             else
-                return PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().GroupBy(bm=>bm.Brand.Name).ToPagedList(page, pagesize));
+                return PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().ToPagedList(page, pagesize));
         }
 
         [ActionName("GetBrandModel")]
@@ -48,8 +48,8 @@ namespace LendCar.Controllers
 
         // PUT: api/Brands/edit/id/page
         [ActionName("Edit")]
-        [HttpPost("{id}/{page}")]
-        public IActionResult Edit([FromRoute]int id, [FromBody] BrandModel brandModel, [FromRoute]int page = 1)
+        [HttpPost("{id}/{page}/{pagesize}")]
+        public IActionResult Edit([FromRoute]int id, [FromBody] BrandModel brandModel, [FromRoute]int page = 1, [FromRoute]int pagesize = 10)
         {
             IActionResult result;
             if (id != brandModel.Id)
@@ -75,8 +75,7 @@ namespace LendCar.Controllers
                 }
             }
 
-            //result = PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().ToList().ToPagedList(page, 10));
-            result = BrandModelsList();
+            result = BrandModelsList(0,page,pagesize);
             return result;
         }
 

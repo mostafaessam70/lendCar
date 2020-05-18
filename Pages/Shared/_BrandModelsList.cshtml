@@ -1,4 +1,4 @@
-﻿@model IPagedList<IGrouping<string,LendCar.Models.BrandModel>>
+﻿@model IPagedList<LendCar.Models.BrandModel>
     <table class="table table-striped custab">
         <thead>
             <tr>
@@ -20,9 +20,11 @@
         </tr>
         }*@
         @{
+            var GroupedModelsByBrands = Model.GroupBy(bm => bm.Brand.Name);
+
             int counter = Model.PageNumber * Model.PageSize - (Model.PageSize - 1);
             if (Model.TotalItemCount > 0)
-                foreach (var modelGroup in Model)
+                foreach (var modelGroup in GroupedModelsByBrands)
                 {
                     <thead>
                         <tr>

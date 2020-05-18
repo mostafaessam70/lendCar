@@ -550,6 +550,34 @@
                     }
                 }
 
+
+        function DeleteBrandModel(element) {
+            var deletedBrandModelName = element.getAttribute("data-deleted-brandModel-name");
+                    var choice = confirm('Are you sure you want to delete ' + deletedBrandModelName);
+                    if (choice) {
+                        var brandModelId = parseInt(element.getAttribute("data-deleted-brandModel-id"));
+                        var url = '@Url.Content($"~/api/BrandModels/Delete/")';
+                        debugger;
+                        $.ajax({
+                            url: url + brandModelId + "/@Model.CurrentBrandModelsPage" + "/@Model.PageSize",
+                            cache: false,
+                            method: 'Post',
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            success: function (data) {
+                                $("#BrandModelsSection").html(data);
+                            },
+                            error: function (xhr, ajaxSettings, thrownError) {
+                                console.log(xhr.status);
+                                console.log(thrownError);
+                            }
+                        })
+                    }
+                }
+
+
+
         function ShowEditBrandModal(element) {
             var editedBrandName = element.getAttribute("data-edited-brand-name");
             var editedBrandId = element.getAttribute("data-edited-brand-id");
