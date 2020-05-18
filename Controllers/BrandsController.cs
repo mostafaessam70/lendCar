@@ -24,9 +24,9 @@ namespace LendCar.Controllers
             _brandRepo = brandRepo;
         }
 
-        [HttpGet]
-        public IActionResult BrandsList(int page = 1) {
-            return PartialView("_BrandsList", _brandRepo.GetAllBrands().ToList().ToPagedList(page, 10)); 
+        [HttpGet("{page}/{pagesize}")]
+        public IActionResult BrandsList(int page = 1,int pagesize = 10) {
+            return PartialView("_BrandsList", _brandRepo.GetAllBrands().ToList().ToPagedList(page, pagesize)); 
         }
         
         [ActionName("GetBrand")]
@@ -46,8 +46,8 @@ namespace LendCar.Controllers
 
         // PUT: api/Brands/edit/id/page
         [ActionName("Edit")]
-        [HttpPost("{id}/{page}")]
-        public IActionResult Edit([FromRoute]int id,[FromBody] Brand brand,[FromRoute]int page = 1)
+        [HttpPost("{id}/{page}/{pagesize}")]
+        public IActionResult Edit([FromRoute]int id,[FromBody] Brand brand,[FromRoute]int page = 1, [FromRoute]int pagesize = 10)
         {
             IActionResult result;
             if (id != brand.Id)
@@ -73,15 +73,15 @@ namespace LendCar.Controllers
                 }
             }
 
-            result =  PartialView("_BrandsList", _brandRepo.GetAllBrands().ToList().ToPagedList(page, 10));
+            result =  BrandsList(page,pagesize);
             
             return result;
         }
 
 
         [ActionName("Delete")]
-        [HttpPost("{id}/{page}")]
-        public IActionResult Delete([FromRoute]int id,[FromRoute] int page = 1)
+        [HttpPost("{id}/{page}/{pagesize}")]
+        public IActionResult Delete([FromRoute]int id,[FromRoute] int page = 1, [FromRoute] int pagesize = 10)
         {
             var brand = _brandRepo.GetBrand(id);
             if (brand == null)
@@ -91,16 +91,16 @@ namespace LendCar.Controllers
 
             _brandRepo.Delete(id);
             _brandRepo.Save();
-            return PartialView("_BrandsList", _brandRepo.GetAllBrands().ToList().ToPagedList(page, 10));
+            return BrandsList(page,pagesize);
         }
 
         [ActionName("Add")]
-        [HttpPost("{page}")]
-        public IActionResult Add([FromBody]Brand brand,[FromRoute] int page = 1)
+        [HttpPost("{page}/{pagesize}")]
+        public IActionResult Add([FromBody]Brand brand,[FromRoute] int page = 1,[FromRoute]int pagesize = 10)
         {
             _brandRepo.Add(brand);
             _brandRepo.Save();
-            return PartialView("_BrandsList", _brandRepo.GetAllBrands().ToList().ToPagedList(page, 10));
+            return BrandsList(page, pagesize);
         }
 
         private bool BrandExists(int id)

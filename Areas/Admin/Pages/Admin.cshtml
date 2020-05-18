@@ -251,6 +251,80 @@
                                                     PageClasses = new[] { "page-link" },
                                                 })
                                         </div>
+
+                                        <!--model of edit brandmodel-->
+                                        <div class="modal fade product_view" id="EditBrandModelModal">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <a class="class pull-right btn-xs"  onclick="HideEditBrandModelModal()"><span class="glyphicon glyphicon-remove" style="color:red"></span></a>
+                                                        <h3 class="modal-title">Edit</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <section class="edit-admin">
+                                                            <div class="container">
+                                                                <form id="EditBrandModelForm">
+                                                                    <input id="EditedBrandModelId" name="Id" hidden />
+                                                                    <div class="row">
+                                                                        <div class="col-md-4  col-md-offset-1 edit-color">
+                                                                            <div class="form-group">
+                                                                                <label>Model</label>
+                                                                                <input class="form-control" type="text" name="Name" id="EditedBrandModelName" placeholder="Enter Car Model" required>
+                                                                                <label>Brand</label>
+                                                                                <select id="BrandForEditedModel" name="BrandId" asp-items="@Model.BrandsSelectList"></select>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 text-center">
+                                                                                    <button id="EditBrandModelBtn" class="btn btn-primary save" disabled>Save <i class="far fa-save"></i></button><br><br>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--model of Create brandmodel-->
+                                        <div class="modal fade product_view" id="BrandModel_Create">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <a id="HideBrandModelModal" class="class pull-right btn-xs" onclick="HideCreateBrandModelModal()"><span class="glyphicon glyphicon-remove" style="color:red"></span></a>
+                                                        <h3 class="modal-title">Create</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <section class="create-admin">
+                                                            <div class="container">
+                                                                <form id="AddBrandModelForm">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4  col-md-offset-1 create-border">
+                                                                            <div class="form-group">
+                                                                                <label>Model</label>
+                                                                                <input class="form-control" id="BrandModelName" name="Name" placeholder="Enter Car Model" required>
+                                                                                <label>Brand</label>
+                                                                                <select id="BrandForAddedModel" name="BrandId" asp-items="@Model.BrandsSelectList"></select>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 text-center">
+                                                                                    <button id="AddBrandModelBtn" type="submit" class="btn btn-primary save" disabled>Save <i class="far fa-save"></i></button><br><br>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </section>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -394,7 +468,7 @@
         }
 
         function changeEntries(entries) {
-            
+
             if (parseInt(entries) > 0 && parseInt(entries) != @Model.PageSize) {
                 var url = '@Url.Content("~/admin/admin?entries=")' + entries;
                 window.location.href = url;
@@ -459,12 +533,9 @@
                         var url = '@Url.Content($"~/api/Brands/Delete/")';
                         debugger;
                         $.ajax({
-                            url: url + brandId + "/@Model.CurrentBrandsPage",
+                            url: url + brandId + "/@Model.CurrentBrandsPage" + "/@Model.PageSize",
                             cache: false,
                             method: 'Post',
-                            beforeSend: function () {
-                                $('#loader').show();
-                            },
                             headers: {
                                 "Content-Type": "application/json"
                             },
@@ -487,9 +558,24 @@
             $("#EditedBrandId").val(editedBrandId);
         }
 
+        function ShowEditBrandModelModal(element) {
+            var editedBrandModelName = element.getAttribute("data-edited-brandModel-name");
+            var editedBrandModelId = element.getAttribute("data-edited-brandModel-id");
+            var brandForEditedModel = element.getAttribute("data-edited-brandModel-brandId");
+            $("#EditBrandModelModal").modal('show');
+            $("#EditedBrandModelName").val(editedBrandModelName);
+            $("#EditedBrandModelId").val(editedBrandModelId);
+            $("#BrandForEditedModel").val(brandForEditedModel);
+        }
+
         function HideEditBrandModal() {
             $("#EditBrandModal").modal('hide')
         }
+
+        function HideEditBrandModelModal() {
+            $("#EditBrandModelModal").modal('hide')
+        }
+
 
         function ShowCreateBrandModal() {
             $("#Brand_Create").modal('show');
@@ -497,6 +583,13 @@
 
         function HideCreateBrandModal() {
             $("#Brand_Create").modal('hide');
+        }
+
+        function ShowCreateBrandModelModal() {
+            $("#BrandModel_Create").modal('show');
+        }
+        function HideCreateBrandModelModal() {
+            $("#BrandModel_Create").modal('hide');
         }
 
         $(document).ready(function () {
@@ -517,12 +610,28 @@
                 }
             });
 
+            $("#AddBrandModelForm").on("blur", "input", () => {
+                if ($("#AddBrandModelForm").valid()) {
+                    $("#AddBrandModelBtn").removeAttr("disabled");
+                } else {
+                    $("#AddBrandModelBtn").attr("disabled", "disabled");
+                }
+            });
+
+            $("#EditBrandModelForm").on("blur", "input", () => {
+                if ($("#EditBrandModelForm").valid()) {
+                    $("#EditBrandModelBtn").removeAttr("disabled");
+                } else {
+                    $("#EditBrandModelBtn").attr("disabled", "disabled");
+                }
+            });
+
+
             $("#AddBrandForm").submit(
                 function () {
                     event.preventDefault();
-                    var url = '@Url.Content("~/api/Brands/Add/")' + @Model.CurrentBrandsPage;
+                    var url = '@Url.Content("~/api/Brands/Add/")' + @Model.CurrentBrandsPage + "/@Model.PageSize";
                     var data = { "Name": $("#BrandName").val()};
-                    debugger;
 
                     $.ajax({
                         url: url,
@@ -553,7 +662,7 @@
                     event.preventDefault();
                     var EditedBrandId = parseInt($("#EditedBrandId").val());
                     var EditedBrandName = $("#EditedBrandName").val();
-                    var url = '@Url.Content("~/api/Brands/Edit/")' + EditedBrandId + "/" + @Model.CurrentBrandsPage;
+                    var url = '@Url.Content("~/api/Brands/Edit/")' + EditedBrandId + "/@Model.CurrentBrandsPage" + "/@Model.PageSize" ;
                     var data = { Id: EditedBrandId, Name: EditedBrandName }
                     debugger;
                     $.ajax({
@@ -580,6 +689,67 @@
                 }
             );
 
+            $("#AddBrandModelForm").submit(
+                function () {
+                    event.preventDefault();
+                    var url = '@Url.Content("~/api/BrandModels/Add/")' + @Model.CurrentBrandModelsPage + "/@Model.PageSize";
+                    var data = { "Name": $("#BrandModelName").val(), "BrandId": parseInt($("#BrandForAddedModel").val()) };
+                    debugger;
+
+                    $.ajax({
+                        url: url,
+                        data: JSON.stringify(data),
+                        cache: false,
+                        method: 'POST',
+                        beforeSend: function () {
+                            $("#BrandModel_Create").modal('hide');
+                        },
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Content-Length": data.length},
+                        success: function (data) {
+                            $("#BrandModelsSection").html(data);
+                        },
+                        error: function (xhr, ajaxSettings, thrownError) {
+                            console.log(xhr.status);
+                            console.log(thrownError);
+                        }
+                    })
+                }
+            );
+
+            $("#EditBrandModelForm").submit(
+                function () {
+                    event.preventDefault();
+                    var EditedBrandModelId = parseInt($("#EditedBrandModelId").val());
+                    var EditedBrandModelName = $("#EditedBrandModelName").val();
+                    var url = '@Url.Content("~/api/BrandModels/Edit/")' + EditedBrandModelId + "/@Model.CurrentBrandModelsPage" + "/@Model.PageSize";
+                    var data = { Id: EditedBrandModelId, Name: EditedBrandModelName, brandId: parseInt($("#BrandForEditedModel").val()) }
+                    debugger;
+                    $.ajax({
+                        url: url,
+                        data: JSON.stringify(data),
+                        cache: false,
+                        method: 'POST',
+                        beforeSend: function () {
+                            $("#EditBrandModelModal").modal('hide');
+                        },
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Content-Length": data.length},
+                        success: function (data) {
+                            $("#loader").hide();
+                            $("#BrandModelsSection").html(data);
+                        },
+                        error: function (xhr, ajaxSettings, thrownError) {
+                            console.log(xhr.status);
+                            console.log(thrownError);
+                        }
+                    })
+                }
+            );
+
+
             $('/*ul*/.pagination > li.disabled > a').addClass('page-link');
 
         });
@@ -587,7 +757,7 @@
         function RenderBrandModels(element)
         {
             var selectedBrandId = parseInt(element.value);
-            var url = '@Url.Content("~/api/BrandModels/GetBrandModelsPartial/")' + selectedBrandId;
+            var url = '@Url.Content("~/api/BrandModels/GetBrandModelsPartial/")' + selectedBrandId + "/@Model.CurrentBrandModelsPage" +"/@Model.PageSize";
 
             $.ajax({
                 url: url,

@@ -22,14 +22,13 @@ namespace LendCar.Controllers
             _bmRepo = bmRepo;
         }
         [ActionName("GetBrandModelsPartial")]
-        [HttpGet("{brandId}")]
-        public IActionResult BrandModelsList([FromRoute]int brandId = 0,int page = 1)
+        [HttpGet("{brandId}/{page}/{pagesize}")]
+        public IActionResult BrandModelsList([FromRoute]int brandId = 0,int page = 1,[FromRoute]int pagesize = 10)
         {
             if(brandId != 0)
-                return PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().Where(bm=>bm.BrandId == brandId).GroupBy(bm=>bm.Brand.Name).ToPagedList(page, 10));
+                return PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().Where(bm=>bm.BrandId == brandId).GroupBy(bm=>bm.Brand.Name).ToPagedList(page, pagesize));
             else
-                return PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().GroupBy(bm=>bm.Brand.Name).ToPagedList(page, 10));
-
+                return PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().GroupBy(bm=>bm.Brand.Name).ToPagedList(page, pagesize));
         }
 
         [ActionName("GetBrandModel")]
@@ -76,15 +75,15 @@ namespace LendCar.Controllers
                 }
             }
 
-            result = PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().ToList().ToPagedList(page, 10));
-
+            //result = PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().ToList().ToPagedList(page, 10));
+            result = BrandModelsList();
             return result;
         }
 
 
         [ActionName("Delete")]
-        [HttpPost("{id}/{page}")]
-        public IActionResult Delete([FromRoute]int id, [FromRoute] int page = 1)
+        [HttpPost("{id}/{page}/{pagesize}")]
+        public IActionResult Delete([FromRoute]int id, [FromRoute] int page = 1, [FromRoute] int pagesize = 10)
         {
             var brandModel = _bmRepo.GetBrandModel(id);
             if (brandModel == null)
@@ -94,16 +93,16 @@ namespace LendCar.Controllers
 
             _bmRepo.Delete(id);
             _bmRepo.Save();
-            return PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().ToList().ToPagedList(page, 10));
+            return BrandModelsList(0,page,pagesize);
         }
 
         [ActionName("Add")]
-        [HttpPost("{page}")]
-        public IActionResult Add([FromBody]BrandModel brandModel, [FromRoute] int page = 1)
+        [HttpPost("{page}/{pagesize}")]
+        public IActionResult Add([FromBody]BrandModel brandModel, [FromRoute] int page = 1, [FromRoute] int pagesize = 10)
         {
             _bmRepo.Add(brandModel);
             _bmRepo.Save();
-            return PartialView("_BrandModelsList", _bmRepo.GetAllBrandModels().ToList().ToPagedList(page, 10));
+            return BrandModelsList(0,page,pagesize);
         }
 
         private bool BrandExists(int id)

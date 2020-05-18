@@ -37,8 +37,8 @@
                             <td>@counter</td>
                             <td>@bmodel.Name</td>
                             <td class="text-center">
-                                <a data-edited-brandModel-id="@bmodel.Id" data-edited-brandModel-name="@bmodel.Name" class='btn btn-info btn-xs edit-brandModel-btn' onclick="ShowEditBrandModelModal(this)"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-                                <a data-deleted-brandModel-id="@bmodel.Id" data-deleted-brandModel-name="@bmodel.Name" class="btn btn-danger btn-xs delete-brandModel" onclick="DeleteBrandModel(this)"><span class="glyphicon glyphicon-remove "></span> Del</a>
+                                <a data-edited-brandModel-id="@bmodel.Id" data-edited-brandModel-name="@bmodel.Name" data-edited-brandModel-brandId="@bmodel.BrandId" class='btn btn-info btn-xs edit-brandModel-btn' onclick="ShowEditBrandModelModal(this)"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                                <a data-deleted-brandModel-id="@bmodel.Id" data-deleted-brandModel-name="@bmodel.Name" data-edited-brandModel-brandId ="@bmodel.BrandId" class="btn btn-danger btn-xs delete-brandModel" onclick="DeleteBrandModel(this)"><span class="glyphicon glyphicon-remove "></span> Del</a>
                             </td>
                         </tr>
                         counter++;
@@ -52,6 +52,5 @@
                 </tr>
                  }
         }
-
 
     </table>
