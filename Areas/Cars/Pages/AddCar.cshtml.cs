@@ -75,7 +75,7 @@ namespace LendCar.Pages
             
             else
             {
-                if (VehiclePhotos != null && VehiclePhotos.Count() > 0)
+                if (VehiclePhotos != null && VehiclePhotos.Count() >= 4)
                 {
                     string newImgName = null;
                     List<CarImage> photos = new List<CarImage>();
