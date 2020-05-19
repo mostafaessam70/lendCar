@@ -1,35 +1,50 @@
-/*
-	Template Name: Cornike - Business HTML5 Template
-	Author: Tripples
-	Author URI: https://themeforest.net/user/tripples
-	Description: Cornike - Business HTML5 Template
-	Version: 1.0
 
-	1. Fixed header
-	2. Main slideshow
-	3. Site search
-	4. Owl Carousel
-	5. Video popup
-	6. Counter
-	7. Contact form
-	8. Back to top
+	//Template Name: Cornike - Business HTML5 Template
+	//Author: Tripples
+	//Author URI: https://themeforest.net/user/tripples
+	//Description: Cornike - Business HTML5 Template
+	//Version: 1.0
+
+	//1. Fixed header
+	//2. Main slideshow
+	//3. Site search
+	//4. Owl Carousel
+	//5. Video popup
+	//6. Counter
+	//7. Contact form
+	//8. Back to top
   
-*/
+//check color in localStorage
+let mainColors = localStorage.getItem("color-option");
+if (mainColors != null) {
 
+	document.documentElement.style.setProperty('--main-color', localStorage.getItem("color-option"));
+	document.querySelectorAll(".colors-list li").forEach(element => {
+		element.classList.remove("activ");
+		element.classList.remove("fa-spin");
 
+		if (element.dataset.color === mainColors) {
+			element.classList.add("activ");
+			element.classList.add("fa-spin");
+        }
+	});
+  
 /*about raruoser */
 
 
+}
+
 jQuery(function ($) {
-    "use strict";
+	"use strict";
+
     /* preloader */
     $('body').toggleClass('loaded');
 
     setTimeout(function () {
         $('body').addClass('loaded');
        
-    }, 2000);
-	/* ----------------------------------------------------------- */
+    }, 1500);
+
 	/*  Fixed header
 	/* ----------------------------------------------------------- */
 
@@ -382,6 +397,47 @@ $(function () {
 	$('a[title]').tooltip();
 });
 
+//change color
+$(document).ready(function () {
+	$('.material-button-toggle').on("click", function () {
+		$(this).toggleClass('open');
+		$('.option').toggleClass('scale-on');
+	});
+});
+
+//setting-box
+
+document.querySelector(".toggle-settings .fa-gear").onclick = function () {
+
+	this.classList.toggle("fa-spin");
+
+	document.querySelector(".settings-box").classList.toggle("openBox");
+};
+
+//setting-box
+//Switch color
+const colorsLi = document.querySelectorAll(".colors-list li");
+
+colorsLi.forEach(li => {
+
+	li.addEventListener("click", (e) => {
+
+		document.documentElement.style.setProperty('--main-color', e.target.dataset.color);
+		localStorage.setItem("color-option", e.target.dataset.color);
+
+		e.target.parentElement.querySelectorAll(".activ").forEach(element => {
+			element.classList.remove("activ");
+			element.classList.remove("fa-spin");
+
+		});
+		//e.target.classList.toggle("fa-spin");
+		e.target.classList.add("activ");
+		e.target.classList.add("fa-spin");
+	});
+
+
+});
+//Switch color
 
 //wow 
 new WOW().init();
@@ -420,4 +476,3 @@ $("#our-team").owlCarousel({
 //		$('.option').toggleClass('scale-on');
 //	});
 //});
-
