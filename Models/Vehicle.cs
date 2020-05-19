@@ -31,7 +31,7 @@ namespace LendCar.Models
         public string EnergyMakeCarMove { get; set; }
         public int? TripsNumber { get; set; }
         [DisplayName("Price per day")]
-        public double PricePerDay { get; set; }
+        public decimal PricePerDay { get; set; }
         [Required(ErrorMessage = "Please specify when your car will be available"),DisplayName("Start Date")]
         public string StartDate { get; set; }
         [Required(ErrorMessage = "Please specify when your car will not be available"),DisplayName("End Date")]

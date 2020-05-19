@@ -10,8 +10,10 @@ namespace LendCar.Repository
     public interface ICarRepository
     {
         LendCarDBContext Context { get; }
+
         Vehicle GetVehicle(int id);
         IQueryable<Vehicle> GetAllVehiclesAccepted();
+        IList<Vehicle> GetAllAvailableVechilces();
         IQueryable<Vehicle> GetAllVehiclesRequests();
         void Add(Vehicle vehicle);
         void Delete(int id);
@@ -22,5 +24,8 @@ namespace LendCar.Repository
         List<VehicleBooking> GetAllBookingByUserID(string userId);
         List<Vehicle> GetAllUserCar(string userID);
         void VehicleBook(VehicleBooking vehicleBooking);
+        decimal GetVehiclePricePerDay(int vId);
+        List<Vehicle> GetAllVehicles(string ownerId);
+        List<VehicleBooking> GetAllBooking();
     }
 }

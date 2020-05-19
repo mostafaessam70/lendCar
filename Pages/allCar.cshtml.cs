@@ -19,11 +19,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace LendCar.Pages
 {
-    //[BindProperties(SupportsGet = true)]
     public class IndexModel : PageModel
     {
-
-
         private readonly ILogger<IndexModel> _logger;
         public ICarRepository ICarRepository { get; }
 
@@ -53,7 +50,8 @@ namespace LendCar.Pages
             else
                 pageNumber = 1;
 
-            Vehicles = ICarRepository.GetAllVehiclesAccepted().ToList().ToPagedList(pageNumber, 9);
+            Vehicles = ICarRepository.GetAllAvailableVechilces().ToPagedList(pageNumber, 9);
+           
         }
 
         public IActionResult OnGetLogout() 
