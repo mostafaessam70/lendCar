@@ -45,7 +45,7 @@ namespace LendCar
             services.AddTransient<IBrandModelRepository, BrandModelRepository>();
             services.AddTransient<IContactRepository,ContactRepository>();
             services.AddTransient<ICityRepostiory, CityRepostiory>();
-            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IColorRepository,ColorRepository>();
             services.AddTransient<IClientRepository, ClientRepository>();
 
             services.AddSingleton<IEmail, Email>();

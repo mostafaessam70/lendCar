@@ -24,5 +24,6 @@ namespace LendCar.Repository
         public VehicleType GetVehicleType(int id) => Context.VehicleTypes.Find(id);
 
         public void Save() => Context.SaveChanges();
+        public bool Exists(int id) => Context.VehicleTypes.Any(vt=>vt.Id == id);
     }
 }

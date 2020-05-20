@@ -58,7 +58,7 @@
                     @*Tab 1*@
                     <div class="container">
                         <div class="tab-content">
-                            <div class="tab-pane fade in active tabDiv" id="vehiclesTabDiv">
+                            <div class="tab-pane fade in active " id="vehiclesTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label>Show Entries : </label>
@@ -102,7 +102,7 @@
                             </div>
 
                             @*Tap 2*@
-                            <div class="tab-pane fade tabDiv"  id="brandsTabDiv">
+                            <div class="tab-pane fade "  id="brandsTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label>Show Entries : </label>
@@ -114,7 +114,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-7">
-                                        <h3 class="head text-center">Brand</h3>
+                                        <h3 class="head text-center">Brands</h3>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="">Search : </label>
@@ -212,7 +212,7 @@
                             </div>
 
                             @*Tab 3*@
-                            <div class="tab-pane fade tabDiv" id="brandModelsTabDiv">
+                            <div class="tab-pane fade " id="brandModelsTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label>Show Entries : </label>
@@ -330,7 +330,7 @@
                             </div>
 
                             @*Tab 4*@
-                            <div class="tab-pane fade tabDiv" id="colorsTabDiv">
+                            <div class="tab-pane fade " id="colorsTabDiv">
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label>Show Entries : </label>
@@ -342,7 +342,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-7">
-                                        <h3 class="head text-center">Color</h3>
+                                        <h3 class="head text-center">Colors</h3>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="">Search : </label>
@@ -352,37 +352,107 @@
 
                                 <div class="container">
                                     <div class="row col-md-8 col-md-offset-2 custyle">
-                                        <table class="table table-striped custab">
-                                            <thead>
-                                                <a href="#" class="btn btn-primary btn-xs pull-left"><b>+</b> Add new Color</a>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Color</th>
-                                                    <th class="text-center">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>News</td>
-                                                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Products</td>
-                                                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Blogs</td>
-                                                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                                            </tr>
-                                        </table>
+                                        <button id="ShowColorsModal" class="btn btn-primary btn-xs pull-left" onclick="ShowCreateColorModal()"><b>+</b> Add new Color</button>
+                                        <div id="ColorsSection">
+                                            <partial name="_ColorsList" model="Model.Colors" />
+                                        </div>
+                                        <div class="text-center">
+
+                                            @Html.PagedListPager((IPagedList)Model.Colors, colorPage => "/Admin/Admin?colorPage=" + colorPage,
+                                                new X.PagedList.Mvc.Common.PagedListRenderOptions
+                                                {
+                                                    DisplayItemSliceAndTotal = true,
+                                                    ContainerDivClasses = new[] { "navigation" },
+                                                    LiElementClasses = new[] { "page-item", "admin-list" },
+                                                    PageClasses = new[] { "page-link" },
+                                                })
+                                        </div>
+                                        <!--model of edit-->
+                                        <div class="modal fade product_view" id="EditColorModal">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <a class="class pull-right btn-xs" id="HideEditColor" onclick="HideEditColorModal()"><span class="glyphicon glyphicon-remove" style="color:red"></span></a>
+                                                        <h3 class="modal-title">Edit</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <section class="edit-admin">
+                                                            <div class="container">
+                                                                <form id="EditColorForm">
+                                                                    <input id="EditedColorId" name="Id" hidden />
+                                                                    <div class="row">
+                                                                        <div class="col-md-4  col-md-offset-1 edit-color">
+                                                                            <div class="form-group">
+                                                                                <label>Color name</label>
+                                                                                <input class="form-control" type="text" asp-for="@Model.NewColor.Name" id="EditedColorName" placeholder="Enter Color" >
+                                                                                <span asp-validation-for="@Model.NewColor.Name" class="text-danger"></span>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Hex value</label>
+                                                                                <input class="form-control" id="EditedColorHex" asp-for="@Model.NewColor.HexValue" placeholder="Enter color hexvalue">
+                                                                                <span asp-validation-for="@Model.NewColor.HexValue" class="text-danger"></span>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 text-center">
+                                                                                    <button id="EditColorBtn" class="btn btn-primary save" disabled>Save <i class="far fa-save"></i></button><br><br>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--model of Create-->
+                                        <div class="modal fade product_view" id="Color_Create">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <a id="HideColorModal" class="class pull-right btn-xs" onclick="HideCreateColorModal()"><span class="glyphicon glyphicon-remove" style="color:red"></span></a>
+                                                        <h3 class="modal-title">Create</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <section class="create-admin">
+                                                            <div class="container">
+                                                                <form id="AddColorForm">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4  col-md-offset-1 create-border">
+                                                                            <div class="form-group">
+                                                                                <label>Color name</label>
+                                                                                <input class="form-control" id="ColorName" asp-for="@Model.NewColor.Name" placeholder="Enter color name" >
+                                                                                <span asp-validation-for="@Model.NewColor.Name" class="text-danger"></span>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Hex value</label>
+                                                                                <input class="form-control" id="ColorHexCreate" asp-for="@Model.NewColor.HexValue" placeholder="Enter color hexvalue">
+                                                                                <span asp-validation-for="@Model.NewColor.HexValue" class="text-danger"></span>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 text-center">
+                                                                                    <button id="AddColorBtn" type="submit" class="btn btn-primary save" disabled>Save <i class="far fa-save"></i></button><br><br>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </section>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
 
                             @*Tab 5*@
-                            <div class="tab-pane fade tabDiv" id="vehicleTypesTabDiv">
+                            <div class="tab-pane fade " id="vehicleTypesTabDiv">
                                 <div class="text-center">
                                     <div class="row">
                                         <div class="form-group col-md-2">
@@ -394,7 +464,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-7">
-                                            <h3 class="head text-center">Color</h3>
+                                            <h3 class="head text-center">Vehicle Types</h3>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="">Search : </label>
@@ -404,31 +474,89 @@
 
                                     <div class="container">
                                         <div class="row col-md-8 col-md-offset-2 custyle">
-                                            <table class="table table-striped custab">
-                                                <thead>
-                                                    <a href="#" class="btn btn-primary btn-xs pull-left"><b>+</b> Add new Color</a>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Color</th>
-                                                        <th class="text-center">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>News</td>
-                                                    <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Products</td>
-                                                    <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Blogs</td>
-                                                    <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                                                </tr>
-                                            </table>
+                                            <button id="ShowVTypeModal" class="btn btn-primary btn-xs pull-left" onclick="ShowCreateVTypeModal()"><b>+</b> Add new vehicle type</button>
+                                            <div id="VTypesSection">
+                                                <partial name="_VehicleTypesList" model="Model.VehicleTypes" />
+                                            </div>
+                                            <div class="text-center">
+
+                                                @Html.PagedListPager((IPagedList)Model.VehicleTypes, VTypePage => "/Admin/Admin?VTypePage=" + VTypePage,
+                                                    new X.PagedList.Mvc.Common.PagedListRenderOptions
+                                                    {
+                                                        DisplayItemSliceAndTotal = true,
+                                                        ContainerDivClasses = new[] { "navigation" },
+                                                        LiElementClasses = new[] { "page-item", "admin-list" },
+                                                        PageClasses = new[] { "page-link" },
+                                                    })
+                                            </div>
+                                            <!--model of edit-->
+                                            <div class="modal fade product_view" id="EditVTypeModal">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <a class="class pull-right btn-xs" id="HideEditVType" onclick="HideEditVTypeModal()"><span class="glyphicon glyphicon-remove" style="color:red"></span></a>
+                                                            <h3 class="modal-title">Edit</h3>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <section class="edit-admin">
+                                                                <div class="container">
+                                                                    <form id="EditVTypeForm">
+                                                                        <input id="EditedVTypeId" name="Id" hidden />
+                                                                        <div class="row">
+                                                                            <div class="col-md-4  col-md-offset-1 edit-color">
+                                                                                <div class="form-group">
+                                                                                    <label>Vehicle Type</label>
+                                                                                    <input class="form-control" type="text" name="Type" id="EditedVTypeName" placeholder="Enter vehicle type" required>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 text-center">
+                                                                                        <button id="EditVTypeBtn" class="btn btn-primary save" disabled>Save <i class="far fa-save"></i></button><br><br>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--model of Create-->
+                                            <div class="modal fade product_view" id="VType_Create">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <a id="HideVTypeModal" class="class pull-right btn-xs" onclick="HideCreateVTypeModal()"><span class="glyphicon glyphicon-remove" style="color:red"></span></a>
+                                                            <h3 class="modal-title">Create</h3>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <section class="create-admin">
+                                                                <div class="container">
+                                                                    <form id="AddVTypeForm">
+                                                                        <div class="row">
+                                                                            <div class="col-md-4  col-md-offset-1 create-border">
+                                                                                <div class="form-group">
+                                                                                    <label>Vehicle Type</label>
+                                                                                    <input class="form-control" id="VTypeName" name="Type" placeholder="Enter vehicle type" required>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 text-center">
+                                                                                        <button id="AddVTypeBtn" type="submit" class="btn btn-primary save" disabled>Save <i class="far fa-save"></i></button><br><br>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </section>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -445,6 +573,12 @@
 @section Scripts{
     <script>
 
+        var currentTabId = '#vehiclesTabDiv';
+        $('a[data-toggle="tab"]').click(function () {
+            currentTabId = $(this).attr('href');
+        });
+
+        //Returning to the current tab when refresh
         var currentUrl = window.location.href;
         if (currentUrl.includes("vehiclePage")) {
             resetTabs();
@@ -461,20 +595,71 @@
             $("#brandModelsTabLi").addClass(" active");
             $("#brandModelsTabDiv").addClass(" in active");
         }
+        else if (currentUrl.includes("VTypePage")) {
+            resetTabs();
+            $("#vehicleTypesTabLi").addClass(" active");
+            $("#vehicleTypesTabDiv").addClass(" in active");
+        }
+        else if (currentUrl.includes("colorPage")) {
+            resetTabs();
+            $("#colorsTabLi").addClass(" active");
+            $("#colorsTabDiv").addClass(" in active");
+        }
 
         function resetTabs() {
             $("#myTab>li.active").removeClass("active");
-            $(".tabDiv").removeClass("in active");
+            $(".tab-pane").removeClass("in active");
         }
 
         function changeEntries(entries) {
-
             if (parseInt(entries) > 0 && parseInt(entries) != @Model.PageSize) {
                 var url = '@Url.Content("~/admin/admin?entries=")' + entries;
+                switch (currentTabId) {
+                    case "#vehiclesTabDiv":
+                        url += "&vehiclePage=" + @Model.CurrentVehiclesPage;
+                        break;
+                    case "#brandsTabDiv":
+                        url += "&brandPage=" + @Model.CurrentBrandsPage;
+                        break;
+                    case "#brandModelsTabDiv":
+                        url += "&brandModelPage=" + @Model.CurrentBrandModelsPage;
+                        break;
+                    case "#colorsTabDiv":
+                        url += "&colorPage=" + @Model.CurrentColorsPage;
+                        break;
+                    case "#vehicleTypesTabDiv":
+                        url += "&VTypePage=" + @Model.CurrentVTypesPage;
+                        break;
+                }
+                debugger;
                 window.location.href = url;
             }
         }
 
+        //Filter brandmodels based on brands
+        function RenderBrandModels(element)
+        {
+            var selectedBrandId = parseInt(element.value);
+            var url = '@Url.Content("~/api/BrandModels/GetBrandModelsPartial/")' + selectedBrandId + "/@Model.CurrentBrandModelsPage" +"/@Model.PageSize";
+
+            $.ajax({
+                url: url,
+                method: 'Get',
+                cache: false,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                success: function (data) {
+                    $("#BrandModelsSection").html(data);
+                },
+                error: function (xhr, ajaxSettings, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                }
+            });
+        }
+
+        //Accept a car
         $(document).on('click', '.accept', function () {
 
             let vechicleId = $(this).attr('data-id');
@@ -498,6 +683,7 @@
 
         })
 
+        //Refuse a car
         $(document).on('click','.refuse',function () {
 
             let vechicleId = $(this).attr('data-id');
@@ -525,6 +711,75 @@
 
             })
 
+        //Brand Model
+        function DeleteBrandModel(element) {
+            var deletedBrandModelName = element.getAttribute("data-deleted-brandModel-name");
+            var choice = confirm('Are you sure you want to delete ' + deletedBrandModelName);
+            if (choice) {
+                var brandModelId = parseInt(element.getAttribute("data-deleted-brandModel-id"));
+                var url = '@Url.Content($"~/api/BrandModels/Delete/")';
+                debugger;
+                $.ajax({
+                    url: url + brandModelId + "/@Model.CurrentBrandModelsPage" + "/@Model.PageSize",
+                    cache: false,
+                    method: 'Post',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    success: function (data) {
+                        $("#BrandModelsSection").html(data);
+                    },
+                    error: function (xhr, ajaxSettings, thrownError) {
+                        console.log(xhr.status);
+                        console.log(thrownError);
+                    }
+                })
+            }
+        }
+
+        function ShowEditBrandModelModal(element) {
+            var editedBrandModelName = element.getAttribute("data-edited-brandModel-name");
+            var editedBrandModelId = element.getAttribute("data-edited-brandModel-id");
+            var brandForEditedModel = element.getAttribute("data-edited-brandModel-brandId");
+            $("#EditBrandModelModal").modal('show');
+            $("#EditedBrandModelName").val(editedBrandModelName);
+            $("#EditedBrandModelId").val(editedBrandModelId);
+            $("#BrandForEditedModel").val(brandForEditedModel);
+        }
+
+        function HideEditBrandModelModal() {
+            $("#EditBrandModelModal").modal('hide')
+        }
+
+        function ShowCreateBrandModelModal() {
+            $("#BrandModel_Create").modal('show');
+        }
+
+        function HideCreateBrandModelModal() {
+            $("#BrandModel_Create").modal('hide');
+        }
+
+        //Brand
+        function ShowCreateBrandModal() {
+            $("#Brand_Create").modal('show');
+        }
+
+        function HideCreateBrandModal() {
+            $("#Brand_Create").modal('hide');
+        }
+
+        function ShowEditBrandModal(element) {
+            var editedBrandName = element.getAttribute("data-edited-brand-name");
+            var editedBrandId = element.getAttribute("data-edited-brand-id");
+            $("#EditBrandModal").modal('show');
+            $("#EditedBrandName").val(editedBrandName);
+            $("#EditedBrandId").val(editedBrandId);
+        }
+
+        function HideEditBrandModal() {
+            $("#EditBrandModal").modal('hide')
+        }
+
         function DeleteBrand(element) {
             var deletedBrandName = element.getAttribute("data-deleted-brand-name");
                     var choice = confirm('Are you sure you want to delete ' + deletedBrandName);
@@ -545,83 +800,113 @@
                             error: function (xhr, ajaxSettings, thrownError) {
                                 console.log(xhr.status);
                                 console.log(thrownError);
+                                $("#BrandsSection").html("Something went wrong .. ");
+
                             }
                         })
                     }
                 }
 
+        //Vehicle Type
+        function ShowCreateVTypeModal() {
+            $("#VType_Create").modal('show');
+        }
 
-        function DeleteBrandModel(element) {
-            var deletedBrandModelName = element.getAttribute("data-deleted-brandModel-name");
-                    var choice = confirm('Are you sure you want to delete ' + deletedBrandModelName);
+        function HideCreateVTypeModal() {
+            $("#VType_Create").modal('hide');
+        }
+
+        function ShowEditVTypeModal(element) {
+            var editedVTypeName = element.getAttribute("data-edited-vType-name");
+            var editedVTypeId = element.getAttribute("data-edited-vType-id");
+            $("#EditVTypeModal").modal('show');
+            $("#EditedVTypeName").val(editedVTypeName);
+            $("#EditedVTypeId").val(editedVTypeId);
+        }
+
+        function HideEditVTypeModal() {
+            $("#EditVTypeModal").modal('hide')
+        }
+
+        function DeleteVType(element) {
+            var deletedVTypeName = element.getAttribute("data-deleted-vType-name");
+            var choice = confirm('Are you sure you want to delete ' + deletedVTypeName);
                     if (choice) {
-                        var brandModelId = parseInt(element.getAttribute("data-deleted-brandModel-id"));
-                        var url = '@Url.Content($"~/api/BrandModels/Delete/")';
+                        var vTypeId = parseInt(element.getAttribute("data-deleted-vType-id"));
+                        var url = '@Url.Content($"~/api/VehicleTypes/Delete/")';
                         debugger;
                         $.ajax({
-                            url: url + brandModelId + "/@Model.CurrentBrandModelsPage" + "/@Model.PageSize",
+                            url: url + vTypeId + "/@Model.CurrentVTypesPage" + "/@Model.PageSize",
                             cache: false,
                             method: 'Post',
                             headers: {
                                 "Content-Type": "application/json"
                             },
                             success: function (data) {
-                                $("#BrandModelsSection").html(data);
+                                $("#VTypesSection").html(data);
                             },
                             error: function (xhr, ajaxSettings, thrownError) {
                                 console.log(xhr.status);
                                 console.log(thrownError);
+                                $("#VTypesSection").html("<div>Something went wrong ..</div>");
                             }
                         })
                     }
                 }
 
-
-
-        function ShowEditBrandModal(element) {
-            var editedBrandName = element.getAttribute("data-edited-brand-name");
-            var editedBrandId = element.getAttribute("data-edited-brand-id");
-            $("#EditBrandModal").modal('show');
-            $("#EditedBrandName").val(editedBrandName);
-            $("#EditedBrandId").val(editedBrandId);
+        //Color
+        function ShowCreateColorModal() {
+            $("#Color_Create").modal('show');
         }
 
-        function ShowEditBrandModelModal(element) {
-            var editedBrandModelName = element.getAttribute("data-edited-brandModel-name");
-            var editedBrandModelId = element.getAttribute("data-edited-brandModel-id");
-            var brandForEditedModel = element.getAttribute("data-edited-brandModel-brandId");
-            $("#EditBrandModelModal").modal('show');
-            $("#EditedBrandModelName").val(editedBrandModelName);
-            $("#EditedBrandModelId").val(editedBrandModelId);
-            $("#BrandForEditedModel").val(brandForEditedModel);
+        function HideCreateColorModal() {
+            $("#Color_Create").modal('hide');
         }
 
-        function HideEditBrandModal() {
-            $("#EditBrandModal").modal('hide')
+        function ShowEditColorModal(element) {
+            var editedColorName = element.getAttribute("data-edited-color-name");
+            var editedColorId = element.getAttribute("data-edited-color-id");
+            var editedColorHex = element.getAttribute("data-edited-color-hex");
+            $("#EditColorModal").modal('show');
+            $("#EditedColorName").val(editedColorName);
+            $("#EditedColorId").val(editedColorId);
+            $("#EditedColorHex").val(editedColorHex);
         }
 
-        function HideEditBrandModelModal() {
-            $("#EditBrandModelModal").modal('hide')
+        function HideEditColorModal() {
+            $("#EditColorModal").modal('hide')
         }
 
+        function DeleteColor(element) {
+            var deletedColorName = element.getAttribute("data-deleted-color-name");
+                    var choice = confirm('Are you sure you want to delete ' + deletedColorName);
+                    if (choice) {
+                        var colorId = parseInt(element.getAttribute("data-deleted-color-id"));
+                        var url = '@Url.Content($"~/api/Colors/Delete/")';
+                        debugger;
+                        $.ajax({
+                            url: url + colorId + "/@Model.CurrentColorsPage" + "/@Model.PageSize",
+                            cache: false,
+                            method: 'Post',
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            success: function (data) {
+                                $("#ColorsSection").html(data);
+                            },
+                            error: function (xhr, ajaxSettings, thrownError) {
+                                console.log(xhr.status);
+                                console.log(thrownError);
+                                $("#ColorsSection").html("Something went wrong .. ");
 
-        function ShowCreateBrandModal() {
-            $("#Brand_Create").modal('show');
-        }
-
-        function HideCreateBrandModal() {
-            $("#Brand_Create").modal('hide');
-        }
-
-        function ShowCreateBrandModelModal() {
-            $("#BrandModel_Create").modal('show');
-        }
-        function HideCreateBrandModelModal() {
-            $("#BrandModel_Create").modal('hide');
-        }
+                            }
+                        })
+                    }
+                }
 
         $(document).ready(function () {
 
+            // (ADD-EDIT) Forms validation
             $("#AddBrandForm").on("blur", "input", () => {
                 if ($("#AddBrandForm").valid()) {
                     $("#AddBrandBtn").removeAttr("disabled");
@@ -651,6 +936,38 @@
                     $("#EditBrandModelBtn").removeAttr("disabled");
                 } else {
                     $("#EditBrandModelBtn").attr("disabled", "disabled");
+                }
+            });
+
+            $("#AddVTypeForm").on("blur", "input", () => {
+                if ($("#AddVTypeForm").valid()) {
+                    $("#AddVTypeBtn").removeAttr("disabled");
+                } else {
+                    $("#AddVTypeBtn").attr("disabled", "disabled");
+                }
+            });
+
+            $("#EditVTypeForm").on("blur", "input", () => {
+                if ($("#EditVTypeForm").valid()) {
+                    $("#EditVTypeBtn").removeAttr("disabled");
+                } else {
+                    $("#EditVTypeBtn").attr("disabled", "disabled");
+                }
+            });
+
+            $("#AddColorForm").on("blur", "input", () => {
+                if ($("#AddColorForm").valid()) {
+                    $("#AddColorBtn").removeAttr("disabled");
+                } else {
+                    $("#AddColorBtn").attr("disabled", "disabled");
+                }
+            });
+
+            $("#EditColorForm").on("blur", "input", () => {
+                if ($("#EditColorForm").valid()) {
+                    $("#EditColorBtn").removeAttr("disabled");
+                } else {
+                    $("#EditColorBtn").attr("disabled", "disabled");
                 }
             });
 
@@ -777,32 +1094,130 @@
                 }
             );
 
+            $("#AddVTypeForm").submit(
+                function () {
+                    event.preventDefault();
+                    var url = '@Url.Content("~/api/VehicleTypes/Add/")' + @Model.CurrentVTypesPage + "/@Model.PageSize";
+                    var data = { "Type": $("#VTypeName").val() };
+                    debugger;
+                    $.ajax({
+                        url: url,
+                        data: JSON.stringify(data),
+                        cache: false,
+                        method: 'POST',
+                        beforeSend: function () {
+                            $("#VType_Create").modal('hide');
+                            $("#VTypesSection").html("<div>Please wait ..</div>");
+
+                        },
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Content-Length": data.length},
+                        success: function (data) {
+                            $("#VTypesSection").html(data);
+                        },
+                        error: function (xhr, ajaxSettings, thrownError) {
+                            console.log(xhr.status);
+                            console.log(thrownError);
+                            $("#VTypesSection").html("<div>Something went wrong ..</div>");
+                        }
+                    })
+                }
+            );
+
+            $("#EditVTypeForm").submit(
+                function () {
+                    event.preventDefault();
+                    var EditedVTypeId = parseInt($("#EditedVTypeId").val());
+                    var EditedVTypeName = $("#EditedVTypeName").val();
+                    var url = '@Url.Content("~/api/VehicleTypes/Edit/")' + EditedVTypeId + "/@Model.CurrentVTypesPage" + "/@Model.PageSize" ;
+                    var data = { Id: EditedVTypeId, Type: EditedVTypeName }
+                    debugger;
+                    $.ajax({
+                        url: url,
+                        data: JSON.stringify(data),
+                        cache: false,
+                        method: 'POST',
+                        beforeSend: function () {
+                            $("#EditVTypeModal").modal('hide');
+                        },
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Content-Length": data.length},
+                        success: function (data) {
+                            $("#VTypesSection").html(data);
+                        },
+                        error: function (xhr, ajaxSettings, thrownError) {
+                            console.log(xhr.status);
+                            console.log(thrownError);
+                            $("#VTypesSection").html("<div>Something went wrong ..</div>");
+                        }
+                    })
+                }
+            );
+
+            $("#AddColorForm").submit(
+                function () {
+                    event.preventDefault();
+                    var url = '@Url.Content("~/api/Colors/Add/")' + @Model.CurrentColorsPage + "/@Model.PageSize";
+                    var data = { "Name": $("#ColorName").val(), "HexValue": $("#ColorHexCreate").val()};
+
+                    $.ajax({
+                        url: url,
+                        data: JSON.stringify(data),
+                        cache: false,
+                        method: 'POST',
+                        beforeSend: function () {
+                            $("#Color_Create").modal('hide');
+                        },
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Content-Length": data.length},
+                        success: function (data) {
+                            $("#ColorsSection").html(data);
+                        },
+                        error: function (xhr, ajaxSettings, thrownError) {
+                            console.log(xhr.status);
+                            console.log(thrownError);
+                        }
+                    })
+                }
+            );
+
+            $("#EditColorForm").submit(
+                function () {
+                    event.preventDefault();
+                    var EditedColorId = parseInt($("#EditedColorId").val());
+                    var EditedColorName = $("#EditedColorName").val();
+                    var EditedColorHex = $("#EditedColorHex").val();
+                    var url = '@Url.Content("~/api/Colors/Edit/")' + EditedColorId + "/@Model.CurrentColorsPage" + "/@Model.PageSize" ;
+                    var data = { Id: EditedColorId, Name: EditedColorName, HexValue: EditedColorHex };
+                    debugger;
+                    $.ajax({
+                        url: url,
+                        data: JSON.stringify(data),
+                        cache: false,
+                        method: 'POST',
+                        beforeSend: function () {
+                            $("#EditColorModal").modal('hide');
+                        },
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Content-Length": data.length},
+                        success: function (data) {
+                            $("#ColorsSection").html(data);
+                        },
+                        error: function (xhr, ajaxSettings, thrownError) {
+                            console.log(xhr.status);
+                            console.log(thrownError);
+                        }
+                    })
+                }
+            );
 
             $('/*ul*/.pagination > li.disabled > a').addClass('page-link');
 
         });
-
-        function RenderBrandModels(element)
-        {
-            var selectedBrandId = parseInt(element.value);
-            var url = '@Url.Content("~/api/BrandModels/GetBrandModelsPartial/")' + selectedBrandId + "/@Model.CurrentBrandModelsPage" +"/@Model.PageSize";
-
-            $.ajax({
-                url: url,
-                method: 'Get',
-                cache: false,
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                success: function (data) {
-                    $("#BrandModelsSection").html(data);
-                },
-                error: function (xhr, ajaxSettings, thrownError) {
-                    console.log(xhr.status);
-                    console.log(thrownError);
-                }
-            });
-        }
 
     </script>
 }
