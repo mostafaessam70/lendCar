@@ -112,6 +112,23 @@
                         </div>
                     </div>
                 </form>
+                    <div class="row">
+                        <div class="col-md-4 confirm">
+                            <form action="/Payment/Pay">
+                                <input type="hidden" name="RenterId" value="@Model.LoggedUserInfo.Id" />
+                                <input type="hidden" name="VehicleId" value="@Model.Vehicle.Id" />
+                                <input type="hidden" name="ReturnData" value="@Model.EndBookingDate" />
+                                <input type="hidden" name="HireDate" value="@Model.StartBookingDate" />
+                                <input type="hidden" name="amount" value="@Model.totalPrice" />
+                                <script src="//checkout.stripe.com/v2/checkout.js"
+                                        class="stripe-button"
+                                        data-key="@Stripe.Value.PublishableKey"
+                                        data-locale="auto">
+                                </script>
+                            </form>
+                        </div>
+                    </div>
+                
                 <hr>
             </div>
 
@@ -160,19 +177,4 @@
 
 </section>
 
-<div class="text-center">
-    <form action="/Payment/Pay">
-        <article>Payment 50 dollar</article>
-        <input type="hidden" name="RenterId" value="@Model.LoggedUserInfo.Id" />
-        <input type="hidden" name="VehicleId" value="@Model.Vehicle.Id" />
-        <input type="hidden" name="ReturnData" value="@Model.EndBookingDate" />
-        <input type="hidden" name="HireDate" value="@Model.StartBookingDate" />
-        <input type="hidden" name="amount" value="@Model.totalPrice" />
-        <script src="//checkout.stripe.com/v2/checkout.js"
-                class="stripe-button"
-                data-key="@Stripe.Value.PublishableKey"
-                data-locale="auto">
-        </script>
-
-    </form>
-</div>
+ 

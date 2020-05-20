@@ -3,6 +3,7 @@ using LendCar.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -109,22 +110,41 @@ namespace LendCar.Repository
             }
             return dateBetweenStartAndEndDate;
         }
-        public List<VehicleBooking> GetAllBookingByUserID(string userId)=>
-         Context.VehicleBookings.Where(c => c.RenterId == userId).Include(c=>c.Vehicle)
-            .ThenInclude(c=>c.Model).ThenInclude(c=>c.Brand).ToList();
- 
+        public List<VehicleBooking> GetAllBookingByUserID(string userId) =>
+         Context.VehicleBookings.Where(c => c.RenterId == userId).Include(c => c.Vehicle)
+            .ThenInclude(c => c.Model).ThenInclude(c => c.Brand).ToList();
+
         public void Add(Vehicle vehicle) => Context.Vehicles.Add(vehicle);
         public void Delete(int id) => Context.Vehicles.Remove(GetVehicle(id));
 
         public void Save() => Context.SaveChanges();
 
-        public List<Vehicle> GetAllUserCar(string ownerId)=>
+        public List<Vehicle> GetAllUserCar(string ownerId) =>
             Context.Vehicles.Where(c => c.OwnerId == ownerId)
-            .Include(c=>c.Model).ThenInclude(c=>c.Brand).ToList();
+            .Include(c => c.Model).ThenInclude(c => c.Brand).ToList();
 
         public void VehicleBook(VehicleBooking vehicleBooking)
         {
             Context.VehicleBookings.Add(vehicleBooking);
+        }
+
+        public IList<Vehicle> GetAllAvailableVechilces()
+        {
+            //dont remove First ToList() ^_^ 
+            return GetAllVehiclesAccepted().ToList()
+                 .Where(c => Convert.ToDateTime(c.EndDate).Date.CompareTo(DateTime.Now.Date) >= 0)
+                 .ToList();
+        }
+
+        public decimal GetVehiclePricePerDay(int vId)=>
+            Context.Vehicles.SingleOrDefault(c => c.Id == vId).PricePerDay;
+
+        public List<Vehicle> GetAllVehicles(string ownerId) =>
+            Context.Vehicles.Where(c => c.OwnerId == ownerId).ToList();
+
+        public List<VehicleBooking> GetAllBooking()
+        {
+            return Context.VehicleBookings.Include(c=>c.Renter).ToList();
         }
     }
 }

@@ -48,7 +48,7 @@ namespace LendCar.Pages
         public string EndBookingDate { get; set; }
         [BindProperty]
         public string StartBookingDate { get; set; }
-        public double totalPrice { get; private set; }
+        public decimal totalPrice { get; private set; }
         public Vehicle Vehicle { get; set; }
         public int CarId { get; set; }
         public bookingModel(SignInManager<ApplicationUser> signInManager,
@@ -83,9 +83,10 @@ namespace LendCar.Pages
             StartBookingDate = changeDateFormat(startBookingDate);
 
 
-            totalPrice = (((Convert.ToDateTime(EndBookingDate).Date -
+            totalPrice = Convert.ToDecimal(
+                (Convert.ToDateTime(EndBookingDate).Date -
                 Convert.ToDateTime(StartBookingDate).Date)
-                .TotalDays + 1) * Vehicle.PricePerDay);
+                .TotalDays + 1) * Vehicle.PricePerDay;
 
 
 
