@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace LendCar.Repository
 {
-    public interface IVehicleTypeRepository
+    public interface IColorRepository
     {
         LendCarDBContext Context { get; }
-        VehicleType GetVehicleType(int id);
-        List<VehicleType> GetAllVehicleTypes();
-        void Add(VehicleType vehicleType);
+        Color GetColor(int id);
+        List<Color> GetAllColors();
+        void Add(Color color);
         void Delete(int id);
         void Save();
         bool Exists(int id);

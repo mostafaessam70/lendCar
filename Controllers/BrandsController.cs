@@ -9,7 +9,6 @@ using LendCar.Models;
 using LendCar.Repository;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using X.PagedList;
-using Microsoft.AspNetCore.Cors;
 
 namespace LendCar.Controllers
 {

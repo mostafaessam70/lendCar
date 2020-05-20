@@ -4842,7 +4842,7 @@ span.round-tabs {
 li.active span.round-tabs.one {
     background: #fff !important;
     border: 2px solid #ddd;
-    color: rgb(34, 194, 34);
+    color: #f1685e;
 }
 
 span.round-tabs.two {
