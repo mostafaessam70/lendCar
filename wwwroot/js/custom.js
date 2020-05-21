@@ -410,8 +410,8 @@ $(document).ready(function () {
 document.querySelector(".toggle-settings .fa-gear").onclick = function () {
 
 	this.classList.toggle("fa-spin");
-
 	document.querySelector(".settings-box").classList.toggle("openBox");
+	document.querySelector(".carGo").classList.toggle("moveCar");
 };
 
 //setting-box
@@ -430,7 +430,6 @@ colorsLi.forEach(li => {
 			element.classList.remove("fa-spin");
 
 		});
-		//e.target.classList.toggle("fa-spin");
 		e.target.classList.add("activ");
 		e.target.classList.add("fa-spin");
 	});
