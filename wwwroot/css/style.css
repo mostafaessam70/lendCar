@@ -40,7 +40,7 @@ body {
 
 body,
 p {
-    font-family:  Helvetica, sans-serif;
+    font-family: 'Lemon', sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased !important;
     line-height: 26px;
@@ -55,7 +55,7 @@ h5,
 h6 {
     color: #212121;
     font-weight: 700;
-    font-family: Helvetica ,'Lemon', sans-serif;
+    font-family: 'Lemon', sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased !important;
     /*text-shadow: 0px 2px 1px #686464;*/
@@ -446,7 +446,7 @@ cite {
     font-weight: 700;
     text-transform: uppercase;
     color: #645454;
-    font-family: Helvetica,'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     -webkit-transition: 350ms;
     -moz-transition: 350ms;
     -o-transition: 350ms;
@@ -710,7 +710,7 @@ ul.top-info-box {
 
         ul.top-info-box li .info-box .info-box-content {
             display: inline-block;
-            font-family: Helvetica,Montserrat;
+            font-family: Montserrat;
             -webkit-flex-direction: column;
             -ms-flex-direction: column;
             flex-direction: column;
@@ -827,7 +827,7 @@ ul.navbar-nav {
             }
 
         ul.navbar-nav > li > a {
-            font-family: Helvetica,'Lemon', sans-serif;
+            font-family: 'Lemon', sans-serif;
             color: #333;
             text-rendering: optimizeLegibility;
             font-weight: 900;
@@ -932,7 +932,7 @@ ul.navbar-nav {
 }
 
 .dropdown-menu li a {
-    font-family: Helvetica, 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     display: block;
     font-size: 12px;
     text-transform: uppercase;
@@ -5320,7 +5320,7 @@ body {
     .about-title .content p {
         color: #ffb600;
         font-size: 40px;
-        font-family: Helvetica,Georgia, 'Times New Roman', Times, serif;
+        font-family: Georgia, 'Times New Roman', Times, serif;
     }
 
 .role {
@@ -5834,7 +5834,7 @@ div.positionBtn {
 {
     position: fixed;
     left:-270px;
-    top:30px;
+    top:90px;
     background-color:#fff0;
     width:270px;
     z-index:1000;
@@ -5847,7 +5847,7 @@ div.positionBtn {
 .settings-box .toggle-settings {
         position: absolute;
         right: -30px;
-        top: 260px;
+        top: 100px;
         background-color: #fff;
         text-align: center;
         cursor: pointer;
@@ -5904,80 +5904,4 @@ div.positionBtn {
     .settings-box .option-box .colors-list li:nth-child(4) {
         background-image: url(https://mrkzgulfup.com/uploads/158985924357774.png);
         background-size: cover;
-    }
-
-.carGo
-{
-    width:100px;
-    height:60px;
-    position:relative;
-    left:-270px;
-}
-.moveCar {
-    transition: 7s;
-    -webkit-transition: 7s;
-    -moz-transition: 7s;
-    -o-transition: 7s;
-    transition: 7s;
-    margin-left: 1770px !important;
-}
-/*Dark Mode*/
-.theme-switch-wrapper {
-    display: flex;
-    align-items: center;
-   
-    em {
-    margin-left: 10px;
-    font-size: 1rem;
-}
-}
-
-.theme-switch {
-    display: inline-block;
-    height: 34px;
-    position: relative;
-    width: 60px;
-    left:70px;
-}
-
-    .theme-switch input {
-        display: none;
-    }
-
-.slider2 {
-    background-color: #544b4b;
-    bottom: 0;
-    cursor: pointer;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: .4s;
-}
-
-    .slider2:before {
-        background-color: #fff;
-        bottom: 4px;
-        content: "";
-        height: 26px;
-        left: 4px;
-        position: absolute;
-        transition: .4s;
-        width: 26px;
-    }
-
-input:checked + .slider2 {
-    background-color: #66bb6a;
-}
-
-    input:checked + .slider2:before {
-        transform: translateX(26px);
-    }
-
-.slider2.round {
-    border-radius: 34px;
-}
-
-    .slider2.round:before {
-        border-radius: 50%;
     }
