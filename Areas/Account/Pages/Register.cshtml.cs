@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using LendCar.Models;
 using Microsoft.Extensions.Logging;
+using LendCar.Repository;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using LendCar.DBContext;
 
 namespace LendCar.Pages
 {
@@ -21,17 +24,24 @@ namespace LendCar.Pages
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-
+        public SelectList Cities { get; set; }
+        public SelectList Genders { get; set; }
+        public LendCarDBContext _context { get; }
+      
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-           ILogger<RegisterModel> logger
+            ILogger<RegisterModel> logger,
+            LendCarDBContext Context
 
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = Context;
+            Cities = new SelectList(_context.Cities.OrderBy(c => c.Name).ToList(), "Id", "Name");
+            Genders = new SelectList(_context.Genders.ToList(), "Id", "Type");
         }
 
         [BindProperty]
@@ -57,17 +67,34 @@ namespace LendCar.Pages
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
-
+            //m4m4..12MMM
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-           
+
+            [Required]
+            [Display(Name = "Phone Number")]
+            [DataType(DataType.PhoneNumber)]
+            public string PhoneNumber { get; set; }
+
+            [Required]
+            [Display(Name = "DriverLicenseNumber")]
+            public string DriverLicenseNumber { get; set; }
+
+
+            [Required]
+            [Display(Name = "Address")]
+            public string Address { get; set; }
+            public int CityId { get; set; }
+            public int GenderId { get; set; }
         }
 
         public async Task OnGetAsync()
         {
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                     
+
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -76,7 +103,12 @@ namespace LendCar.Pages
             if (ModelState.IsValid)
             {
 
-                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email ,JoinedAt = DateTime.Now.ToString("MMMM yyyy") };
+             var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email 
+                    ,JoinedAt = DateTime.Now.ToString("MMMM yyyy"),
+                    DriverLicenseNumber = Input.DriverLicenseNumber,
+                    PhoneNumber = Input.PhoneNumber, Address = Input.Address,
+                   GenderId=Input.GenderId,CityId=Input.CityId
+              };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -84,7 +116,7 @@ namespace LendCar.Pages
 
                     await _userManager.AddToRoleAsync(user, "user");
                     await _signInManager.PasswordSignInAsync(user.UserName, Input.Password, false, false);
-                    return RedirectToPage("./Login");
+                    return RedirectToPage("Index");
                 }
 
                 foreach (var error in result.Errors)
