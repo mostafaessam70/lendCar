@@ -92,7 +92,9 @@
                                         @Html.PagedListPager((IPagedList)Model.Vehicles, page => "Admin/Admin?vehiclePage=" + page,
                                             new X.PagedList.Mvc.Common.PagedListRenderOptions
                                             {
-                                                DisplayItemSliceAndTotal = true,
+                                                DisplayLinkToFirstPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+                                                DisplayLinkToLastPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+
                                                 ContainerDivClasses = new[] { "navigation" },
                                                 LiElementClasses = new[] { "page-item","admin-list" },
                                                 PageClasses = new[] { "page-link" },
@@ -133,7 +135,9 @@
                                             @Html.PagedListPager((IPagedList)Model.Brands, brandPage => "/Admin/Admin?brandPage=" + brandPage,
                                                 new X.PagedList.Mvc.Common.PagedListRenderOptions
                                                 {
-                                                    DisplayItemSliceAndTotal = true,
+                                                    DisplayLinkToFirstPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+                                                    DisplayLinkToLastPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+
                                                     ContainerDivClasses = new[] { "navigation" },
                                                     LiElementClasses = new[] { "page-item", "admin-list" },
                                                     PageClasses = new[] { "page-link" },
@@ -245,7 +249,9 @@
                                             @Html.PagedListPager((IPagedList)Model.BrandModels, brandModelPage => "/Admin/Admin?brandModelPage=" + brandModelPage,
                                                 new X.PagedList.Mvc.Common.PagedListRenderOptions
                                                 {
-                                                    DisplayItemSliceAndTotal = true,
+                                                    DisplayLinkToFirstPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+                                                    DisplayLinkToLastPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+
                                                     ContainerDivClasses = new[] { "navigation" },
                                                     LiElementClasses = new[] { "page-item", "admin-list" },
                                                     PageClasses = new[] { "page-link" },
@@ -361,11 +367,13 @@
                                             @Html.PagedListPager((IPagedList)Model.Colors, colorPage => "/Admin/Admin?colorPage=" + colorPage,
                                                 new X.PagedList.Mvc.Common.PagedListRenderOptions
                                                 {
-                                                    DisplayItemSliceAndTotal = true,
+                                                    DisplayLinkToFirstPage=X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+                                                    DisplayLinkToLastPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+                                                    
                                                     ContainerDivClasses = new[] { "navigation" },
                                                     LiElementClasses = new[] { "page-item", "admin-list" },
                                                     PageClasses = new[] { "page-link" },
-                                                })
+                                                });
                                         </div>
                                         <!--model of edit-->
                                         <div class="modal fade product_view" id="EditColorModal">
@@ -483,7 +491,9 @@
                                                 @Html.PagedListPager((IPagedList)Model.VehicleTypes, VTypePage => "/Admin/Admin?VTypePage=" + VTypePage,
                                                     new X.PagedList.Mvc.Common.PagedListRenderOptions
                                                     {
-                                                        DisplayItemSliceAndTotal = true,
+                                                        DisplayLinkToFirstPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+                                                        DisplayLinkToLastPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+
                                                         ContainerDivClasses = new[] { "navigation" },
                                                         LiElementClasses = new[] { "page-item", "admin-list" },
                                                         PageClasses = new[] { "page-link" },
