@@ -412,6 +412,7 @@ document.querySelector(".toggle-settings .fa-gear").onclick = function () {
 	this.classList.toggle("fa-spin");
 
 	document.querySelector(".settings-box").classList.toggle("openBox");
+	document.querySelector(".carGo").classList.toggle("moveCar");
 };
 
 //setting-box
