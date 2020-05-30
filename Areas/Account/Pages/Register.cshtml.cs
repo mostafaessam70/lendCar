@@ -24,6 +24,8 @@ namespace LendCar.Pages
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
+        private readonly RoleManager<IdentityRole> _roleManager;
+
         public SelectList Cities { get; set; }
         public SelectList Genders { get; set; }
         public LendCarDBContext _context { get; }
@@ -32,7 +34,9 @@ namespace LendCar.Pages
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            LendCarDBContext Context
+            LendCarDBContext Context,
+            RoleManager<IdentityRole> roleManager
+
 
             )
         {
@@ -40,6 +44,8 @@ namespace LendCar.Pages
             _signInManager = signInManager;
             _logger = logger;
             _context = Context;
+            _roleManager = roleManager;
+
             Cities = new SelectList(_context.Cities.OrderBy(c => c.Name).ToList(), "Id", "Name");
             Genders = new SelectList(_context.Genders.ToList(), "Id", "Type");
         }
@@ -67,7 +73,7 @@ namespace LendCar.Pages
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
-            //m4m4..12MMM
+            //mohamedESAM9397..
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
@@ -113,6 +119,12 @@ namespace LendCar.Pages
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+                  
+                    if (!await _roleManager.RoleExistsAsync("user"))
+                    {
+                        await _roleManager.CreateAsync(new  IdentityRole("user") );
+
+                    }
 
                     await _userManager.AddToRoleAsync(user, "user");
                     await _signInManager.PasswordSignInAsync(user.UserName, Input.Password, false, false);
