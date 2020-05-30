@@ -36,6 +36,9 @@
             <div class="toggle-settings">
                 <i class="fas fa-gear "></i>
             </div>
+            <div class="carGo">
+                <img src="https://bit.ly/2zeXUrC" />
+            </div>
             <div class="settings-container">
                 <div class="option-box">
                     <ul class="colors-list">
@@ -118,6 +121,53 @@
 
 
         <footer id="footer" class="footer bg-overlay">
+
+            <div class="footer-main">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 footer-widget footer-about">
+                            <h3 class="widget-title">About Us</h3>
+                            <img class="footer-logo" src="images/footer-logo.png" alt="" />
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci done idunt ut
+                                labore et dolore magna aliqua.
+                            </p>
+                            <div class="footer-social">
+                                <ul>
+                                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-github"></i></a></li>
+                                </ul>
+                            </div><!-- Footer social end -->
+                        </div><!-- Col end -->
+
+                        <div class="col-md-4 col-sm-12 footer-widget">
+                            <h3 class="widget-title">Working Hours</h3>
+                            <div class="working-hours">
+                                We work 7 days a week, every day excluding major holidays. Contact us if you have an emergency, with our
+                                Hotline and Contact form.
+                                <br><br> Monday - Friday: <span class="text-right">10:00 - 16:00 </span>
+                                <br> Saturday: <span class="text-right">12:00 - 15:00</span>
+                                <br> Sunday and holidays: <span class="text-right">09:00 - 12:00</span>
+                            </div>
+                        </div><!-- Col end -->
+
+                        <div class="col-md-4 col-sm-12 footer-widget">
+                            <h3 class="widget-title">Services</h3>
+                            <ul class="list-arrow">
+                                <li><a href="">All cars</a></li>
+                                <li><a href="/allCar">Add new car</a></li>
+                                <li><a href="service-single.html">How it work</a></li>
+                                <li><a href="service-single.html">Contact us</a></li>
+                            </ul>
+                        </div><!-- Col end -->
+
+
+                    </div><!-- Row end -->
+                </div><!-- Container end -->
+            </div><!-- Footer main end -->
+
             <div class="copyright">
                 <div class="container">
                     <div class="row">
@@ -152,9 +202,9 @@
 
                     <div id="back-to-top" data-spy="affix" data-offset-top="10" class="back-to-top affix">
                         @*<button class="btn btn-primary" title="Back to Top">
-                            <i class="fa fa-angle-double-up"></i>
-                        </button>*@
-                        <span>
+                        <i class="fa fa-angle-double-up"></i>
+                    </button>*@
+                        <span title="Back to Top">
                             <img src="http://themes.potenzaglobalsolutions.com/html/cardealer/assets/images/car.png" alt="">
                         </span>
                     </div>
@@ -163,36 +213,36 @@
             </div><!-- Copyright end -->
 
         </footer><!-- Footer end -->
-    </div>
 
-    <div id="loader-wrapper">
-        <div id="loader"></div>
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
 
-    </div>
+        <div id="loader-wrapper">
+            <div id="loader"></div>
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+        </div>
 
-    <!-- Javascript Files
+        <!-- Javascript Files
     ================================================== -->
-    <!-- initialize jQuery Library -->
-    <script src="~/js/jquery.js"></script>
-    <!-- jQuery Validation Libraries -->
-    <script src="~/js/jquery-validate/jquery.validate.min.js"></script>
-    <script src="~/js/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    <!-- Bootstrap jQuery -->
-    <script src="~/js/bootstrap.min.js"></script>
-    <!-- Owl Carousel -->
-    <script src="~/js/owl.carousel.min.js"></script>
-    <!-- Color box -->
-    <script src="~/js/jquery.colorbox.js"></script>
-    <!-- Isotope -->
-    <script src="~/js/isotope.js"></script>
-    <script src="~/js/ini.isotope.js"></script>
-    <!-- wow library -->
-    <script src="~/js/wow.min.js"></script>
-    <!-- Template custom -->
-    <script src="~/js/custom.js"></script>
+        <!-- initialize jQuery Library -->
+        <script src="~/js/jquery.js"></script>
+        <!-- jQuery Validation Libraries -->
+        <script src="~/js/jquery-validate/jquery.validate.min.js"></script>
+        <script src="~/js/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <!-- Bootstrap jQuery -->
+        <script src="~/js/bootstrap.min.js"></script>
+        <!-- Owl Carousel -->
+        <script src="~/js/owl.carousel.min.js"></script>
+        <!-- Color box -->
+        <script src="~/js/jquery.colorbox.js"></script>
+        <!-- Isotope -->
+        <script src="~/js/isotope.js"></script>
+        <script src="~/js/ini.isotope.js"></script>
+        <!-- wow library -->
+        <script src="~/js/wow.min.js"></script>
+        <!-- Template custom -->
+        <script src="~/js/custom.js"></script>
 
-    @RenderSection("Scripts", false)
+        @RenderSection("Scripts", false)
+    </div>
 </body>
 </html>
