@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using LendCar.Repository;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using LendCar.DBContext;
+using Newtonsoft.Json.Serialization;
+using System.Text.RegularExpressions;
 
 namespace LendCar.Pages
 {
@@ -72,13 +74,27 @@ namespace LendCar.Pages
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
+            //[RegularExpression ("?=.*[A - Z])",ErrorMessage = "Password must contain at least One Uppercase letter ")]
             public string Password { get; set; }
             //mohamedESAM9397..
+           
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            [Required]
+            [Display(Name = "FristName")]
+            public string FristName { get; set; }
+
+            [Required]
+            [Display(Name = "LastName")]
+            public string LastName { get; set; }
+
+            [Required]
+            [Display(Name = "NationalId")]
+            [MinLength(14,ErrorMessage = "the NationalId must be Contains 14 numbers ")]
+            public string NationalId { get; set; }
             [Required]
             [Display(Name = "Phone Number")]
             [DataType(DataType.PhoneNumber)]
@@ -106,14 +122,15 @@ namespace LendCar.Pages
         public async Task<IActionResult> OnPostAsync()
         {
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
+             if (ModelState.IsValid)
             {
 
              var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email 
                     ,JoinedAt = DateTime.Now.ToString("MMMM yyyy"),
                     DriverLicenseNumber = Input.DriverLicenseNumber,
                     PhoneNumber = Input.PhoneNumber, Address = Input.Address,
-                   GenderId=Input.GenderId,CityId=Input.CityId
+                   GenderId=Input.GenderId,CityId=Input.CityId,
+                    FirstName=Input.FristName,LastName=Input.LastName,NationalId=Input.NationalId
               };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

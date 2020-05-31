@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LendCar.Models;
 using LendCar.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LendCar.Controllers
@@ -10,9 +12,13 @@ namespace LendCar.Controllers
     [Route("Client")]
     public class ClientController : Controller
     {
-        public ClientController(IClientRepository clientRepository)
+
+        public SignInManager<ApplicationUser> _signInManager;
+       
+        public ClientController(IClientRepository clientRepository, SignInManager<ApplicationUser> signInManager)
         {
             ClientRepository = clientRepository;
+            _signInManager = signInManager;
         }
 
         public IClientRepository ClientRepository { get; }
@@ -30,6 +36,13 @@ namespace LendCar.Controllers
             ClientRepository.CancelMoneyBack(clientId);
             ClientRepository.Save();
             return PartialView("_ClientCancel", ClientRepository.GetClientsCanceledBooking());
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+           
+            return RedirectToPage("/Index");
         }
     }
 }
