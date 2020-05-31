@@ -93,7 +93,7 @@ line-height: 30px;
 .ts-service-box .ts-service-icon i {
     font-size: 36px;
     float: left;
-    color: #ffb600;
+    color: var(--main-color);
 }
 
 .ts-team-content button{
@@ -196,13 +196,12 @@ ul > li.page-item.active.car-list > span {
     }
 
 ul > li.page-item.active.admin-list > span {
-    background-color: #ffb600;
+    background-color: var(--main-color);
     transition: all ease-in-out .3s;
-    border-color: #ffb600;
+    border-color: var(--main-color);
     font-size: 15px;
     margin-right: 7px;
     margin-bottom: 15px;
-    
 }
 
 
