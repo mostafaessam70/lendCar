@@ -34,7 +34,7 @@ namespace LendCar.Pages
             this._signInManager = signInManager;
         }
 
-        public void OnGet()
+        public void OnGet(int Page)
         {
             Request.Query.TryGetValue("Page", out var page);
             int pageNumber;
