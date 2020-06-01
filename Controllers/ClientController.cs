@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LendCar.Models;
 using LendCar.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LendCar.Controllers
@@ -34,6 +35,14 @@ namespace LendCar.Controllers
             ClientRepository.Save();
             return PartialView("_ClientCancel", ClientRepository.GetClientsCanceledBooking());
         }
+
+       /* public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+           
+            return RedirectToPage("/Index");
+            */
+
         [Route("EditInfo")]
         public IActionResult EditClientInfo(ApplicationUser client)
         {
