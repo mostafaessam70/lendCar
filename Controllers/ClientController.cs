@@ -12,10 +12,14 @@ namespace LendCar.Controllers
     [Route("Client")]
     public class ClientController : Controller
     {
-        public ClientController(IClientRepository clientRepository,IUserRepository userRepository)
+
+        public SignInManager<ApplicationUser> SignInManager { get; }
+
+         public ClientController(IClientRepository clientRepository,IUserRepository userRepository, SignInManager<ApplicationUser> signInManager)
         {
             ClientRepository = clientRepository;
             UserRepository = userRepository;
+            SignInManager = signInManager;
         }
 
         public IClientRepository ClientRepository { get; }
@@ -36,12 +40,6 @@ namespace LendCar.Controllers
             return PartialView("_ClientCancel", ClientRepository.GetClientsCanceledBooking());
         }
 
-       /* public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-           
-            return RedirectToPage("/Index");
-            */
 
         [Route("EditInfo")]
         public IActionResult EditClientInfo(ApplicationUser client)
@@ -54,5 +52,7 @@ namespace LendCar.Controllers
             }
             return Ok("failed");
         }
+
+       
     }
 }

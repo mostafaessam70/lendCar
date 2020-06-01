@@ -16,9 +16,9 @@ else
 
     ApplicationUser CurrentUser;
 
-   @inject UserManager<ApplicationUser> UserManager;
-   
-    
+    @inject UserManager<ApplicationUser> UserManager;
+
+
 
     CurrentUser = await UserManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
@@ -33,7 +33,9 @@ else
             <li><a asp-area="Account" asp-page="/changePassword"><i class="fas fa-unlock-alt"></i> Change Passowrd</a></li>
             <li><a asp-area="Cars" asp-page="/UserInfo"><i class="fas fa-user-edit"></i> Edit Info</a></li>
             <li><a asp-area="Account" asp-page="/History"> History</a></li>
-            <li><a asp-controller="Client" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li><a asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </li>
 }
+
+   
