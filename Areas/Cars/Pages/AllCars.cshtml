@@ -1,5 +1,5 @@
 ﻿@page
-@model LendCar.Pages.IndexModel
+@model LendCar.Pages.AllCarsModel
 
 @{
     ViewData["Title"] = "Home page";
@@ -10,7 +10,7 @@
 
 <div class="text-center">
 
-    @Html.PagedListPager((IPagedList)Model.Vehicles, page =>"/AllCars?Page="+page,
+    @Html.PagedListPager((IPagedList)Model.Vehicles, page =>"/Cars/AllCars?Page="+page,
         new X.PagedList.Mvc.Common.PagedListRenderOptions
         {
             DisplayItemSliceAndTotal = true,
