@@ -68,7 +68,8 @@ namespace LendCar
             //    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
             //});
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddRazorPages(c=>c.Conventions.AddPageRoute("/Home",""));
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
         }

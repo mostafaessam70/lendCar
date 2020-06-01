@@ -1,4 +1,17 @@
-﻿
+﻿@inject Microsoft.AspNetCore.Identity.UserManager<LendCar.Models.ApplicationUser> userManager
+@inject LendCar.Repository.IUserRepository userRepo
+@{ 
+    LendCar.Models.ApplicationUser CurrentUser = userRepo.FindById(userManager.GetUserId(User));
+    string image = Url.Content("~/images/users/default.jpg");
+    if (CurrentUser != null)
+    {
+        if (CurrentUser.ImageUrl != null)
+        {
+            image = Url.Content(CurrentUser.ImageUrl);
+        }
+    }
+
+}
 
 @if (!User.Identity.IsAuthenticated)
 {
@@ -11,7 +24,7 @@ else
 
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown">
-            <img src="https://bit.ly/2Z8iLY9"  class="img-circle" style="width:50px;height:50px">
+            <img src="@image"  class="img-circle" style="width:50px;height:50px">
             <i class="fa fa-angle-down"></i>
         </a>
         <ul class="dropdown-menu" role="menu">

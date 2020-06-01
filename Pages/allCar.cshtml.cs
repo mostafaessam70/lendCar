@@ -54,11 +54,5 @@ namespace LendCar.Pages
            
         }
 
-        public IActionResult OnGetLogout() 
-        {
-            this._signInManager.SignOutAsync();
-            return RedirectToPage("Index");
-        }
-
     }
 }
