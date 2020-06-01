@@ -19,8 +19,8 @@ namespace LendCar.Pages
         }
         public void OnGet()
         {
-
         }
+
         public IActionResult OnGetLogout()
         {
             this._signInManager.SignOutAsync();

@@ -146,5 +146,6 @@ namespace LendCar.Repository
         {
             return Context.VehicleBookings.Include(c=>c.Renter).ToList();
         }
+
     }
 }

@@ -33,6 +33,7 @@
 }
 
 
+
 body {
     background: #fff;
     color: #555;
@@ -445,7 +446,7 @@ cite {
     padding: 12px 20px 10px;
     font-weight: 700;
     text-transform: uppercase;
-    color: #fff;
+    color: white;
     font-family: 'Montserrat', sans-serif;
     -webkit-transition: 350ms;
     -moz-transition: 350ms;
@@ -4651,7 +4652,7 @@ background-color: var(--main-color);
 }
 
 .booking hr {
-    height: 2px;
+    height: 1px;
     background-color: var(--main-color);
 }
 
@@ -4666,6 +4667,7 @@ background-color: var(--main-color);
 .booking label {
     font-size: 16px;
     margin-top: 2%;
+    cursor: pointer;
 }
 
 .booking input {

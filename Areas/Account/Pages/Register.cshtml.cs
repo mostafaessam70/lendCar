@@ -16,6 +16,9 @@ using LendCar.DBContext;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Newtonsoft.Json.Serialization;
+using System.Text.RegularExpressions;
+
 
 namespace LendCar.Pages
 {
@@ -84,13 +87,27 @@ namespace LendCar.Pages
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
+            //[RegularExpression ("?=.*[A - Z])",ErrorMessage = "Password must contain at least One Uppercase letter ")]
             public string Password { get; set; }
             //mohamedESAM9397..
+           
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            [Required]
+            [Display(Name = "FristName")]
+            public string FristName { get; set; }
+
+            [Required]
+            [Display(Name = "LastName")]
+            public string LastName { get; set; }
+
+            [Required]
+            [Display(Name = "NationalId")]
+            [MinLength(14,ErrorMessage = "the NationalId must be Contains 14 numbers ")]
+            public string NationalId { get; set; }
             [Required]
             [Display(Name = "Phone Number")]
             [DataType(DataType.PhoneNumber)]
@@ -118,7 +135,7 @@ namespace LendCar.Pages
         public async Task<IActionResult> OnPostAsync()
         {
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
+             if (ModelState.IsValid)
             {
                 string newImgName = "default.jpg";
                 if (Input.ProfilePicture != null && Input.ProfilePicture.Length > 0)
@@ -136,11 +153,11 @@ namespace LendCar.Pages
                     JoinedAt = DateTime.Now.ToString("MMMM yyyy"),
                     DriverLicenseNumber = Input.DriverLicenseNumber,
                     PhoneNumber = Input.PhoneNumber, Address = Input.Address,
-                    GenderId = Input.GenderId, CityId = Input.CityId,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
                     ImageUrl = $"~/images/users/{newImgName}"
                 };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
