@@ -40,7 +40,6 @@ namespace LendCar.Repository
             FindById(userId).ImageUrl = phtoPath;
         }
         public void Save() => Context.SaveChanges();
-       
 
     }
 }

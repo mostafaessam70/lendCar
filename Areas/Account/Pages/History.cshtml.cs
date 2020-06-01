@@ -17,10 +17,14 @@ namespace LendCar.Areas.Account.Pages
         private readonly UserManager<ApplicationUser> UserManager;
 
         public ICarRepository ICarRepository { get; }
-        public HistoryModel(ICarRepository ICarRepository, UserManager<ApplicationUser> userManager)
+        public IClientRepository ClientRepository { get; }
+
+        public HistoryModel(ICarRepository ICarRepository, UserManager<ApplicationUser> userManager,
+            IClientRepository clientRepository)
         {
             this.ICarRepository = ICarRepository;
             UserManager = userManager;
+            ClientRepository = clientRepository;
         }
 
 
@@ -29,6 +33,15 @@ namespace LendCar.Areas.Account.Pages
             var userId = UserManager.GetUserId(User);
             UserBookingCars = ICarRepository.GetAllBookingByUserID(userId);
             UserCars = ICarRepository.GetAllUserCar(userId);
+        }
+        public void OnPost(int bookingId)
+        {
+            var booking = ICarRepository.GetAllBooking().SingleOrDefault(c => c.Id == bookingId);
+            if (Convert.ToDateTime(booking.HireDate).Date > DateTime.Now.Date)
+            {
+                ClientRepository.CancelBooking(bookingId);
+                ClientRepository.Save();
+            }
         }
     }
 }

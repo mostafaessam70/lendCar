@@ -14,5 +14,6 @@ namespace LendCar.Repository
         void Save();
         List<BookingMoneyHelper> GetClientsCanceledBooking();
         void CancelMoneyBack(string clientId);
+        void CancelBooking(int id);
     }
 }
