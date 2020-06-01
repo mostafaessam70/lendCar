@@ -3722,22 +3722,44 @@ label {
         padding: 28px 0;
     }
 /*form add car*/
+
+#add-car {
+    
+    /*background-image: url(https://bit.ly/2Sxz2lq);
+    background-size: cover;*/
+}
+
 .add-car {
     background-color: white;
     border-radius: 20px 20px;
     padding: 50px;
-    margin-left: 350px;
     opacity: .9;
 }
 
-    .add-car h2 {
-        text-align: center
-    }
+.client-terms {
+    margin-top: 13%;
+}
+
+.client-terms p{
+    font-size:17px;
+}
+
+.add-car hr{
+    background-color:#ffb600;
+    height:2px;
+}
+
+.add-car h2 {
+    text-align: center
+}
 
     .add-car button {
-        margin-left: 80px
+       background-color:#ffb600;
     }
 
+    select{
+        cursor:pointer;
+    }
 /*Login Page*/
 .LoginPage {
     background: url(https://bit.ly/35R2p7S) no-repeat center;
@@ -6123,9 +6145,6 @@ div.positionBtn {
     margin-bottom: 6%;
 }
 
-.row {
-    display: flexbox;
-}
 
 .how-work .description h1 {
     font-weight: 700;
@@ -6154,10 +6173,15 @@ div.positionBtn {
         /* box-shadow:0 4px 17px rgba(0, 0, 0, 0.35); */
     }
 
+.img-terms img {
+    max-height: 350px;
+    margin-bottom: 2%;
+}
 
-    .how-steps .right-side {
-        margin-top: 5%;
-    }
+
+.how-steps .right-side {
+    margin-top: 5%;
+}
 
 strong.number {
     display: inline-block;
@@ -6204,43 +6228,6 @@ strong.number {
         background-color: black;
         color: white;
     }
-
-@media only screen and (max-width: 1000px) {
-
-    .how-steps .row {
-        display: grid;
-    }
-
-    .how-steps h3 {
-        text-align: center;
-    }
-
-    .how-steps .right-side a {
-        margin-left: 40%;
-    }
-
-    .how-steps .big-btn {
-        order: 2;
-    }
-
-    .second-img {
-        order: 1;
-    }
-
-    .how-steps .big-btn a {
-        margin-left: 20%;
-    }
-
-
-    .how-steps .col-order-sm-2 {
-        display: block;
-        order: 2;
-    }
-
-    .how-steps .col-order-sm-1 {
-        order: 1;
-    }
-}
 
 div.col-md-5.first-term {
     margin-left: 3%;
@@ -6299,3 +6286,113 @@ div.col-md-5.first-term {
     .hover-icon:hover {
         font-size: xx-large;
     } 
+
+    /*user profile*/
+.user-profile{
+    margin:5% 0% ;
+}
+
+    .user-profile .fas{
+        color:#ffb600;
+        margin-right:2%;
+        font-size:25px;
+    }
+
+    .user-profile hr{
+        height:2px;
+        background-color:#ffb600;
+    }
+
+    .user-image img {
+        width:115px;
+        height:115px;
+        box-shadow: 0px 0px 6px 4px #00000045;
+    }
+
+    /* userinfo*/
+
+.change-user-photo .btn-warning {
+    background-color: #ffb600;
+    border-radius:0px;
+    transition:all 350ms;
+
+}
+
+.change-user-photo .btn-warning:hover{
+    background-color:black;
+}
+
+.userinfo-image img {
+    margin-left: 18%;
+    margin-bottom: 2%;
+    box-shadow: 0px 0px 6px 4px #00000045;
+
+
+}
+
+
+
+@media only screen and (max-width: 1000px) {
+
+    .how-steps .row, .form-horizontal .row, .user-info .row {
+        display: grid;
+    }
+
+    .user-info-text {
+        order: 2;
+    }
+
+    .booking .col-box {
+        margin-top: 20px;
+    }
+
+    .how-steps h3 {
+        text-align: center;
+    }
+
+    .client-terms {
+        margin-top: 2%;
+    }
+
+
+
+        .client-terms img {
+            max-height: 280px;
+        }
+
+    .how-steps .right-side a {
+        margin-left: 40%;
+    }
+
+    .how-steps .big-btn {
+        order: 2;
+    }
+
+    .second-img {
+        order: 1;
+    }
+
+    .add-terms {
+        order: 2;
+    }
+
+
+
+    .how-steps .big-btn a {
+        margin-left: 20%;
+    }
+
+
+    .how-steps .col-order-sm-2 {
+        display: block;
+        order: 2;
+    }
+
+    .how-steps .col-order-sm-1 {
+        order: 1;
+    }
+
+    .userinfo-image img {
+        margin-left: 30%;
+    }
+}
