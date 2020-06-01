@@ -34,7 +34,7 @@ namespace LendCar.Pages
             this._signInManager = signInManager;
         }
 
-        public void OnGet()
+        public void OnGet(int Page)
         {
             Request.Query.TryGetValue("Page", out var page);
             int pageNumber;
@@ -52,12 +52,6 @@ namespace LendCar.Pages
 
             Vehicles = ICarRepository.GetAllAvailableVechilces().ToPagedList(pageNumber, 9);
            
-        }
-
-        public IActionResult OnGetLogout() 
-        {
-            this._signInManager.SignOutAsync();
-            return RedirectToPage("Index");
         }
 
     }

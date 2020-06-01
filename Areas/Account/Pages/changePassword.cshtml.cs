@@ -60,12 +60,7 @@ namespace LendCar.Pages
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var hasPassword = await _userManager.HasPasswordAsync(user);
-            if (!hasPassword)
-            {
-                return RedirectToPage("./SetPassword");
-            }
-
+           
             return Page();
         }
 
@@ -91,12 +86,12 @@ namespace LendCar.Pages
                 }
                 return Page();
             }
-
+           
+            ModelState.Clear();
+            
             await _signInManager.RefreshSignInAsync(user);
-            _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Your password has been changed.";
 
-            return RedirectToPage("./Login");
+            return Page();
         }
     }
 }

@@ -20,8 +20,9 @@ namespace LendCar.Controllers
         public ICarRepository ICarRepository { get; }
 
         [Route("Pay")]
-        public IActionResult Pay(VehicleBooking bookingInfo, long amount, string stripeEmail, string stripeToken)
+        public IActionResult Pay(VehicleBooking bookingInfo, decimal amount, string stripeEmail, string stripeToken)
         {
+
             var c = new CustomerService();
             var customer = c.Create(new CustomerCreateOptions()
             {
@@ -31,8 +32,8 @@ namespace LendCar.Controllers
             var ch = new ChargeService();
             var change = ch.Create(new ChargeCreateOptions
             {
-                Amount = amount*100,
-                Currency = "usd",
+                Amount =(long)amount*100,
+                Currency = "egp",
                 Description = "Vechile booking ",
                 Customer = customer.Id,
                 ReceiptEmail = stripeEmail

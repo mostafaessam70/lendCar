@@ -63,12 +63,10 @@ namespace LendCar.Pages
             Contact = IContactRepsotiory.GetCompanyContact();
 
         }
-        public async Task OnGetAsync(int carId, string endBookingDate, string startBookingDate)
+        public void OnGetAsync(int carId, string endBookingDate, string startBookingDate)
         {
 
             CarId = carId;
-            await SignInManager.PasswordSignInAsync("Moneim2", "Sara@ask123.com", false, false);
-
             LoggedUserInfo = UserRerpository.FindById(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             this.Vehicle = CarRepsitory.GetVehicle(CarId);
@@ -118,8 +116,8 @@ namespace LendCar.Pages
             {
                 LoggedUserInfo.Id = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-                LoggedUserInfo.BirthDate = (Day.Length == 2 ? Day : "0" + Day) + "/" +
-                    (Month.Length == 2 ? Month : "0" + Month) + "/" + Year;
+                LoggedUserInfo.BirthDate = (Day.Length == 2 ? Day : "0" + Day) + "-" +
+                    (Month.Length == 2 ? Month : "0" + Month) + "-" + Year;
 
 
                 UserRerpository.EditBookingInfo(LoggedUserInfo);
