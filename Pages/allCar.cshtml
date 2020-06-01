@@ -10,7 +10,7 @@
 
 <div class="text-center">
 
-    @Html.PagedListPager((IPagedList)Model.Vehicles, page =>"/Index?Page="+page,
+    @Html.PagedListPager((IPagedList)Model.Vehicles, page =>"/allCar?Page="+page,
         new X.PagedList.Mvc.Common.PagedListRenderOptions
         {
             DisplayItemSliceAndTotal = true,
