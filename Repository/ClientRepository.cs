@@ -135,7 +135,7 @@ namespace LendCar.Repository
                     {
 
                         User = UserRepository.FindById(allBookingProccess[i].RenterId),
-                        TotalMoney =totalPrice-( totalPrice / 5)
+                        TotalMoney = totalPrice - (totalPrice / 5)
 
                     });
                 }
@@ -157,6 +157,10 @@ namespace LendCar.Repository
                 bookingVechicles[i].IsOwnerRecivedHisMoney = true;
             }
 
+        }
+        public void CancelBooking(int id)
+        {
+            CarRepository.GetAllBooking().SingleOrDefault(c => c.Id == id).IsBookingCanceled = true;
         }
     }
     class BookingHelper

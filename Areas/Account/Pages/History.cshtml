@@ -38,34 +38,45 @@
                             <h2>Hire Table</h2>
                             <p>Cars that the customer has Hired :</p>
                         </div>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Brand</th>
-                                    <th>Model</th>
-                                    <th>Start Hire</th>
-                                    <th>End Hire</th>
-                                    <th>Case</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @for (int i = 0; i < Model.UserBookingCars.Count; i++)
-                                {
+                        <form>
+                            <table class="table table-striped">
+                                <thead>
                                     <tr>
-                                        <td>@Model.UserBookingCars[i].Vehicle.Model.Brand.Name</td>
-                                        <td>@Model.UserBookingCars[i].Vehicle.Model.Name</td>
-                                        <td>@Model.UserBookingCars[i].HireDate</td>
-                                        <td>@Model.UserBookingCars[i].ReturnData</td>
-                                        <td>
-                                            @(
-                                               Convert.ToDateTime(Model.ICarRepository.ChangeDateFormatToDaysMonthYears(Model.UserBookingCars[i].ReturnData))>=
-                                               Convert.ToDateTime(DateTime.Now.ToString("dd-MM-yyyy"))?"Active":"End"
-                                            )
-                                        </td>
+                                        <th>Brand</th>
+                                        <th>Model</th>
+                                        <th>Start Hire</th>
+                                        <th>End Hire</th>
+                                        <th>Case</th>
+                                        <th>Cancel</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+
+                                    @for (int i = 0; i < Model.UserBookingCars.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>@Model.UserBookingCars[i].Vehicle.Model.Brand.Name</td>
+                                            <td>@Model.UserBookingCars[i].Vehicle.Model.Name</td>
+                                            <td>@Model.UserBookingCars[i].HireDate</td>
+                                            <td>@Model.UserBookingCars[i].ReturnData</td>
+                                            <td>
+                                                @(
+                                                    Convert.ToDateTime(Model.ICarRepository.ChangeDateFormatToDaysMonthYears(Model.UserBookingCars[i].ReturnData)) >=
+                                                    Convert.ToDateTime(DateTime.Now.ToString("dd-MM-yyyy")) ? "Active" : "End"
+                                                )
+                                            </td>
+                                            <form>
+                                                <td>
+                                                    <input type="hidden" name="bookingId" value="@Model.UserBookingCars[i].Id" />
+                                                    <input type="submit" class="btn btn-danger" value="Cancel" />
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
 
                     <div id="tab2" class="tab-pane fade in ">

@@ -16,7 +16,7 @@
                             <li class="active" id="vehiclesTabLi">
                                 <a href="#vehiclesTabDiv" data-toggle="tab" title="Pending Vehicles">
                                     <span class="round-tabs one">
-                                        <i class="glyphicon glyphicon-exclamation-sign"></i>
+                                        <i class="fas fa-car"></i>
                                     </span>
                                 </a>
                             </li>
@@ -24,14 +24,14 @@
                             <li id="brandsTabLi">
                                 <a href="#brandsTabDiv" data-toggle="tab" title="Brands">
                                     <span class="round-tabs two">
-                                        <i class="glyphicon glyphicon-copyright-mark"></i>
+                                        <i class="far fa-copyright"></i>
                                     </span>
                                 </a>
                             </li>
                             <li id="brandModelsTabLi">
                                 <a href="#brandModelsTabDiv" data-toggle="tab" title="Models">
                                     <span class="round-tabs three">
-                                        <i class="glyphicon glyphicon-gift"></i>
+                                        <i class="fas fa-car-side"></i>
                                     </span>
                                 </a>
                             </li>
@@ -39,7 +39,7 @@
                             <li id="colorsTabLi">
                                 <a href="#colorsTabDiv" data-toggle="tab" title="Colors">
                                     <span class="round-tabs four">
-                                        <i class="glyphicon glyphicon-comment"></i>
+                                        <i class="fas fa-paint-roller"></i>
                                     </span>
                                 </a>
                             </li>
@@ -47,7 +47,7 @@
                             <li id="vehicleTypesTabLi">
                                 <a href="#vehicleTypesTabDiv" data-toggle="tab" title="Vehicle types">
                                     <span class="round-tabs five">
-                                        <i class="glyphicon glyphicon-ok"></i>
+                                        <i class="fas fa-car"></i>
                                     </span>
                                 </a>
                             </li>
@@ -92,7 +92,9 @@
                                         @Html.PagedListPager((IPagedList)Model.Vehicles, page => "Admin/Admin?vehiclePage=" + page,
                                             new X.PagedList.Mvc.Common.PagedListRenderOptions
                                             {
-                                                DisplayItemSliceAndTotal = true,
+                                                DisplayLinkToFirstPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+                                                DisplayLinkToLastPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+
                                                 ContainerDivClasses = new[] { "navigation" },
                                                 LiElementClasses = new[] { "page-item","admin-list" },
                                                 PageClasses = new[] { "page-link" },
@@ -133,7 +135,9 @@
                                             @Html.PagedListPager((IPagedList)Model.Brands, brandPage => "/Admin/Admin?brandPage=" + brandPage,
                                                 new X.PagedList.Mvc.Common.PagedListRenderOptions
                                                 {
-                                                    DisplayItemSliceAndTotal = true,
+                                                    DisplayLinkToFirstPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+                                                    DisplayLinkToLastPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+
                                                     ContainerDivClasses = new[] { "navigation" },
                                                     LiElementClasses = new[] { "page-item", "admin-list" },
                                                     PageClasses = new[] { "page-link" },
@@ -226,16 +230,16 @@
                                     <div class="col-md-7">
                                         <h3 class="head text-center">Models</h3>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-2">
                                         <label>Select brand to filter by : </label>
-                                        <select onchange="RenderBrandModels(this)" asp-items="@Model.BrandsSelectList">
+                                        <select class="form-control"  onchange="RenderBrandModels(this)" asp-items="@Model.BrandsSelectList">
                                             <option value="0">All brands</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="container">
-                                    <div class="row col-md-8 col-md-offset-2 custyle">
+                                    <div class="row col-md-10 col-md-offset-1 custyle">
                                         <button id="ShowBrandModelModal" class="btn btn-primary btn-xs pull-left" onclick="ShowCreateBrandModelModal()"><b>+</b> Add New Model</button>
                                         <div id="BrandModelsSection">
                                             <partial name="_BrandModelsList" model="Model.BrandModels" />
@@ -245,7 +249,9 @@
                                             @Html.PagedListPager((IPagedList)Model.BrandModels, brandModelPage => "/Admin/Admin?brandModelPage=" + brandModelPage,
                                                 new X.PagedList.Mvc.Common.PagedListRenderOptions
                                                 {
-                                                    DisplayItemSliceAndTotal = true,
+                                                    DisplayLinkToFirstPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+                                                    DisplayLinkToLastPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+
                                                     ContainerDivClasses = new[] { "navigation" },
                                                     LiElementClasses = new[] { "page-item", "admin-list" },
                                                     PageClasses = new[] { "page-link" },
@@ -351,7 +357,7 @@
                                 </div>
 
                                 <div class="container">
-                                    <div class="row col-md-8 col-md-offset-2 custyle">
+                                    <div class="row col-md-10 col-md-offset-1 custyle">
                                         <button id="ShowColorsModal" class="btn btn-primary btn-xs pull-left" onclick="ShowCreateColorModal()"><b>+</b> Add new Color</button>
                                         <div id="ColorsSection">
                                             <partial name="_ColorsList" model="Model.Colors" />
@@ -361,11 +367,13 @@
                                             @Html.PagedListPager((IPagedList)Model.Colors, colorPage => "/Admin/Admin?colorPage=" + colorPage,
                                                 new X.PagedList.Mvc.Common.PagedListRenderOptions
                                                 {
-                                                    DisplayItemSliceAndTotal = true,
+                                                    DisplayLinkToFirstPage=X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+                                                    DisplayLinkToLastPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+                                                    
                                                     ContainerDivClasses = new[] { "navigation" },
                                                     LiElementClasses = new[] { "page-item", "admin-list" },
                                                     PageClasses = new[] { "page-link" },
-                                                })
+                                                });
                                         </div>
                                         <!--model of edit-->
                                         <div class="modal fade product_view" id="EditColorModal">
@@ -473,7 +481,7 @@
                                     </div>
 
                                     <div class="container">
-                                        <div class="row col-md-8 col-md-offset-2 custyle">
+                                        <div class="row col-md-10 col-md-offset-1 custyle">
                                             <button id="ShowVTypeModal" class="btn btn-primary btn-xs pull-left" onclick="ShowCreateVTypeModal()"><b>+</b> Add new vehicle type</button>
                                             <div id="VTypesSection">
                                                 <partial name="_VehicleTypesList" model="Model.VehicleTypes" />
@@ -483,7 +491,9 @@
                                                 @Html.PagedListPager((IPagedList)Model.VehicleTypes, VTypePage => "/Admin/Admin?VTypePage=" + VTypePage,
                                                     new X.PagedList.Mvc.Common.PagedListRenderOptions
                                                     {
-                                                        DisplayItemSliceAndTotal = true,
+                                                        DisplayLinkToFirstPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+                                                        DisplayLinkToLastPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+
                                                         ContainerDivClasses = new[] { "navigation" },
                                                         LiElementClasses = new[] { "page-item", "admin-list" },
                                                         PageClasses = new[] { "page-link" },
@@ -631,7 +641,7 @@
                         url += "&VTypePage=" + @Model.CurrentVTypesPage;
                         break;
                 }
-                debugger;
+                //debugger;
                 window.location.href = url;
             }
         }

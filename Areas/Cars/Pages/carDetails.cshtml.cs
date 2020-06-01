@@ -54,30 +54,35 @@ namespace LendCar.Pages
         {
             if (ModelState.IsValid)
             {
-                var availableDays = CarRepository.AvailableDays(
-                    CarRepository.ChangeDateFormatToDaysMonthYears(startBookingDate),
-                    CarRepository.ChangeDateFormatToDaysMonthYears(endBookingDate), carId);
 
-                if (availableDays != null)
+                startBookingDate =CarRepository.ChangeDateFormatToDaysMonthYears(startBookingDate);
+                endBookingDate = CarRepository.ChangeDateFormatToDaysMonthYears(endBookingDate);
+
+                if (Convert.ToDateTime(startBookingDate).Date.CompareTo(DateTime.Now.Date) >= 0)
                 {
-                    if (!availableDays.Any(c => c.Value == "Not Available"))
-                    {
-                        return RedirectToPage("booking",
-                            new
-                            {
-                                area = "Cars",
-                                EndBookingDate = endBookingDate,
-                                StartBookingDate = startBookingDate,
-                                CarId = carId
-                            });
-                    }
-                    else
-                    {
+                    var availableDays = CarRepository.AvailableDays(startBookingDate,endBookingDate, carId);
 
-                        TempData["avilabeldays"] = availableDays;
-                        return OnGet(carId);
-                    }
+                    if (availableDays != null)
+                    {
+                        if (!availableDays.Any(c => c.Value == "Not Available"))
+                        {
+                            return RedirectToPage("booking",
+                                new
+                                {
+                                    area = "Cars",
+                                    EndBookingDate = endBookingDate,
+                                    StartBookingDate = startBookingDate,
+                                    CarId = carId
+                                });
+                        }
+                        else
+                        {
 
+                            TempData["avilabeldays"] = availableDays;
+                            return OnGet(carId);
+                        }
+
+                    }
                 }
                 TempData["DateIsNotCorrect"] = true;
             }

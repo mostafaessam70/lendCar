@@ -56,6 +56,15 @@ jQuery(function ($) {
 		}
 	});
 
+	/*hide navebar when scroll and display when up*/
+	var myElement = document.querySelector("#header");
+
+
+	// create a Headroom object passing in the #header element
+	var headroom = new Headroom(myElement);
+
+	// initialize the library
+	headroom.init();
 	/* ----------------------------------------------------------- */
 	/*  Mobile Menu
 	/* ----------------------------------------------------------- */
@@ -412,6 +421,7 @@ document.querySelector(".toggle-settings .fa-gear").onclick = function () {
 	this.classList.toggle("fa-spin");
 
 	document.querySelector(".settings-box").classList.toggle("openBox");
+	document.querySelector(".carGo").classList.toggle("moveCar");
 };
 
 //setting-box

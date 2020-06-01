@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>@ViewData["Title"] - test1</title>
+    <title>@ViewData["Title"] - Lend Car</title>
 
 
     <!-- Bootstrap -->
@@ -36,6 +36,9 @@
             <div class="toggle-settings">
                 <i class="fas fa-gear "></i>
             </div>
+            <div class="carGo">
+                <img src="https://bit.ly/2zeXUrC" />
+            </div>
             <div class="settings-container">
                 <div class="option-box">
                     <ul class="colors-list">
@@ -62,46 +65,51 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-
-                                <div class="collapse navbar-collapse navbar-responsive-collapse">
-                                    <ul class="nav navbar-nav">
-                                        <li class="logo col-xs-12 col-md-4">
-                                            <a href="index.html">
-                                                <img src="https://bit.ly/3dvHTfB" style="height:56px" alt="">
-                                            </a>
-                                        </li><!-- logo end -->
-
-                                        <li class="dropdown active"><a href="#">Home</a></li>
-                                        <li><a href="/allCar">All Cars</a></li>
-                                        <li><a href="/contact">Contact</a></li>
-                                        <partial name="_AddCarPartial" />
-                                    </ul>
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <partial name="_LoginPartial" />
-                                    </ul>
-
-                                    <!--/ Nav ul end -->
-
+                                <div class="logo col-xs-12 col-md-2">
+                                    <a href="index.html">
+                                        <img src="~/logo.png" style="height:56px" alt="">
+                                    </a>
                                 </div>
-                                <!--/ Collapse end -->
+                                    <div class="collapse navbar-collapse navbar-responsive-collapse">
+                                        <ul class="nav navbar-nav">
+                                            <li class="dropdown active"><a href="#">Home</a></li>
+                                            <li class="dropdown">
+                                                <a class="dropdown-toggle" data-toggle="dropdown">Your Car <i class="fa fa-angle-down"></i></a>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="/allCar">All Cars</a></li>
+                                                    <partial name="_AddCarPartial" />
+                                                </ul>
+                                            </li>
+                                            <li><a href="/HowUse">How to use</a></li>
+                                            <li><a href="/contact">Contact</a></li>
+                                            <li><a href="/about">About</a></li>
+                                        </ul>
+                                        <ul class="nav navbar-nav navbar-right">
+                                            <partial name="_LoginPartial" />
+                                        </ul>
 
-                            </div><!-- Site Navbar inner end -->
+                                        <!--/ Nav ul end -->
 
+                                    </div>
+                                    <!--/ Collapse end -->
+
+                                </div><!-- Site Navbar inner end -->
+
+                            </div>
+                            <!--/ Col end -->
                         </div>
-                        <!--/ Col end -->
+                        <!--/ Row end -->
+                        <div class="nav-search">
+                            <span id="search"><i class="fa fa-search"></i></span>
+                        </div><!-- Search end -->
+
+
+                        <div class="search-block" style="display: none;">
+                            <input type="text" class="form-control" placeholder="Type what you want and enter">
+                            <span class="search-close">&times;</span>
+                        </div><!-- Site search end -->
                     </div>
-                    <!--/ Row end -->
-                    <div class="nav-search">
-                        <span id="search"><i class="fa fa-search"></i></span>
-                    </div><!-- Search end -->
-
-
-                    <div class="search-block" style="display: none;">
-                        <input type="text" class="form-control" placeholder="Type what you want and enter">
-                        <span class="search-close">&times;</span>
-                    </div><!-- Site search end -->
-                </div>
-                <!--/ Container end -->
+                    <!--/ Container end -->
 
             </nav>
             <!--/ Navigation end -->
@@ -118,6 +126,53 @@
 
 
         <footer id="footer" class="footer bg-overlay">
+
+            <div class="footer-main">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 footer-widget footer-about">
+                            <h3 class="widget-title">About Us</h3>
+                            <img class="footer-logo" src="images/footer-logo.png" alt="" />
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci done idunt ut
+                                labore et dolore magna aliqua.
+                            </p>
+                            <div class="footer-social">
+                                <ul>
+                                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-github"></i></a></li>
+                                </ul>
+                            </div><!-- Footer social end -->
+                        </div><!-- Col end -->
+
+                        <div class="col-md-4 col-sm-12 footer-widget">
+                            <h3 class="widget-title">Working Hours</h3>
+                            <div class="working-hours">
+                                We work 7 days a week, every day excluding major holidays. Contact us if you have an emergency, with our
+                                Hotline and Contact form.
+                                <br><br> Monday - Friday: <span class="text-right">10:00 - 16:00 </span>
+                                <br> Saturday: <span class="text-right">12:00 - 15:00</span>
+                                <br> Sunday and holidays: <span class="text-right">09:00 - 12:00</span>
+                            </div>
+                        </div><!-- Col end -->
+
+                        <div class="col-md-4 col-sm-12 footer-widget">
+                            <h3 class="widget-title">Services</h3>
+                            <ul class="list-arrow">
+                                <li><a href="">All cars</a></li>
+                                <li><a href="/allCar">Add new car</a></li>
+                                <li><a href="service-single.html">How it work</a></li>
+                                <li><a href="service-single.html">Contact us</a></li>
+                            </ul>
+                        </div><!-- Col end -->
+
+
+                    </div><!-- Row end -->
+                </div><!-- Container end -->
+            </div><!-- Footer main end -->
+
             <div class="copyright">
                 <div class="container">
                     <div class="row">
@@ -154,7 +209,7 @@
                         @*<button class="btn btn-primary" title="Back to Top">
                             <i class="fa fa-angle-double-up"></i>
                         </button>*@
-                        <span>
+                        <span title="Back to Top" style="cursor:pointer;">
                             <img src="http://themes.potenzaglobalsolutions.com/html/cardealer/assets/images/car.png" alt="">
                         </span>
                     </div>
@@ -163,36 +218,37 @@
             </div><!-- Copyright end -->
 
         </footer><!-- Footer end -->
-    </div>
 
-    <div id="loader-wrapper">
-        <div id="loader"></div>
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
 
-    </div>
+        <div id="loader-wrapper">
+            <div id="loader"></div>
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+        </div>
 
-    <!-- Javascript Files
+        <!-- Javascript Files
     ================================================== -->
-    <!-- initialize jQuery Library -->
-    <script src="~/js/jquery.js"></script>
-    <!-- jQuery Validation Libraries -->
-    <script src="~/js/jquery-validate/jquery.validate.min.js"></script>
-    <script src="~/js/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    <!-- Bootstrap jQuery -->
-    <script src="~/js/bootstrap.min.js"></script>
-    <!-- Owl Carousel -->
-    <script src="~/js/owl.carousel.min.js"></script>
-    <!-- Color box -->
-    <script src="~/js/jquery.colorbox.js"></script>
-    <!-- Isotope -->
-    <script src="~/js/isotope.js"></script>
-    <script src="~/js/ini.isotope.js"></script>
-    <!-- wow library -->
-    <script src="~/js/wow.min.js"></script>
-    <!-- Template custom -->
-    <script src="~/js/custom.js"></script>
-
-    @RenderSection("Scripts", false)
+        <!-- initialize jQuery Library -->
+        <script src="~/js/jquery.js"></script>
+        <!-- jQuery Validation Libraries -->
+        <script src="~/js/jquery-validate/jquery.validate.min.js"></script>
+        <script src="~/js/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <!-- Bootstrap jQuery -->
+        <script src="~/js/bootstrap.min.js"></script>
+        <!-- Owl Carousel -->
+        <script src="~/js/owl.carousel.min.js"></script>
+        <!-- Color box -->
+        <script src="~/js/jquery.colorbox.js"></script>
+        <!-- Isotope -->
+        <script src="~/js/isotope.js"></script>
+        <script src="~/js/ini.isotope.js"></script>
+        <!-- wow library -->
+        <script src="~/js/wow.min.js"></script>
+        <!-- Template custom -->
+        <script src="~/js/custom.js"></script>
+        <!--handroom plugin -->
+        <script src="https://unpkg.com/headroom.js"></script>
+        @RenderSection("Scripts", false)
+    </div>
 </body>
 </html>
