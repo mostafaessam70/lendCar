@@ -13,8 +13,12 @@ using Microsoft.Extensions.Logging;
 using LendCar.Repository;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using LendCar.DBContext;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json.Serialization;
 using System.Text.RegularExpressions;
+
 
 namespace LendCar.Pages
 {
@@ -27,6 +31,7 @@ namespace LendCar.Pages
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private IWebHostEnvironment _hostEnvironment;
 
         public SelectList Cities { get; set; }
         public SelectList Genders { get; set; }
@@ -37,9 +42,8 @@ namespace LendCar.Pages
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             LendCarDBContext Context,
-            RoleManager<IdentityRole> roleManager
-
-
+            RoleManager<IdentityRole> roleManager,
+            IWebHostEnvironment hostEnvironment
             )
         {
             _userManager = userManager;
@@ -47,7 +51,7 @@ namespace LendCar.Pages
             _logger = logger;
             _context = Context;
             _roleManager = roleManager;
-
+            _hostEnvironment = hostEnvironment;
             Cities = new SelectList(_context.Cities.OrderBy(c => c.Name).ToList(), "Id", "Name");
             Genders = new SelectList(_context.Genders.ToList(), "Id", "Type");
         }
@@ -63,6 +67,15 @@ namespace LendCar.Pages
             [Required]
             [Display(Name = "UserName")]
             public string UserName { get; set; }
+
+            [Required]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
 
             [Required]
             [EmailAddress]
@@ -108,6 +121,8 @@ namespace LendCar.Pages
             [Required]
             [Display(Name = "Address")]
             public string Address { get; set; }
+
+            public IFormFile ProfilePicture { get; set; }
             public int CityId { get; set; }
             public int GenderId { get; set; }
         }
@@ -115,8 +130,6 @@ namespace LendCar.Pages
         public async Task OnGetAsync()
         {
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-                     
-
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -124,14 +137,27 @@ namespace LendCar.Pages
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
              if (ModelState.IsValid)
             {
+                string newImgName = "default.jpg";
+                if (Input.ProfilePicture != null && Input.ProfilePicture.Length > 0)
+                {
+                    string folder = Path.Combine(_hostEnvironment.WebRootPath, "images/users");
+                    newImgName = $"{Input.UserName}_{DateTime.Now.ToString("MM_dd_yyyy_HH_mm_ss")}{Path.GetExtension(Input.ProfilePicture.FileName)}";
+                    string file = Path.Combine(folder, newImgName);
+                    FileStream fs = new FileStream(file, FileMode.Create);
+                    Input.ProfilePicture.CopyTo(fs);
+                    fs.Close();
+                }
 
-             var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email 
-                    ,JoinedAt = DateTime.Now.ToString("MMMM yyyy"),
+                var user = new ApplicationUser { UserName = Input.UserName,
+                    Email = Input.Email,
+                    JoinedAt = DateTime.Now.ToString("MMMM yyyy"),
                     DriverLicenseNumber = Input.DriverLicenseNumber,
                     PhoneNumber = Input.PhoneNumber, Address = Input.Address,
-                   GenderId=Input.GenderId,CityId=Input.CityId,
-                    FirstName=Input.FristName,LastName=Input.LastName,NationalId=Input.NationalId
-              };
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    ImageUrl = $"~/images/users/{newImgName}"
+                };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

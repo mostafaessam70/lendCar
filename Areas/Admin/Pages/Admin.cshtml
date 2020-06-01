@@ -585,6 +585,7 @@
 
         var currentTabId = '#vehiclesTabDiv';
         $('a[data-toggle="tab"]').click(function () {
+            debugger;
             currentTabId = $(this).attr('href');
         });
 
@@ -594,26 +595,31 @@
             resetTabs();
             $("#vehiclesTabLi").addClass(" active");
             $("#vehiclesTabDiv").addClass(" in active");
+            currentTabId = '#vehiclesTabDiv';
         }
         else if (currentUrl.includes("brandPage")) {
             resetTabs();
             $("#brandsTabLi").addClass(" active");
             $("#brandsTabDiv").addClass(" in active");
+            currentTabId = '#brandsTabDiv';
         }
         else if (currentUrl.includes("brandModelPage")) {
             resetTabs();
             $("#brandModelsTabLi").addClass(" active");
             $("#brandModelsTabDiv").addClass(" in active");
+            currentTabId = '#brandModelsTabDiv';
         }
         else if (currentUrl.includes("VTypePage")) {
             resetTabs();
             $("#vehicleTypesTabLi").addClass(" active");
             $("#vehicleTypesTabDiv").addClass(" in active");
+            currentTabId = '#vehicleTypesTabDiv';
         }
         else if (currentUrl.includes("colorPage")) {
             resetTabs();
             $("#colorsTabLi").addClass(" active");
             $("#colorsTabDiv").addClass(" in active");
+            currentTabId = '#colorsTabDiv';
         }
 
         function resetTabs() {
@@ -624,6 +630,7 @@
         function changeEntries(entries) {
             if (parseInt(entries) > 0 && parseInt(entries) != @Model.PageSize) {
                 var url = '@Url.Content("~/admin/admin?entries=")' + entries;
+                debugger;
                 switch (currentTabId) {
                     case "#vehiclesTabDiv":
                         url += "&vehiclePage=" + @Model.CurrentVehiclesPage;
@@ -641,7 +648,6 @@
                         url += "&VTypePage=" + @Model.CurrentVTypesPage;
                         break;
                 }
-                //debugger;
                 window.location.href = url;
             }
         }
