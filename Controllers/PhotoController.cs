@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using LendCar.Models;
 using LendCar.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,9 +27,12 @@ namespace LendCar.Controllers
         {
             if (HttpContext.Request.Headers["x-requested-with"] == "XMLHttpRequest")
             {
+                ApplicationUser user = UserRepostiory.FindById(userId);
+                string oldImg = user.ImageUrl;
+                System.IO.File.Delete(Path.Combine(HostEnvironment.WebRootPath,oldImg.Replace("~/","")));
                 string photoName = Guid.NewGuid().ToString() + DateTime.Now.ToString("dd-MM-yyyy") + Path.GetExtension(photo.FileName);
-                string physicalPath = Path.Combine(HostEnvironment.WebRootPath, "CarPhotosUploaded", photoName);
-                string relativePath = $"~/CarPhotosUploaded/{photoName}";
+                string physicalPath = Path.Combine(HostEnvironment.WebRootPath, "images", "users" , photoName);
+                string relativePath = $"~/images/users/{photoName}";
                 using (var file = new FileStream(physicalPath, FileMode.Create))
                 {
                     photo.CopyTo(file);

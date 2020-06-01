@@ -41,7 +41,15 @@
                     </div>
                     <div class="col-md-8">
                         <h3> @Model.CurrentCar.Model.Brand.Name @Model.CurrentCar.Model.Name  @Model.CurrentCar.Year</h3>
-                        <h2><span>@Model.CurrentCar.Rate<i class="fa fa-star "></i></span></h2>
+                        @{
+                            double? rate = 0;
+                            if (@Model.CurrentCar.Rate != null)
+                            {
+                                rate = Model.CurrentCar.Rate;
+                            }
+                        }
+                        <h2> @rate <span><i class="fa fa-star "></i></span></h2>
+
                         <span>(@Model.CurrentCar.TripsNumber Trips)</span>
                         <div class="row">
                             <div class="col-md-6">
@@ -49,7 +57,7 @@
                                 <h3><i class="fa fa-clone "></i>  @Model.CurrentCar.NumberOfDoors doors</h3>
                             </div>
                             <div class="col-md-6">
-                                <h3><i class="fa fa-car"></i>  @Model.CurrentCar.EnergyMakeCarMove </h3>
+                                @*<h3><i class="fa fa-car"></i>  @Model.CurrentCar.EnergyMakeCarMove </h3>*@
                                 <h3><i class="fa fa-group "></i>   @Model.CurrentCar.NumberOfSeats seats</h3>
                             </div>
                         </div>
@@ -62,7 +70,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="col-md-4 center-block">
-                            <img src="@Model.Owner.ImageUrl" alt="@Model.Owner.FirstName" class="img-circle">
+                            <img src="@Url.Content(Model.Owner.ImageUrl)" alt="@Model.Owner.FirstName" class="img-circle img-responsive" style="max-height:100px; max-width:200px;">
                         </div>
                         <div class="col-md-8">
                             <h4>@Model.Owner.FirstName @Model.Owner.LastName</h4>
