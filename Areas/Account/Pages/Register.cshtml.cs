@@ -76,7 +76,6 @@ namespace LendCar.Pages
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
-
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -97,16 +96,8 @@ namespace LendCar.Pages
             public string ConfirmPassword { get; set; }
 
             [Required]
-            [Display(Name = "FristName")]
-            public string FristName { get; set; }
-
-            [Required]
-            [Display(Name = "LastName")]
-            public string LastName { get; set; }
-
-            [Required]
             [Display(Name = "NationalId")]
-            [MinLength(14,ErrorMessage = "the NationalId must be Contains 14 numbers ")]
+            [MinLength(14,ErrorMessage = "the National Id be 14 numbers")]
             public string NationalId { get; set; }
             [Required]
             [Display(Name = "Phone Number")]
@@ -152,10 +143,12 @@ namespace LendCar.Pages
                     Email = Input.Email,
                     JoinedAt = DateTime.Now.ToString("MMMM yyyy"),
                     DriverLicenseNumber = Input.DriverLicenseNumber,
-                    PhoneNumber = Input.PhoneNumber, Address = Input.Address,
+                    PhoneNumber = Input.PhoneNumber,CityId = Input.CityId,
+                    Address = Input.Address, GenderId = Input.GenderId,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    ImageUrl = $"~/images/users/{newImgName}"
+                    ImageUrl = $"~/images/users/{newImgName}",
+                    NationalId = Input.NationalId
                 };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
