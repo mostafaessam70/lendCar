@@ -3799,7 +3799,7 @@ label {
 .login-form-1 .form-group {
     /*margin-bottom: 0;*/
     border-bottom: 2px solid #efefef;
-    padding-right: 20px;
+    /*padding-right: 20px;*/
     position: relative;
 }
 
@@ -4025,7 +4025,7 @@ label:hover:before {
 }
 /*=== 9. Misc ===*/
 .LoginPage .logo {
-    padding: 15px 0;
+    /*padding: 15px 0;*/
     font-size: 25px;
     color: #aaaaaa;
     font-weight: bold;
@@ -4169,7 +4169,7 @@ label:hover:before {
 }
 
 .login-form-1 a {
-    color: #aaaaaa;
+    color: #0f08f6;
     transition: all ease-in-out 200ms;
 }
 
@@ -4181,7 +4181,7 @@ label:hover:before {
 .etc-login-form {
     color: #919191;
     padding: 10px 20px;
-    font-weight: lighter;
+    font-weight: bolder;
 }
 
     .etc-login-form p {
@@ -4190,9 +4190,11 @@ label:hover:before {
     }
 /*=== 4. Main Form ===*/
 .login-form-1 {
-    max-width: 300px;
+    max-width: 450px;
     border-radius: 5px;
     display: inline-block;
+    box-shadow: 6px -2px 66px 0px rgba(0,0,0,0.61);
+    width:450px;
 }
 
 .main-login-form {
@@ -4223,7 +4225,7 @@ label:hover:before {
 .login-form-1 .form-group {
     /*margin-bottom: 0;*/
     border-bottom: 2px solid #efefef;
-    padding-right: 20px;
+    /*padding-right: 20px;*/
     position: relative;
 }
 
@@ -4242,24 +4244,59 @@ label:hover:before {
     padding: 5px 0;
 }
 /*=== 5. Login Button ===*/
+@keyframes rotate {
+    100% {
+        transform: rotate(1turn);
+    }
+}
 .login-form-1 .login-button {
     position: absolute;
-    right: -25px;
+    z-index: 0;
+    right: -35px;
     top: 50%;
     background: #ffffff;
     color: #999999;
     padding: 11px 0;
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     margin-top: -25px;
     border: 5px solid #efefef;
     border-radius: 50%;
     transition: all ease-in-out 500ms;
 }
+    .login-form-1 .login-button::before {
+        content: '';
+        position: absolute;
+        z-index: -2;
+        left: -1%;
+        top: -1%;
+        width: 100%;
+        height: 100%;
+        background-color: #399953;
+        background-repeat: no-repeat;
+        background-size: 50% 50%, 50% 50%;
+        background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+        background-image: linear-gradient(#399953, #399953), linear-gradient(#fbb300, #fbb300), linear-gradient(#d53e33, #d53e33), linear-gradient(#377af5, #377af5);
+        animation: rotate 4s linear infinite;
+        border-radius: 50%;
+    }
+    .login-form-1 .login-button::after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        left: 6px;
+        top: 6px;
+        width: calc(100% - 12px);
+        height: calc(100% - 12px);
+        background: white;
+        border-radius: 20px;
+    }
+
 
     .login-form-1 .login-button:hover {
-        color: #555555;
-        transform: rotate(450deg);
+        color: var(--main-color);
+        transform: rotate(720deg);
+        border: 5px solid var(--main-color);
     }
 
     .login-form-1 .login-button.clicked {
@@ -4449,7 +4486,7 @@ label:hover:before {
 }
 /*=== 9. Misc ===*/
 .LoginPage .logo {
-    padding: 15px 0;
+    /*padding: 15px 0;*/
     font-size: 25px;
     color: #aaaaaa;
     font-weight: bold;
@@ -4589,7 +4626,8 @@ label:hover:before {
     }
 
 .form-group input:focus {
-    border: 2px solid var(--main-color);
+    border-bottom: 2px solid var(--main-color);
+    
 }
 
 .form-group input {
@@ -4863,6 +4901,7 @@ li.active span.round-tabs.one {
     background: #f1685e !important;
     border: 2px solid #ddd;
     color: #fff;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
 }
 
 span.round-tabs.two {
@@ -4873,7 +4912,8 @@ span.round-tabs.two {
 li.active span.round-tabs.two {
     background: #febe29 !important;
     border: 2px solid #ddd;
-    color:#fff;
+    color: #fff;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
 }
 
 span.round-tabs.three {
@@ -4884,7 +4924,8 @@ span.round-tabs.three {
 li.active span.round-tabs.three {
     background: #3e5e9a !important;
     border: 2px solid #ddd;
-    color:#fff;
+    color: #fff;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
 }
 
 span.round-tabs.four {
@@ -4893,9 +4934,10 @@ span.round-tabs.four {
 }
 
 li.active span.round-tabs.four {
-    background: rgb(34, 194, 34); !important;
+    background: rgb(34, 194, 34) !important;
     border: 2px solid #ddd;
-    color: /*#f1685e*/#fff;
+    color: /*#f1685e*/ #fff;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
 }
 
 span.round-tabs.five {
@@ -4907,6 +4949,7 @@ li.active span.round-tabs.five {
     background: #999 !important;
     border: 2px solid #ddd;
     color: #fff;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
 }
 
 .nav-tabs > li.active > a span.round-tabs {
