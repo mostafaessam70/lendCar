@@ -27,8 +27,7 @@
     </div><!-- Banner text end -->
 </div><!-- Banner area end -->
 
-
-<section id="main-container" class="main-container car-details">
+<section id="main-container" class="main-container car-details  icon-car-detalis">
     <div class="container">
 
         <div class="row">
@@ -70,16 +69,18 @@
                     </div>
                     <div class="col-md-8">
                         <div class="col-md-4 center-block">
-                            <img src="@Url.Content(Model.Owner.ImageUrl)" alt="@Model.Owner.FirstName" class="img-circle img-responsive" style="max-height:100px; max-width:200px;">
-                        </div>
+                            <a href="/User/Profile">
+                                <img src="@Url.Content(Model.Owner.ImageUrl)" alt="@Model.Owner.FirstName" class="img-circle img-responsive" style="max-height:100px; max-width:200px;">
+                        </a>
+                            </div>
                         <div class="col-md-8">
-                            <h4>@Model.Owner.FirstName @Model.Owner.LastName</h4>
+                            <a href="/User/Profile"><h4>@Model.Owner.FirstName @Model.Owner.LastName</h4></a>
+                             
                             <p>@Model.Owner.TripsNumber trips  <i class="fa fa-dot-circle-o"></i> Joined @Model.Owner.JoinedAt</p>
                             <p>@Model.Owner.BriefAboutMe</p>
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="col-md-5 col-md-offset-1">

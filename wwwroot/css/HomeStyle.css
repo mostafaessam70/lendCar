@@ -1,5 +1,7 @@
 
-
+:root {
+    --main-color: #ffb600;
+}
 /*-- home page --*/
 
 #ts-team{
@@ -117,7 +119,7 @@ ul > li.page-item.active.car-list > span {
         background-color: #ffb60087;
         color: black;
         cursor: pointer;
-        border-color: #ffb600;
+        border-color: var(--main-color);
         font-size: 15px;
     }
 
@@ -134,13 +136,13 @@ ul > li.page-item.active.admin-list > span {
 
 
 
-ul > li.page-item.active.admin-list > span:hover {
-    background-color: #ffb60087;
-    color: black;
-    cursor: pointer;
-    border-color: #ffb600;
-    font-size: 15px;
-}
+    ul > li.page-item.active.admin-list > span:hover {
+        background-color: #ffb60087;
+        color: black;
+        cursor: pointer;
+        border-color: var(--main-color);
+        font-size: 15px;
+    }
 
 
 
