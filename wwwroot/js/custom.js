@@ -15,6 +15,9 @@
 	//8. Back to top
   
 //check color in localStorage
+
+
+
 let mainColors = localStorage.getItem("color-option");
 if (mainColors != null) {
 

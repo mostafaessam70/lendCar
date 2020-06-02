@@ -6,35 +6,11 @@
 }
 
 
-<div id="banner-area" class="banner-area" >
-    <div class="banner-text">
-        <div class="row">
-            <div class="col-md-12">
-                <div id="page-slider" class="owl-carousel owl-theme page-slider page-slider-small">
-                    @if (Model.CurrentCarImges != null)
-                    {
-                        @foreach (var item in Model.CurrentCarImges)
-                        {
-                            <div class="item">
-                                <img src="@Url.Content(item.Image)" alt="" />
-                            </div>
-                        }
-                    }
-
-                </div><!-- Page slider end -->
-            </div><!-- Slider col end -->
-        </div><!-- Row end -->
-    </div><!-- Banner text end -->
-</div><!-- Banner area end -->
-
-
-<section id="main-container" class="main-container car-details">
-    <div class="container">
-
+<div id="banner-area">
+    <div class="container ">
         <div class="row">
 
             <div class="col-md-6">
-
                 <div class="row">
                     <div class="col-md-2">
                         <p class="Vehicle-p">Vehicle</p>
@@ -63,17 +39,47 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <h3>Vehicle's Galary</h3>
+                <div id="page-slider" class="car-details-slider owl-carousel owl-theme page-slider page-slider-small">
+                    @if (Model.CurrentCarImges != null)
+                    {
+                        @foreach (var item in Model.CurrentCarImges)
+                        {
+                            <div class="item">
+                                <img src="@Url.Content(item.Image)" alt="" />
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section id="main-container" class="main-container car-details">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-6">
                 <hr />
+
                 <div class="row">
                     <div class="col-md-3">
                         <p>Vehicle owner</p>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="col-md-4 center-block">
                             <img src="@Url.Content(Model.Owner.ImageUrl)" alt="@Model.Owner.FirstName" class="img-circle img-responsive" style="max-height:100px; max-width:200px;">
                         </div>
                         <div class="col-md-8">
-                            <h4>@Model.Owner.FirstName @Model.Owner.LastName</h4>
+                            <h3>@Model.Owner.FirstName @Model.Owner.LastName</h3>
                             <p>@Model.Owner.TripsNumber trips  <i class="fa fa-dot-circle-o"></i> Joined @Model.Owner.JoinedAt</p>
                             <p>@Model.Owner.BriefAboutMe</p>
                         </div>
