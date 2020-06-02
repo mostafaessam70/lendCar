@@ -45,8 +45,8 @@ namespace LendCar.Repository
             {
                 Vehicle vehicle = GetVehicle(carId);
 
-                DateTime vechicleStartRentDate = Convert.ToDateTime(vehicle.StartDate);
-                DateTime vechcleEndRentDate = Convert.ToDateTime(vehicle.EndDate);
+                DateTime vechicleStartRentDate = Convert.ToDateTime(startDate);
+                DateTime vechcleEndRentDate = Convert.ToDateTime(endDate);
 
                 var dateBeweenStartAndEndHire = GetDateBetweenTwoDates(vechicleStartRentDate, vechcleEndRentDate);
 
@@ -60,14 +60,23 @@ namespace LendCar.Repository
                     allBookingDays.AddRange(s);
                 }
 
+                var avaliableDays = new List<DateTime>();
+
                 for (int i = 0; i < dateBeweenStartAndEndHire.Count; i++)
                 {
+                    bool isNotAvailableDay = false;
+
                     for (int j = 0; j < allBookingDays.Count; j++)
                     {
-                        if (dateBeweenStartAndEndHire[i] == allBookingDays[j])
+                        if (dateBeweenStartAndEndHire[i].Date.CompareTo(allBookingDays[j].Date) == 0)
                         {
-                            dateBeweenStartAndEndHire.RemoveAt(i);
+                            isNotAvailableDay = true;
+                            break;
                         }
+                    }
+                    if (!isNotAvailableDay)
+                    {
+                        avaliableDays.Add(dateBeweenStartAndEndHire[i]);
                     }
                 }
 
@@ -80,9 +89,9 @@ namespace LendCar.Repository
                 {
                     exists = false;
 
-                    for (int j = 0; j < dateBeweenStartAndEndHire.Count; j++)
+                    for (int j = 0; j < avaliableDays.Count; j++)
                     {
-                        if (tripDays[i].CompareTo(dateBeweenStartAndEndHire[j]) == 0)
+                        if (tripDays[i].CompareTo(avaliableDays[j]) == 0)
                         {
                             exists = true;
                         }
@@ -136,7 +145,7 @@ namespace LendCar.Repository
                  .ToList();
         }
 
-        public decimal GetVehiclePricePerDay(int vId)=>
+        public decimal GetVehiclePricePerDay(int vId) =>
             Context.Vehicles.SingleOrDefault(c => c.Id == vId).PricePerDay;
 
         public List<Vehicle> GetAllVehicles(string ownerId) =>
@@ -144,7 +153,7 @@ namespace LendCar.Repository
 
         public List<VehicleBooking> GetAllBooking()
         {
-            return Context.VehicleBookings.Include(c=>c.Renter).ToList();
+            return Context.VehicleBookings.Include(c => c.Renter).ToList();
         }
 
     }
