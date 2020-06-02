@@ -6336,7 +6336,7 @@ div.col-md-5.first-term {
 {
     color:var(--main-color)
 }
-.car-details .fa, .fas {
+.car-details i {
     color: var(--main-color);
     margin-right: 3%;
     font-size: 25px;
