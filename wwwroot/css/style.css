@@ -2852,35 +2852,20 @@ img.testimonial-thumb {
 
 /*-- Banner --*/
 
-.banner-area {
-    position: relative;
-    min-height: 500px;
-    color: #fff;
-    background-position: 50% 50%;
-    -webkit-background-size: cover;
-    background-size: cover;
-    -webkit-backface-visibility: hidden;
-}
 
-.banner-title {
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 58px;
-    font-weight: 900;
-}
 
-.banner-text {
+/*.banner-text {
     position: absolute;
-    /*top: 50%;*/
+    /*top: 50%;
     left: 0;
     right: 0;
-    /*max-width: 1170px;*/
+    /*max-width: 1170px;
     margin: 0 auto;
     width: 100%;
     z-index: 1;
     /*-webkit-transform: translateY(-50%);
-    transform: translateY(-50%);*/
-}
+    transform: translateY(-50%);
+}*/
 
 .banner-heading {
     text-align: center;
@@ -6327,19 +6312,50 @@ div.col-md-5.first-term {
 }
 
 /*car details*/
-
-.car-details{
-    margin:6%;
+#banner-area {
+    margin-top: 5%;
+    margin-bottom: 3%;
 }
+
+
+
+.car-details-slider {
+    box-shadow: 0px 0px 6px 7px #3e2a65a1;
+    height:350px;
+}
+
+    .car-details-slider img{
+        height:350px;
+    }
+
+
+    .car-details {
+        margin: 6%;
+    }
+
+    .car-details p{
+        font-size: 18px;
+    }
+#banner-area .fa, .fas {
 
 .icon-car-detalis i
 {
     color:var(--main-color)
 }
+  
 .car-details i {
+.car-details .fa, .fas {
     color: var(--main-color);
     margin-right: 3%;
     font-size: 25px;
+}
+
+#page-slider > div.owl-nav > div.owl-next > i:hover{
+    color: white;
+}
+
+#page-slider > div.owl-nav > div.owl-prev > i:hover{
+    color: white;
 }
 
 .car-details hr {
