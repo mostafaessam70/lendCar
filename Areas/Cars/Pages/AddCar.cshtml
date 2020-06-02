@@ -8,144 +8,157 @@
     </script>
 
 
-        <section style="background-image: url(https://bit.ly/2Sxz2lq); background-size:cover">
+        <section id="add-car">
             <div class="form-horizontal">
-                <div class="container-fluid ">
-                    <div class="row col-md-5 add-car center-block">
-                        <div>
-                            <h2>Add Your Car</h2>
+                <div class="container ">
+                    <div class="row">
+                        <div class="col-md-8  add-car center-block add-terms">
+                            <div>
+                                <h2>Add Your Car</h2>
+                            </div>
+                            <hr />
+                            <form id="AddCarForm" method="post" enctype="multipart/form-data">
+
+                                @*<div class="form-group col-md-10">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                </div>*@
+
+                                <div class="form-group col-md-10">
+                                    <label asp-for="@Model.Vehicle.VIN">VIN : </label>
+                                    <input asp-for="@Model.Vehicle.VIN" class="form-control">
+                                    <span asp-validation-for="@Model.Vehicle.VIN"></span>
+                                </div>
+
+                                <div class="form-group col-md-10">
+                                    <label asp-for="@Model.Vehicle.PlateNumber">Plate Number</label>
+                                    <input asp-for="@Model.Vehicle.PlateNumber" class="form-control">
+                                    <span asp-validation-for="@Model.Vehicle.PlateNumber"></span>
+
+                                </div>
+
+                                <div class="form-group col-md-10">
+                                    <label for="BrandId">Brand :</label>
+                                    <select id="ddlBrands" asp-items="@Model.Brands" class="form-control">
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group col-md-10">
+                                    <label for="Model">Model : </label>
+                                    <select id="ddlModels" asp-for="@Model.Vehicle.ModelId" asp-items='@Model.BrandModels' class="form-control">
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group col-md-10">
+                                    <label asp-for="@Model.Vehicle.Year">Year : </label>
+                                    <input asp-for="@Model.Vehicle.Year" class="form-control">
+                                    <span asp-validation-for="@Model.Vehicle.Year"></span>
+                                </div>
+
+
+                                <div class="form-group col-md-10">
+                                    <label asp-for="@Model.Vehicle.ColorId">Color : </label>
+                                    <select asp-for="@Model.Vehicle.ColorId" asp-items='Model.Colors' class="form-control">
+                                    </select>
+                                    <span asp-validation-for="@Model.Vehicle.ColorId"></span>
+                                </div>
+
+                                <div class="form-group col-md-10">
+                                    <label asp-for="@Model.Vehicle.OdoMeterId">OdoMeter : </label>
+                                    <select asp-for="@Model.Vehicle.OdoMeterId" asp-items="@Model.OdoMeters" class="form-control">
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group col-md-10">
+                                    <label asp-for="@Model.Vehicle.VehicleTypeId">Vehicle Type : </label>
+                                    <select asp-for="@Model.Vehicle.VehicleTypeId" asp-items="@Model.VehicleTypes" class="form-control"></select>
+                                </div>
+
+
+                                <div class="form-group col-md-10">
+                                    <label asp-for="@Model.Vehicle.GasMileage">Gas Mileage (KMPL) :</label>
+                                    <input asp-for="@Model.Vehicle.GasMileage" class="form-control">
+                                    <span asp-validation-for="@Model.Vehicle.GasMileage"></span>
+
+                                </div>
+
+
+                                <div class="form-group col-md-10">
+                                    <label asp-for="@Model.Vehicle.NumberOfSeats">Number of seats :</label>
+                                    <input min="1" asp-for="@Model.Vehicle.NumberOfSeats" class="form-control">
+                                    <span asp-validation-for="@Model.Vehicle.NumberOfSeats"></span>
+
+                                </div>
+
+                                <div class="form-group col-md-10">
+                                    <label asp-for="@Model.Vehicle.NumberOfDoors">Number of doors :</label>
+                                    <input min="1" asp-for="@Model.Vehicle.NumberOfDoors" class="form-control">
+                                    <span asp-validation-for="@Model.Vehicle.NumberOfDoors"></span>
+
+                                </div>
+
+
+                                <div class="form-group col-md-10">
+                                    <label asp-for="@Model.Vehicle.PricePerDay">Price per day (EGP): </label>
+                                    <input asp-for="@Model.Vehicle.PricePerDay" class="form-control" />
+                                    <span asp-validation-for="@Model.Vehicle.PricePerDay"></span>
+
+                                </div>
+
+                                <div class="form-group col-md-10">
+                                    <label asp-for="@Model.Vehicle.CityId">City : </label>
+                                    <select asp-for="@Model.Vehicle.CityId" asp-items="@Model.Cities" class="form-control"></select>
+                                </div>
+
+                                <div class="form-group col-md-10">
+                                    <label asp-for="@Model.Vehicle.Region">Region : </label>
+                                    <input asp-for="@Model.Vehicle.Region" class="form-control">
+                                </div>
+
+                                <div class="form-group col-md-10">
+                                    <label asp-for="@Model.Vehicle.StartDate">Available from : </label>
+                                    <input id="StartDate" type="date" value='@Model.Today.AddDays(1).ToString("yyyy-MM-dd")' min='@Model.Today.AddDays(1).ToString("yyyy-MM-dd")' asp-for="@Model.Vehicle.StartDate" class="form-control">
+                                    <span asp-validation-for="@Model.Vehicle.StartDate"></span>
+                                </div>
+
+                                <div class="form-group col-md-10">
+                                    <label asp-for="@Model.Vehicle.EndDate">Available to : </label>
+                                    <input id="EndDate" type="date" value='@Model.Today.AddDays(2).ToString("yyyy-MM-dd")' min="@Model.Today.AddDays(2).ToString("yyyy-MM-dd")" asp-for="@Model.Vehicle.EndDate" class="form-control">
+                                    <span asp-validation-for="@Model.Vehicle.EndDate"></span>
+
+                                </div>
+
+                                <div class="form-group col-md-10">
+                                    <label asp-for="@Model.VehiclePhotos">Car Images: <span>(please provide at least 4 photos for all angles of the car)</span> </label>
+                                    <input asp-for="@Model.VehiclePhotos" id="VehiclePhotos" accept="image/*" multiple>
+                                    <span asp-validation-for="@Model.VehiclePhotos"></span>
+                                </div>
+
+                                <div class="form-group col-md-10">
+                                    <input hidden asp-for="@Model.Vehicle.OwnerId" value="@Model.userManager.GetUserId(User)">
+                                </div>
+
+                                <div class="form-group col-md-10">
+                                    <input hidden asp-for="@Model.Vehicle.TripsNumber" value="0">
+                                </div>
+
+                                <button id="AddcarSubmitBtn" type="submit" class="btn btn-primary col-md-8" disabled>Add My Car</button>
+
+                            </form>
                         </div>
-                        <hr />
-                        <form id="AddCarForm" method="post" enctype="multipart/form-data">
 
-                            @*<div class="form-group col-md-10">
-            <div asp-validation-summary="All" class="text-danger"></div>
-        </div>*@
-
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.VIN">VIN : </label>
-                                <input asp-for="@Model.Vehicle.VIN" class="form-control">
-                                <span asp-validation-for="@Model.Vehicle.VIN"></span>
+                        <div class="col-md-4 client-terms">
+                            <div class="img-terms">
+                                <img src="~/images/terms.svg">
                             </div>
+                           
+                            <h4> According to our terms</h4>
+                            <p>You decide how long you want to keep your car. You choose your deductible for the insurance and how many kilometers you would like to drive per month. We will take care of the rest.</p>
+                       
 
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.PlateNumber">Plate Number</label>
-                                <input asp-for="@Model.Vehicle.PlateNumber" class="form-control">
-                                <span asp-validation-for="@Model.Vehicle.PlateNumber"></span>
-
-                            </div>
-
-                            <div class="form-group col-md-10">
-                                <label for="BrandId">Brand :</label>
-                                <select id="ddlBrands" asp-items="@Model.Brands" class="form-control">
-                                </select>
-
-                            </div>
-
-                            <div class="form-group col-md-10">
-                                <label for="Model">Model : </label>
-                                <select id="ddlModels" asp-for="@Model.Vehicle.ModelId" asp-items='@Model.BrandModels' class="form-control">
-                                </select>
-                            </div>
-
-
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.Year">Year : </label>
-                                <input asp-for="@Model.Vehicle.Year" class="form-control">
-                                <span asp-validation-for="@Model.Vehicle.Year"></span>
-                            </div>
-
-
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.ColorId">Color : </label>
-                                <select asp-for="@Model.Vehicle.ColorId" asp-items='Model.Colors' class="form-control">
-                                </select>
-                                <span asp-validation-for="@Model.Vehicle.ColorId"></span>
-                            </div>
-
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.OdoMeterId">OdoMeter : </label>
-                                <select asp-for="@Model.Vehicle.OdoMeterId" asp-items="@Model.OdoMeters" class="form-control">
-                                </select>
-                            </div>
-
-
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.VehicleTypeId">Vehicle Type : </label>
-                                <select asp-for="@Model.Vehicle.VehicleTypeId" asp-items="@Model.VehicleTypes" class="form-control"></select>
-                            </div>
-
-
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.GasMileage">Gas Mileage (KMPL) :</label>
-                                <input asp-for="@Model.Vehicle.GasMileage" class="form-control">
-                                <span asp-validation-for="@Model.Vehicle.GasMileage"></span>
-
-                            </div>
-
-
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.NumberOfSeats">Number of seats :</label>
-                                <input min="1" asp-for="@Model.Vehicle.NumberOfSeats" class="form-control">
-                                <span asp-validation-for="@Model.Vehicle.NumberOfSeats"></span>
-
-                            </div>
-
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.NumberOfDoors">Number of doors :</label>
-                                <input min="1" asp-for="@Model.Vehicle.NumberOfDoors" class="form-control">
-                                <span asp-validation-for="@Model.Vehicle.NumberOfDoors"></span>
-
-                            </div>
-
-
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.PricePerDay">Price per day (EGP): </label>
-                                <input asp-for="@Model.Vehicle.PricePerDay" class="form-control" />
-                                <span asp-validation-for="@Model.Vehicle.PricePerDay"></span>
-
-                            </div>
-
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.CityId">City : </label>
-                                <select asp-for="@Model.Vehicle.CityId" asp-items="@Model.Cities" class="form-control"></select>
-                            </div>
-
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.Region">Region : </label>
-                                <input asp-for="@Model.Vehicle.Region" class="form-control">
-                            </div>
-
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.StartDate">Available from : </label>
-                                <input id="StartDate" type="date" value='@Model.Today.AddDays(1).ToString("yyyy-MM-dd")' min='@Model.Today.AddDays(1).ToString("yyyy-MM-dd")' asp-for="@Model.Vehicle.StartDate" class="form-control">
-                                <span asp-validation-for="@Model.Vehicle.StartDate"></span>
-                            </div>
-
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.Vehicle.EndDate">Available to : </label>
-                                <input id="EndDate" type="date" value='@Model.Today.AddDays(2).ToString("yyyy-MM-dd")' min="@Model.Today.AddDays(2).ToString("yyyy-MM-dd")" asp-for="@Model.Vehicle.EndDate" class="form-control">
-                                <span asp-validation-for="@Model.Vehicle.EndDate"></span>
-
-                            </div>
-
-                            <div class="form-group col-md-10">
-                                <label asp-for="@Model.VehiclePhotos">Car Images: <span>(please provide at least 4 photos for all angles of the car)</span> </label>
-                                <input asp-for="@Model.VehiclePhotos" id="VehiclePhotos" accept="image/*" multiple>
-                                <span asp-validation-for="@Model.VehiclePhotos"></span>
-                            </div>
-
-                            <div class="form-group col-md-10">
-                                <input hidden asp-for="@Model.Vehicle.OwnerId" value="@Model.userManager.GetUserId(User)">
-                            </div>
-
-                            <div class="form-group col-md-10">
-                                <input hidden asp-for="@Model.Vehicle.TripsNumber" value="0">
-                            </div>
-
-                            <button id="AddcarSubmitBtn" type="submit" class="btn btn-primary col-md-8" disabled>Add My Car</button>
-
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

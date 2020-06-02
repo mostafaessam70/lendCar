@@ -5,10 +5,10 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<section class="booking">
+<section class="booking user-info">
     <div class="container">
         <div class="row left-side">
-            <div class="col-md-7 col-xs-12">
+            <div class="col-md-7 col-xs-12 user-info-text">
                 <div class="title">
                     <h1>Your Info</h1>
                 </div>
@@ -100,9 +100,9 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4 confirm">
+                        <div class="col-md-5 confirm">
                             <button type="submit" class="btn btn-primary btn-block">
-                                Continue <i class="fas fa-share-square"></i>
+                                Continue <i class="fas fa-share-square"></i> 
                             </button>
                         </div>
                     </div>
@@ -111,15 +111,15 @@
             </div>
 
             <!-- right-side -->
-            <div class="col-md-4 col-box">
+            <div class="col-md-4 col-box userinfo-image text-center">
                 <div class="row">
-                    <div class="col-lg-8 text-center col-offset-2">
-                        <img id="profileImage" src="@Url.Content(Model.LoggedUserInfo.ImageUrl)" class="img-circle img-responsive" />
+                    <div class="col-md-12 ">
+                        <img id="profileImage" src="@Url.Content(Model.LoggedUserInfo.ImageUrl)" class="img-circle " />
                         <input type="file" id="UploadUserPhoto" class="hidden" />
                     </div>
                 </div>
-                <div class="row text-center">
-                    <label for="UploadUserPhoto">Change Photo</label>
+                <div class="change-user-photo">
+                    <label class="btn btn-warning " for="UploadUserPhoto">Change Photo</label>
                 </div>
                 <div id="c">
 

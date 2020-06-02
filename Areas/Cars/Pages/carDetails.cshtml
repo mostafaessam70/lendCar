@@ -1,15 +1,15 @@
 ﻿@page
 @model LendCar.Pages.carDetailsModel
 @{
-    ViewData["Title"] = "carDetails";
+    ViewData["Title"] = "Car Details";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
 
-<div id="banner-area" class="banner-area" style="background-image:url(images/banner/banner2.jpg)">
+<div id="banner-area" class="banner-area" >
     <div class="banner-text">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-md-12">
                 <div id="page-slider" class="owl-carousel owl-theme page-slider page-slider-small">
                     @if (Model.CurrentCarImges != null)
                     {
@@ -27,17 +27,15 @@
     </div><!-- Banner text end -->
 </div><!-- Banner area end -->
 
-
-<section id="main-container" class="main-container">
+<section id="main-container" class="main-container car-details  icon-car-detalis">
     <div class="container">
 
         <div class="row">
 
             <div class="col-md-6">
-
                 <div class="row">
                     <div class="col-md-2">
-                        <p>Vehicle</p>
+                        <p class="Vehicle-p">Vehicle</p>
                     </div>
                     <div class="col-md-8">
                         <h3> @Model.CurrentCar.Model.Brand.Name @Model.CurrentCar.Model.Name  @Model.CurrentCar.Year</h3>
@@ -63,15 +61,47 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <h3>Vehicle's Galary</h3>
+                <div id="page-slider" class="car-details-slider owl-carousel owl-theme page-slider page-slider-small">
+                    @if (Model.CurrentCarImges != null)
+                    {
+                        @foreach (var item in Model.CurrentCarImges)
+                        {
+                            <div class="item">
+                                <img src="@Url.Content(item.Image)" alt="" />
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section id="main-container" class="main-container car-details">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-6">
                 <hr />
+
                 <div class="row">
                     <div class="col-md-3">
                         <p>Vehicle owner</p>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="col-md-4 center-block">
-                            <img src="@Url.Content(Model.Owner.ImageUrl)" alt="@Model.Owner.FirstName" class="img-circle img-responsive" style="max-height:100px; max-width:200px;">
-                        </div>
+                            <a href="/User/Profile">
+                                <img src="@Url.Content(Model.Owner.ImageUrl)" alt="@Model.Owner.FirstName" class="img-circle img-responsive" style="max-height:100px; max-width:200px;">
+                        </a>
+                            </div>
                         <div class="col-md-8">
                             <h4>@Model.Owner.FirstName @Model.Owner.LastName</h4>
                             <p>@Model.Owner.TripsNumber trips  <i class="fa fa-dot-circle-o"></i> Joined @Model.Owner.JoinedAt</p>
@@ -79,21 +109,19 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-5 col-md-offset-1">
                 <div class="row">
-                    <h2 class="col-md-6">@Model.CurrentCar.PricePerDay EGP / day</h2>
+                    <h2 class="col-md-12">@Model.CurrentCar.PricePerDay EGP / day</h2>
                 </div>
                 <div class="row">
                     <form method="post">
                         <input type="hidden" name="carId" value="@Model.CurrentCar.Id" />
-                        <div class="form-group col-md-10">
+                        <div class="form-group col-md-12">
                             <label for="TripStart">Trip start : </label>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <input type="date"
                                            class="form-control" ,required
                                            asp-for="StartBookingDate"
@@ -105,10 +133,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-10">
+                        <div class="form-group col-md-12">
                             <label for="Tripend">Trip end : </label>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <input type="date" required
                                            class="form-control" id="TripStart"
                                            asp-for="EndBookingDate"
@@ -121,7 +149,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group col-md-10">
+                        <div class="form-group col-md-12">
                             <div class="row">
                                 <div class="col-md-6">
                                     @if (Model.avilabeldays != null)
@@ -137,8 +165,10 @@
                                     }
                                 </div>
                             </div>
+
+                            <button type="submit" id="con" class="btn btn-primary btn-block">Go To Checkout</button>
                         </div>
-                        <button type="submit" id="con" class="btn btn-primary col-md-9" style="width:70%;margin-left:17px">Go To Checkout</button>
+                        
                     </form>
 
                 </div>
@@ -166,7 +196,7 @@
                     {
                         <div class="row">
 
-                            <div class="col-xs-offset-2 col-xs-5 text-info ">
+                            <div class="col-xs-offset-2 col-md-5 text-info ">
                                 <p>@item.Key</p>
                             </div>
                             <div class="col-xs-3 text-danger">
