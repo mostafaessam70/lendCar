@@ -19,22 +19,19 @@ using Microsoft.AspNetCore.Identity;
 
 namespace LendCar.Pages
 {
-    public class IndexModel : PageModel
+    public class AllCarsModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<AllCarsModel> _logger;
         public ICarRepository ICarRepository { get; }
 
-        private SignInManager<ApplicationUser> _signInManager;
-
         public IPagedList<Vehicle> Vehicles { get; set; }
-        public IndexModel(ILogger<IndexModel> logger, ICarRepository ICarRepository,SignInManager<ApplicationUser> signInManager)
+        public AllCarsModel(ILogger<AllCarsModel> logger, ICarRepository ICarRepository,SignInManager<ApplicationUser> signInManager)
         {
             _logger = logger;
             this.ICarRepository = ICarRepository;
-            this._signInManager = signInManager;
         }
 
-        public void OnGet(int Page)
+        public void OnGet()
         {
             Request.Query.TryGetValue("Page", out var page);
             int pageNumber;
@@ -50,9 +47,7 @@ namespace LendCar.Pages
             else
                 pageNumber = 1;
 
-            Vehicles = ICarRepository.GetAllAvailableVechilces().ToPagedList(pageNumber, 9);
-           
+            Vehicles = ICarRepository.GetAllAvailableVechilces().ToPagedList(pageNumber, 9);   
         }
-
     }
 }

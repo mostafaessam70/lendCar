@@ -10,14 +10,14 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-3 user-image">
-                        <img src="@Url.Content(Model.CurrentUser.ImageUrl)" alt="@Model.CurrentUser.FirstName 's picture" class="img-circle" >
+                        <img src="@Url.Content(Model.CurrentUser.ImageUrl)" alt="@Model.CurrentUser.FirstName's picture" class="img-circle" >
                     </div>
                     <div class="col-md-8">
                         @*<div class="col-md-4 center-block">
                             <h3><span>5.0<i class="fa fa-star " style="color:gold"></i></span></h3>
                         </div>*@
                         <div class="col-md-12">
-                            <h3><i class="fas fa-user"></i> @Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h3>
+                            <h5 style="text-transform:capitalize"><i class="fas fa-user"></i> @Model.CurrentUser.FirstName.ToLower() @Model.CurrentUser.LastName.ToLower()</h5>
                             <p><i class="fas fa-car-alt"></i> @Model.CurrentUser.TripsNumber trips  <i class="fa fa-dot-circle-o"></i> Joined @Model.CurrentUser.JoinedAt</p>
                             <p><i class="fas fa-city"></i> @Model.CurrentUser.City.Name</p>
                             <p>@Model.CurrentUser.BriefAboutMe</p>
@@ -58,7 +58,7 @@
                                                 <i class="fa fa-clock-o"></i> Available from @vehicle.StartDate
                                             </span>
                                             <div style="margin-bottom:5px">
-                                                <a class="btn btn-primary" asp-page="carDetails" asp-area="Cars" asp-route-id="@vehicle.Id">Details</a>
+                                                <a class="btn btn-primary" asp-page="CarDetails" asp-area="Cars" asp-route-id="@vehicle.Id">Details</a>
                                             </div>
                                         </div>
                                     </div>
