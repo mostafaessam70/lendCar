@@ -3779,14 +3779,14 @@ label {
         text-decoration: none;
     }
 /*=== 3. Text Outside the Box ===*/
-.etc-login-form {
+/*.etc-login-form {
     color: #919191;
     padding: 10px 20px;
 }
 
     .etc-login-form p {
         margin-bottom: 5px;
-    }
+    }*/
 /*=== 4. Main Form ===*/
 .login-form-1 {
     max-width: 300px;
@@ -4497,6 +4497,7 @@ label:hover:before {
     top: 0;
     left: 2px;
     font-size: 14px;
+    color: var(--main-color);
 }
 
 [type="radio"]:not(:checked) + label:after,
@@ -5112,6 +5113,7 @@ li.active:after {
     margin: 5% 0;
     box-shadow: 3px 3px 2px #ccc;
     transition: 0.5s;
+    margin-top: 50px;
 }
 
     .custab:hover {
@@ -6293,14 +6295,14 @@ div.col-md-5.first-term {
 }
 
     .user-profile .fas{
-        color:#ffb600;
+        color:var(--main-color);
         margin-right:2%;
         font-size:25px;
     }
 
     .user-profile hr{
         height:2px;
-        background-color:#ffb600;
+        background-color:var(--main-color);
     }
 
     .user-image img {
@@ -6330,10 +6332,12 @@ div.col-md-5.first-term {
 
 }
 
-
+.icon-car-detalis i
+{
+    color:var(--main-color)
+}
 
 @media only screen and (max-width: 1000px) {
-
     .how-steps .row, .form-horizontal .row, .user-info .row {
         display: grid;
     }
