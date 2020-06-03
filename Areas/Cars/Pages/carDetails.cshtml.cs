@@ -34,7 +34,7 @@ namespace LendCar.Pages
         {
             CurrentCar = CarRepository.GetVehicle(id);
 
-            StartBookingDate = CarRepository.ChangeDateFormatToYearsMonthDays(CurrentCar.StartDate);
+            StartBookingDate = CarRepository.ChangeDateFormatToYearsMonthDays(DateTime.Now.ToString("dd-MM-yyyy"));
             EndBookingDate = CarRepository.ChangeDateFormatToYearsMonthDays(CurrentCar.EndDate);
 
             CurrentCarImges = CurrentCar?.Photos.ToList();

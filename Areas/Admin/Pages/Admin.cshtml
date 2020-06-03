@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="text-center">
 
-                                        @Html.PagedListPager((IPagedList)Model.Vehicles, page => "Admin/Admin?vehiclePage=" + page,
+                                        @Html.PagedListPager((IPagedList)Model.Vehicles, vehiclePage => "/Admin/Admin?vehiclePage=" + vehiclePage,
                                             new X.PagedList.Mvc.Common.PagedListRenderOptions
                                             {
                                                 DisplayLinkToFirstPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,

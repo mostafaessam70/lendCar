@@ -36,7 +36,7 @@ namespace LendCar
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<LendCarDBContext>(options =>
-             options.UseSqlServer(Configuration.GetConnectionString("LendCarCString")));
+             options.UseSqlServer(Configuration.GetConnectionString("LendCarCString")), ServiceLifetime.Transient);
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICarRepository, CarRepository>();
@@ -72,6 +72,13 @@ namespace LendCar
                      options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddRazorPages(c=>c.Conventions.AddPageRoute("/Home",""));
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+
+
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "343811122792-kva42leqiguv4e4f2qg97rnbubj9upu6.apps.googleusercontent.com";
+                options.ClientSecret = "cS5GgQbnV3EcF-_AENf2azye";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
