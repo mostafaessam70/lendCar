@@ -41,5 +41,9 @@ namespace LendCar.Repository
         }
         public void Save() => Context.SaveChanges();
 
+        public bool IsNationalIdExist(string nationalId)
+        {
+            return Context.Users.Any(c => c.NationalId == nationalId);
+        }
     }
 }

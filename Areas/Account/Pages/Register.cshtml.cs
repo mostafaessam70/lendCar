@@ -95,9 +95,11 @@ namespace LendCar.Pages
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            [Remote("IsNationalIdExist", "Validation",
+                ErrorMessage = "Nationl Id Already Exist",HttpMethod ="POST")]
             [Required]
-            [Display(Name = "NationalId")]
             [MinLength(14,ErrorMessage = "the National Id be 14 numbers")]
+            [RegularExpression("[0-9]{14}", ErrorMessage = "Invalid National ID ")]
             public string NationalId { get; set; }
             [Required]
             [Display(Name = "Phone Number")]
