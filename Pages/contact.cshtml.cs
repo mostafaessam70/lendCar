@@ -19,7 +19,7 @@ namespace LendCar.Pages
         public IContactRepository ContactRep { get; }
         public IEmail Email { get; }
 
-        [BindProperty,BindRequired]
+        [BindProperty]
         public ContactViewModel ContactViewModel { get; set; }
         public contactModel(IContactRepository contactRep, IEmail email)
         {
