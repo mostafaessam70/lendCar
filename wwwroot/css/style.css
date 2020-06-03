@@ -48,6 +48,12 @@ p {
     font-size: 15px;
 }
 
+#contact-form > section > div > div.text-right > button > i,
+div.col-md-7.col-xs-12.user-info-text > form > div:nth-child(6) > div > button > i,
+#EditCarForm i {
+    color: white;
+}
+
 h1,
 h2,
 h3,
@@ -3738,12 +3744,17 @@ label {
     text-align: center
 }
 
-    .add-car button {
-       background-color:#ffb600;
+.add-car button {
+    font-size: 22px;
+    background-color: #ffb600;
+}
+
+    .add-car button:hover{
+        background-color: black;
     }
 
-    select{
-        cursor:pointer;
+    select {
+        cursor: pointer;
     }
 /*Login Page*/
 .LoginPage {
@@ -4686,7 +4697,7 @@ background-color: var(--main-color);
 /* booking styles*/
 
 .booking .left-side {
-    margin-bottom: 100px;
+    margin-bottom: 4%;
 }
 
 .booking .icon i {
@@ -6312,6 +6323,7 @@ div.col-md-5.first-term {
 }
 
 /*car details*/
+
 #banner-area {
     margin-top: 5%;
     margin-bottom: 3%;
@@ -6321,40 +6333,33 @@ div.col-md-5.first-term {
 
 .car-details-slider {
     box-shadow: 0px 0px 6px 7px #3e2a65a1;
-    height:350px;
+    height: 350px;
 }
 
-    .car-details-slider img{
-        height:350px;
+    .car-details-slider img {
+        height: 350px;
     }
 
 
-    .car-details {
-        margin: 6%;
-    }
+.car-details {
+    margin: 6%;
+}
 
-    .car-details p{
+    .car-details p {
         font-size: 18px;
     }
-#banner-area .fa, .fas {
 
-.icon-car-detalis i
-{
-    color:var(--main-color)
-}
-  
-.car-details i {
-.car-details .fa, .fas {
+#banner-area .fa, .fas{
     color: var(--main-color);
     margin-right: 3%;
     font-size: 25px;
 }
 
-#page-slider > div.owl-nav > div.owl-next > i:hover{
+#page-slider > div.owl-nav > div.owl-next > i:hover {
     color: white;
 }
 
-#page-slider > div.owl-nav > div.owl-prev > i:hover{
+#page-slider > div.owl-nav > div.owl-prev > i:hover {
     color: white;
 }
 
@@ -6367,6 +6372,20 @@ div.col-md-5.first-term {
     font-size: 20px;
     color: var(--main-color);
 }
+
+
+input[type="text"]::-webkit-input-placeholder,
+input[type="email"]::-webkit-input-placeholder
+ {
+    color: white;
+    font-size: 18px;
+}
+
+textarea[id="message"]::-webkit-input-placeholder {
+    color: white;
+    font-size: 22px;
+}
+
 /* some media query*/
 @media only screen and (max-width: 1000px) {
     .how-steps .row, .form-horizontal .row, .user-info .row {
