@@ -14,6 +14,9 @@ namespace LendCar.Repository
         ApplicationUser FindById(string id);
         void EditBookingInfo(ApplicationUser user);
         void EditPhotoPath(string userId, string phtoPath);
+        bool IsNationalIdExist(string nationalId);
         void Save();
+        bool IsUserNameExists(string userName);
+        bool IsEmailExists(string email);
     }
 }

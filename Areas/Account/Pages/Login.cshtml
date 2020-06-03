@@ -10,11 +10,11 @@
         <div class="formLogin">
             <div class="text-center">
                 <div class="logo">
-                    <img  src="https://bit.ly/3fqRV3g" alt="car"/>
+                    <img src="https://bit.ly/3fqRV3g" alt="car" />
                 </div>
                 <!-- Main Form -->
                 <div class="login-form-1">
-                    <form  class="text-left" asp-page="Login" method="post">
+                    <form class="text-left" asp-page="Login" method="post">
                         <div class="login-form-main-message"></div>
                         <div class="main-login-form">
                             <div class="login-group">
@@ -36,10 +36,13 @@
                                 </div>
                             </div>
                             <button type="submit" class="login-button"><i class="fas fa-car-side"></i></button>
-                            
+
                         </div>
+                        <a href="#" class="fa fa-google" id="googleAnch" onclick="document.getElementById('go').click()"></a>
+
+
                         <div class="etc-login-form">
-                            <p>forgot your password? <a  asp-page="./forgetPassword">click here</a></p>
+                            <p>forgot your password? <a asp-page="./forgetPassword">click here</a></p>
                             <p>new user? <a asp-page="./Register">create new account</a></p>
                         </div>
                     </form>
@@ -47,4 +50,14 @@
                 <!-- end:Main Form -->
             </div>
         </div>
+        <form id="external-account" asp-page="./ExternalLogin" 
+                  asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+            @foreach (var provider in Model.ExternalLogins)
+            {
+                <button style="visibility:hidden;" id="go" type="submit" 
+                        class="btn btn-primary" name="provider" value="@provider.Name"
+                        title="Log in using your @provider.DisplayName account">
+                        @provider.DisplayName</button>
+            }
+        </form>
     </section>

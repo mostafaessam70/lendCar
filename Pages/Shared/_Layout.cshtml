@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>@ViewData["Title"] - Lend Car</title>
+    <title>@ViewData["Title"] - LendCar</title>
 
 
     <!-- Bootstrap -->
@@ -72,14 +72,7 @@
                                 </div>
                                     <div class="collapse navbar-collapse navbar-responsive-collapse">
                                         <ul class="nav navbar-nav">
-                                            <li class="dropdown"><a asp-page="Index">Home</a></li>
-                                            @*<li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown">Your Car <i class="fa fa-angle-down"></i></a>
-            <ul class="dropdown-menu" role="menu">
-                <li><a asp-page="AllCars" asp-area="Cars">All Cars</a></li>
-                <li> <partial name="_AddCarPartial" /></li>
-            </ul>
-        </li>*@
+                                            <li><a asp-page="Index">Home</a></li>
                                             <li><a asp-page="AllCars" asp-area="Cars">All Cars</a></li>
                                             @if (User.Identity.IsAuthenticated)
                                             {
@@ -88,7 +81,21 @@
                                             <li><a asp-page="HowUse">How to use</a></li>
                                             <li><a asp-page="contact">Contact</a></li>
                                             <li><a asp-page="about">About</a></li>
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                                <li class="dropdown">
+                                                    <a class="dropdown-toggle" data-toggle="dropdown">Admin<i class="fa fa-angle-down"></i></a>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a asp-area="Admin" asp-page="Admin">CRUD</a></li>
+                                                        <li><a asp-area="Admin" asp-page="BookingMoney">Booking Money</a></li>
+                                                        <li><a asp-area="Admin" asp-page="ClientHistory">Client History</a></li>
+                                                        <li><a asp-area="Admin" asp-page="Users">Users</a></li>
+                                                    </ul>
+                                                </li>
+                                            }
+
                                         </ul>
+
                                         <ul class="nav navbar-nav navbar-right">
                                             <partial name="_LoginPartial" />
                                         </ul>
@@ -139,8 +146,8 @@
                             <h3 class="widget-title">About Us</h3>
                             <img class="footer-logo" src="images/footer-logo.png" alt="" />
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci done idunt ut
-                                labore et dolore magna aliqua.
+                                LendCar is a car sharing marketplace where guests can book any car they want,
+                                wherever they want it across All governorates of Egypt.
                             </p>
                             <div class="footer-social">
                                 <ul>

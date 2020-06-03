@@ -13,9 +13,6 @@
                         <img src="@Url.Content(Model.CurrentUser.ImageUrl)" alt="@Model.CurrentUser.FirstName's picture" class="img-circle">
                     </div>
                     <div class="col-md-8">
-                        @*<div class="col-md-4 center-block">
-                    <h3><span>5.0<i class="fa fa-star " style="color:gold"></i></span></h3>
-                </div>*@
                         <div class="col-md-12">
                             <h5 style="text-transform:capitalize"><i class="fas fa-user"></i> @Model.CurrentUser.FirstName.ToLower() @Model.CurrentUser.LastName.ToLower()</h5>
                             <p><i class="fas fa-car-alt"></i> @Model.CurrentUser.TripsNumber trips  <i class="fa fa-dot-circle-o"></i> Joined @Model.CurrentUser.JoinedAt</p>
@@ -46,9 +43,9 @@
                             <div class="col-md-4 col-xs-12">
                                 <div class="latest-post">
                                     <div class="latest-post-media">
-                                        <a href="" class="latest-post-img">
-                                            <img class="img-responsive" src="@Url.Content(vehicle.ImageUrl)" alt="@vehicle.Model.Brand.Name">
-                                        </a>
+
+                                        <img class="img-responsive" src="@Url.Content(vehicle.ImageUrl)" alt="@vehicle.Model.Brand.Name">
+
                                     </div>
                                     <div class="post-body">
                                         <div class="post-title">
@@ -62,23 +59,32 @@
                                                 <i class="fa fa-clock-o"></i> Available from @vehicle.StartDate
                                             </span>
                                             <div style="margin-bottom:5px">
-                                                <a class="btn btn-primary" asp-page="carDetails" asp-area="Cars" asp-route-id="@vehicle.Id">Details</a>
-                                                <a class="btn btn-primary" asp-page="carEdit" asp-area="Cars" asp-route-id="@vehicle.Id">EditYourCarDetails</a>
-
+                                                <a class="btn btn-primary" asp-page="CarDetails" asp-area="Cars" asp-route-id="@vehicle.Id">Details</a>
+                                                <a class="btn btn-primary" asp-page="EditCar" asp-area="Cars" asp-route-id="@vehicle.Id">Edit</a>
 
                                             </div>
                                         </div>
                                     </div>
                                 </div><!-- Latest post end -->
+
                             </div><!-- 1st post col end -->
                         </div>
                     }
                     <!--/ Content row end -->
+                <div class="row">
+                    
+                        @Html.PagedListPager((IPagedList)Model.UserVehicles, CarsPage => "/User/Profile?CarsPage=" + CarsPage,
+                                           new X.PagedList.Mvc.Common.PagedListRenderOptions
+                                           {
+                                               DisplayLinkToFirstPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+                                               DisplayLinkToLastPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
 
-                    <div class="general-btn ">
-                        <a class="btn btn-primary" href="#">See All Cars</a>
-                    </div>
-
+                                               ContainerDivClasses = new[] { "navigation" },
+                                               LiElementClasses = new[] { "page-item", "admin-list" },
+                                               PageClasses = new[] { "page-link" },
+                                           })
+                 
+                </div>
                 </div>
                 <!--/ Container end -->
             </section>

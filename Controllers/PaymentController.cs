@@ -42,8 +42,8 @@ namespace LendCar.Controllers
             {
                 ICarRepository.VehicleBook(new VehicleBooking()
                 {
-                    HireDate=bookingInfo.HireDate,
-                    ReturnData=bookingInfo.ReturnData,
+                    HireDate= ICarRepository.ChangeDateFormatToDaysMonthYears(bookingInfo.HireDate),
+                    ReturnData=ICarRepository.ChangeDateFormatToDaysMonthYears(bookingInfo.ReturnData),
                     VehicleId=bookingInfo.VehicleId,
                     RenterId=bookingInfo.RenterId
                 });

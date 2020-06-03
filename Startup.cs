@@ -72,6 +72,7 @@ namespace LendCar
                      options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddRazorPages(c=>c.Conventions.AddPageRoute("/Home",""));
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+ 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -108,7 +109,7 @@ namespace LendCar
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });
         }

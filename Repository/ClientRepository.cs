@@ -39,7 +39,7 @@ namespace LendCar.Repository
                     }
                 }
             }
-
+            Save();
         }
 
         public List<BookingMoneyHelper> GetUserMoney()
@@ -156,11 +156,12 @@ namespace LendCar.Repository
             {
                 bookingVechicles[i].IsOwnerRecivedHisMoney = true;
             }
-
-        }
+         }
         public void CancelBooking(int id)
         {
-            CarRepository.GetAllBooking().SingleOrDefault(c => c.Id == id).IsBookingCanceled = true;
+           var booking= Context.VehicleBookings.SingleOrDefault(c => c.Id == id);
+            booking.IsBookingCanceled = true;
+            Save();
         }
     }
     class BookingHelper

@@ -15,7 +15,8 @@ namespace LendCar.Pages
     {
         private SignInManager<ApplicationUser> _signInManager;
         private ICarRepository _carRepo;
-        public List<Vehicle> Vehicles { get; set; }
+        public List<Vehicle> AvailableVehicles { get; set; }
+        public List<Vehicle> AcceptedVehicles { get; set; }
         public HomeModel(SignInManager<ApplicationUser> signInManager, ICarRepository carRepo)
         {
             _signInManager = signInManager;
@@ -23,7 +24,8 @@ namespace LendCar.Pages
         }
         public void OnGet()
         {
-            Vehicles = _carRepo.GetAllVehiclesAccepted().OrderBy(v => v.Rate).Take(3).ToList();
+            AvailableVehicles = _carRepo.GetAllAvailableVechilces().ToList();
+            AcceptedVehicles = _carRepo.GetAllVehiclesAccepted().OrderByDescending(v => v.Rate).Take(3).ToList();
         }
 
         public IActionResult OnGetLogout()

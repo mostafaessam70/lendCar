@@ -1,0 +1,83 @@
+﻿@page
+@model LendCar.Areas.Admin.Pages.UsersModel
+@{
+    ViewData["Title"] = "Users";
+}
+
+<section id="users">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="tab-content">
+                    <div id="tab1" class="tab-pane fade in active">
+                        <div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>User name</th>
+                                        <th>First name</th>
+                                        <th>Last name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Role</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var user in Model.UserManager.Users.ToList())
+                                    {
+
+                                    <tr>
+                                        <td>@user.UserName</td>
+                                        <td>@user.FirstName</td>
+                                        <td>@user.LastName</td>
+                                        <td>@user.Email</td>
+                                        <td>@user.PhoneNumber</td>
+                                        <td>
+                                            <select class="RoleOptions">
+                                                @foreach (var role in Model.RoleManager.Roles.ToList())
+                                                {
+                                                    <option data-userId="@user.Id"
+                                                            data-roleName="@role.Name"
+                                                            selected="@(Model.UserManager.IsInRoleAsync(user,role.Name).Result?"selected":null)">
+                                                        @role.Name
+                                                    </option>
+                                                }
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('.RoleOptions').change(function () {
+                var userId = $(this).find(":selected").attr('data-userId');
+                var roleName = $(this).find(":selected").attr('data-roleName');
+
+                $.ajax({
+                    method: "POST",
+                    url: '/Users/ChangeRole',
+                    data: { UserId: userId, RoleName: roleName },
+                    success: function (data) {
+                        if (data == 'Succeed') {
+                            //pop up modal user successfuly add to this role
+                        }
+                        else {
+                            //pop up modal something happen please try again .....
+                        }
+                    }
+                    
+                })
+            })
+        })
+    </script>
+}
