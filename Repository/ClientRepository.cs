@@ -82,7 +82,9 @@ namespace LendCar.Repository
                             if (clientBooingMoney.Exists(c => c.User.Id == Users[i].Id))
                             {
 
-                                clientBooingMoney.SingleOrDefault(c => c.User.Id == Users[i].Id).TotalMoney += vechicleBookingMoney[j].TotalMoney;
+                                clientBooingMoney.SingleOrDefault(c => c.User.Id == Users[i].Id).TotalMoney +=
+                                   vechicleBookingMoney[j].TotalMoney
+                                    - ((vechicleBookingMoney[j].TotalMoney / 100) * 20);
                             }
                             else
                             {
@@ -90,7 +92,7 @@ namespace LendCar.Repository
                                 {
                                     User = Users[i],
                                     TotalMoney = vechicleBookingMoney[j].TotalMoney
-                                    - (vechicleBookingMoney[j].TotalMoney / 10)
+                                    - ((vechicleBookingMoney[j].TotalMoney / 100)*20)
                                 });
                             }
                         }
@@ -123,7 +125,7 @@ namespace LendCar.Repository
                         allBookingProccess[i].HireDate, allBookingProccess[i].VehicleId);
 
                     client.SingleOrDefault(c => c.User.Id == allBookingProccess[i].RenterId)
-                        .TotalMoney += totalPrice - (totalPrice / 5);
+                        .TotalMoney += totalPrice - ((totalPrice/100)* 5);
 
                 }
                 else
@@ -135,7 +137,7 @@ namespace LendCar.Repository
                     {
 
                         User = UserRepository.FindById(allBookingProccess[i].RenterId),
-                        TotalMoney = totalPrice - (totalPrice / 5)
+                        TotalMoney = totalPrice - ((totalPrice / 100) * 5)
 
                     });
                 }

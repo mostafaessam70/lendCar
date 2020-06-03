@@ -83,6 +83,7 @@
                                         <li class="nav-item"><a asp-page="about">About</a></li>
                                         @if (User.IsInRole("Admin"))
                                         {
+                                            @if (3 == 3) { }
                                             <li class="dropdown nav-item">
                                                 <a class="dropdown-toggle" data-toggle="dropdown">Admin<i class="fa fa-angle-down"></i></a>
                                                 <ul class="dropdown-menu" role="menu">
@@ -262,7 +263,7 @@
         <script src="https://unpkg.com/headroom.js"></script>
         @RenderSection("Scripts", false)
         <script>
-
+            
             $(document).ready(function () {
                 debugger;
                 var navItems = document.getElementsByClassName("nav-item");
@@ -272,6 +273,7 @@
                         break;
                     }
                 }
+                
             });
 
         </script>
