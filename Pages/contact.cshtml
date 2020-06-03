@@ -90,41 +90,42 @@
 <form method="post" id="contact-form">
     <section class="contact">
         <div class="container">
-            <form  action="" method="post" role="form">
-                <div class="error-container"></div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>WE LOVE TO HEAR YOU</h3>
-                    </div>
+            <div class="error-container"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>WE LOVE TO HEAR YOU</h3>
+                </div>
 
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label asp-for="ContactViewModel.UserEmail">Email</label>
-                            <input asp-for="ContactViewModel.UserEmail" class="form-control form-control-email" id="email" placeholder="Enter Your Mail">
-                            <span asp-validation-for="ContactViewModel.UserEmail" class="red"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label asp-for="ContactViewModel.MailSubjct">Subject</label>
-                            <input asp-for="ContactViewModel.MailSubjct" class="form-control form-control-subject" id="subject" placeholder="Eneter Subject OF Your Message">
-                            <span asp-validation-for="ContactViewModel.MailSubjct" class="red"></span>
-
-                        </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="ContactViewModel.UserEmail">Email</label>
+                        <input asp-for="ContactViewModel.UserEmail" class="form-control form-control-email" id="email" placeholder="Enter Your Mail">
+                        <span asp-validation-for="ContactViewModel.UserEmail" class="red"></span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="ContactViewModel.Message">Message</label>
-                    <textarea asp-for="ContactViewModel.Message" class="form-control form-control-message" id="message" placeholder="Write Your Message" rows="10"></textarea>
-                    <span asp-validation-for="ContactViewModel.Message" class="red"></span>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="ContactViewModel.MailSubjct">Subject</label>
+                        <input asp-for="ContactViewModel.MailSubjct" class="form-control form-control-subject" id="subject" placeholder="Eneter Subject OF Your Message">
+                        <span asp-validation-for="ContactViewModel.MailSubjct" class="red"></span>
 
+                    </div>
                 </div>
-                <div class="text-right">
-                    <br>
-                    <button class="btn btn-primary " type="submit">Send Message  <i class="fas fa-paper-plane"></i></button>
-                </div>
-            </form>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactViewModel.Message">Message</label>
+                <textarea asp-for="ContactViewModel.Message" class="form-control form-control-message" id="message" placeholder="Write Your Message" rows="10"></textarea>
+                <span asp-validation-for="ContactViewModel.Message" class="red"></span>
+
+            </div>
+            <div class="text-right">
+                <br>
+                <button class="btn btn-primary " type="submit"> Send Message  <i class="fas fa-paper-plane"></i></button>
+            </div>
 
         </div>
     </section>
+
 </form>
+
+       
