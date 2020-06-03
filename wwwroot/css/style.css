@@ -5016,6 +5016,16 @@ li.active:after {
     border: 10px solid transparent;
     border-bottom-color: var(--main-color)
 }
+.history li.active:after {
+    content: " ";
+    position: absolute;
+    left: 48%;
+    opacity: 1;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 10px solid transparent;
+    border-bottom-color: var(--main-color)
+}
 .pagination li.active:after {
     content: " ";
     position: absolute;

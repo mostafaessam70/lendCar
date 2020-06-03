@@ -1,32 +1,6 @@
 ﻿@model ViewModels.ClientHistoryViewModel
 @inject Repository.ICarRepository ICarRepository
 
-<section id="user-history">
-    <div class="nav-container">
-        <div class="container-fluid"></div>
-        <div class="row ">
-            <div class="links">
-                <div class="col-md-12 text-center">
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a data-toggle="tab" href="#tab1" title="Rented cars" class="tab-one">
-                                <span class="round ">
-                                    <i class="glyphicon glyphicon-home"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-toggle="tab" href="#tab2" title="Rented cars" class="tab-tow">
-                                <span class="round ">
-                                    <i class="fas fa-history"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="container">
         <div class="row">
@@ -39,7 +13,7 @@
                         </div>
                         <form>
                             <table class="table table-striped">
-                                <thead>
+                                <thead style="background-color:var(--main-color);color:#fff;">
                                     <tr>
                                         <th>Brand</th>
                                         <th>Model</th>
@@ -85,7 +59,7 @@
                             <p>Cars that the customer has rented :</p>
                         </div>
                         <table class="table table-bordered">
-                            <thead>
+                            <thead style="background-color:var(--main-color);color:#fff;">
                                 <tr>
                                     <th>Brand</th>
                                     <th>Model</th>
@@ -122,5 +96,3 @@
             </div>
         </div>
     </div>
-
-</section>
