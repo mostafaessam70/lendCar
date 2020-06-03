@@ -88,7 +88,7 @@ namespace LendCar.Pages
             [Display(Name = "Password")]
             //[RegularExpression ("?=.*[A - Z])",ErrorMessage = "Password must contain at least One Uppercase letter ")]
             public string Password { get; set; }
-            //mohamedESAM9397..
+            //mohamedESAM9397..55
            
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
