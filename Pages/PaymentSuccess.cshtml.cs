@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace LendCar.Pages
+namespace LendCar.Pages.Shared
 {
-    public class failConfirmeModel : PageModel
+    public class PaymentSuccessModel : PageModel
     {
         public void OnGet()
         {

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using LendCar.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -23,7 +24,9 @@ namespace LendCar.Pages
 
         public SignInManager<ApplicationUser> SignInManager { get; }
         public UserManager<ApplicationUser> Usermanger { get; }
-       
+        public IList<AuthenticationScheme> ExternalLogins { get; set; }
+
+        public string ReturnUrl { get; set; }
 
         public LoginModel(SignInManager<ApplicationUser> signInManager,
                           UserManager<ApplicationUser> usermanger
@@ -35,8 +38,12 @@ namespace LendCar.Pages
            
 
         }
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
+            ExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            ReturnUrl = "/Index";
+
             if (!User.Identity.IsAuthenticated)
                 return Page();
             else
@@ -48,6 +55,9 @@ namespace LendCar.Pages
 
             var result = await SignInManager.PasswordSignInAsync(UserName, Password, false, false);
 
+            ExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            ReturnUrl = "/Index";
+
             if (result.Succeeded)
             {
                 if (User.IsInRole("Admin"))
@@ -56,7 +66,9 @@ namespace LendCar.Pages
                     return RedirectToPage("Index");
             }
             else
-                return RedirectToPage("Login", new { area = "Account"});
+           
+            return RedirectToPage("Login", new { area = "Account"});
+
         }
     }
 }
