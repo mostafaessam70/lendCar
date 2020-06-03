@@ -38,6 +38,7 @@ namespace LendCar.Pages
             [Required]
             [DataType(DataType.Password)]
             [Display(Name = "Current password")]
+            [Remote("IsOldPasswordMatch","Validation",ErrorMessage = "Old Password is not correct",HttpMethod ="POST")]
             public string OldPassword { get; set; }
 
             [Required]

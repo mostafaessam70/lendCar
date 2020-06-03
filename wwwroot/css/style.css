@@ -145,6 +145,7 @@ a:visited {
 a {
     color: inherit;
     transition: .2s ease;
+    cursor:pointer;
 }
 
     a:hover {
@@ -3848,7 +3849,7 @@ label {
     width: 50px;
     height: 50px;
     margin-top: -25px;
-    border: 5px solid #efefef;
+    /*border: 5px solid #efefef;*/
     border-radius: 50%;
     transition: all ease-in-out 500ms;
 }
@@ -4280,7 +4281,7 @@ label:hover:before {
     width: 70px;
     height: 70px;
     margin-top: -25px;
-    border: 5px solid #efefef;
+    /*border: 5px solid #efefef;*/
     border-radius: 50%;
     transition: all ease-in-out 500ms;
 }

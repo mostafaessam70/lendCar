@@ -23,7 +23,7 @@
                             <p><i class="fas fa-car-alt"></i> @Model.CurrentUser.TripsNumber trips  <i class="fa fa-dot-circle-o"></i> Joined @Model.CurrentUser.JoinedAt</p>
                             <p><i class="fas fa-city"></i> @Model.CurrentUser.City.Name</p>
                             <p>@Model.CurrentUser.BriefAboutMe</p>
-                            <p><i class="fas fa-car-side"></i> Has @Model.UserVehicles.Count vehicles</p>
+                            <p><i class="fas fa-car-side"></i> Has @Model.UserVehicles.TotalItemCount vehicles</p>
                         </div>
                     </div>
                 </div>
@@ -77,18 +77,23 @@
                     }
                     <!--/ Content row end -->
                 <div class="row">
-                    
+                    @if (Model.UserVehicles.TotalItemCount > 3)
+                    {
                         @Html.PagedListPager((IPagedList)Model.UserVehicles, CarsPage => "/User/Profile?CarsPage=" + CarsPage,
-                                           new X.PagedList.Mvc.Common.PagedListRenderOptions
-                                           {
-                                               DisplayLinkToFirstPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
-                                               DisplayLinkToLastPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+                                         new X.PagedList.Mvc.Common.PagedListRenderOptions
+                                         {
+                                             DisplayLinkToFirstPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
+                                             DisplayLinkToLastPage = X.PagedList.Mvc.Common.PagedListDisplayMode.IfNeeded,
 
-                                               ContainerDivClasses = new[] { "navigation" },
-                                               LiElementClasses = new[] { "page-item", "admin-list" },
-                                               PageClasses = new[] { "page-link" },
-                                           })
-                 
+                                             ContainerDivClasses = new[] { "navigation" },
+                                             LiElementClasses = new[] { "page-item", "admin-list" },
+                                             PageClasses = new[] { "page-link" },
+                                         })
+                    }
+
+
+
+
                 </div>
                 </div>
                 <!--/ Container end -->

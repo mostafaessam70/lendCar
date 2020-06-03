@@ -97,8 +97,7 @@ namespace LendCar.Pages
             }
 
 
-
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 LoggedUserInfo.Id = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
