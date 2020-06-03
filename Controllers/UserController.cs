@@ -31,7 +31,12 @@ namespace LendCar.Pages.Controllers
 
             var user = UserManager.Users.SingleOrDefault(c => c.Id == userId);
 
-            await UserManager.RemoveFromRolesAsync(user, RoleManager.Roles.Select(c => c.Name).ToList());
+            if (UserManager.IsInRoleAsync(user, "user").Result)
+            {
+                await UserManager.RemoveFromRoleAsync(user, "user");
+            }
+            else
+                await UserManager.RemoveFromRoleAsync(user, "Admin");
 
             var result = await UserManager
                  .AddToRoleAsync(user, roleName);
