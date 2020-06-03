@@ -66,6 +66,7 @@ namespace LendCar.Pages
 
             [Required]
             [Display(Name = "UserName")]
+            [Remote("IsUserNameExists", "Validation", ErrorMessage ="User Name already Exist",HttpMethod ="POST")]
             public string UserName { get; set; }
 
             [Required]
@@ -79,6 +80,7 @@ namespace LendCar.Pages
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
+            [Remote("IsEmailExists", "Validation", ErrorMessage = "Email already Exist", HttpMethod = "POST")]
             public string Email { get; set; }
 
 
@@ -95,9 +97,11 @@ namespace LendCar.Pages
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            [Remote("IsNationalIdExist", "Validation",
+                ErrorMessage = "Nationl Id Already Exist",HttpMethod ="POST")]
             [Required]
-            [Display(Name = "NationalId")]
             [MinLength(14,ErrorMessage = "the National Id be 14 numbers")]
+            [RegularExpression("[0-9]{14}", ErrorMessage = "Invalid National ID ")]
             public string NationalId { get; set; }
             [Required]
             [Display(Name = "Phone Number")]
@@ -141,7 +145,7 @@ namespace LendCar.Pages
 
                 var user = new ApplicationUser { UserName = Input.UserName,
                     Email = Input.Email,
-                    JoinedAt = DateTime.Now.ToString("MMMM yyyy"),
+                    JoinedAt = DateTime.Now.ToString("dd-MM-yyyy"),
                     DriverLicenseNumber = Input.DriverLicenseNumber,
                     PhoneNumber = Input.PhoneNumber,CityId = Input.CityId,
                     Address = Input.Address, GenderId = Input.GenderId,
