@@ -20,7 +20,7 @@ namespace LendCar.Repository
              
             MailMessage msg = new MailMessage();
 
-            msg.From = new MailAddress("m4m4esam9397@gmail.com");
+            msg.From = new MailAddress("akg201194@gmail.com");
             msg.To.Add(to);
             msg.Subject = subject;
             msg.Body = emailBody;
@@ -29,7 +29,7 @@ namespace LendCar.Repository
             {
                 client.EnableSsl = true;
                 client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential("m4m4esam9397@gmail.com","..123456");
+                client.Credentials = new NetworkCredential("akg201194@gmail.com","akg-2017");
                 client.Host = "smtp.gmail.com";
                 client.Port = 587;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
