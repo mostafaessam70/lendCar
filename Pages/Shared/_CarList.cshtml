@@ -7,9 +7,64 @@
 
             @if (i == 0)
             {
-                <div class="text-center titl-list">
+            <div class="row">
+                <div class="col-md-6 text-left titl-list">
                     <h1>Inventory</h1>
                 </div>
+
+                <div class="col-md-6 adv">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-4">
+                            <div class="input-group" id="adv-search">
+
+                                <div class="col-md-6">
+                                    <input type="text" class="" placeholder="Search for snippets" />
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="input-group-btn">
+                                        <div class="btn-group" role="group">
+                                            <div class="dropdown dropdown-lg">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                                <div class="dropdown-menu dropdown-menu-right" role="menu" style="padding: 20px" ;>
+                                                    <form class="form-horizontal" role="form">
+                                                        <div class="form-group">
+                                                            <label for="filter">Filter by</label>
+                                                            <select class="form-control">
+                                                                <option value="0" selected>All citits</option>
+                                                                <option value="1">Featured</option>
+                                                                <option value="2">Most popular</option>
+                                                                <option value="3">Top rated</option>
+                                                                <option value="4">Most commented</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="filter">Filter by</label>
+                                                            <select class="form-control">
+                                                                <option value="0" selected>All Brands</option>
+                                                                <option value="1">Featured</option>
+                                                                <option value="2">Most popular</option>
+                                                                <option value="3">Top rated</option>
+                                                                <option value="4">Most commented</option>
+                                                            </select>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             }
 
             @for (int j = 0; j < 3 && Model.Count > i; j++, i = (j != 3 ? ++i : i))

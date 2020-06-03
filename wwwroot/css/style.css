@@ -6386,6 +6386,10 @@ textarea[id="message"]::-webkit-input-placeholder {
     font-size: 22px;
 }
 
+.adv {
+    padding:25px
+}
+
 /* some media query*/
 @media only screen and (max-width: 1000px) {
     .how-steps .row, .form-horizontal .row, .user-info .row {
