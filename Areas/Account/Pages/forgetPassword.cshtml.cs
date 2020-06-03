@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using LendCar.Models;
+using LendCar.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -20,9 +21,9 @@ namespace LendCar.Pages
     {
 
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IEmailSender _emailSender;
+        private readonly IEmail _emailSender;
 
-        public forgetPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        public forgetPasswordModel(UserManager<ApplicationUser> userManager, IEmail emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;
@@ -43,12 +44,13 @@ namespace LendCar.Pages
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
-                {   //email confirmed equal false
-                    return RedirectToPage("./ForgotPasswordConfirmation");
+                if (user == null)
+                {   
+                    return RedirectToPage("Register");
                 }
 
-                //email confirmed equal true
+                ModelState.Clear();
+
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                 var callbackUrl = Url.Page(
@@ -57,12 +59,12 @@ namespace LendCar.Pages
                     values: new { code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
+                 _emailSender.SendEmail(
                     Input.Email,
                     "Reset Password",
                     $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                return RedirectToPage("./ForgotPasswordConfirmation");
+                return Page();
             }
 
             return Page();
