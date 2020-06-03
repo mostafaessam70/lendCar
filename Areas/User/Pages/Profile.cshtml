@@ -13,7 +13,7 @@
                         @{
                             string img = Url.Content("~/images/users/default.jpg");
                             if (Model.CurrentUser.ImageUrl != null)
-                                img = Model.CurrentUser.ImageUrl;
+                                img = Url.Content(Model.CurrentUser.ImageUrl);
                         }
                         <img src="@img" alt="@Model.CurrentUser.FirstName's picture" class="img-circle">
                     </div>
