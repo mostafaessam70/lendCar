@@ -6,27 +6,6 @@
 }
 
 
-<div id="banner-area" class="banner-area" >
-    <div class="banner-text">
-        <div class="row">
-            <div class="col-md-12">
-                <div id="page-slider" class="owl-carousel owl-theme page-slider page-slider-small">
-                    @if (Model.CurrentCarImges != null)
-                    {
-                        @foreach (var item in Model.CurrentCarImges)
-                        {
-                            <div class="item">
-                                <img src="@Url.Content(item.Image)" alt="" />
-                            </div>
-                        }
-                    }
-
-                </div><!-- Page slider end -->
-            </div><!-- Slider col end -->
-        </div><!-- Row end -->
-    </div><!-- Banner text end -->
-</div><!-- Banner area end -->
-
 <section id="main-container" class="main-container car-details  icon-car-detalis">
     <div class="container">
 
@@ -63,7 +42,6 @@
                 </div>
             </div>
 
-
             <div class="col-md-6">
                 <h3>Vehicle's Galary</h3>
                 <div id="page-slider" class="car-details-slider owl-carousel owl-theme page-slider page-slider-small">
@@ -81,7 +59,8 @@
             </div>
         </div>
     </div>
-</div>
+
+</section>
 
 
 <section id="main-container" class="main-container car-details">
@@ -161,7 +140,7 @@
                                     }
                                     @if (Model.DateIsNotCorrect)
                                     {
-                                        <span class="text-danger">Please open your eyes and look At your Choosen date ! </span>
+                                        <span class="text-danger">Please select a valid date </span>
                                     }
                                 </div>
                             </div>
