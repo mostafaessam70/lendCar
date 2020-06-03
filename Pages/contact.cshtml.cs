@@ -14,6 +14,7 @@ namespace LendCar.Pages
 {
     public class contactModel : PageModel
     {
+        
         public Contact Contact { get; set; }
         public IContactRepository ContactRep { get; }
         public IEmail Email { get; }
@@ -31,7 +32,7 @@ namespace LendCar.Pages
         {
             if (ModelState.IsValid) 
             {
-                 Email.SendEmail("ahmedmoneim094@gmail.com", 
+                 Email.SendEmail("mohamedesam9397@gmail.com", 
                     ContactViewModel.MailSubjct, ContactViewModel.UserEmail+"\n\n"+ContactViewModel. Message);
             }
         }

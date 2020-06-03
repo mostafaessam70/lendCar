@@ -70,6 +70,44 @@
                                         <img src="~/logo.png" style="height:56px" alt="">
                                     </a>
                                 </div>
+
+                                  @*  <div class="collapse navbar-collapse navbar-responsive-collapse">
+                                        <ul class="nav navbar-nav">
+                                            <li><a asp-page="Index">Home</a></li>
+                                            <li><a asp-page="AllCars" asp-area="Cars">All Cars</a></li>
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <li> <partial name="_AddCarPartial" /></li>
+                                            }
+                                            <li><a asp-page="HowUse">How to use</a></li>
+                                            <li><a asp-page="contact">Contact</a></li>
+                                            <li><a asp-page="about">About</a></li>
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                                <li class="dropdown">
+                                                    <a class="dropdown-toggle" data-toggle="dropdown">Admin<i class="fa fa-angle-down"></i></a>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a asp-area="Admin" asp-page="Admin">CRUD</a></li>
+                                                        <li><a asp-area="Admin" asp-page="BookingMoney">Booking Money</a></li>
+                                                        <li><a asp-area="Admin" asp-page="ClientHistory">Client History</a></li>
+                                                        <li><a asp-area="Admin" asp-page="Users">Users</a></li>
+                                                    </ul>
+                                                </li>
+                                            }
+
+                                        </ul>
+
+                                        <ul class="nav navbar-nav navbar-right">
+                                            <partial name="_LoginPartial" />
+                                        </ul>
+
+                                        <!--/ Nav ul end -->
+
+                                    </div>
+                                    <!--/ Collapse end --> 
+
+                                </div><!-- Site Navbar inner end --> *@
+
                                 <div class="collapse navbar-collapse navbar-responsive-collapse">
                                     <ul class="nav navbar-nav">
                                         <li class="nav-item"><a href="~/Index">Home</a></li>
