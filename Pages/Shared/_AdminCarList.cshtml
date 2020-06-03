@@ -3,9 +3,10 @@
     <thead class="text-center" style="color:#fff;background-color:var(--main-color)">
         <tr>
             <td scope="col">#</td>
-            <td scope="col">Vehicles Name</td>
+            <td scope="col">Brand & Model</td>
+            <td scope="col">Location</td>
             <td scope="col">Color</td>
-            <td scope="col">Platform</td>
+            <td scope="col">Plate Number</td>
             <td scope="col">Start Date</td>
             <td scope="col">End Date</td>
             <td scope="col">Accept</td>
@@ -17,22 +18,23 @@
         {
         <tr>
             <td scope="row">@i</td>
-            <td>@Model[i-1].City.Name</td>
+            <td>@Model[i - 1].Model.Brand.Name @Model[i - 1].Model.Name @Model[i-1].Year</td>
+            <td>@Model[i - 1].Region @Model[i - 1].City.Name</td>
             @* <td> <p style="min-width:100%;min-height:100%; background-color:#@Url.Content(Model[i].Color.HexValue);"><p></td>*@
-        <td><i class="fas fa-tint" style=" font-size: xx-large;width:100%;height:100%; color:@Model[i-1].Color.HexValue"></i></td>
-            <td>@Model[i-1].PlateNumber</td>
-            <td>@Model[i-1].StartDate</td>
-            <td>@Model[i-1].EndDate</td>
+            <td><i class="fas fa-tint" style=" font-size: xx-large;width:100%;height:100%; color:@Model[i-1].Color.HexValue"></i></td>
+            <td>@Model[i - 1].PlateNumber</td>
+            <td>@Model[i - 1].StartDate</td>
+            <td>@Model[i - 1].EndDate</td>
 
             @*<td>
             <a asp-page="/Cars/carDetails" asp-route-id="@Model[i].Id">Details</a>
         </td>*@
-        <td>
-            <a class="far fa-check-circle accept hover-icon" data-id="@Model[i-1].Id"></a>
-        </td>
-        <td>
-            <a class="fas fa-times refuse hover-icon" style="color:red" data-id="@Model[i-1].Id"></a>
-        </td>
+            <td>
+                <a class="far fa-check-circle accept hover-icon" data-id="@Model[i-1].Id"></a>
+            </td>
+            <td>
+                <a class="fas fa-times refuse hover-icon" style="color:red" data-id="@Model[i-1].Id"></a>
+            </td>
         </tr>
         }
     </tbody>

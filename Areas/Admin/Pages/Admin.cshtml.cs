@@ -99,7 +99,7 @@ namespace LendCar.Pages
             CurrentVTypesPage = vTypePageNumber;
             CurrentColorsPage = colorPageNumber;
 
-            Vehicles = _carRepository.GetAllVehiclesRequests().ToList().ToPagedList(vehiclesPageNumber, PageSize);
+            Vehicles = _carRepository.GetAllVehiclesRequests().OrderByDescending(v=>v.Id).ToList().ToPagedList(vehiclesPageNumber, PageSize);
             Brands = _brandRepo.GetAllBrands().ToList().ToPagedList(brandsPageNumber, PageSize);
             BrandModels = _brandModelRepo.GetAllBrandModels().ToList().ToPagedList(brandModelsPageNumber, PageSize);
             VehicleTypes = _vehicleTypeRepo.GetAllVehicleTypes().ToList().ToPagedList(vTypePageNumber, PageSize);

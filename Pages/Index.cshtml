@@ -225,44 +225,34 @@
     <div class="container">
         <div class="row">
             <div class="facts-wrapper">
-                <div class="col-sm-3 ts-facts">
+                <div class="col-sm-4 ts-facts">
                     <div class="ts-facts-icon">
                         <i class="fas fa-key"></i>
 
                     </div>
                     <div class="ts-facts-content">
-                        <h2 class="ts-facts-num"><span class="counterUp" data-count="1109">0</span></h2>
+                        <h2 class="ts-facts-num"><span class="counterUp" data-count="@Model.AvailableVehicles.Count">0</span></h2>
                         <h3 class="ts-facts-title">Total Cars</h3>
                     </div>
                 </div><!-- Col end -->
 
-                <div class="col-sm-3 ts-facts">
+                <div class="col-sm-4 ts-facts">
                     <div class="ts-facts-icon">
                         <i class="fas fa-car-side"></i>
                     </div>
                     <div class="ts-facts-content">
-                        <h2 class="ts-facts-num"><span class="counterUp" data-count="@Model.Vehicles.Count">0</span></h2>
-                        <h3 class="ts-facts-title">Lend Car</h3>
+                        <h2 class="ts-facts-num"><span class="counterUp" data-count="@Model.AcceptedVehicles.Where(v=>v.AcceptedAdmin == true).Count()">0</span></h2>
+                        <h3 class="ts-facts-title">Available Cars</h3>
                     </div>
                 </div><!-- Col end -->
 
-                <div class="col-sm-3 ts-facts">
+                <div class="col-sm-4 ts-facts">
                     <div class="ts-facts-icon">
                         <i class="fas fa-user-clock"></i>
                     </div>
                     <div class="ts-facts-content">
                         <h2 class="ts-facts-num"><span class="counterUp" data-count="4000">0</span></h2>
                         <h3 class="ts-facts-title">Hours of Lend</h3>
-                    </div>
-                </div><!-- Col end -->
-
-                <div class="col-sm-3 ts-facts">
-                    <div class="ts-facts-icon">
-                        <i class="fas fa-car"></i>
-                    </div>
-                    <div class="ts-facts-content">
-                        <h2 class="ts-facts-num"><span class="counterUp" data-count="44">0</span></h2>
-                        <h3 class="ts-facts-title">Available Car</h3>
                     </div>
                 </div><!-- Col end -->
 
@@ -459,7 +449,7 @@
         <!--/ Title row end -->
 
         <div class="row">
-            @foreach (var vehicle in Model.Vehicles)
+            @foreach (var vehicle in Model.AcceptedVehicles)
             {
                 <div class="col-md-4 col-xs-12">
                     <div class="latest-post">
