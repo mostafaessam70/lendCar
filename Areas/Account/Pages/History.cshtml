@@ -31,9 +31,10 @@
         </div>
     </div>
 
-<div id="userHistoryDiv">
-    <partial name="_History" model="Model.ClientHistory" />
-</div>
+    <div id="userHistoryDiv">
+        <partial name="_History" model="Model.ClientHistory" />
+    </div>
+</section>
 
 @section scripts{
     <script>
@@ -47,6 +48,7 @@
                 data: { UserID: clientId, BookingId:bookingId },
                 success: function (data) {
                     $('#userHistoryDiv').html(data);
+                    window.location.reload();
                 }
             })
         })

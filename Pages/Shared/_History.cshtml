@@ -65,7 +65,11 @@
                                                 )
                                             </td>
                                             <td>
-                                                <input type="button" class="btn btn-danger btnCancel" data-id="@Model.UserBookingCars[i].Id" value="Cancel" />
+                                                <input type="button"
+                                                       class="btn btn-danger btnCancel"
+                                                       disabled="@(Convert.ToDateTime(Model.UserBookingCars[i].HireDate).Date <= DateTime.Now.Date?"disabled":null)"
+                                                       data-id="@Model.UserBookingCars[i].Id"
+                                                       value="Cancel" />
                                             </td>
                                         </tr>
                                     }

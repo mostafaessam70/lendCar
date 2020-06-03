@@ -45,5 +45,15 @@ namespace LendCar.Repository
         {
             return Context.Users.Any(c => c.NationalId == nationalId);
         }
+
+        public bool IsUserNameExists(string userName)
+        {
+            return Context.Users.Any(c => c.UserName == userName);
+        }
+
+        public bool IsEmailExists(string email)
+        {
+            return Context.Users.Any(c => c.Email == email);
+        }
     }
 }
