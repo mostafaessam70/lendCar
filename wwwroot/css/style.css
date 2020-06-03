@@ -4565,8 +4565,7 @@ label:hover:before {
     }
 
 .google-lend {
-    margin-top: 15px;
-    margin-bottom: 30px;
+    background-color: #4d25251c;
 }
 
 
@@ -4638,7 +4637,7 @@ label:hover:before {
     color: var(--main-color);
     padding-bottom: 50px;
     padding-top: 0px;
-    margin-bottom: 50px;
+    
 }
 
     .contact label {
@@ -4657,9 +4656,9 @@ label:hover:before {
     border-radius: 0px;
 }
 
- #contact-form .form-control{
-    background: rgba(245, 245, 245, 0.23);
-    color:white;
+#contact-form .form-control {
+    background: rgba(12, 12, 12, 0.73);
+    color: white;
 }
 
 #contact-form .form-group textarea {
@@ -6354,7 +6353,7 @@ div.col-md-5.first-term {
 
 
 .car-details {
-    margin: 6%;
+    /*margin: 6%;*/
 }
 
     .car-details p {
@@ -6364,7 +6363,7 @@ div.col-md-5.first-term {
 #banner-area .fa, .fas{
     color: var(--main-color);
     margin-right: 3%;
-    font-size: 25px;
+    /*font-size: 25px;*/
 }
 
 
