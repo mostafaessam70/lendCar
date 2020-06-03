@@ -39,7 +39,7 @@ namespace LendCar.Controllers
                 }
                 UserRepostiory.EditPhotoPath(userId,relativePath );
                 UserRepostiory.Save();
-                var image = System.IO.File.OpenRead(physicalPath);
+                //var image = System.IO.File.OpenRead(physicalPath);
                 return Json(true);
             }
             return NotFound();

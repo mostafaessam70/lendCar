@@ -36,6 +36,7 @@ namespace LendCar.Areas.Cars
         private IVehicleTypeRepository vehicleTypeRepo;
         private IBrandRepository brandRepo;
         private IBrandModelRepository brandModelRepo;
+        private List<CarImage> carImages;
         public LendCarDBContext _context { get; }
         public carEditModel(IVehicleTypeRepository _vehicleTypeRepo,
                            ICarRepository _carRepo,
@@ -56,7 +57,6 @@ namespace LendCar.Areas.Cars
 
             VehicleTypes = new SelectList(vehicleTypeRepo.GetAllVehicleTypes().OrderBy(vt => vt.Type), "Id", "Type");
             Brands = new SelectList(brandRepo.GetAllBrands().OrderBy(b => b.Name), "Id", "Name");
-            BrandModels = new SelectList(brandModelRepo.GetAllBrandModels().Where(bm => bm.BrandId == brandRepo.GetAllBrands().OrderBy(b => b.Name).FirstOrDefault().Id).OrderBy(b => b.Name), "Id", "Name");
             OdoMeters = new SelectList(carRepo.Context.OdoMeters.ToList(), "Id", "Value");
             Colors = new SelectList(carRepo.Context.Colors.OrderBy(c => c.Name).ToList(), "Id", "Name");
             Vehicle = new Vehicle();
@@ -68,6 +68,7 @@ namespace LendCar.Areas.Cars
         public void OnGet(int id)
         {
             Vehicle = carRepo.GetVehicle(id);
+            BrandModels = new SelectList(brandModelRepo.GetAllBrandModels().Where(bm => bm.BrandId == Vehicle.Model.BrandId).OrderBy(b => b.Name), "Id", "Name");
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -78,11 +79,14 @@ namespace LendCar.Areas.Cars
             }
 
             _context.Attach(Vehicle).State = EntityState.Modified;
-
-
-
+            carImages = _context.CarImages.Where(i => i.VehicleId == Vehicle.Id).ToList();
             if (VehiclePhotos != null && VehiclePhotos.Count() >= 4)
             {
+                foreach (var photo in carImages)
+                {
+                    _context.CarImages.Remove(photo);
+                    System.IO.File.Delete(Path.Combine(hostEnvironment.WebRootPath, photo.Image.Replace("~/", "")));
+                }
                 string newImgName = null;
                 List<CarImage> photos = new List<CarImage>();
                 foreach (var photo in VehiclePhotos)
@@ -101,20 +105,19 @@ namespace LendCar.Areas.Cars
                 }
                 Vehicle.Photos = photos;
 
-
                 await _context.SaveChangesAsync();
 
-                return RedirectToPage("Profile", new { id = Vehicle.Id });
+                return RedirectToPage("Profile", new { area="User" });
             }
             else if(VehiclePhotos != null && VehiclePhotos.Count() < 4 && VehiclePhotos.Count() > 0)
             {
-                return Page();
+                return RedirectToPage("EditCar",new { area = "Cars", id = Vehicle.Id });
             }
             else
             
                 await _context.SaveChangesAsync();
             
-            return RedirectToPage("Profile", new { id = Vehicle.Id});
+            return RedirectToPage("Profile", new { area="User"});
 
         }
     }
