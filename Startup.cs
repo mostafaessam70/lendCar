@@ -36,7 +36,7 @@ namespace LendCar
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<LendCarDBContext>(options =>
-             options.UseSqlServer(Configuration.GetConnectionString("LendCarCString")));
+             options.UseSqlServer(Configuration.GetConnectionString("LendCarCString")), ServiceLifetime.Transient);
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICarRepository, CarRepository>();
