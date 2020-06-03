@@ -686,12 +686,10 @@
                         method: 'Post',
                         data: { Page:@Model.CurrentVehiclesPage, Id: vechicleId },
                         url: '/Vehicles/Accept',
-                        beforeSend: function () {
-                            $('#loader').show();
-                        },
+                        
                         success: function (data) {
                             $('#vechileList').html(data);
-                            $('#loader').hide();
+                            window.location.reload();
                         },
                         error: function (err) { console.log(err) }
 
@@ -710,13 +708,10 @@
                         method: 'Post',
                         data: { page:@Model.CurrentVehiclesPage, id: vechicleId },
                         url: '/Vehicles/Refuse',
-                        beforeSend: function () {
-                            $('#loader').show();
-                        },
                         success: function (data) {
                             console.log(data);
                             $('#vechileList').html(data);
-                            $('#loader').hide();
+                            window.location.reload();
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
                             console.log(xhr.status);

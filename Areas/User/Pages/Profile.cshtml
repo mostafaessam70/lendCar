@@ -10,7 +10,12 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-3 user-image">
-                        <img src="@Url.Content(Model.CurrentUser.ImageUrl)" alt="@Model.CurrentUser.FirstName's picture" class="img-circle">
+                        @{
+                            string img = Url.Content("~/images/users/default.jpg");
+                            if (Model.CurrentUser.ImageUrl != null)
+                                img = Model.CurrentUser.ImageUrl;
+                        }
+                        <img src="@img" alt="@Model.CurrentUser.FirstName's picture" class="img-circle">
                     </div>
                     <div class="col-md-8">
                         <div class="col-md-12">
