@@ -49,9 +49,9 @@ namespace LendCar.Controllers
                 });
                 ICarRepository.Save();
 
-                return RedirectToPage("succeeded");
+                return RedirectToPage("/PaymentSuccess");
             }
-            return RedirectToPage("failed");
+            return RedirectToPage("/PaymentFail");
         }
     }
 }
