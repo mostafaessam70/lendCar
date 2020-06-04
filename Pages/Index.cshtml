@@ -26,8 +26,8 @@
 
                     <h3 class="slide-sub-title animated5">The new way of having your car</h3>
                     <p>
-                        <a href="/allCar" class="slider btn btn-primary">Choose your car</a>
-                        <a href="/contact" class="slider btn btn-primary border">Contact Now</a>
+                        <a asp-page="AllCars" asp-area="Cars" class="slider btn btn-primary">Choose your car</a>
+                        <a asp-page="contact" class="slider btn btn-primary border">Contact Now</a>
                     </p>
                 </div>
             </div>
@@ -160,14 +160,13 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Safety and maintenance</a>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Safety</a>
                             </h4>
                         </div>
                         <div id="collapseOne" class="panel-collapse collapse in">
                             <div class="panel-body">
                                 <p>
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                                    wolf moon officia aute, non cupidata
+                                    Either you are the owner or the renter of the car, you and the car are safe with us and our 24/7 customer service.
                                 </p>
                             </div>
                         </div>
@@ -185,8 +184,7 @@
                         <div id="collapseTwo" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <p>
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                                    wolf moon officia aute, non cupidata
+                                    Our customer service is available 24/7 .
                                 </p>
                             </div>
                         </div>
@@ -205,8 +203,7 @@
                         <div id="collapseThree" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <p>
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                                    wolf moon officia aute, non cupidata
+                                    All the process is online from adding the car to booking it and recieving it in our office.
                                 </p>
                             </div>
                         </div>
@@ -330,9 +327,7 @@
                     <div class="item">
                         <div class="quote-item">
                             <span class="quote-text">
-                                Question ran over her cheek When she reached the first hills of the Italic Mountains, she had a last
-                                view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the
-                                subline of her own road.
+                               Easy Booking and payment, saves lots of time .
                             </span>
 
                             <div class="quote-item-footer">
@@ -349,9 +344,7 @@
                     <div class="item">
                         <div class="quote-item">
                             <span class="quote-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci done idunt ut
-                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitoa tion ullamco laboris
-                                nisi aliquip consequat.
+                                Best Customer Service , available any time .
                             </span>
 
                             <div class="quote-item-footer">
@@ -368,9 +361,7 @@
                     <div class="item">
                         <div class="quote-item">
                             <span class="quote-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci done idunt ut
-                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitoa tion ullamco laboris
-                                nisi ut commodo consequat.
+                               Got some extra cash with this amazing app, my car will be always useful even when i'm not using it.'
                             </span>
 
                             <div class="quote-item-footer">
@@ -441,12 +432,11 @@
 
 
 
-<section id="news" class="news" style="background-color: #F1F1F1;">
+@*<section id="news" class="news" style="background-color: #F1F1F1;">
     <div class="container">
         <div class="row text-center">
             <h3 class="section-sub-title">Some Cars</h3>
         </div>
-        <!--/ Title row end -->
 
         <div class="row">
             @foreach (var vehicle in Model.AcceptedVehicles)
@@ -468,18 +458,14 @@
                                 </span>
                             </div>
                         </div>
-                    </div><!-- Latest post end -->
-                </div><!-- 1st post col end -->
+                    </div>
+                </div>
 
             }
         </div>
-        <!--/ Content row end -->
-
         <div class="general-btn text-center">
             <a class="btn btn-primary" href="news-left-sidebar.html">See All Cars</a>
         </div>
 
     </div>
-    <!--/ Container end -->
-</section>
-<!--/ News end -->
+</section>*@

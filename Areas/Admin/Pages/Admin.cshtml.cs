@@ -12,7 +12,7 @@ using X.PagedList;
 
 namespace LendCar.Pages
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminModel : PageModel
     {
         private ICarRepository _carRepository;

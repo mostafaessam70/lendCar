@@ -14,14 +14,7 @@
                 <div class="title">
                     <h1>Your Info</h1>
                 </div>
-                <div class="box-info">
-                    <span class="icon">
-                        <i class="fas fa-exclamation-circle"></i>
-                    </span>
-                    <div class="info">
-                        <p>Since this is your first trip, you’ll need to provide your photo, driver’s license, and contact info to set up your account.</p>
-                    </div>
-                </div>
+                
                 <hr>
                 <h3>Driver's license</h3>
                 <p>Enter your info exactly as it appears on your license so Turo can verify your eligibility to drive.</p>
@@ -32,7 +25,7 @@
                         <div class="col-md-6">
                             <input name="carId" value="@Model.CarId" hidden />
                             <div class="form-group">
-                                <label asp-for="LoggedUserInfo.FirstName">Fist Name</label>
+                                <label asp-for="LoggedUserInfo.FirstName">First ame</label>
 
                                 <input asp-for="LoggedUserInfo.FirstName"
                                        class="form-control" type="text">
@@ -42,7 +35,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="LoggedUserInfo.LastName">Last Name</label>
+                                <label asp-for="LoggedUserInfo.LastName">Last name</label>
 
                                 <input asp-for="LoggedUserInfo.LastName"
                                        class="form-control" type="text">
@@ -136,17 +129,24 @@
             <div class="col-md-4 col-box">
                 <div class="car-info">
 
+
+
                     <img src="@Url.Content(Model.Vehicle.ImageUrl)"
                          class="img-responsive car-img">
 
-                    <img src="@Url.Content(Model.Vehicle.Owner.ImageUrl)"
-                         class="img-responsive  person-img">
-                </div><br>
+                    @{
+                        string img = Url.Content("~/images/users/default.jpg");
+                        if (Model.Vehicle.Owner.ImageUrl != null)
+                            img = @Url.Content(Model.Vehicle.Owner.ImageUrl);
+                    }
+                    @*<img src="@img"
+                         class="img-responsive  person-img">*@
+                </div>
                 <div class="car-details">
-                    <p class="car-owner">dewei’s</p>
+                    <p class="car-owner">@Model.Vehicle.Owner.FirstName @Model.Vehicle.Owner.LastName</p>
                     <h3>@Model.Vehicle.Model.Brand.Name</h3>
                     <div class="rate">
-                        <span class="rate-number">4.88</span>
+                        <span class="rate-number">0</span>
                         <i class="fas fa-star"></i>
                         <span>(@Model.Vehicle.TripsNumber trips)</span>
                     </div>
@@ -177,7 +177,7 @@
 
 </section>
 
-<button type="button" hidden class="btn btn-primary" id="btnModal" data-toggle="modal" data-target="#exampleModal">
+<button type="button" hidden id="btnModal" data-toggle="modal" data-target="#exampleModal">
 </button>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

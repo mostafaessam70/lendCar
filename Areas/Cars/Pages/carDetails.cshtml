@@ -80,7 +80,13 @@
                     </div>
                     <div class="col-md-9">
                         <div class="col-md-4 center-block">
-                            <img src="@Url.Content(Model.Owner.ImageUrl)" alt="@Model.Owner.FirstName" class="img-circle img-responsive" >
+                            
+                            @{
+                                string img = Url.Content("~/images/users/default.jpg");
+                                if (Model.Owner.ImageUrl != null)
+                                    img = @Url.Content(Model.Owner.ImageUrl);
+                            }
+                            <img src="@img" alt="@Model.Owner.FirstName" class="img-circle img-responsive">
                         </div>
                         <div class="col-md-8">
                             <h3>@Model.Owner.FirstName @Model.Owner.LastName</h3>
@@ -146,8 +152,14 @@
                                     }
                                 </div>
                             </div>
-
-                            <button type="submit" id="con" class="btn btn-primary btn-block">Go To Checkout</button>
+                            
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <button type="submit" id="con" class="btn btn-primary btn-block">Go To Checkout</button>
+                                }
+                                else {
+                                    <a asp-area="Account" asp-page="Login" class="text-danger">Login to book this car now !</a>
+                                }
                         </div>
 
                     </form>

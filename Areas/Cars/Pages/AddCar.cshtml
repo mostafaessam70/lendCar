@@ -119,13 +119,13 @@
 
                                 <div class="form-group col-md-10">
                                     <label asp-for="@Model.Vehicle.StartDate">Available from : </label>
-                                    <input id="StartDate" type="date" value='@Model.Today.AddDays(1).ToString("yyyy-MM-dd")' min='@Model.Today.AddDays(1).ToString("yyyy-MM-dd")' asp-for="@Model.Vehicle.StartDate" class="form-control">
+                                    <input id="StartDate" type="date" value='@Model.Today.ToString("yyyy-MM-dd")' min='@Model.Today.ToString("yyyy-MM-dd")' asp-for="@Model.Vehicle.StartDate" class="form-control">
                                     <span asp-validation-for="@Model.Vehicle.StartDate"></span>
                                 </div>
 
                                 <div class="form-group col-md-10">
                                     <label asp-for="@Model.Vehicle.EndDate">Available to : </label>
-                                    <input id="EndDate" type="date" value='@Model.Today.AddDays(2).ToString("yyyy-MM-dd")' min="@Model.Today.AddDays(2).ToString("yyyy-MM-dd")" asp-for="@Model.Vehicle.EndDate" class="form-control">
+                                    <input id="EndDate" type="date" value='@Model.Today.AddDays(1).ToString("yyyy-MM-dd")' min="@Model.Today.AddDays(1).ToString("yyyy-MM-dd")" asp-for="@Model.Vehicle.EndDate" class="form-control">
                                     <span asp-validation-for="@Model.Vehicle.EndDate"></span>
 
                                 </div>

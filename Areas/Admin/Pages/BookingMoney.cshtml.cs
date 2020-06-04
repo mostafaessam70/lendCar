@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using LendCar.Models;
 using LendCar.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LendCar.Areas.Admin.Pages
 {
+    [Authorize(Roles = "Admin")]
     public class BookingMoneyModel : PageModel
     {
         public BookingMoneyModel(IClientRepository clientRepository, UserManager<ApplicationUser> s)
